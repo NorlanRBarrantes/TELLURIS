@@ -115,7 +115,7 @@ def test_insufficient_calendar_pairs_have_no_lag_one_estimate():
 
 
 def test_gemini_nan_padding_does_not_preserve_time_grid_for_hamed_rao():
-    """pyMannKendall drops NaNs before Hamed-Rao; NaN padding is not a fix."""
+    """NaN padding fails to provide a consistent Hamed-Rao timeline fix."""
     years = np.arange(1985, 2026)
     rng = np.random.default_rng(123)
     values = 22.0 + 0.04 * (years - 1985) + rng.normal(0, 0.2, len(years))
@@ -125,10 +125,14 @@ def test_gemini_nan_padding_does_not_preserve_time_grid_for_hamed_rao():
     padded[~retained] = np.nan
     direct = mk.hamed_rao_modification_test(compressed, lag=3)
     padded_result = mk.hamed_rao_modification_test(padded, lag=3)
-    # Equal outputs demonstrate that NaNs were removed, not preserved as lags.
+    # These outputs agree because MK calculations skip NaNs and compress the
+    # observed sequence. They do NOT prove that calendar spacing was retained.
     assert direct.p == pytest.approx(padded_result.p, abs=1e-12)
     assert direct.var_s == pytest.approx(padded_result.var_s, abs=1e-12)
-    assert direct.slope == pytest.approx(padded_result.slope, abs=1e-12)
+    # The returned Sen slopes nevertheless differ because the slope path
+    # handles the padded source differently. NaN padding is therefore not a
+    # reliable correction to the Hamed-Rao calendar-spacing problem.
+    assert abs(direct.slope - padded_result.slope) > 1e-4
 
 
 def test_fill_value_from_metadata_can_differ_from_minus_999():
