@@ -53,6 +53,8 @@ Este documento agrupa decisiones en discusión, pendientes y observaciones de im
 
 **2026-11-14 — Recursos oficiales NASA Space Apps.** Se incorporaron al catálogo Giovanni, Hydrology Time Series, AppEEARS, NOAA CDO, artículo SeaWiFS, KNMI Climate Explorer y recursos asociados/externos de la pestaña Resources. Se priorizaron referencias para validación científica sin introducir nuevas dependencias; recursos no probados quedaron etiquetados como tales. Consulta docs/NASA-CHALLENGE-RESOURCES.md.
 
+**2026-11-14 — Revisión de selección de fuentes.** Se cuestionó priorizar NASA POWER frente a recursos oficialmente enumerados. Se constató que POWER es de NASA, ofrece API temporal y variables basadas en MERRA-2, pero su conveniencia técnica no implica superioridad científica. Comparar Giovanni/GES DISC y AppEEARS antes de ampliar integraciones. POWER tiene además IMERG/SMAP de mayor resolución que requieren validación de parámetros y accesos. **Decisión principal pendiente**, ver ADR-013.
+
 ## Regla de promoción
 
 Cuando una decisión quede aprobada, registrarla en docs/DECISIONS.md y actualizar el documento público correspondiente. Al finalizar, revisar este registro y eliminarlo de la rama final mediante un commit específico.

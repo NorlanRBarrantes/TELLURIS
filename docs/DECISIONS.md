@@ -96,4 +96,14 @@ Only **approved or explicitly labeled proposed** decisions are published here. O
 - **Impact:** No unsupported scoring weights, competitors' alleged failures, historic weather anecdotes, or invented outputs will be promoted into the NASA submission.
 
 
+## ADR-013 — Evaluate NASA-recommended data tools against NASA POWER
+
+- **Date:** 2026-11-14
+- **Status:** Under evaluation; no replacement approved
+- **Question:** Why use NASA POWER for TELLURIS when the challenge lists Giovanni, Hydrology Time Series, AppEEARS and other resources?
+- **Finding:** POWER is a NASA-operated analysis-ready data service and provides MERRA-2-based meteorological series with a documented temporal REST API. It can satisfy the NASA-mission/model data requirement. The named challenge resources are useful alternatives or validation tools, but their presence in the resource list is not a mandate to build against their interfaces.
+- **Trade-off:** POWER is convenient for an initial point-based trend engine, but its conventional meteorological grid and specialized parameter catalog may be insufficient for detailed spatial or vegetation investigations. Giovanni/GLDAS and AppEEARS offer broader scientific sources, with different access and workflow complexities.
+- **Next decision gate:** Test a real NASA POWER result and investigate one challenge-listed alternative (Giovanni or GES DISC) for the same scientific question. Consider AppEEARS if a MODIS vegetation use case is prioritized. Do not imply actual integration, independent verification, or dataset equivalence before testing.
+- **Detail:** [Data source selection comparison](DATA-SOURCES.md#source-selection-nasa-power-vs-challenge-listed-resources-review-2026-11-14) and [official resource catalog](NASA-CHALLENGE-RESOURCES.md).
+
 Do not replace proposed status with accepted until the underlying decision is verified and recorded.

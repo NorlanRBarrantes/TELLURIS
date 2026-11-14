@@ -39,6 +39,26 @@ NASA's documented monthly API allows up to 20 parameters per single-point reques
 - NASA POWER monthly endpoint and methodology, accessed for the November 14 research review: https://power.larc.nasa.gov/docs/services/api/temporal/monthly/ ; https://power.larc.nasa.gov/docs/services/ ; https://power.larc.nasa.gov/docs/methodology/data/sources_hydrology/
 
 
+## Source selection: NASA POWER vs. challenge-listed resources (review 2026-11-14)
+
+The official challenge **does not require use of a particular listed website**. It requests scientific mission/model variables, geographic time series, rate-of-change estimates and statistical significance testing. NASA POWER was proposed because its documented temporal API returns ready-to-process point observations in JSON/CSV with parameter/date/coordinate selection. Its meteorological fields derive from NASA models including MERRA-2, which the challenge mentions.
+
+**This is an engineering rationale, not a finding that POWER is more scientifically valid than the challenge-listed tools.**
+
+| NASA source/tool | Strength for TELLURIS | Integration / science concern | Planned use |
+| --- | --- | --- | --- |
+| [NASA POWER](https://power.larc.nasa.gov/docs/services/api/temporal/monthly/) | Straightforward temporal REST API; long meteorological records; analysis-ready responses | Coarse conventional meteorology grid; verify exact variables, temporal semantics, metadata and units | **Candidate P0 primary provider**, subject to real-response tests |
+| [Giovanni](https://giovanni.gsfc.nasa.gov/) | Broad NASA atmospheric/hydrologic catalog, regional plots and time series | Browser analysis workflows are not equivalent to a guaranteed lightweight public REST interface for arbitrary frontend use | **Research and independent inspection**; evaluate export formats |
+| [Hydrology Time Series / GES DISC](https://disc.gsfc.nasa.gov/information/tools?title=Hydrology%20Time%20Series) | Hydrology-focused series and datasets (e.g., GLDAS in GES DISC) | Check supported collections, authentication, delivery workflow and API access | **Alternative / cross-check** for hydrology |
+| [AppEEARS](https://appeears.earthdatacloud.nasa.gov/) | MODIS/land data extraction, point/polygon requests, quality flags, programmatic API | Earthdata Login and asynchronous task/extract workflow; must validate product access and usable latency | **Candidate post-MVP provider** for satellite vegetation |
+| [NOAA CDO](https://www.ncei.noaa.gov/cdo-web/) | Historical station-based climate observations | Coverage must be verified; not itself a replacement for NASA mission/model data | **External reference only** |
+
+**Updated POWER capability:** [POWER methodology](https://power.larc.nasa.gov/docs/methodology/) also lists higher-resolution datasets such as GPM IMERG precipitation (~0.1°) and SMAP L4 soil moisture (~9 km). These are **not automatically interchangeable** with conventional MERRA-2 meteorological variables; investigate parameter aliases, time availability, units, and extraction endpoints before claiming integration.
+
+**Working rule:** Demonstrate a valid end-to-end scientific result before integrating more sources. If a first-party challenge-listed tool delivers materially better spatial coverage or reproducibility for the chosen investigation without jeopardizing the hackathon deadline, reconsider the primary provider. A broad dataset catalog without tested calculations does not meet the challenge.
+
+Additional programmatic-access reference: NASA [AppEEARS Data Resources](https://github.com/nasa/AppEEARS-Data-Resources) (Earthdata authentication required). For the full official resource catalog see [NASA challenge resources](NASA-CHALLENGE-RESOURCES.md).
+
 ## Candidate follow-on datasets (not integrated)
 
 | Source | Possible use | Status |
