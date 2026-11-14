@@ -60,7 +60,7 @@ https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=T2M,PRECTOTCOR
 
 ### Repository automation
 
-A minimal [GitHub Actions workflow](../.github/workflows/exp001-qa.yml) runs the 11 **synthetic** QA tests when the experiment source/tests change, on pull requests, or by manual dispatch. It does **not** contact NASA or establish a valid climate finding. CI status must be inspected in GitHub Actions before claiming it passed.
+A minimal [GitHub Actions workflow](../.github/workflows/exp001-qa.yml) runs the 11 **synthetic** QA tests when the experiment source/tests change, on pull requests, or by manual dispatch. It does **not** contact NASA or establish a valid climate finding. The first CI run [#43640908593](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43640908593), on commit bc746cdf, **completed successfully**. This confirms only the synthetic Python tests in the hosted runner, not NASA-data or statistical independence validation.
 
 ## Execution record — 2026-11-14
 

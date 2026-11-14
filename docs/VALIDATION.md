@@ -75,7 +75,7 @@
 
 - Workflow: [.github/workflows/exp001-qa.yml](../.github/workflows/exp001-qa.yml)
 - Purpose: reproduce synthetic parser/statistics QA without any credentials or live NASA API call.
-- **CI status: pending separate GitHub run verification.** Successful local execution is documented above; do not mark an uninspected CI run as passing.
+- **CI status: success.** [GitHub Actions run #43640908593](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43640908593) completed successfully on commit bc746cdf with the synthetic-qa job. This does **not** establish real NASA retrieval, empirical climate trends or inference validity for autocorrelated observations.
 
 ## How to record completed validations
 
