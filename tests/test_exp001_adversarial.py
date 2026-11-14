@@ -112,3 +112,80 @@ def test_insufficient_calendar_pairs_have_no_lag_one_estimate():
     assert outcome["status"] == "exploratory_independence_not_established"
     assert outcome["n_consecutive_year_pairs_for_lag1"] == 0
     assert outcome["lag1_on_detrended_residuals_diagnostic_only"] is None
+
+
+def test_gemini_nan_padding_does_not_preserve_time_grid_for_hamed_rao():
+    """pyMannKendall drops NaNs before Hamed-Rao; NaN padding is not a fix."""
+    years = np.arange(1985, 2026)
+    rng = np.random.default_rng(123)
+    values = 22.0 + 0.04 * (years - 1985) + rng.normal(0, 0.2, len(years))
+    retained = ~np.isin(years, [1998, 1999])
+    compressed = values[retained]
+    padded = values.copy()
+    padded[~retained] = np.nan
+    direct = mk.hamed_rao_modification_test(compressed, lag=3)
+    padded_result = mk.hamed_rao_modification_test(padded, lag=3)
+    # Equal outputs demonstrate that NaNs were removed, not preserved as lags.
+    assert direct.p == pytest.approx(padded_result.p, abs=1e-12)
+    assert direct.var_s == pytest.approx(padded_result.var_s, abs=1e-12)
+    assert direct.slope == pytest.approx(padded_result.slope, abs=1e-12)
+
+
+def test_fill_value_from_metadata_can_differ_from_minus_999():
+    """Different explicit sentinels must be recognized, without a -900 rule."""
+    payload = {
+        "header": {"fill_value": -99.0},
+        "parameters": {"T2M": {"units": "C"}, "PRECTOTCORR": {"units": "mm/day"}},
+        "properties": {"parameter": {"T2M": {}, "PRECTOTCORR": {}}},
+    }
+    for month in range(1, 13):
+        key = f"2025{month:02d}"
+        payload["properties"]["parameter"]["T2M"][key] = -5.0
+        payload["properties"]["parameter"]["PRECTOTCORR"][key] = 2.0
+    payload["properties"]["parameter"]["PRECTOTCORR"]["202512"] = -99.0
+    result = exp.parse_annual(payload, 2025, 2025)
+    assert result["annual"]["T2M"] == {2025: -5.0}
+    assert result["annual"]["PRECTOTCORR"] == {}
+    assert result["qa"]["missing_months"]["PRECTOTCORR"] == ["202512"]
+
+
+def test_paired_report_explains_nonadditivity_using_same_years():
+    """Report two different, explicitly labeled estimators using aligned years."""
+    years = list(range(2000, 2010))
+    a = [-0.52, 0.63, -1.46, -2.99, -0.61, -1.03, 1.8, 0.2, -0.93, -1.11]
+    b = [0.56, -0.77, -0.52, -0.03, 0.15, 0.16, 0.18, 1.37, 1.77, -1.58]
+    def payload(series):
+        obj = {"header": {"fill_value": -999.0},
+               "parameters": {"T2M": {"units": "C"}, "PRECTOTCORR": {"units": "mm/day"}},
+               "properties": {"parameter": {"T2M": {}, "PRECTOTCORR": {}}}}
+        for year, temperature in zip(years, series):
+            for month in range(1, 13):
+                key = f"{year}{month:02d}"
+                obj["properties"]["parameter"]["T2M"][key] = temperature
+                obj["properties"]["parameter"]["PRECTOTCORR"][key] = 2.0
+        return obj
+    report = exp.compute_report(
+        {"Liberia": {"payload": payload(a)}, "Limon": {"payload": payload(b)}},
+        2000, 2009,
+    )
+    comparison = report["paired_difference"]["T2M"]["slope_comparison"]
+    assert comparison["status"] == "exploratory"
+    separate = comparison["difference_of_individual_sen_slopes_per_decade"]
+    paired = comparison["sen_slope_of_paired_difference_per_decade"]
+    assert abs(separate - paired) > 1.0  # Synthetic nonadditivity example.
+    assert comparison["liberia_sen_on_common_years_per_decade"] == pytest.approx(
+        exp.analyze(dict(zip(years, a)))["trend"]["slope_per_decade"]
+    )
+    assert comparison["limon_sen_on_common_years_per_decade"] == pytest.approx(
+        exp.analyze(dict(zip(years, b)))["trend"]["slope_per_decade"]
+    )
+
+
+def test_hamed_rao_not_selected_as_primary_significance_method():
+    """Serial-dependence inference must remain explicitly unvalidated."""
+    years = {y: 20.0 + (y - 1990) * 0.1 for y in range(1990, 2020)}
+    result = exp.analyze(years)
+    assert result["status"] == "exploratory_independence_not_established"
+    assert "mann_kendall_original" in result
+    assert "mann_kendall_hamed_rao" not in result
+    assert "lag1_on_detrended_residuals_diagnostic_only" in result

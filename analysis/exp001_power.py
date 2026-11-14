@@ -219,10 +219,38 @@ def compute_report(input_data: dict[str, dict[str, Any]], start: int, end: int) 
         one, two = (parsed[place]["annual"][var] for place in LOCATIONS)
         common = sorted(set(one).intersection(two))
         diff = {year: one[year] - two[year] for year in common}
+        paired_analysis = analyze(diff)
+        matched_liberia = analyze({year: one[year] for year in common})
+        matched_limon = analyze({year: two[year] for year in common})
+        # These are distinct estimators: Sen(A-B) is not generally Sen(A)-Sen(B).
+        if all(r["status"] == "exploratory_independence_not_established"
+               for r in (paired_analysis, matched_liberia, matched_limon)):
+            slope_comparison = {
+                "status": "exploratory",
+                "liberia_sen_on_common_years_per_decade": matched_liberia["trend"]["slope_per_decade"],
+                "limon_sen_on_common_years_per_decade": matched_limon["trend"]["slope_per_decade"],
+                "difference_of_individual_sen_slopes_per_decade": (
+                    matched_liberia["trend"]["slope_per_decade"]
+                    - matched_limon["trend"]["slope_per_decade"]
+                ),
+                "sen_slope_of_paired_difference_per_decade": paired_analysis["trend"]["slope_per_decade"],
+                "note": (
+                    "Sen(A-B) is not generally Sen(A)-Sen(B): each is a separate "
+                    "median-of-pairwise-slopes estimator. All individual slopes "
+                    "here use the same common years. No hypothesis test of "
+                    "equality of robust slopes or causal inference is asserted."
+                ),
+            }
+        else:
+            slope_comparison = {
+                "status": "insufficient_years",
+                "n_common_years": len(common),
+            }
         outcome["paired_difference"][var] = {
             "description": "Trend in Liberia minus Limon annual difference; not a causal explanation or proof of identical Sen slopes",
             "common_years": common, "units": "C" if var == "T2M" else "mm/year",
-            "analysis": analyze(diff),
+            "analysis": paired_analysis,
+            "slope_comparison": slope_comparison,
         }
     return outcome
 
