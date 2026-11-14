@@ -61,4 +61,13 @@ Only **approved or explicitly labeled proposed** decisions are published here. O
 - **Decision:** License original contributions under MIT; credit every external library, dataset, image and map service under their own applicable terms.
 - **Reason:** Explicit OSI-recognized open source license and clear NASA submission reuse conditions.
 
+## ADR-009 — Review and integrate external research and AI suggestions
+
+- **Date:** 2026-11-14
+- **Status:** Accepted
+- **Decision:** Accept external research and AI-generated proposals (including Google Gemini) as review inputs, not as verified project facts. Cross-check against authoritative NASA documentation, scientific methodology, licensing, implementation feasibility and current decisions before accepting changes.
+- **Reason:** Preserve scientific reliability, prevent incompatible design choices, and keep NASA-facing materials focused and auditable.
+- **Impact:** Record the source and disposition of material proposals; promote only accepted, justified content into public documentation, code and tests; disclose material AI assistance in docs/AI-USE.md. Keep informal exploration out of the final submission tree.
+- **Procedure:** CONTRIBUTING.md → External research and AI-assisted material intake.
+
 Do not replace proposed status with accepted until the underlying decision is verified and recorded.

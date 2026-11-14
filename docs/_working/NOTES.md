@@ -46,6 +46,8 @@ Este documento agrupa decisiones en discusión, pendientes y observaciones de im
 
 **2026-11-14 — Inicialización.** Se estableció la identidad TELLURIS, se confirmó el repositorio vacío y privado y se comenzó la documentación pública. No se ha confirmado una aplicación en funcionamiento ni un despliegue.
 
+**2026-11-14 — Flujo para aportes externos.** El equipo compartirá periódicamente investigaciones, materiales y propuestas de Gemini u otras herramientas. Antes de integrarlas: identificar fuente y fecha, separar afirmaciones de hipótesis, verificar con fuentes NASA y método científico, evaluar compatibilidad, decidir su estado, documentar decisiones aprobadas y subir solo cambios útiles con commits claros. Política pública en CONTRIBUTING.md y ADR-009.
+
 ## Regla de promoción
 
 Cuando una decisión quede aprobada, registrarla en docs/DECISIONS.md y actualizar el documento público correspondiente. Al finalizar, revisar este registro y eliminarlo de la rama final mediante un commit específico.
