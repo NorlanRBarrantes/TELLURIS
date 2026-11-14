@@ -50,3 +50,11 @@ Do not imply NASA endorsement or generate/reuse NASA brand assets without confir
 References:
 - NASA legal terms: https://www.spaceappschallenge.org/legal/
 - NASA Space Apps branding: https://www.spaceappschallenge.org/brand/
+
+## Project Uriel public-site drafting — November 14, 2026
+
+- **OpenAI ChatGPT:** Reviewed existing TELLURIS README, challenge interpretation, product scope, methodology, evidence register, experiment report, deployment records and architecture decisions to prepare a static, bilingual Project Uriel site and research-stage TELLURIS introduction for `projecturiel.earth`.
+- **Assets:** Drafted HTML, CSS, small progressive-enhancement JavaScript research-question generator, original SVG/Python-created OpenGraph illustrations and metadata (canonical, hreflang, sitemap, robots, JSON-LD).
+- **Disclosure:** The question generator makes no NASA API calls and computes no scientific results. Existing 11 synthetic QA tests are described as synthetic and are not evidence of climate change findings.
+- **Verification boundary:** Local static render and interaction checks do not establish that the site was deployed on BanaHosting, indexed by Google or scientifically validated.
+- **Human review:** Content, brand, accessibility, DNS/hosting settings and NASA submission references require team review before publication.
