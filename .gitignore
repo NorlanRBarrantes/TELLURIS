@@ -1,0 +1,42 @@
+# Local secrets and untracked planning
+.env
+.env.*
+!.env.example
+.local/
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# Dependencies and local tools
+node_modules/
+vendor/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Build output and transient data
+dist/
+build/
+coverage/
+.cache/
+.tmp/
+temp/
+tmp/
+*.log
+*.sqlite
+*.sqlite3
+
+# Operating systems and IDEs
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Do not check in downloaded raw scientific data without explicit review.
+data/raw/
+data/cache/

@@ -1,0 +1,51 @@
+# Deployment and operations
+
+## Selected environment
+
+- **Intended public URL:** https://telluris.lynxglobals.net/
+- **Hosting provider:** BanaHosting
+- **Plan type:** Shared hosting
+- **Expected control panel:** cPanel, subject to account verification
+- **Status:** Hosting chosen; DNS, SSL, document root, supported runtimes, and live deployment **not yet tested**.
+
+The project must not assume root access, Docker, a permanently running Python service, a Node.js application server, or privileged OS configuration.
+
+## Deployment strategy (proposed)
+
+1. Confirm subdomain and DNS configuration.
+2. Confirm HTTPS certificate and document root in the actual hosting account.
+3. Confirm available PHP version, HTTPS outbound connections, cron and rewrite support if relevant.
+4. Prefer a **static frontend build** with no persistent application server.
+5. Add a small PHP proxy/cache only if required, and only after testing it on this account.
+6. Keep any validation-oriented Python tooling outside production unless Python hosting support is explicitly confirmed.
+7. Upload only compiled public assets and approved server code, excluding internal notes and credentials.
+8. Test the actual public URL, application routing, NASA requests, errors, and provenance displays.
+9. Confirm accessibility from an incognito browser without authentication.
+
+## Suggested deployment layout, not yet implemented
+
+A Vite build can be deployed into the subdomain's verified document root. If the frontend uses history-based routes, configure an appropriate rewrite to index.html; alternatively prefer hash routing if rewriting cannot be configured. Never add a rewrite that intercepts backend API endpoints.
+
+If a PHP API is needed, publish only safe entrypoints and keep caches, configurations, and nonpublic files outside the public web root where the account allows it. Treat shared hosting as resource constrained: avoid high request concurrency, memory-heavy geographic raster operations, and unbounded API calls.
+
+## Environment and security rules
+
+- Store secrets only in hosting configuration or local ignored files.
+- No access keys, cPanel credentials, FTP credentials, or private paths in the repository.
+- Enforce TLS and fixed NASA upstream host(s) for any proxy.
+- Define rate limits, network timeouts, cache expiry, and error responses.
+- Provide a clearly labeled offline demonstration if live NASA data is temporarily unavailable, using genuine, attributed source data.
+
+## Unverified questions
+
+- Does this account expose cPanel's Python or Node.js application managers?
+- What PHP version and extensions are active for the subdomain?
+- Are external HTTPS requests available from PHP?
+- Can static SPA rewrites be configured for this document root?
+- Are there hosting-side request, CPU, bandwidth, and rate restrictions relevant to NASA retrieval?
+- Are DNS and certificate issuance fully configured?
+
+**Do not mark deployment complete until the live site passes these checks.**
+
+References:
+- cPanel generic application support (not a provider-specific guarantee): https://support.cpanel.net/hc/en-us/articles/4408475507479-Does-cPanel-support-Python-Java-or-other-frameworks
