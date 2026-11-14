@@ -106,4 +106,30 @@ Only **approved or explicitly labeled proposed** decisions are published here. O
 - **Next decision gate:** Test a real NASA POWER result and investigate one challenge-listed alternative (Giovanni or GES DISC) for the same scientific question. Consider AppEEARS if a MODIS vegetation use case is prioritized. Do not imply actual integration, independent verification, or dataset equivalence before testing.
 - **Detail:** [Data source selection comparison](DATA-SOURCES.md#source-selection-nasa-power-vs-challenge-listed-resources-review-2026-11-14) and [official resource catalog](NASA-CHALLENGE-RESOURCES.md).
 
+## ADR-014 — Scientific guardrails as a product differentiator
+
+- **Date:** 2026-11-14
+- **Status:** Accepted as a product direction; implementation pending
+- **Decision:** Make data-provenance, unit, completeness, assumption and uncertainty warnings integral to every TELLURIS result. Consider a learner-facing comparison between naive and assumption-aware statistical methods after both are independently verified.
+- **Rationale:** Increase scientific usefulness without inventing findings or incorrectly declaring significance.
+- **Scope:** Start with baseline quality checks and a tested trend; conditional advanced methods and multiple-source comparisons belong to later stages.
+- **Reference:** [Scientific guardrails](SCIENTIFIC-GUARDRAILS.md).
+
+## ADR-015 — Client-side statistics proposal and deployment safeguards
+
+- **Date:** 2026-11-14
+- **Status:** Proposed; requires implementation/hosting verification
+- **Decision candidate:** TypeScript numerical engine in the browser with independent Python-based fixture validation; statically deployable UI, optional bounded PHP proxy/cache in BanaHosting shared hosting.
+- **Rationale:** Avoid presuming persistent server processes; a small, independently testable scientific core is likely suitable for static hosting.
+- **Caution:** No assertion of <2 s API calls, <4 ms calculations, exact decimal parity, or guaranteed shared-hosting support before measuring them.
+
+## ADR-016 — Research claims and external Gemini review
+
+- **Date:** 2026-11-14
+- **Status:** Accepted
+- **Decision:** Treat the team's second Gemini-assisted report as a source of proposals rather than a validated experiment. Reject unsupported pre-declared statistical outcomes for Costa Rica and global cases, non-evidenced competition statements, and claims that ENSO regression attributes climate change. Keep a paired Costa Rica investigation and test IMERG as an optional complementary NASA product.
+- **Rationale:** NASA explicitly accepts baseline linear-trend analyses; advanced methods are scientific enhancements, not mandatory competition requirements. Every claim requires a traceable method and source.
+- **Supporting documents:** [Scientific guardrails](SCIENTIFIC-GUARDRAILS.md), [Data sources](DATA-SOURCES.md), and [Scientific methodology](SCIENTIFIC-METHODOLOGY.md).
+
+
 Do not replace proposed status with accepted until the underlying decision is verified and recorded.

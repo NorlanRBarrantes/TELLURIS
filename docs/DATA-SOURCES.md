@@ -74,6 +74,13 @@ References:
 - https://disc.gsfc.nasa.gov/
 - https://giovanni.earthdata.nasa.gov/
 
+### GPM IMERG V07B — verified research alternative, not integrated
+
+NASA's [GPM precipitation data directory](https://gpm.nasa.gov/data/directory) describes IMERG V07B as a multi-satellite rainfall-estimate product on an approximately 0.1° (10 km) grid and indicates that reprocessing includes **January 1998 onward**. Periods, runs (Early/Late/Final), latency, product units and redistribution/citation requirements vary. The 2000 starting year asserted in the external report is not an unconditional product limit. The specific collection, retrieval protocol and aligned POWER comparison remain to be tested.
+
+**Source interpretation:** Satellite precipitation estimates may incorporate gauge corrections or multisensor blending, so avoid claiming they are a single sensor's unmodified direct observation. For a cross-source comparison, reconcile period, variable definition, unit conversions, sampling footprint and missing values before claiming a match or discrepancy.
+
+
 ## Provenance fields required in each analysis
 
 Dataset / collection; NASA source; variable code and human-readable name; units; temporal resolution; date range requested and actually analyzed; spatial selector and effective spatial resolution; retrieval timestamp; data processing algorithm and version; missing-data flags; statistical test; number of valid observations; output and limitations.

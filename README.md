@@ -35,6 +35,7 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 - [Scientific methodology](docs/SCIENTIFIC-METHODOLOGY.md)
 - [Costa Rica climate contrast research case](docs/CASE-STUDY-COSTA-RICA.md)
 - [Research sources and evidence](docs/RESEARCH-REFERENCES.md)
+- [Scientific guardrails and data-quality controls](docs/SCIENTIFIC-GUARDRAILS.md)
 - [Technical architecture](docs/ARCHITECTURE.md)
 - [Deployment constraints](docs/DEPLOYMENT.md)
 - [Architecture decision records](docs/DECISIONS.md)

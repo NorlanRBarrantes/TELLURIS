@@ -28,6 +28,8 @@ TELLURIS aims to turn a question about environmental change into a **reproducibl
 6. Handle missing values and invalid / insufficient inputs without fabricating output.
 7. Demonstrate at least one reproducible investigation.
 
+**Scientific guardrails (P0 baseline):** Explicit provenance, units, temporal coverage, missing-value diagnostics and clear significance limitations are required with every reported trend. Advanced corrections and multi-dataset comparisons are optional extensions, not prerequisites for meeting the NASA challenge. See [Scientific guardrails](SCIENTIFIC-GUARDRAILS.md).
+
 **P1 — Valuable if P0 is stable**
 - Compare two locations using identical variables, time spans, and procedures.
 - Export the provenance and results of an investigation.
@@ -35,6 +37,9 @@ TELLURIS aims to turn a question about environmental change into a **reproducibl
 - Introduce a second investigation scenario.
 
 **Demonstration scenario — conditional P1 priority:** A side-by-side, NASA-backed comparison of two **point** samples (initial candidates: Liberia and Limón) on the same variable and overlapping period. The comparison should be built only after P0 can calculate and display a valid result for a single point. A contrasting seasonal response does not establish an opposing long-term trend. See [Costa Rica case study](CASE-STUDY-COSTA-RICA.md).
+
+- Explain potential statistical pitfalls in an educational comparison view, after reference computations are validated.
+- Consider one higher-resolution NASA source (GPM IMERG V07B) for a fixed, thoroughly documented precipitation case, only after P0 is functional.
 
 **P2 — Not required for the hackathon**
 - Conversational AI assistance, if it can be constrained to verified results.

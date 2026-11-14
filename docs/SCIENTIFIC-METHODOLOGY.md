@@ -50,6 +50,15 @@ A two-point comparison should align the time period and processing, report each 
 - Annual aggregation may reduce seasonal structure but does not automatically remove serial correlation. Check autocorrelation or use a justified method before interpreting p-values.
 - Nonlinear behavior and different trends in different subperiods require appropriate caveats.
 
+### Review of the external statistical audit (2026-11-14)
+
+- Keep Sen slope and a justified significance test as the baseline; do **not** make seasonal MK, Hamed-Rao and Pettitt universally mandatory. Their applicability depends on data frequency, dependence and the hypothesis being tested.
+- Never describe ENSO-regression residuals as an isolated anthropogenic climate signal. An association with ENSO is not causal attribution.
+- Do not accept a hard-coded fill-value rule (e.g., values below -900) or an 85% completeness threshold without source metadata and method-specific validation.
+- A two-location comparison with opposing or significant *individual* trends does not by itself show a significant *difference between slopes*.
+- See [Scientific guardrails](SCIENTIFIC-GUARDRAILS.md) for proposed quality gates and limitations.
+
+
 ## Proposed minimum quality standard
 
 - Prefer a sufficiently long time span, e.g. 20+ complete years for first demonstrations; the threshold is an analytical design choice, not a NASA mandate.

@@ -55,6 +55,9 @@ Este documento agrupa decisiones en discusión, pendientes y observaciones de im
 
 **2026-11-14 — Revisión de selección de fuentes.** Se cuestionó priorizar NASA POWER frente a recursos oficialmente enumerados. Se constató que POWER es de NASA, ofrece API temporal y variables basadas en MERRA-2, pero su conveniencia técnica no implica superioridad científica. Comparar Giovanni/GES DISC y AppEEARS antes de ampliar integraciones. POWER tiene además IMERG/SMAP de mayor resolución que requieren validación de parámetros y accesos. **Decisión principal pendiente**, ver ADR-013.
 
+**2026-11-14 — Auditoría del segundo informe de Gemini.** Se reconoce como oportunidad el panel educativo de controles de calidad/advertencias estadísticas. Se mantienen POWER inicial, casos CR y estadística con referencia independiente. React/TypeScript para cálculo local y PHP cache siguen como propuesta a validar en BanaHosting. GPM IMERG V07B (desde enero 1998 según NASA) es candidato a comparación. Se posponen Pettitt, filtro ENSO y ESP32 hasta que P0 esté probado. No se aceptan los valores p/correlaciones propuestos ni promesas de rendimiento. Se documentaron ADR-014 a ADR-016 y docs/SCIENTIFIC-GUARDRAILS.md.
+
+
 ## Regla de promoción
 
 Cuando una decisión quede aprobada, registrarla en docs/DECISIONS.md y actualizar el documento público correspondiente. Al finalizar, revisar este registro y eliminarlo de la rama final mediante un commit específico.

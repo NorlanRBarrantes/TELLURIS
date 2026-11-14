@@ -10,7 +10,7 @@ AI-generated text and code require human review. AI is not accepted as a scienti
 
 - **OpenAI ChatGPT:** Assisted with concept exploration, project naming discussion, technical planning, public documentation drafting, challenge/source research, and initial GitHub repository changes on November 14, 2026.
 - **Scientific data results:** None validated at the time of the initial documentation commits.
-- **Other AI tools:** No use has been recorded here yet; update before final submission if applicable.
+- **Other AI tools at initialization:** None recorded at the first documentation commit; additional use is documented below.
 
 ## External research review — November 14, 2026
 
@@ -18,6 +18,14 @@ AI-generated text and code require human review. AI is not accepted as a scienti
 - The method and product concepts were **reviewed and selectively incorporated** with ChatGPT assistance against NASA POWER documentation, the challenge statement, the pyMannKendall project, and published Central American climate literature.
 - **Authorship of the supplied brief or use of a specific AI tool for that brief was not independently established.** Update this log if the team confirms the tool or author; do not incorrectly claim Gemini authored this document merely because other Gemini material may later be shared.
 - No time-series results, hardware integration, or statistical execution has been verified from that brief.
+
+
+## Second external AI research review — November 14, 2026
+
+- **Google Gemini:** Team supplied an AI-assisted research/audit report assessing sources, statistical methodology, Costa Rica case studies, hosting, competition differentiation and optional ESP32 hardware. It was used as a planning input, **not** as data or validated computations.
+- **OpenAI ChatGPT:** Critically reviewed the supplied report against the official NASA challenge, NASA POWER/GPM documentation and statistical-method references; drafted scoped updates to repository documentation and proposed quality checks.
+- **Excluded as unverified:** Numerical trend claims, p-values, climate correlations, global-case outcomes, API timing/browser benchmarks, assumed shared-hosting support, event judges and comparative claims about other hackathon submissions.
+- **Scientific execution:** No real-data computation or production app verification is claimed by this research review.
 
 
 ## Scientific safeguards

@@ -47,6 +47,17 @@ These numbers cannot be presented as confirmed **2026 global** evaluation weight
 
 The research brief's named individual judge affiliations, claim that most competing teams fail, historical coefficients and alleged exact climate outcomes have **not** been independently verified for this project. They are omitted from the public product narrative.
 
+## Follow-up AI report audit — 2026-11-14
+
+A second team-supplied Gemini-assisted technical report recommended a browser-based statistical engine, NASA POWER/IMERG comparisons, an ENSO lens, Hamed–Rao/seasonal MK/Pettitt tests, and an ESP32 display. The verified methodological and NASA-source context has been selectively promoted to [Scientific guardrails](SCIENTIFIC-GUARDRAILS.md); unsupported measured outcomes and speed guarantees have **not** been adopted.
+
+- The NASA challenge explicitly regards **basic linear trend analysis as a valid start**; sophisticated corrections are optional, subject to scientific assumptions: https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/
+- POWER MERRA-2 meteorology and monthly API scope: https://power.larc.nasa.gov/docs/services/api/temporal/monthly/
+- GPM IMERG V07B records including TRMM-era January 1998: https://gpm.nasa.gov/data/directory
+- pyMannKendall methods and their seasonality/serial-correlation assumptions: https://github.com/mmhs013/pyMannKendall
+- NOAA ONI moving historical baselines: https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_change.shtml
+
+
 ## Scope of the external research review
 
 A long team-supplied exploratory report suggested a paired Costa Rican investigation, pyMannKendall extensions, and an ESP32 LCD console. Only scientifically supported context and appropriately scoped proposals have been retained in public documentation. No original text, numeric results or device implementation are represented as completed TELLURIS work.

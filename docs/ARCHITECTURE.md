@@ -42,6 +42,15 @@ User selects location, variable and date range
 - Do not silently fall back to invented results.
 - Avoid saving personal information and refrain from adding unnecessary login.
 
+## Client-side statistical engine — proposed, not yet benchmarked
+
+An external analysis proposed implementing deterministic analysis in TypeScript, optionally in a Web Worker, with Python/SciPy/pyMannKendall used locally or in CI as an independent reference. This is **plausible** for modest annual/monthly series and compatible with static hosting; it remains a candidate until numerical correctness, performance and browser behavior are tested.
+
+The public site would preferentially load a static build. A narrowly scoped PHP proxy/cache may help with cross-origin requests or upstream outages **only if the actual shared-hosting account supports the required network and filesystem operations**. No real BanaHosting capability, subdomain deployment, guaranteed cache latency or uptime has been verified. Cached demonstrations must identify their source/period/version and must never masquerade as fresh data.
+
+An API schema should distinguish observations, provenance, QA warnings, method identifiers and optional outputs. Do not freeze fields for experimental methods that have not been implemented. See [Scientific guardrails](SCIENTIFIC-GUARDRAILS.md).
+
+
 ## Optional prototype hardware — no hosting dependency
 
 A research contribution proposed an ESP32 touch-display console for showing comparison results. This **is not a requirement** of TELLURIS or the NASA challenge. Device availability, exact model, display resolution, firmware stack, and connectivity remain unverified.
