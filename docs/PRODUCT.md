@@ -34,6 +34,8 @@ TELLURIS aims to turn a question about environmental change into a **reproducibl
 - Provide accessible language for scientific terminology.
 - Introduce a second investigation scenario.
 
+**Demonstration scenario — conditional P1 priority:** A side-by-side, NASA-backed comparison of two **point** samples (initial candidates: Liberia and Limón) on the same variable and overlapping period. The comparison should be built only after P0 can calculate and display a valid result for a single point. A contrasting seasonal response does not establish an opposing long-term trend. See [Costa Rica case study](CASE-STUDY-COSTA-RICA.md).
+
 **P2 — Not required for the hackathon**
 - Conversational AI assistance, if it can be constrained to verified results.
 - Additional missions/datasets (e.g., GPM or MODIS).
@@ -47,6 +49,11 @@ TELLURIS aims to turn a question about environmental change into a **reproducibl
 - Are apparent trends consistent after correcting for seasonality or changing the analysis period?
 
 Do **not** write that a region is warming, drying, greening, or recovering until a real dataset and validated analysis support that specific statement.
+
+## Optional physical demonstration
+
+An ESP32-based auxiliary monitor with a ~5-inch display has been **proposed in an external research brief**, but no specific board, wiring, firmware, screen resolution, or member availability has been confirmed. Hardware is an **optional enhancement** only after the core scientific app works. It would display a result snapshot from the validated analysis, not operate as a scientific sensor or disaster warning system.
+
 
 ## User workflow (target)
 

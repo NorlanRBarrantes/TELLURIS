@@ -12,6 +12,14 @@ AI-generated text and code require human review. AI is not accepted as a scienti
 - **Scientific data results:** None validated at the time of the initial documentation commits.
 - **Other AI tools:** No use has been recorded here yet; update before final submission if applicable.
 
+## External research review — November 14, 2026
+
+- A team-supplied research brief proposed a Pacific–Caribbean climate contrast, more advanced Mann-Kendall methods, and an ESP32 display demonstration.
+- The method and product concepts were **reviewed and selectively incorporated** with ChatGPT assistance against NASA POWER documentation, the challenge statement, the pyMannKendall project, and published Central American climate literature.
+- **Authorship of the supplied brief or use of a specific AI tool for that brief was not independently established.** Update this log if the team confirms the tool or author; do not incorrectly claim Gemini authored this document merely because other Gemini material may later be shared.
+- No time-series results, hardware integration, or statistical execution has been verified from that brief.
+
+
 ## Scientific safeguards
 
 - NASA/source data values must come from attributable datasets.

@@ -30,6 +30,15 @@ This is a **request example**, not evidence that a given API response or result 
 
 NASA's documented monthly API allows up to 20 parameters per single-point request, while regional requests are limited to one parameter. Respect API limits, validate inputs, and cache successful responses. Never imply that two geospatially different points represent a national average.
 
+### Additional verification from NASA documentation (2026-11-14 review)
+
+- The monthly API documentation states **up to 20** parameters per point request (not 10); regional submissions are limited to one parameter.
+- NASA POWER's meteorological source resolution is approximately **0.5° × 0.625°**; two nearby requested coordinates may resolve to the same grid cell. Record the effective data grid rather than implying urban/station precision.
+- NASA's hydrology methodology describes aggregate-product precipitation in **mm/day**; annual totals must use the correct calendar-month day count and valid-data policy, unless actual response metadata explicitly indicates another unit.
+- POWER is an analysis-ready data service drawing on models/reanalysis and other sources; avoid labeling all outputs as direct satellite measurements or local weather-station observations.
+- NASA POWER monthly endpoint and methodology, accessed for the November 14 research review: https://power.larc.nasa.gov/docs/services/api/temporal/monthly/ ; https://power.larc.nasa.gov/docs/services/ ; https://power.larc.nasa.gov/docs/methodology/data/sources_hydrology/
+
+
 ## Candidate follow-on datasets (not integrated)
 
 | Source | Possible use | Status |

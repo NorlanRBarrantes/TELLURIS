@@ -33,6 +33,8 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 - [Product vision, scope and acceptance criteria](docs/PRODUCT.md)
 - [NASA data sources and provenance](docs/DATA-SOURCES.md)
 - [Scientific methodology](docs/SCIENTIFIC-METHODOLOGY.md)
+- [Costa Rica climate contrast research case](docs/CASE-STUDY-COSTA-RICA.md)
+- [Research sources and evidence](docs/RESEARCH-REFERENCES.md)
 - [Technical architecture](docs/ARCHITECTURE.md)
 - [Deployment constraints](docs/DEPLOYMENT.md)
 - [Architecture decision records](docs/DECISIONS.md)

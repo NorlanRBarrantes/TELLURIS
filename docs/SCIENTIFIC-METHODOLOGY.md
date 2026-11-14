@@ -25,6 +25,21 @@ Define a variable, source, spatial sampling support, calendar coverage, temporal
 
 **Sen's slope.** Robust estimator of the median of pairwise slopes. Specify the time scale and demonstrate numerical agreement against an independent implementation.
 
+### Advanced methods under evaluation (not yet implemented)
+
+The [pyMannKendall](https://github.com/mmhs013/pyMannKendall) reference implementation documents several related but distinct procedures:
+
+- `original_test`: baseline monotonic-trend test; does not account for serial correlation or the seasonal cycle.
+- `seasonal_test(period=12)`: compares corresponding calendar months in monthly sequences; requires correct ordering and treatment of incomplete seasons.
+- `seasonal_sens_slope(period=12)`: robust seasonal slope; the package defines a **full period cycle** as one time step (for monthly data, check interpretation as a year before displaying units).
+- `hamed_rao_modification_test`: adjusts test variance for serial dependence under its method-specific assumptions.
+- `trend_free_pre_whitening_modification_test`: an alternative autocorrelation treatment, not a universal replacement for seasonality handling.
+
+**Decision rule:** start with a well-tested annual baseline, then add diagnostic checks (seasonality and serial autocorrelation) before selecting a correction. Do not simply run every variant and pick the smallest p-value. Compare the chosen implementation against independent reference fixtures and include the test name in the report. Monthly tests and annual aggregation are **alternative analytical views**, not interchangeable without explicit units and assumptions.
+
+A two-point comparison should align the time period and processing, report each point's results separately, and not interpret differences between individual p-values as proof that the two trends differ significantly. Testing slope differences formally is separate and is deferred until justified.
+
+
 ### Interpretation policy
 
 - Report the **effect size** as well as its uncertainty and the significance test.

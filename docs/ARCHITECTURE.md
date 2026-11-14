@@ -42,6 +42,15 @@ User selects location, variable and date range
 - Do not silently fall back to invented results.
 - Avoid saving personal information and refrain from adding unnecessary login.
 
+## Optional prototype hardware — no hosting dependency
+
+A research contribution proposed an ESP32 touch-display console for showing comparison results. This **is not a requirement** of TELLURIS or the NASA challenge. Device availability, exact model, display resolution, firmware stack, and connectivity remain unverified.
+
+If undertaken **after** a working, tested web analysis, the device should consume a small, versioned, read-only result payload with: location label, parameter, units, source, period, slope and units, p-value, test method, data timestamp, quality flags, and a clearly descriptive (not alarmist) significance label. If results have not been computed, display "unavailable" instead of guessed values.
+
+No claims of live Earth sensing, real-time warning, disaster forecasting, or sensor data capture are justified by a screen that displays historical NASA-derived results. Serial/Wi-Fi transport is a demo-specific optimization, not part of the mandatory public shared-hosting architecture.
+
+
 ## Proposed code organization
 
 - app/ — frontend source and static assets, once implemented

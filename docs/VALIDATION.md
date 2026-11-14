@@ -31,6 +31,18 @@
 | OPS-002 | Shared-hosting server constraints | Pending | Runtime capability record |
 | SUB-001 | Public source, demo and attribution | Pending | Accessible links / submission review |
 
+## Additional case-study and statistical gates
+
+| ID | Check | Status | Evidence |
+| --- | --- | --- | --- |
+| SCI-009 | NASA POWER monthly PRECTOTCORR units and day-weighted totals | Pending | NASA metadata + verified month/year calculation |
+| SCI-010 | Two requested locations resolve to distinct effective source grid samples | Pending | Coordinates and grid metadata |
+| SCI-011 | Same-period, same-variable comparison and missing-data alignment | Pending | Reproducible two-location fixture |
+| SCI-012 | Annual vs seasonal Mann-Kendall behavior and slope units | Pending | Independent tests and method comparison |
+| SCI-013 | Serial dependence diagnostic; correction only when justified | Pending | Documented check and test fixture |
+| SCI-014 | No claim of opposing long-term trend based solely on ENSO-seasonal contrast | Pending | Case-study narrative review |
+
+
 ## How to record completed validations
 
 For each verified item add: execution date (UTC), exact code commit, environment/version, external dataset URI and retrieval time, method, expected and actual values, tolerance, pass/fail status, and link to test artifact or reproducible command. Do not insert personal credentials, raw access logs, or nonredistributable data.
