@@ -63,6 +63,9 @@ Este documento agrupa decisiones en discusión, pendientes y observaciones de im
 **2026-11-14 — Tercera revisión Gemini sobre EXP-001.** Gemini no recibió los archivos privados del repo y planteó riesgos condicionales. Se comprobó que el tratamiento de empates/continuidad MK, las pendientes Sen con años reales y la eliminación de tendencia previa al lag-1 ya existían. Se detectaron dos pruebas defectuosas en Gemini (tolerancia p=0.001 y un ejemplo donde las pendientes coincidían accidentalmente). Se corrigió un defecto verdadero: calcular r1 solo para parejas de años calendario consecutivos. Se añadieron 6 pruebas adversariales y dependencia de validación pyMannKendall 1.4.3: 17/17 CI exitosas (runs 43649103042 y 43649183358). Se modernizó GitHub Actions para Node 24. Sin NASA POWER real descargado. Ver ADR-019 y docs/EXPERIMENT-001.md.
 
 
+**2026-11-14 — Cuarta auditoría Gemini (sin archivos fuente reales).** Se contrastaron seis supuestos defectos contra el código. Hamed-Rao no se ejecuta; completitud por variable y metadatos fill ya corregidos; lag-1 es Pearson sobre parejas de años consecutivos; no hay selector automático de test. La diferencia entre pendientes de Sen y pendiente de la diferencia se expuso explícitamente en el JSON, calculada sobre años comunes. Un ensayo nuevo supuso erróneamente que rellenar NaN conservaba idéntica pendiente pyMannKendall; CI lo rechazó. Se verificó el comportamiento real y se ajustó la prueba. 21/21 pruebas sintéticas aprobaron en GitHub Actions #43650944212. ADR-020. Sigue pendiente obtener datos NASA reales.
+
+
 ## Regla de promoción
 
 Cuando una decisión quede aprobada, registrarla en docs/DECISIONS.md y actualizar el documento público correspondiente. Al finalizar, revisar este registro y eliminarlo de la rama final mediante un commit específico.

@@ -93,6 +93,18 @@
 - **Not validated:** NASA POWER retrieval and real climatological results, temporal dependence assumptions, confidence-interval coverage for autocorrelated observations, and any final Liberia/Limón scientific interpretation.
 
 
+## EXP-001 fourth Gemini review — 2026-11-14
+
+| ID | Check | Status | Evidence |
+| --- | --- | --- | --- |
+| ADV-007 | pyMannKendall Hamed–Rao NaN-padding behavior is not treated as a calendar-spacing fix | **Passed — synthetic behavior test** | tests/test_exp001_adversarial.py |
+| ADV-008 | A nonstandard provider fill value (-99) is parsed without arbitrary -900 cutoff | **Passed — synthetic** | tests/test_exp001_adversarial.py |
+| ADV-009 | Paired Sen slope and difference of aligned individual Sen slopes are labeled separately | **Passed — synthetic** | tests/test_exp001_adversarial.py |
+| ADV-010 | EXP-001 does not silently activate Hamed–Rao or claim independence-robust significance | **Passed — synthetic** | tests/test_exp001_adversarial.py |
+
+**CI evidence:** [GitHub Actions run #43650944212](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43650944212) — **21/21 passed**. Preceding failed [run #43650886241](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43650886241) exposed an invalid test assumption about Sen slope with NaN-padded pyMannKendall input. The repaired test passed subsequently. Only synthetic QA is verified; NASA source retrieval and inference on real observations are still pending.
+
+
 ## How to record completed validations
 
 For each verified item add: execution date (UTC), exact code commit, environment/version, external dataset URI and retrieval time, method, expected and actual values, tolerance, pass/fail status, and link to test artifact or reproducible command. Do not insert personal credentials, raw access logs, or nonredistributable data.

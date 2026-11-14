@@ -12,7 +12,7 @@ The tentative 1985–2025 period contains 41 calendar years if all requested mon
 
 - [Python experiment script](../analysis/exp001_power.py): download NASA POWER monthly point JSON, parse monthly samples, generate year-level and paired summaries, and calculate **exploratory** trend statistics.
 - [Python dependencies](../analysis/requirements-exp001.txt): NumPy, SciPy, Requests and pytest.
-- [Unit tests](../tests/test_exp001_power.py): 11 baseline tests and [6 adversarial tests](../tests/test_exp001_adversarial.py) based entirely on **synthetic, explicitly non-NASA** inputs.
+- [Unit tests](../tests/test_exp001_power.py): 11 baseline tests and [10 adversarial tests](../tests/test_exp001_adversarial.py) based entirely on **synthetic, explicitly non-NASA** inputs.
 
 Use Python 3.10 or later. These instructions assume execution from the repository root.
 
@@ -113,6 +113,44 @@ Reference specifications: [SciPy theilslopes](https://docs.scipy.org/doc/scipy/r
 - Inspect residual serial dependence, appropriate statistical treatment, uncertainty and possible period sensitivity; compare reference calculations independently.
 - Obtain a second NASA product, such as [GPM IMERG V07 monthly](https://doi.org/10.5067/GPM/IMERG/3B-MONTH/07), only after the first validated analysis, matching period, units and spatial footprint correctly.
 - Update [validation register](VALIDATION.md) with code SHA, source URL, retrieval UTC and actual numeric values once verified.
+
+## Fourth external Gemini audit — reviewed against current repository (2026-11-14)
+
+A team-supplied second-generation adversarial report enumerated six possible defects but stated that Gemini had not actually received the current source files. The report was **not treated as a verified diagnosis**. Each claim was compared to `analysis/exp001_power.py` at commit cc2cd26 and to the statistical-library source.
+
+| Gemini claim | Review result |
+| --- | --- |
+| Hamed–Rao applied to missing-year sequences with compressed time | **Not applicable to EXP-001**: production experiment does not call Hamed–Rao or auto-select it. For future integration, actual calendar spacing requires a justified method. |
+| Missing precipitation month discards otherwise valid T2M year | **Already handled**: monthly completeness is evaluated independently per variable, and paired comparisons align common years per variable. |
+| Improper lag-1 normalization when years are missing | **Already handled**: after detrending, the implementation calculates Pearson correlation over actual consecutive calendar-year pairs; does not use the full-series-variance denominator or an unvalidated significance threshold. |
+| Fixed -900 cutoff, ignored NASA fill metadata / asymmetric missing keys | **Already handled**: parse exact `header.fill_value`, reject unknown unit metadata, and examine 12 expected month keys for each variable. No claim is made about unverified alternate API schemas. |
+| Automatic Hamed–Rao selection based on only Pearson lag-1 | **Not applicable**: MK p-values and Sen CIs remain explicitly conditional on independence. A lag-1 estimate is diagnostic only. |
+| Sen(A-B) versus Sen(A)-Sen(B) interpretation | **True methodological caution, now clearer in output**: `paired_difference[var].slope_comparison` exposes both distinct estimators over the **same common calendar years**, labeled exploratory. |
+
+### Correcting a misleading proposed NaN workaround
+
+The supplied report advised padding a missing-year grid with `np.nan` before calling `pymannkendall.hamed_rao_modification_test`. In the library's code, the MK statistic/variance path skips NaNs and effectively compresses its time axis. The slope calculation path can nevertheless return **different Sen slopes** for padded versus compressed inputs. Our synthetic regression test observed equal p-values and corrected variances but different reported slopes. Hence **NaN padding alone is not a validated remedy**, and EXP-001 still does not use Hamed–Rao as a definitive correction.
+
+Source review: [pyMannKendall implementation](https://github.com/mmhs013/pyMannKendall/blob/master/pymannkendall/pymannkendall.py).
+
+### New interpretation fields (non-breaking addition)
+
+In the per-variable `paired_difference` structure:
+
+- `slope_comparison.liberia_sen_on_common_years_per_decade`
+- `slope_comparison.limon_sen_on_common_years_per_decade`
+- `slope_comparison.difference_of_individual_sen_slopes_per_decade`
+- `slope_comparison.sen_slope_of_paired_difference_per_decade`
+
+Because the median-of-pairwise-slopes estimator is nonlinear, the final two values **need not agree**. Neither is a causal claim or a formal proof of differences between underlying robust slopes. If too few common years are available, a status is returned instead of invented slopes.
+
+### Verified synthetic QA
+
+- Four new tests protect metadata-defined sentinel handling, distinguish Hamed–Rao `NaN` behavior, check paired-slope output and verify that the code does not claim Hamed–Rao-based significance.
+- Total: **21 of 21 synthetic tests passed** in [GitHub Actions run #43650944212](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43650944212) (Python 3.12, pyMannKendall 1.4.3 and SciPy).
+- An earlier test draft in [run #43650886241](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43650886241) failed because it incorrectly asserted that NaN padding left Sen slope unchanged. The assertion was corrected after inspecting the actual library behavior; it was a **test assumption error**, not a discovered TELLURIS climate-engine defect.
+- **Scientific gate remains pending:** no actual NASA POWER response or verified Liberia/Limón climatological trends resulted from this audit.
+
 
 ## References
 

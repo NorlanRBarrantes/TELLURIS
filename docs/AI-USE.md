@@ -43,6 +43,14 @@ AI-generated text and code require human review. AI is not accepted as a scienti
 - **Limitation:** All tests used synthetic values. No empirical NASA trends were obtained or inferred from this exercise.
 
 
+## Fourth Gemini code-audit report — November 14, 2026
+
+- **Google Gemini:** Produced a second-generation adversarial report describing six hypothetical faults in EXP-001, again noting that the current repository source files were not accessible in its context.
+- **OpenAI ChatGPT:** Inspected the actual GitHub EXP-001 implementation and scientific-library source; rejected five inapplicable/already-solved claims, clarified the correct interpretation of the paired difference, and expanded the synthetic regression suite.
+- **Reproducibility:** An initial synthetic test assumption about NaN-padded pyMannKendall Sen slopes failed in CI and was corrected. The final [21/21 CI execution](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43650944212) succeeded.
+- **Integrity:** No actual NASA POWER data, climate trends, autocorrelation-corrected p-values or causal attribution were produced in this review.
+
+
 ## Scientific safeguards
 
 - NASA/source data values must come from attributable datasets.

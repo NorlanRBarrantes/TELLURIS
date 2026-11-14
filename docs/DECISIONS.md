@@ -164,3 +164,13 @@ Do not replace proposed status with accepted until the underlying decision is ve
 - **Rationale:** Original MK tie/continuity handling and calendar-aware Sen slope already passed review. The supplied nonadditivity and p-value-difference fixtures were unsuitable, while the code's prior lag-1 handling across gaps warranted a genuine correction.
 - **Evidence:** [EXP-001 audit](EXPERIMENT-001.md#adversarial-audit-of-exp-001--2026-11-14); [CI run #43649103042](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43649103042), 17/17 synthetic tests passed.
 - **Boundary:** No live NASA POWER measurements, climatological significance, or causal explanation is established by synthetic unit tests.
+
+## ADR-020 — Reject unsupported Gemini defect claims; clarify paired Sen reporting
+
+- **Date:** 2026-11-14
+- **Status:** Accepted; synthetic CI verified, scientific real-data validation pending
+- **Decision:** Treat the six alleged flaws in the fourth Gemini report as hypotheses until checked against current source. Keep original MK inference explicitly exploratory, retain per-variable completeness and metadata-based missing-value handling, and **do not** introduce Hamed–Rao solely through NaN padding or an AR(1) threshold.
+- **Product improvement:** Add separate, clearly labeled matched-calendar-year Sen slopes and paired-difference slope in the EXP-001 output, without conflating the estimators or declaring causal/statistical equivalence.
+- **Evidence:** Four additional adversarial tests, 21/21 total passed in [CI #43650944212](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43650944212). The initial failed NaN-padding test was corrected rather than mislabeled as a production defect.
+- **Reference:** [EXP-001 fourth Gemini audit](EXPERIMENT-001.md#fourth-external-gemini-audit--reviewed-against-current-repository-2026-11-14).
+- **Limitation:** The exercise tested deterministic synthetic input only; no NASA Earth-science results or source API responses were validated.
