@@ -143,3 +143,15 @@ Only **approved or explicitly labeled proposed** decisions are published here. O
 - **Next gate:** Verify real NASA payloads, spatial semantics, valid years and an appropriate independence-aware statistical inference before promoting any finding to the product interface or NASA submission.
 
 Do not replace proposed status with accepted until the underlying decision is verified and recorded.
+
+## ADR-018 — Project Uriel team site and TELLURIS public introduction
+
+- **Date:** 2026-11-14
+- **Status:** Accepted site structure; public deployment pending verification
+- **Decision:** Use `https://projecturiel.earth/` as the Project Uriel team homepage and `https://projecturiel.earth/telluris/` as the public, introductory TELLURIS research page.
+- **Language:** English is the canonical international-review landing language; Spanish translations use `/es/` and `/es/telluris/` and explicit alternate-language metadata.
+- **Reason:** Distinguish the team's identity from the scientific product, provide a clear project entry point, and keep scientifically accurate public context visible while the software is being investigated.
+- **Compatibility with ADR-004:** The earlier `https://telluris.lynxglobals.net/` remains a previously selected candidate for the eventual scientific application, not a verified production deployment. Reconcile or retire that destination deliberately after actual deployment checks; the new `/telluris/` introduction does not establish the analysis engine is operating.
+- **Content integrity:** The landing does not claim validated real NASA trends, scientific significance, API integration, or NASA endorsement. A research-question builder may draft hypothetical questions but must not present invented measurements.
+- **Publication gate:** Publish a static bundle on BanaHosting, preserve the current HTTPS configuration, verify each route and language, then record observed public behavior in `docs/VALIDATION.md`.
+- **Repository gate:** Commit the reviewed static site source to version control before declaring release reproducible; no committed site source or successful deployment is asserted by this ADR.
