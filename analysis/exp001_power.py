@@ -164,8 +164,17 @@ def analyze(annual: dict[int, float]) -> dict[str, Any]:
     sen = theilslopes(y, x, alpha=0.95)
     mk = mann_kendall_independent(y.tolist())
     residuals = y - sen.slope * (x - x[0])
-    if np.std(residuals[:-1]) > 0 and np.std(residuals[1:]) > 0:
-        lag1 = float(np.corrcoef(residuals[:-1], residuals[1:])[0, 1])
+    # A calendar lag of one year must span consecutive calendar years.
+    # With missing years, neighboring retained observations are NOT all lag-1 pairs.
+    consecutive_pair_indices = np.flatnonzero(np.diff(x) == 1.0)
+    if len(consecutive_pair_indices) >= 3:
+        earlier = residuals[consecutive_pair_indices]
+        later = residuals[consecutive_pair_indices + 1]
+        if np.std(earlier) > 0 and np.std(later) > 0:
+            estimated = float(np.corrcoef(earlier, later)[0, 1])
+            lag1 = estimated if math.isfinite(estimated) else None
+        else:
+            lag1 = None
     else:
         lag1 = None
     return {
@@ -177,6 +186,9 @@ def analyze(annual: dict[int, float]) -> dict[str, Any]:
                                                              float((sen.high_slope if hasattr(sen, "high_slope") else sen.highslope) * 10)]},
         "mann_kendall_original": mk,
         "lag1_on_detrended_residuals_diagnostic_only": lag1,
+        "n_consecutive_year_pairs_for_lag1": int(len(consecutive_pair_indices)),
+        "missing_year_gaps": [int(years[i + 1] - years[i] - 1)
+                               for i in range(len(years) - 1) if years[i + 1] - years[i] > 1],
         "warnings": [
             "Original Mann-Kendall significance and Sen CI assume appropriate temporal independence.",
             "A single lag-1 estimate does not validate independence or select an autocorrelation correction.",
