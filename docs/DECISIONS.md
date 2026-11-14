@@ -144,6 +144,16 @@ Only **approved or explicitly labeled proposed** decisions are published here. O
 
 Do not replace proposed status with accepted until the underlying decision is verified and recorded.
 
+## ADR-019 — Adversarial QA and calendar-gap correction for EXP-001
+
+- **Date:** 2026-11-14
+- **Status:** Accepted; deterministic QA verified, NASA real-data analysis pending
+- **Decision:** Integrate six adversarial tests using SciPy and pyMannKendall as references, and ensure annual lag-1 diagnostics use only consecutive calendar-year pairs. Correct flawed assertions from the third team-supplied Gemini audit rather than accepting them verbatim.
+- **Rationale:** Original MK tie/continuity handling and calendar-aware Sen slope already passed review. The supplied nonadditivity and p-value-difference fixtures were unsuitable, while the code's prior lag-1 handling across gaps warranted a genuine correction.
+- **Evidence:** [EXP-001 audit](EXPERIMENT-001.md#adversarial-audit-of-exp-001--2026-11-14); [CI run #43649103042](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43649103042), 17/17 synthetic tests passed.
+- **Boundary:** No live NASA POWER measurements, climatological significance, or causal explanation is established by synthetic unit tests.
+
+
 ## ADR-018 — Project Uriel team site and TELLURIS public introduction
 
 - **Date:** 2026-11-14

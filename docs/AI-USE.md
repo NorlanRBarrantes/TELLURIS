@@ -35,6 +35,14 @@ AI-generated text and code require human review. AI is not accepted as a scienti
 - **Executed checks:** 11 local synthetic tests passed. An attempted live NASA API request failed DNS resolution from the execution environment. There are no verified real climatological results or production deployments from EXP-001.
 - **Caveat:** Do not represent Python/SciPy-generated p-values from unexamined serially dependent source observations as confirmed significance. Confirm accuracy independently before publication.
 
+## Third Gemini adversarial code-review report — November 14, 2026
+
+- **Google Gemini:** Supplied a third review prompt response suggesting tie/continuity, Sen calendar-gap, paired-difference and autocorrelation tests. Gemini stated it had not received the actual repository files, and its output was treated as hypotheses to inspect rather than findings.
+- **OpenAI ChatGPT:** Compared the suggestions against repository source and SciPy/pyMannKendall documentation, independently evaluated the original numerical examples, repaired two unsuitable test assertions, implemented six targeted synthetic tests and fixed a real calendar-gap issue in lag-1 diagnostic reporting.
+- **Verification:** 17/17 tests passed in [GitHub Actions run #43649103042](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43649103042). Follow-up CI with updated Node 24 actions also succeeded in [run #43649183358](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43649183358).
+- **Limitation:** All tests used synthetic values. No empirical NASA trends were obtained or inferred from this exercise.
+
+
 ## Scientific safeguards
 
 - NASA/source data values must come from attributable datasets.

@@ -12,7 +12,7 @@ The tentative 1985–2025 period contains 41 calendar years if all requested mon
 
 - [Python experiment script](../analysis/exp001_power.py): download NASA POWER monthly point JSON, parse monthly samples, generate year-level and paired summaries, and calculate **exploratory** trend statistics.
 - [Python dependencies](../analysis/requirements-exp001.txt): NumPy, SciPy, Requests and pytest.
-- [Unit tests](../tests/test_exp001_power.py): 11 deterministic tests based entirely on **synthetic, explicitly non-NASA** inputs.
+- [Unit tests](../tests/test_exp001_power.py): 11 baseline tests and [6 adversarial tests](../tests/test_exp001_adversarial.py) based entirely on **synthetic, explicitly non-NASA** inputs.
 
 Use Python 3.10 or later. These instructions assume execution from the repository root.
 
@@ -25,7 +25,7 @@ source .venv/bin/activate
 # Windows PowerShell:
 # .\.venv\Scripts\Activate.ps1
 python -m pip install -r analysis/requirements-exp001.txt
-python -m pytest -q tests/test_exp001_power.py
+python -m pytest -q tests/test_exp001_power.py tests/test_exp001_adversarial.py
 ~~~
 
 ### Live NASA POWER request (requires network)
@@ -74,6 +74,37 @@ A minimal [GitHub Actions workflow](../.github/workflows/exp001-qa.yml) runs the
 ## Corrections to Gemini's original draft
 
 The original externally supplied Python script was **not accepted unchanged**. Its arbitrary greater-than-minus-900 filter, silent unit assumptions, coupled variable completeness, empty-data failure paths, and automatic MK/Hamed–Rao method selection were corrected or removed. Reported confidence intervals and p-values are now clearly labeled exploratory until source data and dependence assumptions are checked. The Gemini report itself acknowledged that it had not executed live NASA calculations.
+
+## Adversarial audit of EXP-001 — 2026-11-14
+
+A team-supplied Gemini analysis proposed independent statistical tests but **did not receive the three actual repository files**. Its recommendations were checked against the real code; we did not treat its hypothetical issues as confirmed bugs.
+
+**Already correctly implemented before this audit:**
+- Original Mann–Kendall tie correction and continuity correction, confirmed against pyMannKendall 1.4.3 for a deterministic tied-value fixture.
+- SciPy `theilslopes(values, years)` uses the actual calendar year axis and does not collapse missing years into adjacent indices.
+- Detrending before estimating serial correlation; exclusions of YYYY13, documented fill values and day-weighted annual aggregation.
+- Paired annual Liberia-minus-Limón difference is a trend **in the time-varying gap**, not a causal inference or a guarantee that Sen(A−B)=Sen(A)−Sen(B).
+
+**Errors in Gemini's suggested tests:**
+1. Its original Theil–Sen nonadditivity fixture yielded exactly equal slopes in that particular example, so the intended `assert not np.isclose(...)` would fail. Replaced with a deterministic counterexample where the estimated slopes genuinely differ.
+2. Its original `not np.isclose(MK_p, SciPy_p, atol=1e-3)` was unsuitable: the observed difference in the provided example is about 0.000025, much smaller than 0.001. We now test our MK values against pyMannKendall with tight tolerance and show the non-equivalence to SciPy's uncorrected p-value separately.
+
+**Confirmed implementation issue and fix:**
+
+The prior lag-1 diagnostic correlated adjacent **retained** observations even across calendar-year gaps. `analysis/exp001_power.py` now considers only consecutive calendar-year pairs, reports their count, and returns null when too few pairs support a correlation estimate. This is diagnostic quality control; it is **not** a Hamed–Rao correction or proof of serial independence.
+
+**Reproducible checks:**
+
+- Original synthetic tests: [tests/test_exp001_power.py](../tests/test_exp001_power.py), 11 cases.
+- Adversarial synthetic tests: [tests/test_exp001_adversarial.py](../tests/test_exp001_adversarial.py), 6 cases using SciPy and pyMannKendall 1.4.3.
+- Run: `python -m pytest -q tests/test_exp001_power.py tests/test_exp001_adversarial.py`
+- [GitHub Actions run #43649103042](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43649103042) — **17 passed**, `fix: validate calendar gaps in EXP-001 statistical diagnostics`.
+- [GitHub Actions run #43649183358](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43649183358) — **success** after updating GitHub Actions to Node 24 compatible checkout@v5 and setup-python@v6. The same 17 synthetic checks run again.
+
+**Boundaries:** No actual NASA POWER response was downloaded in this review; this is **software unit-test evidence, not empirical Earth-science validation**. Sen confidence intervals and original MK p-values remain exploratory for real, potentially autocorrelated climate observations. No new physical trend, p-value, or climate attribution is asserted.
+
+Reference specifications: [SciPy theilslopes](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.theilslopes.html), [pyMannKendall source](https://github.com/mmhs013/pyMannKendall), [NASA POWER monthly API](https://power.larc.nasa.gov/docs/services/api/temporal/monthly/).
+
 
 ## Before publishing a scientific finding
 

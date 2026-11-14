@@ -59,6 +59,13 @@ A two-point comparison should align the time period and processing, report each 
 - See [Scientific guardrails](SCIENTIFIC-GUARDRAILS.md) for proposed quality gates and limitations.
 
 
+### Calendar-gap and robust slope checks (2026-11-14)
+
+For annual time series with missing years, Sen slope must divide each difference by the **actual elapsed calendar years**, not by adjacent retained observation indices. Theil-Sen is nonlinear: estimating the slope of a paired annual difference series is not algebraically identical to subtracting separately estimated Sen slopes. A paired difference describes change in the between-location gap.
+
+Similarly, lag-one correlation refers to observations **one calendar year apart**; if years are missing, adjacent retained points may represent a different lag. EXP-001 now uses only consecutive calendar-year pairs for this diagnostic. It remains a diagnostic, not proof of independence or a validated correction to Mann–Kendall inference. See [EXP-001 adversarial review](EXPERIMENT-001.md#adversarial-audit-of-exp-001--2026-11-14).
+
+
 ## Proposed minimum quality standard
 
 - Prefer a sufficiently long time span, e.g. 20+ complete years for first demonstrations; the threshold is an analytical design choice, not a NASA mandate.

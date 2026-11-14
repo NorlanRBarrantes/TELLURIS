@@ -1,6 +1,6 @@
 # Validation and reproducibility record
 
-**Status: Pending execution.** This file is the test protocol and evidence register, not a fabricated test report.
+**Status: Synthetic QA executed; scientific analysis using real NASA observations remains pending.** This is an evidence register, not a fabricated climate-science report.
 
 ## Definition of scientific done
 
@@ -76,6 +76,22 @@
 - Workflow: [.github/workflows/exp001-qa.yml](../.github/workflows/exp001-qa.yml)
 - Purpose: reproduce synthetic parser/statistics QA without any credentials or live NASA API call.
 - **CI status: success.** [GitHub Actions run #43640908593](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43640908593) completed successfully on commit bc746cdf with the synthetic-qa job. This does **not** establish real NASA retrieval, empirical climate trends or inference validity for autocorrelated observations.
+
+## EXP-001 adversarial QA — verified 2026-11-14
+
+| ID | Check | Status | Evidence |
+| --- | --- | --- | --- |
+| ADV-001 | MK tied ranks/variance/continuity against pyMannKendall 1.4.3 | **Passed — synthetic** | tests/test_exp001_adversarial.py |
+| ADV-002 | Sen slope uses calendar years with missing-year gaps | **Passed — synthetic** | tests/test_exp001_adversarial.py |
+| ADV-003 | Sen is non-additive across paired-series differences | **Passed — corrected synthetic fixture** | tests/test_exp001_adversarial.py |
+| ADV-004 | Lag-1 correlation computed after detrending | **Passed — synthetic** | tests/test_exp001_adversarial.py |
+| ADV-005 | Lag-1 uses only truly consecutive calendar-year pairs | **Passed — synthetic; prior diagnostic issue fixed** | tests/test_exp001_adversarial.py |
+| ADV-006 | No lag-1 estimate when there are no consecutive year pairs | **Passed — synthetic** | tests/test_exp001_adversarial.py |
+
+- **GitHub CI evidence:** [17/17 tests passed, run #43649103042](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43649103042) (includes 11 prior + 6 adversarial tests).
+- **CI runtime modernization:** [run #43649183358](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43649183358) **succeeded** with Node 24 compatible actions/checkout@v5 and actions/setup-python@v6.
+- **Not validated:** NASA POWER retrieval and real climatological results, temporal dependence assumptions, confidence-interval coverage for autocorrelated observations, and any final Liberia/Limón scientific interpretation.
+
 
 ## How to record completed validations
 

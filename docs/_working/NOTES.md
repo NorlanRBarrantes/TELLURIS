@@ -60,6 +60,9 @@ Este documento agrupa decisiones en discusión, pendientes y observaciones de im
 
 **2026-11-14 — EXP-001 de Gemini: implementación auditada.** Se revisó el script Python recibido. Se corrigieron valores faltantes por metadatos NASA, unidades obligatorias, años completos por variable, posibles claves YYYY13, alineación temporal y errores de series vacías. Se retiró selección automática no validada de Hamed–Rao. Se incorporó análisis exploratorio independiente de runtime web con pruebas: 11/11 sintéticas pasaron localmente. Intento de acceso a NASA POWER falló por DNS externo; sin valores NASA verificados. Ver docs/EXPERIMENT-001.md y ADR-017.
 
+**2026-11-14 — Tercera revisión Gemini sobre EXP-001.** Gemini no recibió los archivos privados del repo y planteó riesgos condicionales. Se comprobó que el tratamiento de empates/continuidad MK, las pendientes Sen con años reales y la eliminación de tendencia previa al lag-1 ya existían. Se detectaron dos pruebas defectuosas en Gemini (tolerancia p=0.001 y un ejemplo donde las pendientes coincidían accidentalmente). Se corrigió un defecto verdadero: calcular r1 solo para parejas de años calendario consecutivos. Se añadieron 6 pruebas adversariales y dependencia de validación pyMannKendall 1.4.3: 17/17 CI exitosas (runs 43649103042 y 43649183358). Se modernizó GitHub Actions para Node 24. Sin NASA POWER real descargado. Ver ADR-019 y docs/EXPERIMENT-001.md.
+
+
 ## Regla de promoción
 
 Cuando una decisión quede aprobada, registrarla en docs/DECISIONS.md y actualizar el documento público correspondiente. Al finalizar, revisar este registro y eliminarlo de la rama final mediante un commit específico.

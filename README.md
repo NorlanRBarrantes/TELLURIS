@@ -5,7 +5,7 @@
 
 > Discover what is changing on Earth, where it is changing, how much it is changing, and whether the observed trend is statistically significant.
 
-**Project status:** Research and a first Python analysis prototype with 11 synthetic QA tests passed locally; no NASA time-series results or production deployment verified.
+**Project status:** Research and a first Python analysis prototype with 17 synthetic QA tests passed locally; no NASA time-series results or production deployment verified.
 
 ## Challenge
 
