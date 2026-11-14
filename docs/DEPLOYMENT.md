@@ -49,3 +49,18 @@ If a PHP API is needed, publish only safe entrypoints and keep caches, configura
 
 References:
 - cPanel generic application support (not a provider-specific guarantee): https://support.cpanel.net/hc/en-us/articles/4408475507479-Does-cPanel-support-Python-Java-or-other-frameworks
+
+## Team and public research landing routes — 2026-11-14
+
+A separate, static public-site package has been prepared for the Project Uriel identity and TELLURIS introductory research content. This section records a deployment intention, **not an operational validation**.
+
+| Route | Purpose |
+| --- | --- |
+| `https://projecturiel.earth/` | Team homepage, mission and prominent TELLURIS entry point |
+| `https://projecturiel.earth/telluris/` | TELLURIS research introduction and question-building preview; not the scientific engine |
+| `https://projecturiel.earth/es/` | Spanish team homepage |
+| `https://projecturiel.earth/es/telluris/` | Spanish TELLURIS introduction |
+
+Deployment: upload approved static assets to the independently verified document root for `projecturiel.earth`; do not replace its functional SSL or rewrite configuration blindly. Verify HTTP response, HTTPS, canonical redirects, navigation, mobile behavior, sitemap, robots and translated URLs. Confirm that the scientific API and statistical engine remain out of scope for this first landing deployment.
+
+The previously selected `https://telluris.lynxglobals.net/` in this document remains a candidate destination for the scientific application until ADR-004 is reconciled after verified deployments. See ADR-018 in `docs/DECISIONS.md`. Keep publication assertions tied to witnessed tests, not uploaded files alone.
