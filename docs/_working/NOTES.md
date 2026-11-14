@@ -51,6 +51,8 @@ Este documento agrupa decisiones en discusión, pendientes y observaciones de im
 **2026-11-14 — Evaluación de investigación externa sobre Pacífico/Caribe y ESP32.** Se seleccionó la comparación de dos puntos (Liberia–Limón) como demostración P1, sin asumir que existan tendencias opuestas; los fenómenos estacionales y los cambios multidecadales se investigarán por separado. Se evaluarán métodos estacionales y correcciones de autocorrelación solo tras pruebas. El ESP32 LCD de 5" sigue opcional, sin confirmar hardware ni firmware. Se corrigió el límite NASA POWER a 20 parámetros por punto y se evitó presentar porcentajes de evaluación de la sede 2025 como rúbrica global 2026. No se aceptaron coeficientes, nombres de jueces ni supuestos resultados sin fuentes primarias verificadas. Ver ADR-010 a ADR-012 y docs/RESEARCH-REFERENCES.md.
 
 
+**2026-11-14 — Recursos oficiales NASA Space Apps.** Se incorporaron al catálogo Giovanni, Hydrology Time Series, AppEEARS, NOAA CDO, artículo SeaWiFS, KNMI Climate Explorer y recursos asociados/externos de la pestaña Resources. Se priorizaron referencias para validación científica sin introducir nuevas dependencias; recursos no probados quedaron etiquetados como tales. Consulta docs/NASA-CHALLENGE-RESOURCES.md.
+
 ## Regla de promoción
 
 Cuando una decisión quede aprobada, registrarla en docs/DECISIONS.md y actualizar el documento público correspondiente. Al finalizar, revisar este registro y eliminarlo de la rama final mediante un commit específico.

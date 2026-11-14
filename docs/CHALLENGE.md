@@ -20,6 +20,12 @@ Official challenge: https://www.spaceappschallenge.org/2026/challenges/earth-sys
 
 The challenge's official description recommends exploring local differences, providing approachable variable explanations, and using daily or monthly data to simplify analysis. AI-assisted variable discovery is optional, not a scientific prerequisite.
 
+## Resource catalog and optional ideas
+
+The [curated NASA challenge resource catalog](NASA-CHALLENGE-RESOURCES.md) preserves the tools and scientific/partner references provided in the official Resources tab, with distinct levels of applicability to TELLURIS. Their listing does not imply NASA endorsement, automatically permit third-party data reuse, or establish that each tool has been integrated.
+
+The challenge also suggests guided question-based discovery, demonstrations, clear variable definitions, and optional AI-assisted discovery. It explicitly allows a **basic linear trend** as a valid starting point. None of these suggestions substitutes for the required data-backed significance analysis.
+
 ## How TELLURIS intends to address the brief
 
 | Objective | Intended capability | Proof needed |

@@ -9,6 +9,8 @@ https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/
 
 The published challenge calls for choosing NASA variables, obtaining regional data, visualizing a long-enough historical time series, estimating the rate of change and testing significance. It notes that detecting linear trends is a valid starting point; sophisticated climate analyses are beyond its required minimum.
 
+For the complete curated list of resources supplied in the challenge's **Resources** tab, see [Official challenge resource catalog](NASA-CHALLENGE-RESOURCES.md). The items there are references, not implemented integrations.
+
 ## NASA POWER documentation
 
 - Monthly API and parameter limit: https://power.larc.nasa.gov/docs/services/api/temporal/monthly/
