@@ -132,4 +132,14 @@ Only **approved or explicitly labeled proposed** decisions are published here. O
 - **Supporting documents:** [Scientific guardrails](SCIENTIFIC-GUARDRAILS.md), [Data sources](DATA-SOURCES.md), and [Scientific methodology](SCIENTIFIC-METHODOLOGY.md).
 
 
+## ADR-017 — Reproducible NASA POWER experiment after Gemini script review
+
+- **Date:** 2026-11-14
+- **Status:** Experimental code and synthetic unit tests accepted; actual NASA-data validity pending
+- **Decision:** Integrate a corrected Python EXP-001 investigation script and reproducible synthetic QA tests into analysis/ and tests/. Preserve original NASA response and metadata when externally retrieved. Avoid applying Hamed–Rao automatically based only on one lag-1 diagnostic.
+- **Rationale:** The contributed Gemini experiment made no live numerical claims and supplied a useful starting point, but required stronger handling of missing values, per-variable completeness, unit validation, empty series and scientific assumptions.
+- **Verification:** 11/11 deterministic local synthetic tests passed on 2026-11-14; external NASA endpoint access failed in the execution environment. This is **not** confirmation of a real Earth-science result.
+- **Implementation:** [EXP-001](EXPERIMENT-001.md), [source script](../analysis/exp001_power.py), [unit tests](../tests/test_exp001_power.py).
+- **Next gate:** Verify real NASA payloads, spatial semantics, valid years and an appropriate independence-aware statistical inference before promoting any finding to the product interface or NASA submission.
+
 Do not replace proposed status with accepted until the underlying decision is verified and recorded.

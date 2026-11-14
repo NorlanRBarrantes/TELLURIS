@@ -58,6 +58,10 @@ A second team-supplied Gemini-assisted technical report recommended a browser-ba
 - NOAA ONI moving historical baselines: https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/ensostuff/ONI_change.shtml
 
 
+## Team-supplied EXP-001 Gemini script review — 2026-11-14
+
+The submitted report included proposed NASA POWER monthly URLs, a Python script and a GPM IMERG V07 monthly collection description. It clearly acknowledged inability to download source JSON and compute actual trends. We retained the NASA source references and adapted the script into [EXP-001](EXPERIMENT-001.md), requiring real metadata, independent per-variable completeness, transparent statistical limitations and tests. The **monthly GPM IMERG precipitation field is in mm/hr**, which must not be confused with POWER's PRECTOTCORR mm/day (verify within actual collection metadata). GPM reference: https://doi.org/10.5067/GPM/IMERG/3B-MONTH/07
+
 ## Scope of the external research review
 
 A long team-supplied exploratory report suggested a paired Costa Rican investigation, pyMannKendall extensions, and an ESP32 LCD console. Only scientifically supported context and appropriately scoped proposals have been retained in public documentation. No original text, numeric results or device implementation are represented as completed TELLURIS work.

@@ -28,6 +28,13 @@ AI-generated text and code require human review. AI is not accepted as a scienti
 - **Scientific execution:** No real-data computation or production app verification is claimed by this research review.
 
 
+## Gemini EXP-001 code review and rewrite — November 14, 2026
+
+- **Google Gemini:** Produced the submitted research report and preliminary Python implementation for the proposed NASA POWER Liberia/Limón experiment; explicitly reported that no live NASA dataset was accessed or numerical results computed.
+- **OpenAI ChatGPT:** Audited the report, checked NASA API/GPM documentation, rewrote the experimental Python script with stronger metadata/quality checks and guarded statistical interpretation, prepared 11 synthetic unit tests, and updated repository documentation.
+- **Executed checks:** 11 local synthetic tests passed. An attempted live NASA API request failed DNS resolution from the execution environment. There are no verified real climatological results or production deployments from EXP-001.
+- **Caveat:** Do not represent Python/SciPy-generated p-values from unexamined serially dependent source observations as confirmed significance. Confirm accuracy independently before publication.
+
 ## Scientific safeguards
 
 - NASA/source data values must come from attributable datasets.

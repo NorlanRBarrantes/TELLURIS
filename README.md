@@ -5,7 +5,7 @@
 
 > Discover what is changing on Earth, where it is changing, how much it is changing, and whether the observed trend is statistically significant.
 
-**Project status:** Initial documentation and research. Features, analyses, and production deployment are not yet verified.
+**Project status:** Research and a first Python analysis prototype with 11 synthetic QA tests passed locally; no NASA time-series results or production deployment verified.
 
 ## Challenge
 
@@ -35,6 +35,7 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 - [Scientific methodology](docs/SCIENTIFIC-METHODOLOGY.md)
 - [Costa Rica climate contrast research case](docs/CASE-STUDY-COSTA-RICA.md)
 - [Research sources and evidence](docs/RESEARCH-REFERENCES.md)
+- [EXP-001 reproducible POWER experiment and test record](docs/EXPERIMENT-001.md)
 - [Scientific guardrails and data-quality controls](docs/SCIENTIFIC-GUARDRAILS.md)
 - [Technical architecture](docs/ARCHITECTURE.md)
 - [Deployment constraints](docs/DEPLOYMENT.md)

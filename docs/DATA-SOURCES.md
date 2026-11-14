@@ -81,6 +81,10 @@ NASA's [GPM precipitation data directory](https://gpm.nasa.gov/data/directory) d
 **Source interpretation:** Satellite precipitation estimates may incorporate gauge corrections or multisensor blending, so avoid claiming they are a single sensor's unmodified direct observation. For a cross-source comparison, reconcile period, variable definition, unit conversions, sampling footprint and missing values before claiming a match or discrepancy.
 
 
+### EXP-001 source integration protocol (not yet executed on NASA readings)
+
+The [EXP-001 Python investigation](EXPERIMENT-001.md) constructs specific monthly NASA POWER API requests for Liberia and Limón for the tentative 1985–2025 historical window. It retains original JSON responses and source metadata, excludes optional YYYY13 annual keys, rejects unexpected source units and uses a leap-year-aware aggregation method. **Only synthetic unit tests have passed; no actual POWER response or scientific result has been validated.**
+
 ## Provenance fields required in each analysis
 
 Dataset / collection; NASA source; variable code and human-readable name; units; temporal resolution; date range requested and actually analyzed; spatial selector and effective spatial resolution; retrieval timestamp; data processing algorithm and version; missing-data flags; statistical test; number of valid observations; output and limitations.

@@ -58,6 +58,8 @@ Este documento agrupa decisiones en discusión, pendientes y observaciones de im
 **2026-11-14 — Auditoría del segundo informe de Gemini.** Se reconoce como oportunidad el panel educativo de controles de calidad/advertencias estadísticas. Se mantienen POWER inicial, casos CR y estadística con referencia independiente. React/TypeScript para cálculo local y PHP cache siguen como propuesta a validar en BanaHosting. GPM IMERG V07B (desde enero 1998 según NASA) es candidato a comparación. Se posponen Pettitt, filtro ENSO y ESP32 hasta que P0 esté probado. No se aceptan los valores p/correlaciones propuestos ni promesas de rendimiento. Se documentaron ADR-014 a ADR-016 y docs/SCIENTIFIC-GUARDRAILS.md.
 
 
+**2026-11-14 — EXP-001 de Gemini: implementación auditada.** Se revisó el script Python recibido. Se corrigieron valores faltantes por metadatos NASA, unidades obligatorias, años completos por variable, posibles claves YYYY13, alineación temporal y errores de series vacías. Se retiró selección automática no validada de Hamed–Rao. Se incorporó análisis exploratorio independiente de runtime web con pruebas: 11/11 sintéticas pasaron localmente. Intento de acceso a NASA POWER falló por DNS externo; sin valores NASA verificados. Ver docs/EXPERIMENT-001.md y ADR-017.
+
 ## Regla de promoción
 
 Cuando una decisión quede aprobada, registrarla en docs/DECISIONS.md y actualizar el documento público correspondiente. Al finalizar, revisar este registro y eliminarlo de la rama final mediante un commit específico.
