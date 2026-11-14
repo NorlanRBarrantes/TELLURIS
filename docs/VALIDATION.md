@@ -71,6 +71,12 @@
 
 **Local test record:** 11 of 11 tests passed on Python 3.13.5, NumPy 2.3.5, SciPy 1.17.0, Requests 2.32.5 and pytest 9.0.2. Command: python -m pytest -q tests/test_exp001_power.py. The test fixtures are synthetic and **must not be used as observations or evidence that Liberia/Limón climate trends were measured**.
 
+## EXP-001 GitHub Actions automation
+
+- Workflow: [.github/workflows/exp001-qa.yml](../.github/workflows/exp001-qa.yml)
+- Purpose: reproduce synthetic parser/statistics QA without any credentials or live NASA API call.
+- **CI status: pending separate GitHub run verification.** Successful local execution is documented above; do not mark an uninspected CI run as passing.
+
 ## How to record completed validations
 
 For each verified item add: execution date (UTC), exact code commit, environment/version, external dataset URI and retrieval time, method, expected and actual values, tolerance, pass/fail status, and link to test artifact or reproducible command. Do not insert personal credentials, raw access logs, or nonredistributable data.

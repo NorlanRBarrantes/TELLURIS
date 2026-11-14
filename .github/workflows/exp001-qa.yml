@@ -1,0 +1,35 @@
+name: EXP-001 Synthetic QA
+
+on:
+  push:
+    paths:
+      - "analysis/exp001_power.py"
+      - "analysis/requirements-exp001.txt"
+      - "tests/test_exp001_power.py"
+      - ".github/workflows/exp001-qa.yml"
+  pull_request:
+    paths:
+      - "analysis/exp001_power.py"
+      - "analysis/requirements-exp001.txt"
+      - "tests/test_exp001_power.py"
+      - ".github/workflows/exp001-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install experiment dependencies
+        run: python -m pip install -r analysis/requirements-exp001.txt
+      - name: Run synthetic QA tests
+        run: python -m pytest -q tests/test_exp001_power.py

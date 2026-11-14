@@ -58,6 +58,10 @@ https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=T2M,PRECTOTCOR
 7. The reported p-values and Sen confidence intervals **depend on temporal-independence and related method assumptions**. The code does not claim validated Hamed–Rao correction or an automatically justified significance classification.
 8. Return an explicit insufficient-years status for short/empty data. The minimum of 10 years is merely a software screening rule, not a climate-science recommendation.
 
+### Repository automation
+
+A minimal [GitHub Actions workflow](../.github/workflows/exp001-qa.yml) runs the 11 **synthetic** QA tests when the experiment source/tests change, on pull requests, or by manual dispatch. It does **not** contact NASA or establish a valid climate finding. CI status must be inspected in GitHub Actions before claiming it passed.
+
 ## Execution record — 2026-11-14
 
 - Command: **python -m pytest -q tests/test_exp001_power.py**
