@@ -1,0 +1,34 @@
+name: EXP-003D NASA IGBP land cover source verification
+
+on:
+  push:
+    paths:
+      - "analysis/exp003d_igbp_screen.py"
+      - "tests/test_exp003d_igbp_screen.py"
+      - ".github/workflows/exp003d-igbp.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  landcover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Test IGBP classification parser and scientific limits
+        run: python -m unittest discover -s tests -p "test_exp003d_igbp_screen.py" -v
+      - name: Query 2023 MCD12Q1 original NASA land cover for four predeclared points
+        run: python -u analysis/exp003d_igbp_screen.py
+      - name: Preserve unmodified NASA originals and traceability
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exp003d-original-modis-igbp-landcover
+          path: data/raw/exp003d/
+          if-no-files-found: warn
+          retention-days: 30
