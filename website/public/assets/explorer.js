@@ -285,6 +285,20 @@ function renderInference(result,variable,pairedDifference=null){
     "Non-overlapping block-order permutations (999 per size, fixed seed) only test sensitivity under exchangeable stationary blocks. "+
     "NASA product homogeneity, long-memory dependence and causality remain unverified.";
   byId("inference-caution").textContent=hint;
+  const half=info.halfPeriod;
+  const stability=byId("period-sensitivity");
+  stability.textContent=half?.available?(
+    (es?"Sensibilidad al período: ":"Period sensitivity: ")+
+    half.earlier.start+"–"+half.earlier.end+": "+fmt(half.earlier.slopePerDecade)+
+      " · "+half.later.start+"–"+half.later.end+": "+fmt(half.later.slopePerDecade)+
+      " "+VARIABLES[variable].slopeUnit+
+      (half.oppositeSigns?(es?
+        " · Los signos se invierten entre períodos: revisar no monotonicidad y homogeneidad.":
+        " · The trend direction reverses across periods: check nonmonotonicity and product homogeneity."):
+        (es?" · Resumen descriptivo, no prueba de cambio de régimen.":
+        " · Descriptive only; not a formal regime-change test."))):
+    (es?"El período es demasiado corto para comparar dos mitades de diez años.":
+        "The record is too short for two ten-year period comparisons.");
   const pair=byId("paired-inference");
   pair.hidden=pairedDifference?.status!=="exploratory";
   if(!pair.hidden){
@@ -329,8 +343,9 @@ function acceptData(output, queryUrl=null, paired=null){
     "Lag-1 residual correlation (diagnostic only): "+result.lag1.toFixed(3)+" using "+result.lag1Pairs+" consecutive-year pairs.");
   display("chart-title",L(VARIABLES[variable].name)+" · "+(fields.place.selectedOptions[0]?.textContent||L("Selected location")));
   renderChart(result.points,result,variable);
-  const pairedDiff=!circular && paired?.status==="exploratory"?
-    analyze(pairedAnnualDifferences(result.points,paired.points)):null;
+  const pairedSeries=!circular && paired?.status==="exploratory"?
+    pairedAnnualDifferences(result.points,paired.points):[];
+  const pairedDiff=pairedSeries.length>=10?analyze(pairedSeries):null;
   renderInference(result,variable,pairedDiff);
   active.pairedDifference=pairedDiff;
   renderTable(result.points,variable);
@@ -358,7 +373,7 @@ async function snapshot(){
     if(fields.place.value==="custom") throw new Error("Archived samples are available only for Liberia and Limón.");
     if(!["T2M","PRECTOTCORR"].includes(fields.variable.value))
       throw new Error("NASA annual archive covers only T2M and PRECTOTCORR. Choose Live NASA for the selected variable.");
-    const requestToken=requestGeneration;
+    const requestToken=++requestGeneration;
     setMessage("Loading archived original NASA-derived annual series…");
     const response=await fetch("/telluris/explore/data/exp001-annual.json",{cache:"no-cache"});
     if(!response.ok) throw new Error("Archived data file unavailable (HTTP "+response.status+").");
@@ -379,7 +394,7 @@ form.addEventListener("submit",async event=>{
   let cfg;
   try{cfg=bounds();}catch(e){setMessage(e.message,true);return;}
   const variable=fields.variable.value;
-  const requestToken=requestGeneration;
+  const requestToken=++requestGeneration;
   const comparisonRequested=byId("compare-locations")?.checked===true
     &&fields.place.value!=="custom" &&VARIABLES[variable].aggregation!=="circular";
   const comparisonPlace=comparisonRequested?(fields.place.value==="liberia"?"limon":"liberia"):null;

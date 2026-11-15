@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {senConfidenceInterval,blockOrderPermutation,pairedAnnualDifferences,
-        assessTrendEvidence} from "../public/assets/inference.js";
+        assessTrendEvidence,halfPeriodSensitivity} from "../public/assets/inference.js";
 import {analyze,mannKendall} from "../public/assets/science.js";
 function points(n,fun,start=1985){return Array.from({length:n},(_,i)=>({year:start+i,value:fun(i)}));}
 test("Sen confidence limits are exact on a perfect linear trend with elapsed years",()=>{
@@ -71,4 +71,18 @@ test("Non-constant observations cannot be labeled validated based on raw MK alon
  const r=assessTrendEvidence(x,mannKendall(x.map(v=>v.value)),.7,40);
  assert.equal(r.validatedSignificance,false);
  assert.equal(r.reason.includes("homogeneity"),true);
+});
+
+test("Opposite early/late slopes flag nonmonotonicity rather than certified significance",()=>{
+ const series=points(40,i=>i<20?i:40-i);
+ const half=halfPeriodSensitivity(series);
+ assert.equal(half.available,true);
+ assert.equal(half.oppositeSigns,true);
+ const mk=mannKendall(series.map(x=>x.value));
+ const decision=assessTrendEvidence(series,mk,0,39);
+ assert.equal(decision.halfPeriod.oppositeSigns,true);
+ assert.notEqual(decision.status,"consistent_exploratory");
+});
+test("Half-period split refuses records with too few points per half",()=>{
+ assert.equal(halfPeriodSensitivity(points(19,i=>i)).available,false);
 });

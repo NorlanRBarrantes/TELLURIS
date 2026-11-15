@@ -37,3 +37,5 @@
 @media(max-width:950px){.inference-grid{grid-template-columns:1fr}}
 
 .table-heading{gap:10px;flex-wrap:wrap}.table-heading button{max-width:100%}
+
+#period-sensitivity{margin:12px 0 0;padding:9px 12px;border-top:0;border-left:2px solid rgba(174,218,220,.4);background:rgba(24,61,65,.16)}

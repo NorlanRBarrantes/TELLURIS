@@ -49,6 +49,7 @@ export function buildScientificReport(active, context={}) {
         serialResidualLag1:a.lag1,
         consecutiveYearPairs:a.lag1Pairs,
         blockOrderPermutations:proof?.blockTests||null,
+        halfPeriodSensitivity:proof?.halfPeriod||null,
         blockNullAssumption:"stationary_exchangeable_nonoverlapping_blocks",
         blockMethodLimit:"Nonstandard sensitivity, not a validated universal autocorrelation correction",
         decision:proof?.status||"not_assessed"
