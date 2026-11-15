@@ -45,3 +45,12 @@
 #gpm-file{width:100%;padding:10px;max-width:100%;border:1px solid rgba(184,237,198,.25);border-radius:9px;background:rgba(8,25,34,.55);color:#c8e7d6}
 #gpm-output{white-space:normal;overflow-wrap:anywhere}
 #gpm-export{margin-top:12px;max-width:100%}
+
+/* EXP-007C - source-backed monthly reference and quarterly comparison. */
+#monthly-panel .table-scroll{overflow-x:auto;max-width:100%}
+#monthly-panel .monthly-profile{width:100%;min-width:560px;font-size:12px}
+#monthly-panel .monthly-profile th,#monthly-panel .monthly-profile td{
+ padding:9px 10px;text-align:left;border-bottom:1px solid rgba(177,224,211,.14);
+ font-variant-numeric:tabular-nums;white-space:nowrap}
+#monthly-panel .monthly-profile th{color:#b8dfd2}
+#monthly-panel .monthly-profile td{color:#e8f5ef}
