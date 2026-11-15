@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="../../assets/explorer.css?v=exp007-20261115">
 <script type="module" src="../../assets/explorer.js?v=exp007-20261115"></script>
 <link rel="stylesheet" href="../../assets/globe.css?v=exp008-20261115">
+<link rel="stylesheet" href="../../assets/observatory.css?v=exp009-20261115">
+<script type="module" src="../../assets/observatory.js?v=exp009-20261115"></script>
 <script type="module" src="../../assets/globe.js?v=exp008-uvfix-20261115"></script>
 </head><body>
 <a class="skip" href="#explorer">Ir al explorador</a>
@@ -23,36 +25,11 @@
 </div></header>
 <main class="container explorer-shell" id="explorer">
 <div class="explorer-intro">
-  <p class="eyebrow mint">TELLURIS / LABORATORIO CIENTÍFICO / EXPERIMENTOS 001–004</p>
+  <p class="eyebrow mint">TELLURIS / OBSERVATORIO CIENTÍFICO / EXPERIMENTOS 001–009</p>
   <h1>La Tierra cambia.<br><em>Sigamos la evidencia.</em></h1>
   <p>Explora datos históricos de NASA POWER, calcula tendencias robustas y distingue lo que podemos concluir de lo que todavía no. Cada resultado se vincula a una fuente científica.</p>
   <div class="intro-flags"><span>NASA POWER · MERRA-2 / CERES</span><span>1985–2025</span><span>Ciencia exploratoria</span></div>
 </div>
-<div class="explore-layout">
-  <aside class="explore-controls" aria-labelledby="controls-title">
-    <p class="eyebrow mint">01 / CONFIGURAR INVESTIGACIÓN</p>
-    <h2 id="controls-title">Define la pregunta</h2>
-    <div class="question-presets" id="question-presets" aria-label="Preguntas sugeridas">
-      <p>Comienza con una pregunta científica:</p>
-      <div class="question-preset-buttons"><button type="button" data-question-variable="T2M">¿Cambia la temperatura?</button><button type="button" data-question-variable="PRECTOTCORR">¿Cambia la lluvia?</button><button type="button" data-question-variable="RH2M">¿Cambia la humedad?</button><button type="button" data-question-variable="WS10M">¿Cambian los vientos?</button><button type="button" data-question-variable="ALLSKY_SFC_SW_DWN">¿Varía la radiación solar?</button><button type="button" data-question-variable="GWETROOT">¿Cambia el agua del suelo?</button></div>
-    </div>
-    <form id="explore-form">
-      <label for="location">Ubicación</label>
-      <select id="location" name="location"><option value="liberia">Liberia · Pacífico, Costa Rica</option><option value="limon">Limón · Caribe, Costa Rica</option><option value="custom">Coordenadas personalizadas</option></select>
-      <div class="coordinate-fields"><div><label for="latitude">Latitud</label><input id="latitude" type="number" step="any" min="-90" max="90" value="10.63" required readonly></div><div><label for="longitude">Longitud</label><input id="longitude" type="number" step="any" min="-180" max="180" value="-85.44" required readonly></div></div>
-      <label for="variable">Variable científica</label>
-      <select id="variable"><optgroup label="Atmósfera y viento"><option value="T2M">Temperatura del aire a 2 m · T2M</option><option value="T2M_MAX">Máxima mensual del aire · T2M_MAX</option><option value="T2M_MIN">Mínima mensual del aire · T2M_MIN</option><option value="RH2M">Humedad relativa a 2 m · RH2M</option><option value="QV2M">Humedad específica a 2 m · QV2M</option><option value="WS10M">Velocidad del viento a 10 m · WS10M</option><option value="WD10M">Dirección del viento a 10 m · análisis circular · WD10M</option><option value="U10M">Componente este del viento · U10M</option><option value="V10M">Componente norte del viento · V10M</option><option value="PS">Presión superficial · PS</option><option value="CLOUD_AMT">Cantidad de nubes · CLOUD_AMT</option></optgroup><optgroup label="Radiación y energía"><option value="ALLSKY_SFC_SW_DWN">Radiación solar incidente · ALLSKY_SFC_SW_DWN</option><option value="ALLSKY_SFC_LW_DWN">Radiación infrarroja descendente · ALLSKY_SFC_LW_DWN</option><option value="ALLSKY_SRF_ALB">Albedo superficial · ALLSKY_SRF_ALB</option></optgroup><optgroup label="Agua y suelo"><option value="PRECTOTCORR">Precipitación anual · PRECTOTCORR</option><option value="EVPTRNS">Evapotranspiración (flujo energético) · EVPTRNS</option><option value="GWETTOP">Humedad relativa suelo superficial · GWETTOP</option><option value="GWETROOT">Humedad relativa zona radicular · GWETROOT</option></optgroup></select>
-      <p id="variable-guide" class="control-note variable-guide">Selecciona una variable para ver el origen, unidades y método de agregación.</p>
-      <div class="coordinate-fields"><div><label for="from-year">Desde</label><input id="from-year" type="number" min="1981" max="2025" value="1985" required></div><div><label for="to-year">Hasta</label><input id="to-year" type="number" min="1981" max="2025" value="2025" required></div></div>
-      <button id="live-btn" class="explore-primary" type="submit">Consultar datos NASA en vivo <span aria-hidden="true">↗</span></button>
-      <label class="compare-label" for="compare-locations"><input type="checkbox" id="compare-locations"><span>Comparar también con la otra vertiente de Costa Rica (consulta NASA adicional)</span></label>
-      <button id="snapshot-btn" class="explore-secondary" type="button">Usar muestra archivada NASA</button>
-      <label class="import-label" for="file-input">O importar un JSON original de NASA (.json)</label>
-      <input id="file-input" type="file" accept=".json,application/json">
-    </form>
-    <p class="control-note">Las consultas en vivo dependen de la disponibilidad de NASA y de los permisos del navegador. La muestra archivada contiene datos auténticos de NASA, no una simulación.</p>
-  </aside>
-  <section class="explore-workspace" aria-label="Resultados de investigación">
 <section class="globe-card globe-card-v2" aria-labelledby="globe-title">
   <div class="globe-head"><div><p class="eyebrow mint">EXP-008 / VISUALIZACIÓN CIENTÍFICA TERRESTRE</p><h3 id="globe-title">La Tierra en 3D</h3></div><span class="globe-source-tag">NASA GIBS · MODIS · BLUE MARBLE</span></div>
   <div class="globe-toolbar">
@@ -83,6 +60,75 @@
   <p class="globe-credits"><a id="globe-source-link" href="https://nasa-gibs.github.io/gibs-api-docs/access-basics/" target="_blank" rel="noopener noreferrer">Ficha y procedencia NASA ↗</a> · NASA GIBS / ESDIS; costas: Natural Earth (dominio público); motor 3D: Three.js (MIT).</p>
   <p class="globe-disclaimer">Gira, acerca o selecciona coordenadas para preparar una investigación con NASA POWER. Las capas MODIS son imágenes de fechas concretas, no mapas de tendencias históricas. La temperatura de superficie no equivale a la del aire a 2 m; ningún color permite deducir una lectura puntual precisa. Nunca se completan huecos con observaciones simuladas.</p>
 </section>
+
+<section class="observatory" id="observatory" aria-labelledby="obs-title">
+  <header class="obs-heading">
+    <div><p class="eyebrow mint">EXP-009 / LABORATORIO MULTIVARIABLE</p><h2 id="obs-title">Observatorio del Sistema Terrestre</h2><p>Contrasta variables NASA POWER por zona y descubre patrones que merece la pena investigar. Cada variable conserva sus unidades originales y los datos incompletos se señalan sin inventar resultados.</p></div>
+    <span class="obs-head-label">NASA POWER · 18 PARÁMETROS VERIFICADOS</span>
+  </header>
+  <div class="obs-modes" role="group" aria-label="Elige el alcance de investigación"><button class="obs-mode" type="button" data-obs-mode="one-one" aria-pressed="false"><small>01 / 01</small><strong>Una variable · una zona</strong><span>Investigación en profundidad</span></button>
+<button class="obs-mode" type="button" data-obs-mode="one-two" aria-pressed="false"><small>01 / 02</small><strong>Una variable · dos zonas</strong><span>Contraste anual pareado</span></button>
+<button class="obs-mode" type="button" data-obs-mode="all-one" aria-pressed="false"><small>18 / 01</small><strong>Todas las variables · una zona</strong><span>Contexto ambiental completo</span></button>
+<button class="obs-mode" type="button" data-obs-mode="all-two" aria-pressed="true"><small>18 / 02</small><strong>Todas las variables · dos zonas</strong><span>Contraste regional integral</span></button></div>
+  <div class="obs-query">
+    <div class="obs-query-context"><small>ZONA A</small><strong id="obs-primary-label">Seleccionada en los controles de investigación</strong><span>Se usan las coordenadas, variable y años de la sección 01 inferior.</span></div>
+    <div id="obs-second-controls" class="obs-second-controls">
+      <label for="obs-other-place">ZONA B
+        <select id="obs-other-place"><option value="limon">Limón · Caribe, Costa Rica</option><option value="liberia">Liberia · Pacífico, Costa Rica</option><option value="custom">Coordenadas personalizadas</option></select></label>
+      <div class="obs-coordinate-pair"><label for="obs-other-lat">Latitud<input id="obs-other-lat" type="number" min="-90" max="90" step="any" value="9.99" readonly></label><label for="obs-other-lon">Longitud<input id="obs-other-lon" type="number" min="-180" max="180" step="any" value="-83.03" readonly></label></div>
+    </div>
+    <div class="obs-query-actions"><p id="obs-single-hint" hidden>Este modo utiliza la variable seleccionada en la sección 01.</p>
+      <button id="obs-run-live" type="button" class="obs-action-primary">Investigar datos NASA en vivo <span aria-hidden="true">↗</span></button>
+      <button id="obs-run-archive" type="button" class="obs-action-secondary">Probar archivo original NASA</button>
+      <button id="obs-cancel" type="button" hidden>Cancelar consultas</button></div>
+  </div>
+  <p class="obs-status" id="obs-status" role="status" aria-live="polite">Elige un modo y carga observaciones originales NASA.</p>
+  <div id="obs-results" class="obs-results" hidden>
+    <p class="obs-source-kind" id="obs-source-kind"></p>
+    <p class="obs-summary" id="obs-summary"></p>
+    <div class="obs-kpis">
+      <div><small>Series disponibles</small><strong id="obs-kpi-available">—</strong></div>
+      <div><small>Pendientes positivas · A</small><strong id="obs-kpi-up">—</strong></div>
+      <div><small>Pendientes negativas · A</small><strong id="obs-kpi-down">—</strong></div>
+      <div><small>Fuentes no disponibles</small><strong id="obs-kpi-unavailable">—</strong></div>
+    </div>
+    <div class="obs-matrix-header"><div><h3>Matriz de evidencias comparadas</h3><p>Selecciona una variable para revisar sus series anuales reales; no compares pendientes con distintas unidades físicas.</p></div><label for="obs-family-filter">Familia de variables<select id="obs-family-filter"><option value="all">Todas las variables NASA</option><option value="atmosphere">Atmósfera</option><option value="wind">Viento</option><option value="water">Agua y suelo</option><option value="energy">Energía y radiación</option></select></label></div>
+    <p class="obs-matrix-count">Mostradas: <strong id="obs-count">—</strong></p>
+    <div class="obs-table-scroll"><table class="obs-table"><thead><tr id="obs-head"></tr></thead><tbody id="obs-rows"></tbody></table></div>
+    <section class="obs-focus" aria-labelledby="obs-focus-title"><div class="obs-focus-top"><div><small>FUENTE EN DETALLE / UNA UNIDAD FÍSICA</small><h3 id="obs-focus-title">—</h3></div><button type="button" id="obs-drilldown">Abrir investigación en profundidad ↗</button></div><p id="obs-focus-detail"></p><svg id="obs-chart" viewBox="0 0 720 260" aria-label="Gráfica de datos anuales NASA"></svg><div class="obs-chart-legend" id="obs-chart-legend"></div><div class="obs-provenance" id="obs-provenance"></div></section>
+    <section class="obs-explainer" aria-labelledby="obs-explainer-title"><div><p class="eyebrow mint">TELLURIS / INTÉRPRETE DE EVIDENCIAS</p><h3 id="obs-explainer-title">¿Qué podrían significar estas observaciones?</h3><div id="obs-explanation" class="obs-explanation"></div></div>
+      <div class="obs-qa"><p>Pregúntale a la evidencia</p><form id="obs-question-form"><label for="obs-question" class="sr-only">Pregunta</label><input id="obs-question" type="text" maxlength="240" placeholder="¿Por qué cambió? ¿Es significativo T2M?"><button type="submit">Explicar</button></form><div class="obs-prompt-list"><button type="button" data-obs-prompt="¿Por qué cambió el clima?">Posibles causas</button><button type="button" data-obs-prompt="¿Es significativo?">Confianza</button><button type="button" data-obs-prompt="PRECTOTCORR">Precipitación</button></div><p id="obs-answer" class="obs-answer" aria-live="polite"></p><p class="obs-ai-disclosure">Intérprete determinista basado en fuentes — no es IA generativa. No deduce causalidad ni inventa mediciones.</p></div>
+    </section>
+  </div>
+  <details class="obs-glossary"><summary>Entender los términos científicos sin complicaciones</summary><div class="obs-glossary-buttons"><button type="button" data-obs-term="sen">Theil–Sen</button><button type="button" data-obs-term="pvalue">Valor p</button><button type="button" data-obs-term="ci">Intervalo de confianza</button><button type="button" data-obs-term="paired">Años pareados</button><button type="button" data-obs-term="model">NASA POWER</button></div><p id="obs-glossary-answer" aria-live="polite"></p></details>
+  <p class="obs-integrity">Integridad científica: NASA POWER proporciona observaciones mensuales originales agrupadas por comunidad RE/AG (máximo 20 parámetros por solicitud). Las agregaciones anuales son deterministas. Las tendencias comparativas aquí son descriptivas y no corrigen dependencia temporal ni pruebas múltiples; la coincidencia no demuestra causas. El archivo anual EXP-001 contiene únicamente T2M y PRECTOTCORR en Liberia/Limón.</p>
+</section>
+<div class="explore-layout">
+  <aside class="explore-controls" aria-labelledby="controls-title">
+    <p class="eyebrow mint">01 / CONFIGURAR INVESTIGACIÓN</p>
+    <h2 id="controls-title">Define la pregunta</h2>
+    <div class="question-presets" id="question-presets" aria-label="Preguntas sugeridas">
+      <p>Comienza con una pregunta científica:</p>
+      <div class="question-preset-buttons"><button type="button" data-question-variable="T2M">¿Cambia la temperatura?</button><button type="button" data-question-variable="PRECTOTCORR">¿Cambia la lluvia?</button><button type="button" data-question-variable="RH2M">¿Cambia la humedad?</button><button type="button" data-question-variable="WS10M">¿Cambian los vientos?</button><button type="button" data-question-variable="ALLSKY_SFC_SW_DWN">¿Varía la radiación solar?</button><button type="button" data-question-variable="GWETROOT">¿Cambia el agua del suelo?</button></div>
+    </div>
+    <form id="explore-form">
+      <label for="location">Ubicación</label>
+      <select id="location" name="location"><option value="liberia">Liberia · Pacífico, Costa Rica</option><option value="limon">Limón · Caribe, Costa Rica</option><option value="custom">Coordenadas personalizadas</option></select>
+      <div class="coordinate-fields"><div><label for="latitude">Latitud</label><input id="latitude" type="number" step="any" min="-90" max="90" value="10.63" required readonly></div><div><label for="longitude">Longitud</label><input id="longitude" type="number" step="any" min="-180" max="180" value="-85.44" required readonly></div></div>
+      <label for="variable">Variable científica</label>
+      <select id="variable"><optgroup label="Atmósfera y viento"><option value="T2M">Temperatura del aire a 2 m · T2M</option><option value="T2M_MAX">Máxima mensual del aire · T2M_MAX</option><option value="T2M_MIN">Mínima mensual del aire · T2M_MIN</option><option value="RH2M">Humedad relativa a 2 m · RH2M</option><option value="QV2M">Humedad específica a 2 m · QV2M</option><option value="WS10M">Velocidad del viento a 10 m · WS10M</option><option value="WD10M">Dirección del viento a 10 m · análisis circular · WD10M</option><option value="U10M">Componente este del viento · U10M</option><option value="V10M">Componente norte del viento · V10M</option><option value="PS">Presión superficial · PS</option><option value="CLOUD_AMT">Cantidad de nubes · CLOUD_AMT</option></optgroup><optgroup label="Radiación y energía"><option value="ALLSKY_SFC_SW_DWN">Radiación solar incidente · ALLSKY_SFC_SW_DWN</option><option value="ALLSKY_SFC_LW_DWN">Radiación infrarroja descendente · ALLSKY_SFC_LW_DWN</option><option value="ALLSKY_SRF_ALB">Albedo superficial · ALLSKY_SRF_ALB</option></optgroup><optgroup label="Agua y suelo"><option value="PRECTOTCORR">Precipitación anual · PRECTOTCORR</option><option value="EVPTRNS">Evapotranspiración (flujo energético) · EVPTRNS</option><option value="GWETTOP">Humedad relativa suelo superficial · GWETTOP</option><option value="GWETROOT">Humedad relativa zona radicular · GWETROOT</option></optgroup></select>
+      <p id="variable-guide" class="control-note variable-guide">Selecciona una variable para ver el origen, unidades y método de agregación.</p>
+      <div class="coordinate-fields"><div><label for="from-year">Desde</label><input id="from-year" type="number" min="1981" max="2025" value="1985" required></div><div><label for="to-year">Hasta</label><input id="to-year" type="number" min="1981" max="2025" value="2025" required></div></div>
+      <button id="live-btn" class="explore-primary" type="submit">Consultar datos NASA en vivo <span aria-hidden="true">↗</span></button>
+      <label class="compare-label" for="compare-locations"><input type="checkbox" id="compare-locations"><span>Comparar también con la otra vertiente de Costa Rica (consulta NASA adicional)</span></label>
+      <button id="snapshot-btn" class="explore-secondary" type="button">Usar muestra archivada NASA</button>
+      <label class="import-label" for="file-input">O importar un JSON original de NASA (.json)</label>
+      <input id="file-input" type="file" accept=".json,application/json">
+    </form>
+    <p class="control-note">Las consultas en vivo dependen de la disponibilidad de NASA y de los permisos del navegador. La muestra archivada contiene datos auténticos de NASA, no una simulación.</p>
+  </aside>
+  <section class="explore-workspace" aria-label="Resultados de investigación">
+
     <div class="workspace-top">
       <div><p class="eyebrow mint">02 / EVIDENCIA Y ANÁLISIS</p><h2>Señal histórica</h2></div>
       <span class="status-pill" id="source-mode">Esperando datos</span>
