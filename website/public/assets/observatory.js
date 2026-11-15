@@ -4,7 +4,8 @@
  */
 import {VARIABLES} from "./science.js";
 import {chosenCodes,siteCount,planBatches,parseBatch,parseArchive,
-        matrixRows,summarizeInvestigation,groundedAnswer,coMovementClues} from "./matrix-core.js";
+        matrixRows,summarizeInvestigation,groundedAnswer,coMovementClues,
+        buildMatrixEvidence,matrixCSV} from "./matrix-core.js";
 
 const root=document.getElementById("observatory");
 if(root){
@@ -188,7 +189,7 @@ async function loadSource(fromArchive){
     }
     if(token!==generation)return;
     const rows=matrixRows(codes,output,sites);
-    current={rows,sites,mode,source:fromArchive?"archive":"NASA POWER LIVE",records:output};
+    current={rows,sites,mode,source:fromArchive?"archive":"NASA POWER LIVE",records:output,start,end};
     selectedCode=codes.includes(form.variable.value)?form.variable.value:codes[0];
     if(!rows.some(r=>r.code===selectedCode&&r.left.status!=="unavailable"))
       selectedCode=rows.find(r=>r.left.status==="descriptive")?.code||selectedCode;
@@ -393,6 +394,21 @@ function render(){
   answer.textContent=L("Pregunta por una variable, las diferencias, sus causas posibles o la confiabilidad.",
     "Ask about a variable, differences, possible causes or reliability.");
 }
+function downloadEvidence(kind){
+  if(!current)return;
+  const report=buildMatrixEvidence(current);
+  const isCSV=kind==="csv";
+  const text=isCSV?matrixCSV(report):JSON.stringify(report,null,2)+"\n";
+  const blob=new Blob([text],{type:isCSV?"text/csv;charset=utf-8":"application/json;charset=utf-8"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;
+  a.download="telluris_EXP009_"+current.mode+"_"+current.start+"-"+current.end+
+    (isCSV?".csv":".json");
+  document.body.append(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+el("obs-export-csv").addEventListener("click",()=>downloadEvidence("csv"));
+el("obs-export-json").addEventListener("click",()=>downloadEvidence("json"));
 el("obs-family-filter").addEventListener("change",()=>{if(current)renderTable();});
 el("obs-drilldown").addEventListener("click",()=>{
   if(!current)return;
