@@ -5,7 +5,8 @@ import {VARIABLES,POWER_READY_CODES} from "../public/assets/science.js";
 import {INVESTIGATION_MODES,VARIABLE_FAMILIES,chosenCodes,siteCount,
   batchPowerUrl,planBatches,verifyLocation,parseBatch,parseArchive,
   summarizeSeries,matchedDifference,matrixRows,standardizedObservations,
-  summarizeInvestigation,groundedAnswer} from "../public/assets/matrix-core.js";
+  summarizeInvestigation,groundedAnswer,annualDifferences,
+  annualCoMovement,coMovementClues,PREDECLARED_PAIRS} from "../public/assets/matrix-core.js";
 
 const sites=[{id:"liberia",label:"Liberia",lat:10.63,lon:-85.44},
              {id:"limon",label:"Limón",lat:9.99,lon:-83.03}];
@@ -99,4 +100,39 @@ test("Narrative is deterministic, cautious and never asserts cause or p-values",
  assert.match(groundedAnswer("¿Por qué cambió la lluvia?",rows,{lang:"es",sites}),/no demuestran causalidad/);
  assert.match(groundedAnswer("¿Es significativo?",rows,{lang:"es",sites}),/comparaciones múltiples/);
  assert.match(groundedAnswer("T2M",rows,{lang:"es",sites}),/°C \/ decade/);
+});
+
+test("Co-movement uses matching consecutive-year FIRST differences rather than trends",()=>{
+ const a=Array.from({length:20},(_,i)=>({year:2000+i,value:i*i}));
+ const b=a.map(p=>({...p,value:p.value*3+1}));
+ const opposite=a.map(p=>({...p,value:100-p.value*2}));
+ const same=annualCoMovement(a,b),reverse=annualCoMovement(a,opposite);
+ assert.equal(same.status,"descriptive");
+ assert.equal(same.n,19);
+ assert.ok(same.r>.999999);
+ assert.ok(reverse.r<-.999999);
+ assert.equal(same.inference,false);
+ assert.equal(same.causality,false);
+ const gaps=a.filter(p=>p.year%2===0);
+ assert.equal(annualDifferences(gaps).length,0);
+ assert.equal(annualCoMovement(gaps,b).status,"insufficient");
+ assert.equal(annualCoMovement(a,a.map(p=>({...p,value:5}))).status,"flat");
+});
+test("Only predeclared source-backed multi-variable clues are calculated",()=>{
+ assert.equal(PREDECLARED_PAIRS.length,5);
+ const result=parseArchive(archive,sites,chosenCodes("all-two","T2M"),1985,2025);
+ const rows=matrixRows(chosenCodes("all-two","T2M"),result,sites);
+ const clues=coMovementClues(rows,sites);
+ assert.equal(clues.length,1);
+ assert.equal(clues[0].first,"T2M");
+ assert.equal(clues[0].second,"PRECTOTCORR");
+ assert.equal(clues[0].sites.length,2);
+ for(const entry of clues[0].sites){
+   assert.equal(entry.status,"descriptive");
+   assert.equal(entry.n,40);
+   assert.ok(entry.r>=-1&&entry.r<=1);
+ }
+ const answer=groundedAnswer("pistas correlación",rows,{lang:"es",sites});
+ assert.match(answer,/Asociaciones descriptivas/);
+ assert.match(answer,/no significancia validada/);
 });
