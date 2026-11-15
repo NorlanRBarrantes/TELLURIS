@@ -52,7 +52,7 @@ test("The full-width globe and research lab exist in both languages",async()=>{
  }
 });
 
-test("Research primary controls update the same scientific form as the globe",()=>{
+test("Research primary controls update the same scientific form as the globe",async()=>{
  const {readFileSync}=await import("node:fs");
  const script=readFileSync(new URL("../public/assets/observatory.js",import.meta.url),"utf8");
  assert.match(script,/primary\.variable\.append\(child\.cloneNode\(true\)\)/);
