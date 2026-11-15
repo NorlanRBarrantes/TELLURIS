@@ -231,3 +231,13 @@ New source-separated precipitation comparison is implemented in [GPM JS module](
 - **E source implementation:** EXP-005 report JSON is transformed into bilingual print-ready HTML with annual SVG plot, source provenance, original statistical caveats and table; users choose **Print → Save as PDF**. This is not direct server-generated PDF, and the output requires a real-browser print test.
 - **Release boundary:** the current public BanaHosting site was previously verified at **5fddb6c**. These new source commits are in GitHub; no claim of deployed C/E UI, production functional success, or updated site SHA is made until a controlled rollout.
 - **A/B/D:** Original NASA GPM granules, true geospatial 3D NASA raster layers and secure LLM provider connection remain unimplemented/unverified. See [EXP-007 scope](EXP-007-FIVE-PILLARS.md). Do not portray them as active capabilities.
+
+## EXP-007 BanaHosting release — 2026-11-15 (operator-observed)
+
+- **Published source commit:** `907b98f600c6bf42d67e317ab00a033a92b37920` (website/public content), after a successful no-write `--check`.
+- **Pre-deploy:** seven changed public files were reported: `assets/explorer.css`, `assets/explorer.js`, `assets/science.js`, `assets/scientific-print.js`, `assets/seasonality.js`, `en/telluris/explore/index.html`, and `telluris/explore/index.html`.
+- **Backup:** `TELLURIS_BACKUPS/pre-907b98f600c6-20261115_164745.tar.gz`; deploy script reported "Backup verified".
+- **HTTPS post-copy verification:** all seven changed files produced `OK HTTPS` comparing deployed HTTP downloads byte-for-byte against the checked-out source. The script printed `COMPLETE: 907b98f600c6; 7 files verified via HTTPS.`
+- **Automation:** preceding [GitHub Actions run #43765203183](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43765203183) completed successfully, including script syntax/dry run and site QA. Earlier [scientific module suite #43764971107](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43764971107) passed 82/82 Node tests.
+- **Evidence limit:** this deployment record is based on operator-provided BanaHosting shell output and approved CI results; it does **not** establish user-browser interactions, NASA API CORS success, working downloaded PDF, long-term scientific significance, or original GPM IMERG observations. Manual ES/EN/mobile tests for C and E are still required.
+- **Release traceability:** later documentation-only commits may advance GitHub `main`; the public site release remains the website/public tree of `907b98f` until another deployment is verified.
