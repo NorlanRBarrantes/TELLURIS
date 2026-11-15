@@ -274,3 +274,11 @@ A second real-source run confirmed that the selected Limón point is classified 
 - **Safety:** WD10M only circular descriptive, not linear MK; annual max/min are summaries of monthly max/min; EVPTRNS energy flux not depth; POWER soil wetness not river flow/volumetric soil moisture; original MK p remains exploratory.
 - **UX:** question-first controls, 18 ES/EN definitions, source lineage, one-click optional second coast live comparison for continuous variables, export, and stale-request protection.
 - **Next:** publish newest ZIP in BanaHosting and test real NASA source in browser before integrating any more unverified sources. [Four-stage shipping plan](RELEASE-STAGES-EXP004.md).
+
+## ADR-030 — Transparent significance tier with independent code validation; no spurious NASA findings
+
+- **Date:** 2026-11-15 (Costa Rica)
+- **Status:** EXP-005 implemented, scientific source-suitability pending.
+- **Decision:** report original Mann–Kendall p **conditionally**, Sen slope 95% iid rank CI, lag-1 diagnostic, fixed-seed 3-year and 5-year *nonoverlapping block-order* permutation sensitivities, and an early/late half-period directional check. Never assert independent scientific validation or causal attribution. When no block test is eligible, mark sensitivity incomplete. Calendar-year-matched spatial differences are an additional exploratory analysis distinct from two independent slopes.
+- **Verification:** six original/source/synthetic SciPy cross-checks plus 66 passing Node site/source tests as of #43755613674. Explicit limitations are disclosed in bilingual web UI and JSON export, not left in source comments alone.
+- **Why:** NASA explicitly requests trend rate and statistical significance; a visually small MK p alone is insufficient under serial correlation and potential MERRA-2 inhomogeneity. See [full protocol](EXP-005-SIGNIFICANCE.md).

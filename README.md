@@ -84,3 +84,5 @@ The Explorer now includes a geography-only WebGL globe, deterministic evidence q
 - [EXP-003C — spatial QA pre-screen of predeclared Caribbean MODIS candidates](docs/EXP-003C-SPATIAL-PRESCREEN.md)
 
 - [EXP-003D — verified 2023 NASA land-cover classes at the predeclared Caribbean locations](docs/EXP-003D-IGBP.md)
+
+- [EXP-005 — Statistical significance, Sen confidence intervals and reproducible scientific reports](docs/EXP-005-SIGNIFICANCE.md)
