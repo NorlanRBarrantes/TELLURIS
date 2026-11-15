@@ -27,11 +27,11 @@ for(const [file,lang,route,es,en] of pages){
  });
  test("Local CSS, scripts and icons are resolvable: "+route,()=>{
   const h=read(file),dir=path.dirname(path.join(root,file));
-  const refs=[...h.matchAll(/(?:href|src)="([^"]+\.(?:css|js|svg))"/g)].map(x=>x[1]);
+  const refs=[...h.matchAll(/(?:href|src)="([^"]+\.(?:css|js|svg)(?:\?[^"]*)?)"/g)].map(x=>x[1]);
   assert.ok(refs.length >= 3);
   for(const ref of refs) {
    if(ref.startsWith("https://")) continue;
-   assert.ok(existsSync(path.resolve(dir,ref)),file+" broken asset: "+ref);
+   assert.ok(existsSync(path.resolve(dir,ref.split("?")[0])),file+" broken asset: "+ref);
   }
  });
 }
