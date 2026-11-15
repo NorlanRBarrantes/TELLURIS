@@ -30,7 +30,7 @@ jobs:
           node --check website/public/assets/science.js
           node --check website/public/assets/explorer.js
       - name: Run science and archived NASA parity tests
-        run: node --test website/tests/science.test.js
+        run: node --test website/tests/*.test.js
       - name: Run local HTTP smoke test
         run: |
           cd website/public
@@ -38,7 +38,12 @@ jobs:
           server=$!
           trap 'kill $server || true' EXIT
           sleep 2
-          curl --fail --silent --show-error http://127.0.0.1:8765/telluris/explore/ | grep -q "TELLURIS Explorer"
+          curl --fail --silent --show-error http://127.0.0.1:8765/ | grep -q 'lang="es"'
+          curl --fail --silent --show-error http://127.0.0.1:8765/en/ | grep -q 'lang="en"'
+          curl --fail --silent --show-error http://127.0.0.1:8765/telluris/ | grep -q 'lang="es"'
+          curl --fail --silent --show-error http://127.0.0.1:8765/en/telluris/ | grep -q 'lang="en"'
+          curl --fail --silent --show-error http://127.0.0.1:8765/telluris/explore/ | grep -q 'lang="es"'
+          curl --fail --silent --show-error http://127.0.0.1:8765/en/telluris/explore/ | grep -q 'lang="en"'
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/explore/data/exp001-annual.json | grep -q "MERRA2"
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/explorer.js | grep -q "fromSnapshot"
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/ | grep -q "TELLURIS"
