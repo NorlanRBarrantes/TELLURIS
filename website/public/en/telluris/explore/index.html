@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="../../../assets/globe.css?v=exp008-20261115">
 <link rel="stylesheet" href="../../../assets/observatory.css?v=exp009-20261115">
 <script type="module" src="../../../assets/observatory.js?v=exp009-20261115"></script>
-<script type="module" src="../../../assets/globe.js?v=exp008-uvfix-20261115"></script>
+<script type="module" src="../../../assets/globe.js?v=exp009-atmos-20261115"></script>
 </head><body>
 <a class="skip" href="#explorer">Skip to explorer</a>
 <header class="header"><div class="container nav">
@@ -40,7 +40,7 @@
       <input id="globe-date" type="date" min="2000-03-01" value="2024-07-15">
     </label>
   </div>
-  <div class="globe-viewport"><div id="globe-stage" class="globe-stage" role="group" aria-label="3D NASA Earth globe; accessible keyboard and location buttons below"></div><span class="globe-viewport-label">NASA EARTH OBSERVATION · GEOGRAPHIC VIEW</span></div>
+  <div class="globe-viewport"><div id="globe-stage" class="globe-stage" role="group" aria-label="3D NASA Earth globe; accessible keyboard and location buttons below"></div><canvas id="globe-weather-canvas" aria-hidden="true"></canvas><div id="globe-hover-tooltip" class="globe-hover-tooltip" role="tooltip" hidden></div><span class="globe-viewport-label">NASA EARTH OBSERVATION · GEOGRAPHIC VIEW</span></div>
   <div class="globe-command">
     <div class="globe-camera-controls" role="group" aria-label="3D view controls">
       <button type="button" id="globe-zoom-in" aria-label="Zoom in">+</button>
@@ -53,6 +53,9 @@
       <button type="button" data-globe-location="limon">Limón · Caribbean</button>
     </div>
   </div>
+  <div class="globe-weather-toolbar"><label for="globe-weather-mode">Illustrative atmosphere
+      <select id="globe-weather-mode"><option value="none">No animation</option><option value="wind">Wind · source-gated</option><option value="rain">Rain · source-gated</option></select></label>
+    <p id="globe-weather-note">Wind/rain motion is disabled until matching annual NASA POWER observations are loaded. It never portrays real-time weather or a gridded wind/rain field.</p></div>
   <div class="globe-selected"><div><small>SELECTED LOCATION</small><strong id="globe-selection">Liberia · 10.630°, -85.440°</strong></div><button type="button" id="globe-analyze">Investigate with NASA POWER ↗</button></div>
   <p id="globe-status" class="globe-status" role="status" aria-live="polite">Loading geographical globe…</p>
   <p id="globe-layer-meta" class="globe-layer-meta">NASA Blue Marble is an Earth reference image, not a measurement at this point.</p>
