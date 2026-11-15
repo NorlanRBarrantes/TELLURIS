@@ -4,7 +4,7 @@
  */
 import {VARIABLES} from "./science.js";
 import {chosenCodes,siteCount,planBatches,parseBatch,parseArchive,
-        matrixRows,summarizeInvestigation,groundedAnswer} from "./matrix-core.js";
+        matrixRows,summarizeInvestigation,groundedAnswer,coMovementClues} from "./matrix-core.js";
 
 const root=document.getElementById("observatory");
 if(root){
@@ -344,6 +344,35 @@ function renderFocus(){
   }
   const detail=el("obs-drilldown");detail.disabled=!Object.hasOwn(VARIABLES,row.code);
 }
+function renderClues(){
+  const grid=el("obs-clue-grid");grid.replaceChildren();
+  const clues=coMovementClues(current.rows,current.sites);
+  if(!clues.length){
+    grid.append(node("p",L(
+      "No hay suficientes pares de series NASA completas para contrastar cambios de años consecutivos. Prueba «Todas las variables» con NASA en vivo.",
+      "Not enough complete NASA series for consecutive-year co-movement. Try All variables with live NASA."
+    ),"obs-clue-empty"));
+    return;
+  }
+  for(const clue of clues){
+    const first=VARIABLES[clue.first],second=VARIABLES[clue.second];
+    const card=node("article","","obs-clue");
+    card.append(node("strong",(es?first.nameEs:first.name)+" / "+(es?second.nameEs:second.name)));
+    for(const entry of clue.sites){
+      const r=entry.r;
+      const kind=r>.3?L("Cambios con dirección parecida","Changes moved in similar directions"):
+        r<-.3?L("Cambios de dirección opuesta","Changes moved in opposite directions"):
+          L("Asociación lineal débil","Weak linear association");
+      card.append(node("p",entry.site+" · r = "+N(r,2)+" · "+
+        entry.n+" "+L("pares anuales","matched annual changes")+" · "+kind));
+    }
+    card.append(node("small",L(
+      "Asociación descriptiva dentro de productos NASA POWER compartidos. No implica causa, significancia ni independencia.",
+      "Descriptive association within related NASA POWER products. Not causation, significance or independent validation."
+    )));
+    grid.append(card);
+  }
+}
 function render(){
   results.hidden=false;
   const summaryData=summarizeInvestigation(current.rows,{
@@ -360,7 +389,7 @@ function render(){
     L("NASA POWER · solicitudes mensuales en vivo","NASA POWER · live monthly requests");
   insight.replaceChildren(node("p",summaryData.intro));
   for(const note of summaryData.notes)insight.append(node("p",note,"obs-caution"));
-  renderTable();renderFocus();
+  renderTable();renderFocus();renderClues();
   answer.textContent=L("Pregunta por una variable, las diferencias, sus causas posibles o la confiabilidad.",
     "Ask about a variable, differences, possible causes or reliability.");
 }
