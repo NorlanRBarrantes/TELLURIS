@@ -96,3 +96,9 @@ cat "$HOME/TELLURIS_BACKUPS/production-current.txt"
 \`\`\`
 
 After deployment: open both language routes, test archived/live NASA retrieval, the EXP-005 statistical caveats, EXP-006 IMERG import restrictions, the new EXP-007C monthly panel using real monthly NASA JSON and EXP-007E browser Print → Save as PDF, plus mobile layout and network failures. Do not claim EXP-007 fully operational until witnessed. Record the published full commit, visual QA and issues in docs/VALIDATION.md. Keep secrets and research-only materials out of \`website/public/\`.
+
+### Production validation record — 2026-11-15, EXP-007
+
+The BanaHosting operator executed `git fetch` and `git pull --ff-only` to advance the private checkout from `5fddb6c` to `907b98f`. The checked-in deployment script `--check` identified **7 differences** and confirmed production remained untouched. The explicit `--deploy` execution created and verified backup `TELLURIS_BACKUPS/pre-907b98f600c6-20261115_164745.tar.gz`; all seven updated/new ES/EN Explorer and `assets/` files passed source-versus-HTTPS byte comparisons. Script output finished `COMPLETE: 907b98f600c6; 7 files verified via HTTPS.`
+
+**Production published source at this check:** `907b98f600c6bf42d67e317ab00a033a92b37920`. No automatic deployment is implied for later `main` commits. EXP-007C and E are released as public assets but manual browser, print-to-PDF and original NASA source replay remain open validation tasks.
