@@ -23,7 +23,7 @@ jobs:
             ("WS10M","RE"),("WD10M","RE"),("U10M","RE"),("V10M","RE"),
             ("ALLSKY_SFC_SW_DWN","RE"),("T2M_MAX","AG"),("T2M_MIN","AG"),
             ("PS","AG"),("CLOUD_AMT","AG"),("GWETROOT","HY"),
-            ("GWETTOP","HY"),("EVPTRNS","HY"),("QV2M","AG"),
+            ("GWETTOP","HY"),("EVPTRNS","HY"),("EVPTRNS","AG"),("EVPTRNS","RE"),("GWETROOT","AG"),("GWETROOT","RE"),("GWETTOP","AG"),("GWETTOP","RE"),("QV2M","AG"),
             ("ALLSKY_SFC_LW_DWN","RE"),("ALLSKY_SRF_ALB","RE")]
           results=[]
           for name,comm in names:
