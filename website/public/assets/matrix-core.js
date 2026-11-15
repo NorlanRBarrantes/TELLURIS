@@ -221,3 +221,62 @@ export function groundedAnswer(question,rows,{lang="es",sites=[]}={}){
   const summary=summarizeInvestigation(rows,{lang,sites});
   return summary.intro+" "+summary.notes.join(" ");
 }
+
+
+/* Predeclared, hypothesis-generating pairs. These are NOT independent data
+ * streams or causal paths. r describes co-movement of ANNUAL FIRST DIFFERENCES,
+ * using strictly consecutive matched years (no fabricated values or p-values).
+ */
+export const PREDECLARED_PAIRS=Object.freeze([
+  ["PRECTOTCORR","GWETROOT"],
+  ["PRECTOTCORR","RH2M"],
+  ["T2M","RH2M"],
+  ["CLOUD_AMT","ALLSKY_SFC_SW_DWN"],
+  ["T2M","PRECTOTCORR"]
+]);
+export function annualDifferences(points){
+  if(!Array.isArray(points))return [];
+  const ordered=[...points].filter(p=>Number.isInteger(p.year)&&
+    Number.isFinite(p.value)).sort((a,b)=>a.year-b.year);
+  const out=[];
+  for(let i=1;i<ordered.length;i++){
+    if(ordered[i].year===ordered[i-1].year+1){
+      out.push({year:ordered[i].year,value:ordered[i].value-ordered[i-1].value});
+    }
+  }
+  return out;
+}
+export function annualCoMovement(first,second){
+  const a=annualDifferences(first),b=annualDifferences(second);
+  const byYear=new Map(b.map(p=>[p.year,p.value]));
+  const paired=a.filter(p=>byYear.has(p.year)).map(p=>[p.value,byYear.get(p.year)]);
+  if(paired.length<12)return {status:"insufficient",n:paired.length};
+  const meanA=paired.reduce((s,p)=>s+p[0],0)/paired.length;
+  const meanB=paired.reduce((s,p)=>s+p[1],0)/paired.length;
+  let ab=0,aa=0,bb=0;
+  for(const [x,y] of paired){
+    ab+=(x-meanA)*(y-meanB);
+    aa+=(x-meanA)**2;bb+=(y-meanB)**2;
+  }
+  if(aa<1e-15||bb<1e-15)return {status:"flat",n:paired.length};
+  return {status:"descriptive",n:paired.length,r:Math.max(-1,Math.min(1,ab/Math.sqrt(aa*bb))),
+    method:"Pearson correlation of matched consecutive-year first differences",
+    inference:false,causality:false};
+}
+export function coMovementClues(rows,sites){
+  const byCode=new Map(rows.map(r=>[r.code,r]));
+  const output=[];
+  for(const [first,second] of PREDECLARED_PAIRS){
+    const a=byCode.get(first),b=byCode.get(second);
+    if(!a||!b)continue;
+    const clue={first,second,sites:[]};
+    for(let i=0;i<sites.length;i++){
+      const x=i===0?a.a?.points:a.b?.points,y=i===0?b.a?.points:b.b?.points;
+      const estimate=annualCoMovement(x,y);
+      if(estimate.status==="descriptive")
+        clue.sites.push({site:sites[i].label,...estimate});
+    }
+    if(clue.sites.length)output.push(clue);
+  }
+  return output;
+}
