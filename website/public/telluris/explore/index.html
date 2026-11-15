@@ -62,9 +62,20 @@
       <div class="metric-grid">
         <div class="metric"><small>Tendencia estimada de Sen / década</small><strong id="slope-value">—</strong><span id="slope-direction">—</span></div>
         <div class="metric"><small>Años completos</small><strong id="sample-value">—</strong><span id="sample-period">—</span></div>
-        <div class="metric"><small>Valor p de Mann–Kendall original</small><strong id="p-value">—</strong><span id="p-value-note">Exploratorio; independencia no verificada</span></div>
+        <div class="metric"><small>Valor p de Mann–Kendall · hipótesis de independencia</small><strong id="p-value">—</strong><span id="p-value-note">Exploratorio; independencia no verificada</span></div>
       </div>
-      <section class="chart-card" aria-labelledby="chart-title">
+      
+      <section class="inference-panel" id="inference-panel" aria-labelledby="inference-title">
+        <div class="inference-header"><div><p class="eyebrow mint">03 / PRUEBAS DE SIGNIFICANCIA</p><h3 id="inference-title">¿Qué tan sólida es esta tendencia?</h3></div><span id="inference-verdict" class="inference-verdict">Sin evaluación</span></div>
+        <div class="inference-grid">
+          <div><small>Intervalo de confianza Theil–Sen al 95 %</small><strong id="sen-interval">—</strong><span id="ci-interpretation">Asume observaciones anuales independientes.</span></div>
+          <div><small>Pruebas exploratorias de sensibilidad temporal</small><strong id="block-sensitivity">—</strong><span>Permutaciones por bloques de 3 y 5 años · 999 simulaciones</span></div>
+          <div><small>Autocorrelación residual de un año</small><strong id="lag-diagnostic">—</strong><span>Diagnóstico orientativo, no prueba de independencia.</span></div>
+        </div>
+        <p id="inference-caution" class="inference-caution">No se ha demostrado homogeneidad del producto NASA ni independencia temporal. Ningún valor p de esta pantalla garantiza una tendencia climática validada.</p>
+        <p id="paired-inference" class="inference-paired" hidden></p>
+      </section>
+<section class="chart-card" aria-labelledby="chart-title">
         <div class="chart-head"><div><p class="eyebrow">SERIE TEMPORAL ANUAL</p><h3 id="chart-title">Serie histórica modelada</h3></div><div class="chart-legend" id="chart-legend"><span class="legend-data">Valor anual</span><span class="legend-trend">Tendencia de Sen</span></div></div>
         <svg id="trend-chart" viewBox="0 0 760 350" role="img" aria-label="Datos anuales del modelo NASA y tendencia Sen estimada" preserveAspectRatio="xMidYMid meet"></svg>
         <p class="chart-caption" id="chart-caption">—</p>

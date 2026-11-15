@@ -64,7 +64,18 @@
         <div class="metric"><small>Valid annual samples</small><strong id="sample-value">—</strong><span id="sample-period">—</span></div>
         <div class="metric"><small>Original Mann–Kendall p</small><strong id="p-value">—</strong><span id="p-value-note">Exploratory; independence unverified</span></div>
       </div>
-      <section class="chart-card" aria-labelledby="chart-title">
+      
+      <section class="inference-panel" id="inference-panel" aria-labelledby="inference-title">
+        <div class="inference-header"><div><p class="eyebrow mint">03 / SIGNIFICANCE TESTS</p><h3 id="inference-title">How strong is the trend evidence?</h3></div><span id="inference-verdict" class="inference-verdict">Not assessed</span></div>
+        <div class="inference-grid">
+          <div><small>95% Theil–Sen slope confidence interval</small><strong id="sen-interval">—</strong><span id="ci-interpretation">Assumes independent annual observations.</span></div>
+          <div><small>Exploratory temporal-dependence sensitivity</small><strong id="block-sensitivity">—</strong><span>3- and 5-year block permutations · 999 simulations</span></div>
+          <div><small>Lag-one residual autocorrelation</small><strong id="lag-diagnostic">—</strong><span>Heuristic diagnostic; not proof of independence.</span></div>
+        </div>
+        <p id="inference-caution" class="inference-caution">NASA product homogeneity and temporal independence have not been established. No p-value here certifies a validated climate trend.</p>
+        <p id="paired-inference" class="inference-paired" hidden></p>
+      </section>
+<section class="chart-card" aria-labelledby="chart-title">
         <div class="chart-head"><div><p class="eyebrow">ANNUAL TIME SERIES</p><h3 id="chart-title">Observed model series</h3></div><div class="chart-legend" id="chart-legend"><span class="legend-data">Annual value</span><span class="legend-trend">Sen trend</span></div></div>
         <svg id="trend-chart" viewBox="0 0 760 350" role="img" aria-label="Annual NASA model data and estimated Sen trend" preserveAspectRatio="xMidYMid meet"></svg>
         <p class="chart-caption" id="chart-caption">—</p>
