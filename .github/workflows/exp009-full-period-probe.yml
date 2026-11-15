@@ -1,0 +1,58 @@
+name: EXP-009 Full historical NASA POWER batch coverage probe
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/exp009-full-period-probe.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  historical-source-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Verify complete-year coverage in original 1985-2025 NASA monthly batches
+        shell: bash
+        run: |
+          node --input-type=module <<'JS'
+          import {POWER_READY_CODES} from "./website/public/assets/science.js";
+          import {planBatches,parseBatch} from "./website/public/assets/matrix-core.js";
+          const sites=[{id:"liberia",lat:10.63,lon:-85.44,label:"Liberia"},
+                       {id:"limon",lat:9.99,lon:-83.03,label:"Limón"}];
+          const batches=planBatches(sites,[...POWER_READY_CODES],1985,2025);
+          let passed=0,partial=0;
+          for(const batch of batches){
+            const response=await fetch(batch.url,{
+              signal:AbortSignal.timeout(100000),
+              headers:{"User-Agent":"ProjectUriel-TELLURIS-original-NASA-history-probe/1.0"}
+            });
+            if(!response.ok)throw Error("NASA "+batch.siteId+"/"+batch.community+
+              " HTTP "+response.status+" "+(await response.text()).slice(0,400));
+            const payload=await response.json();
+            const parsed=parseBatch(payload,batch,1985,2025);
+            for(const code of batch.codes){
+              const entry=parsed[code];
+              if(entry.status!=="ready")throw Error("No scientifically useful annual source: "+
+                batch.siteId+" "+code+" "+entry.status+" "+entry.reason);
+              const years=entry.data.points.map(p=>p.year);
+              const missing=[];
+              for(let y=1985;y<=2025;y++)if(!years.includes(y))missing.push(y);
+              if(missing.length)partial++;
+              console.log("NASA_FULL_HISTORY",batch.siteId,code,
+                "COMPLETE_YEARS",years.length,"PERIOD",years[0]+"-"+years.at(-1),
+                "MISSING_YEARS",missing.length?missing.join(","):"none",
+                "ORIGINAL_UNIT",entry.data.meta.originalUnit);
+              passed++;
+            }
+          }
+          console.log("NASA_FULL_HISTORY_PASS",passed,"site-parameter records",
+            "WITH_INCOMPLETE_COVERAGE",partial);
+          if(passed!==36)throw Error("Expected 36 source-backed long-period results");
+          JS
