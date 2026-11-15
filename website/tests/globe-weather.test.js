@@ -41,6 +41,8 @@ test("The full-width globe and research lab exist in both languages",async()=>{
    const page=readFileSync(new URL("../public/"+lang+"telluris/explore/index.html",import.meta.url),"utf8");
    for(const id of ["globe-weather-mode","globe-weather-canvas","globe-hover-tooltip",
      "observatory","obs-run-live","obs-run-archive","obs-second-controls",
+     "obs-main-place","obs-main-variable","obs-main-lat","obs-main-lon",
+     "obs-main-start","obs-main-end","obs-export-csv","obs-export-json",
      "obs-results","obs-chart","obs-question-form","obs-glossary-answer"])
       assert.ok(page.includes('id="'+id+'"'),lang+id);
    assert.ok(page.indexOf('class="globe-card globe-card-v2"') < page.indexOf('class="explore-layout"'));
@@ -48,4 +50,14 @@ test("The full-width globe and research lab exist in both languages",async()=>{
    assert.equal((page.match(/id="globe-stage"/g)||[]).length,1);
    assert.ok(page.includes("observatory.css?v=exp009-20261115"));
  }
+});
+
+test("Research primary controls update the same scientific form as the globe",()=>{
+ const {readFileSync}=await import("node:fs");
+ const script=readFileSync(new URL("../public/assets/observatory.js",import.meta.url),"utf8");
+ assert.match(script,/primary\.variable\.append\(child\.cloneNode\(true\)\)/);
+ assert.match(script,/form\[key\]\.dispatchEvent\(new Event\("change"/);
+ assert.match(script,/form\.place\.dispatchEvent\(new Event\("change"/);
+ assert.match(script,/buildMatrixEvidence\(current\)/);
+ assert.match(script,/matrixCSV\(report\)/);
 });
