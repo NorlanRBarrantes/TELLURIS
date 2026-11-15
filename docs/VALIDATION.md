@@ -144,3 +144,11 @@ Results must be computed before any place is described as having an observed sig
 - [Variable catalog](VARIABLE-CATALOG.md): NASA POWER atmosphere/radiation candidates; GLDAS runoff and soil water; SWOT **estimated river discharge** and reach geometry; MODIS vegetation/temperature/evaporation; GPM precipitation; SMAP soil moisture; GRACE terrestrial water storage; AIRS/OMI atmosphere; PO.DAAC ocean series.
 - **Evidence limitation:** Catalog coverage verifies plausible official sources, **not** software integrations or valid climate findings. The only connected NASA variables remain POWER T2M/PRECTOTCORR. River discharge is a 2022+ SWOT reach-level estimate, not a 1985–2025 hydrograph or GLDAS Qs runoff.
 - **Next acceptance gates:** validated significance inference, live metadata-driven additional POWER parameters, educational question flow, at least one non-meteorological NASA source extraction, deployment/update verification and publicly reviewable competition submission.
+
+## Team scientific inventory + browseable web catalog — 2026-11-15
+
+- **Source preservation:** The team-submitted original markdown document is preserved at [TEAM-CATALOG-2026-11-15.md](TEAM-CATALOG-2026-11-15.md), with methods review at [TEAM-CATALOG-REVIEW.md](TEAM-CATALOG-REVIEW.md).
+- **Data inventory:** [catalog.json](../website/public/telluris/catalog/data/catalog.json), schema `telluris.catalog.2026-11-15.v1`, **2 connected NASA POWER variables + 49 research candidates + 10 derived indicators**, all 49 names/order and six domain categories retained.
+- **Bilingual user-facing discovery:** `/telluris/catalog/` (Spanish), `/en/telluris/catalog/` (English); search/filter by topic, Earth-system area and integration status; no operational controls for unconnected variables.
+- **Automated checks:** [GitHub Actions run #43729854583](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43729854583) — **34/34 Node tests passed**, browser-source syntax checks and local HTTP smoke checks of both catalog routes and JSON passed, static deployment ZIP generated.
+- **Scientific limitation:** these are source/topic proposals, **not** 49 tested NASA endpoints or 10 computed indices. Current production still needs an upload/verification step, and no additional NASA science inference was established.

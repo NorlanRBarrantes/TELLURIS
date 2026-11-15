@@ -82,3 +82,9 @@ The implemented paths above are present; `api/` and other backend notes remain *
 ## Architecture validation gate
 
 Before implementation is finalized, inspect cPanel runtime and site document root; verify whether external HTTPS requests work, whether URL rewriting is available, and whether any backend runtime is necessary. If server-side capabilities are limited, prefer a statically deployable demonstration with verifiable precomputed NASA-backed cases.
+
+## Scientific discovery catalog and connector gating — 2026-11-15
+
+The team research index is stored as static versioned JSON at `website/public/telluris/catalog/data/catalog.json`, with a bilingual read-only search interface at `/telluris/catalog/` (ES) and `/en/telluris/catalog/` (EN). Scientific entries distinguish **connected** NASA data (2), **research** topics (49) and **derived** indicators (10). The browse interface can only route connected NASA values to the existing Explorer. No API route is invented for unsupported variables.
+
+The future connector contract must distinguish `source_dataset`, `measured_or_estimated_quantity`, `phenomenon_or_event`, `derived_indicator`, `spatial_support` (model grid/region/river reach/event), `temporal_support`, `data_quality` and `validation_state`. Seismic catalogs and FIRMS event records must not be treated as meteorological monthly point observations. The versioned team source and corrections are preserved in [catalog review](TEAM-CATALOG-REVIEW.md).

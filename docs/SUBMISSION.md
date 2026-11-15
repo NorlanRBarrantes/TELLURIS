@@ -66,3 +66,7 @@ The repository was created private; reviewers cannot access private repositories
 - Submission requirements / credits discussion: https://github.com/nasa/spaceapps/discussions/1858
 
 The official submission interface and current 2026 guide take precedence if any detail changes.
+
+## Team catalog contribution and evidence labeling — 2026-11-15
+
+The team-contributed [49-variable scientific inventory](TEAM-CATALOG-2026-11-15.md), documented review and 10 derived indicators are now a research roadmap; the public bilingual catalog was implemented at `/telluris/catalog/`. Cite the **team contribution** accurately in the final presentation. Mark it as research inventory: the current Explorer has **two** live NASA POWER variables, not 51 live variables. [Run #43729854583](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43729854583) verified 34 Node/HTTP checks. Public BanaHosting update and browser verification remain separate tasks.

@@ -82,3 +82,9 @@ The browser displays exploratory Theil–Sen and original MK computations on aut
 - The previously observed 403 came from mode 600 static files; if the cPanel ZIP extractor repeats that, set **644 for public static files and 755 for directories** in the intended document root only. Do not apply world-readable permissions to any private or unrelated files.
 - Check six primary routes at HTTPS, selectors ES/EN at the top, live and archived NASA runs, the shared JSON, styling on mobile, the updated `sitemap.xml` and external links.
 - The ZIP's root is already the contents of `website/public/`. Do not extract it into an extra nested directory.
+
+## Catalog navigation release — 2026-11-15
+
+The static bundle now also contains `/telluris/catalog/` and `/en/telluris/catalog/` plus `assets/catalog.js`, `assets/catalog.css`, and the immutable versioned inventory JSON at `/telluris/catalog/data/catalog.json`. The TELLURIS introduction and both Explorer language variants link to the new catalog. The catalog lists **49 future research candidates and ten proposed derived indicators**, but does not pretend these sources are connected.
+
+[GitHub Actions run #43729854583](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43729854583) passes 34 Node tests, source syntax tests, route/asset HTTP smoke checks and creates a ZIP artifact to upload to cPanel. GitHub does **not** automatically deploy to BanaHosting. After backing up the web root, extract the latest artifact contents at the current `projecturiel.earth` document root and confirm public static-file permissions, exact new URLs, filters, Spanish/English switch and existing NASA Explorer functionality.
