@@ -296,3 +296,58 @@ export function coMovementClues(rows,sites){
   }
   return output;
 }
+
+
+/* Portable, evidence-preserving full-matrix export for independent review.
+ * Includes original source metadata and EVERY available annual observation.
+ * No generated p-values, no unsupported native measurements and no causal labels.
+ */
+export function buildMatrixEvidence({rows,sites,records,mode,source,start,end}){
+ if(!Array.isArray(rows)||!rows.length||!Array.isArray(sites)||!sites.length||
+    !records||!INVESTIGATION_MODES.includes(mode))throw Error("No completed NASA research matrix");
+ if(!Number.isInteger(start)||!Number.isInteger(end)||start>end)throw Error("Invalid year range");
+ const data=rows.map(r=>({
+   code:r.code,name:r.definition.name,nativeUnit:r.definition.unit,
+   sourceCommunity:r.definition.community,aggregation:r.definition.aggregation,
+   pairedYearDifference:r.paired?.status==="descriptive"?{
+     years:r.paired.n,period:[r.paired.start,r.paired.end],
+     descriptiveSlopePerDecade:r.paired.slopePerDecade,unit:r.definition.slopeUnit,
+     validatedSignificance:false
+   }:null,
+   locations:sites.map(site=>{
+     const entry=records[site.id]?.[r.code]||{};
+     const item=r.left&&site.id===sites[0].id?r.left:r.right;
+     return {siteId:site.id,siteLabel:site.label,
+       coordinates:[site.lat,site.lon],status:entry.status||"unavailable",
+       reason:entry.reason||null,queryUrl:entry.sourceUrl||entry.data?.meta?.archiveLink||null,
+       sourceMetadata:entry.data?.meta||null,
+       annualObservations:entry.data?.points||[],
+       descriptiveSlopePerDecade:item?.status==="descriptive"?item.slopePerDecade:null,
+       validatedSignificance:false};
+   })
+ }));
+ return {schema:"telluris.exp009.research_matrix.v1",generatedUtc:new Date().toISOString(),
+   project:"Project Uriel / TELLURIS",
+   nasaAffiliation:"Independent participant project, not NASA endorsed",
+   origin:source,mode,requestedYears:[start,end],
+   limitation:"Descriptive annual Sen estimates only; source data may be modeled, products share inputs; no validated significance, homogeneity, multiple-testing correction or causal attribution.",
+   originalNASAResultSource:"https://power.larc.nasa.gov/docs/services/api/temporal/monthly/",
+   variables:data};
+}
+export function matrixCSV(report){
+ if(report?.schema!=="telluris.exp009.research_matrix.v1")
+   throw Error("Invalid evidence report");
+ const header=["variable","name","unit","source_community","site_id","site_label",
+   "site_lat","site_lon","status","sample_years","sen_slope_per_decade","matched_pair_slope_per_decade",
+   "source_url","scientific_warning"];
+ const rows=[header];
+ for(const r of report.variables)for(const site of r.locations)rows.push([
+   r.code,r.name,r.nativeUnit,r.sourceCommunity,site.siteId,site.siteLabel,
+   site.coordinates[0],site.coordinates[1],site.status,
+   site.annualObservations.length,site.descriptiveSlopePerDecade,
+   r.pairedYearDifference?.descriptiveSlopePerDecade??null,
+   site.queryUrl,report.limitation
+ ]);
+ const clean=v=>'"'+String(v??"").replaceAll('"','""')+'"';
+ return rows.map(row=>row.map(clean).join(",")).join("\r\n")+"\r\n";
+}
