@@ -1,6 +1,31 @@
 # EXP-001 — Liberia–Limón NASA POWER trend investigation
 
-**Status: CODE AND SYNTHETIC TESTS PASSED; REAL NASA DATA NOT YET RETRIEVED OR ANALYZED.**
+**Status: REAL NASA DATA RETRIEVED; EXPLORATORY SLOPES REPRODUCED; SCIENTIFIC INFERENCE PENDING.**
+
+## Verified NASA POWER acquisition — 2026-11-15 UTC
+
+**Status:** Real NASA POWER monthly-point data retrieved and processed; exploratory numerical slopes independently recalculated. Significance/uncertainty under serial dependence, precipitation product homogeneity and public browser deployment remain **unverified**.
+
+- [GitHub Actions source run #43656774519](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43656774519), artifact `exp001-nasa-power-originals` (original raw NASA JSON for two sites and Python EXP-001 output; 30-day retention).
+- NASA API `v2.10.0`; header source `MERRA2`; fill `-999`; period 1985-01-01 through 2025-12-31; T2M units `C`, PRECTOTCORR units `mm/day`. Each site/variable has 41 complete annual aggregates, with 41 explicit `YYYY13` summary keys excluded.
+- Point returned: Liberia `[-85.44,10.63,94.64]`; Limón `[-83.03,9.99,354.78]`, geographic coordinates and NASA-reported source elevation—not station observations.
+
+| NASA model grid sample | Sen T2M (°C/decade) | Sen rainfall (mm/decade) | Original MK p T2M* | Original MK p PREC* |
+| --- | ---: | ---: | ---: | ---: |
+| Liberia | -0.11268630 | +434.85162 | 0.08570791 | 0.0000000161 |
+| Limón | +0.16786322 | +918.76865 | 0.0000001762 | 0.0000000003415 |
+
+*Original MK p-values are **exploratory**, not corrected/validated for serial dependence; do **not** present them as final scientific significance claims.*
+
+An independent local re-aggregation of the **original monthly JSON**, using exact month lengths and SciPy's `stats.theilslopes` with real calendar years, reproduced all four Python trend estimates to numeric precision. In contrast, rainfall period means were extremely different (Liberia: ~793 mm/year for 1985–2004 vs ~2002 for 2005–2025; Limón ~1510 vs ~3469). This strongly motivates an **inhomogeneity assessment** with independent satellite and gauge products. NASA's [MERRA-2 precipitation documentation](https://power.larc.nasa.gov/docs/methodology/data/sources_meteorology/) and [Reichle et al., 2017](https://journals.ametsoc.org/view/journals/clim/30/5/jcli-d-16-0570.1.xml) note limitations and possible gauge-network discontinuities; our specific series have not yet been attributed to any mechanism.
+
+**Source integrity:** Source-original SHA-256 Liberia `2630001674b075e90a5a0d17edbc22370e8feb43a7df4e6230ab28958a27fd8b`; Limón `5c202f4d083412a53755a5900b4423ceebd1040efe496838377af93aa6299a19`. Rounded 41-year annual source samples are committed as [EXP-001 Explorer data](../website/public/telluris/explore/data/exp001-annual.json); they explicitly link to the retrieval run and original SHA-256 fingerprints.
+
+## Static Explorer 0.1 — implemented and tested
+
+[Explorer source](../website/public/telluris/explore/index.html) uses pure browser ES modules and authentic NASA-derived annual data for an immediately usable, reproducible historical demonstration. Supports configurable location/variable/period, live POWER request (CORS unverified), importing source NASA JSON, historical chart, independently tested Sen slope, original MK p explicitly labeled *exploratory*, lag-1 diagnostic, original NASA provenance and CSV download. Tests: [GitHub Actions static MVP run #43657393798](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43657393798), **12/12 Node scientific/browser-source tests and static HTTP smoke passed**. Static website artifact created for manual cPanel upload.
+
+**Do not equate a working static app or numerical algorithm parity with scientifically validated climate inference or verified public deployment.**
 
 ## Scientific question
 

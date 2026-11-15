@@ -94,3 +94,10 @@ Dataset / collection; NASA source; variable code and human-readable name; units;
 Before NASA submission, list every non-original dataset, library, image, icon, basemap, font, and model with its canonical source URL, author/provider, and applicable license or attribution. NASA's legal terms require appropriate credit for third-party material: https://www.spaceappschallenge.org/legal/
 
 **As of initialization:** no actual data download, external asset incorporation, or scientific result has been verified.
+
+
+## Verified acquisition — EXP-001 (2026-11-15 UTC)
+
+[Actions run #43656774519](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43656774519) obtained original NASA POWER monthly-point JSON using API version 2.10.0. Both Costa Rica points contain 41 complete years (1985–2025), original variables T2M (C) and PRECTOTCORR (mm/day), MERRA2 provider and -999 fill metadata. Raw source SHA-256: Liberia `2630001674b075e90a5a0d17edbc22370e8feb43a7df4e6230ab28958a27fd8b`; Limón `5c202f4d083412a53755a5900b4423ceebd1040efe496838377af93aa6299a19`. Original JSON is stored as a 30-day Actions artifact; derived rounded annual data is committed at [the Explorer's versioned sample](../website/public/telluris/explore/data/exp001-annual.json).
+
+**Interpretation restriction:** Large annual rainfall-rate changes require checks for potential product inhomogeneity and independent comparison against IMERG/station observations. Authentic NASA-model data are not automatically equivalent to in-situ measurements or validated physical trends. See [EXP-001](EXPERIMENT-001.md).

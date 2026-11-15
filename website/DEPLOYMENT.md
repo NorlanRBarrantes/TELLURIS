@@ -61,3 +61,12 @@ Static title/description, `lang` and hreflang, canonical URL, OpenGraph, Twitter
 ## Copyright
 
 Original site source and illustrations prepared for Project Uriel. The pages link to NASA data sources, but do not claim to be a NASA product or imply NASA endorsement.
+
+
+## TELLURIS Explorer 0.1 static release
+
+This bundle now includes the functional `/telluris/explore/` route, associated browser ES modules/CSS and authentic NASA POWER-derived archived annual series. The [Explorer QA workflow](../.github/workflows/explorer-qa.yml) packages a static-site ZIP once the 12 JavaScript scientific tests and local HTTP smoke checks pass.
+
+To update a site that is already running on BanaHosting, retain the existing HTTPS/.htaccess setup, back up the current document root, then copy the **contents** of `website/public/` (or the CI ZIP contents) into that root. Verify `/telluris/explore/` loads the archived series, and attempt **Request live NASA data** separately; the latter may be restricted by cross-origin browser policy. Do not claim production deployment until it is confirmed from a browser.
+
+The browser displays exploratory Theil–Sen and original MK computations on authentic NASA-derived model data; this is not a publication-grade climate significance inference.

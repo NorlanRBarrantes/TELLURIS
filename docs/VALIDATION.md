@@ -1,6 +1,16 @@
 # Validation and reproducibility record
 
-**Status: Synthetic QA executed; scientific analysis using real NASA observations remains pending.** This is an evidence register, not a fabricated climate-science report.
+**Status: EXP-001 authentic NASA input retrieved and basic trend computation independently reproduced; broader scientific inference remains pending.** This is a validation register with clearly bounded evidence.
+
+## Verified EXP-001 real source and web QA — 2026-11-15 UTC
+
+- **SCI-001: Complete / NASA input retrieved.** [Run #43656774519](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43656774519) queried actual NASA POWER MERRA2 JSON for Liberia and Limón, 1985–2025. Original JSON responses archived as run artifacts.
+- **SCI-002/SCI-009: Actual source units/coverage checked.** API v2.10.0; T2M C, PRECTOTCORR mm/day, -999 fill; 41 complete calendar years for each point/variable; annual YYYY13 fields excluded.
+- **SCI-006 (partial): Independent Sen numerical verification.** SciPy reaggregation and `theilslopes` computed from the raw NASA JSON agree to displayed numeric precision with EXP-001. Dependence-robust significance/CI is still pending.
+- **WEB-001: Exploratory browser MVP unit and HTTP smoke tests complete.** [Run #43657393798](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43657393798) passed 12/12 JavaScript scientific tests, parser/metadata/year checks, Python slope parity for archived annual observations and local HTTP route/asset smoke tests. The deployable static artifact was generated.
+- **Still pending:** live browser NASA CORS, public BanaHosting HTTPS/routes, accessibility and E2E interactions, multiple NASA sources, precipitation homogeneity, formal significance/uncertainty under serial dependence.
+
+**Scientific concern:** Extremely large precipitation slopes in corrected MERRA2 may be affected by input-product or gauge-network inhomogeneity. Do not present their p-values as validated climate findings.
 
 ## Definition of scientific done
 

@@ -74,3 +74,11 @@ References:
 - **Disclosure:** The question generator makes no NASA API calls and computes no scientific results. Existing 11 synthetic QA tests are described as synthetic and are not evidence of climate change findings.
 - **Verification boundary:** Local static render and interaction checks do not establish that the site was deployed on BanaHosting, indexed by Google or scientifically validated.
 - **Human review:** Content, brand, accessibility, DNS/hosting settings and NASA submission references require team review before publication.
+
+
+## Web MVP and real NASA acquisition — November 14/15, 2026
+
+- **NASA (not AI):** NASA POWER API v2.10.0 returned authentic MERRA2 monthly T2M/PRECTOTCORR values for Liberia and Limón, 1985–2025, during Actions run 43656774519. Original response SHA-256 digests and provenance are recorded in EXP-001.
+- **OpenAI ChatGPT:** Created the source-acquisition workflow, inspected its NASA artifacts, independently recalculated four slopes using SciPy, implemented static browser Explorer 0.1 with scientific provenance and exploratory caveats, wrote JavaScript tests and deployment instructions.
+- **Google Gemini:** Earlier concept/review contributions remain documented above; no Gemini climate numbers have been substituted for real NASA data.
+- **Boundary:** Neither API retrieval nor algorithm parity validates underlying time-series homogeneity, serial-independence assumptions, statistical significance claims or public deployment.

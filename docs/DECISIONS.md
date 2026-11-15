@@ -174,3 +174,14 @@ Do not replace proposed status with accepted until the underlying decision is ve
 - **Evidence:** Four additional adversarial tests, 21/21 total passed in [CI #43650944212](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43650944212). The initial failed NaN-padding test was corrected rather than mislabeled as a production defect.
 - **Reference:** [EXP-001 fourth Gemini audit](EXPERIMENT-001.md#fourth-external-gemini-audit--reviewed-against-current-repository-2026-11-14).
 - **Limitation:** The exercise tested deterministic synthetic input only; no NASA Earth-science results or source API responses were validated.
+
+## ADR-021 — Start actual development with NASA-backed static Explorer 0.1
+
+- **Date:** 2026-11-14 in Costa Rica / 2026-11-15 UTC for NASA acquisition
+- **Status:** Accepted implementation; public hosting and publication-grade inference not verified
+- **Decision:** Use a zero-dependency ES module browser MVP under `/telluris/explore/` (alongside team and research pages) for single-point annual T2M and precipitation, NASA-source provenance, an authentic archived NASA sample, direct NASA fetch and optional raw JSON import, Sen trend, explicitly exploratory original MK p, lag-one diagnostic and CSV export.
+- **Scientific evidence:** [EXP-001](EXPERIMENT-001.md), live POWER run #43656774519 (1985–2025, 41 years both points/variables), independent Python/SciPy re-aggregation and slope parity.
+- **Software evidence:** [Browser MVP CI run #43657393798](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43657393798), 12 scientific tests + HTTP smoke succeeded.
+- **Tradeoff:** A static vanilla ES module implementation meets shared-hosting constraints immediately; React/TypeScript remains a future option, not a prerequisite.
+- **Important warnings:** NASA model-grid samples are not meteorological station observations; large rainfall trends may be nonhomogeneous; original MK inference is not independence-robust. No assumption of NASA endorsement or production deployment.
+- **Deployment:** Build-free site archive is available in the CI artifact for manual BanaHosting upload. Browser direct NASA CORS and production routing must be separately verified.

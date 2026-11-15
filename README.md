@@ -5,7 +5,7 @@
 
 > Discover what is changing on Earth, where it is changing, how much it is changing, and whether the observed trend is statistically significant.
 
-**Project status:** Research and a first Python analysis prototype with 21 synthetic QA tests passed locally; no NASA time-series results or production deployment verified.
+**Project status:** NASA POWER time series for Liberia/Limón (1985–2025) retrieved from the real service; EXP-001 independently recalculated exploratory slopes. A dependency-free browser TELLURIS Explorer 0.1 and archived real-data sample are implemented. Full statistical inference and public BanaHosting deployment remain unverified.
 
 ## Challenge
 
@@ -21,7 +21,7 @@ The planned application will make historical Earth-system observations understan
 4. Inspect an appropriate statistical significance test and its limitations.
 5. Compare locations and export a traceable evidence report.
 
-These are **product goals, not statements of implemented functionality**.
+The first exploratory single-location interface is implemented in [TELLURIS Explorer 0.1](website/public/telluris/explore/index.html). Multi-region comparisons and validated inferential reporting remain future milestones.
 
 ## Science first
 
@@ -35,7 +35,8 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 - [Scientific methodology](docs/SCIENTIFIC-METHODOLOGY.md)
 - [Costa Rica climate contrast research case](docs/CASE-STUDY-COSTA-RICA.md)
 - [Research sources and evidence](docs/RESEARCH-REFERENCES.md)
-- [EXP-001 reproducible POWER experiment and test record](docs/EXPERIMENT-001.md)
+- [EXP-001 real NASA POWER acquisition, code and scientific cautions](docs/EXPERIMENT-001.md)
+- [Static browser Explorer MVP and hosting instructions](website/README.md)
 - [Scientific guardrails and data-quality controls](docs/SCIENTIFIC-GUARDRAILS.md)
 - [Technical architecture](docs/ARCHITECTURE.md)
 - [Deployment constraints](docs/DEPLOYMENT.md)
@@ -46,12 +47,13 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 
 ## Links
 
-- **Application (planned):** https://telluris.lynxglobals.net/
+- **Web explorer source (production upload pending):** https://projecturiel.earth/telluris/explore/
+- **Earlier app-hostname alternative:** https://telluris.lynxglobals.net/
 - **Source repository:** https://github.com/NorlanRBarrantes/TELLURIS
 - **Team:** Project Uriel
 - **Challenge:** NASA Space Apps Challenge 2026, November 14–15, 2026
 
-The domain and shared hosting provider have been selected; availability and deployment are **not yet verified**.
+The actual public Explorer 0.1 deployment is **not yet verified**. GitHub commits do not automatically update BanaHosting.
 
 ## Attribution and independence
 

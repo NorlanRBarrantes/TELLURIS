@@ -64,3 +64,8 @@ A separate, static public-site package has been prepared for the Project Uriel i
 Deployment: upload approved static assets to the independently verified document root for `projecturiel.earth`; do not replace its functional SSL or rewrite configuration blindly. Verify HTTP response, HTTPS, canonical redirects, navigation, mobile behavior, sitemap, robots and translated URLs. Confirm that the scientific API and statistical engine remain out of scope for this first landing deployment.
 
 The previously selected `https://telluris.lynxglobals.net/` in this document remains a candidate destination for the scientific application until ADR-004 is reconciled after verified deployments. See ADR-018 in `docs/DECISIONS.md`. Keep publication assertions tied to witnessed tests, not uploaded files alone.
+
+
+## Deployed-site path for Explorer MVP 0.1
+
+The static Explorer source is `website/public/telluris/explore/`. Project Uriel landing pages link directly to this path. Deploy the complete contents of `website/public/` into the existing BanaHosting document root, preserving the current server-side SSL and routing rules. The prior `telluris.lynxglobals.net` host remains an alternate concept, not a necessary dependency. Production HTTPS/routing and live browser CORS behavior are not yet verified.
