@@ -494,7 +494,15 @@
         "ECOSTRESS",
         "HLS",
         "OPERA"
-      ]
+      ],
+      "source_evidence": {
+        "status": "api_sample_verified",
+        "source": "NASA ORNL DAAC / MOD13Q1 16-day NDVI/EVI",
+        "verified_utc": "2026-11-15",
+        "verification_url": "https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43737483122",
+        "description_es": "NASA respondió con datos reales y bandas QA para Liberia y Limón. La serie multianual y su significancia aún no están validadas ni integradas al explorador público.",
+        "description_en": "NASA returned real observations and quality bands for Liberia and Limón. Long-term series and significance remain unvalidated and are not yet available in the public explorer."
+      }
     },
     {
       "id": "C24",

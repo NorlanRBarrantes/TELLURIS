@@ -65,3 +65,13 @@ test("The team/Explorer pages and sitemap provide catalog navigation",()=>{
  assert.ok(map.includes("<loc>https://projecturiel.earth/telluris/catalog/</loc>"));
  assert.ok(map.includes("<loc>https://projecturiel.earth/en/telluris/catalog/</loc>"));
 });
+
+test("MODIS probe is visibly evidenced but not represented as a connected variable",()=>{
+ const e=data.candidates.find(x=>x.id==="C23");
+ assert.equal(e.implementation_status,"not_connected");
+ assert.equal(e.source_evidence.status,"api_sample_verified");
+ assert.ok(e.source_evidence.verification_url.includes("/actions/runs/43737483122"));
+ const src=read("assets/catalog.js");
+ assert.ok(src.includes("api_sample_verified"));
+ assert.ok(src.includes('entry.category==="connected"'));
+});

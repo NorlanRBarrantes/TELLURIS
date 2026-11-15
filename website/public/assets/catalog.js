@@ -42,6 +42,15 @@ function itemCard(entry) {
     const foot=document.createElement("p");foot.className="catalog-note";
     foot.textContent=tr("Fuentes propuestas para esta familia: ","Candidate sources for this group: ")+entry.source_candidates.join(" · ");
     card.append(foot);
+    if(entry.source_evidence && entry.source_evidence.status==="api_sample_verified"){
+      const note=document.createElement("p");note.className="catalog-note";
+      note.textContent=lang==="es"?entry.source_evidence.description_es:entry.source_evidence.description_en;
+      const evidence=document.createElement("a");
+      evidence.className="catalog-open";evidence.href=entry.source_evidence.verification_url;
+      evidence.target="_blank";evidence.rel="noopener noreferrer";
+      evidence.textContent=tr("Ver prueba real de NASA ↗","View real NASA verification ↗");
+      card.append(note,evidence);
+    }
   }
   return card;
 }
