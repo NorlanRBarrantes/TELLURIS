@@ -1,4 +1,5 @@
 import {VARIABLES, powerUrl, fromPower, fromSnapshot, analyze} from "./science.js";
+import {buildEvidence, compareEvidence, answerEvidence} from "./evidence.js";
 
 const uiLanguage = document.documentElement.lang.toLowerCase().startsWith("es") ? "es" : "en";
 const locale = uiLanguage === "es" ? "es-CR" : "en-US";
@@ -72,6 +73,12 @@ const fields = {place:byId("location"), lat:byId("latitude"),lon:byId("longitude
   variable:byId("variable"), start:byId("from-year"),end:byId("to-year")};
 const known = {liberia:[10.63,-85.44],limon:[9.99,-83.03]};
 let active = null;
+let evidenceContext = null;
+let comparisonContext = "";
+byId("evidence-form")?.addEventListener("submit", event => {
+  event.preventDefault();
+  byId("evidence-answer").textContent = answerEvidence(byId("evidence-question").value,evidenceContext,comparisonContext);
+});
 
 function setMessage(message, error=false) {
   const box = byId("message");
@@ -91,6 +98,8 @@ function bounds() {
 }
 function resetWhenChanged() {
   active = null;
+  evidenceContext = null;
+  comparisonContext = "";
   byId("results").hidden = true;
   byId("source-mode").textContent = L("Awaiting new data");
   setMessage("Settings changed. Request NASA data or load the archived NASA sample.");
@@ -173,7 +182,7 @@ function renderTable(points,variable){
   }
   byId("unit-header").textContent=L(VARIABLES[variable].name)+" ("+VARIABLES[variable].unit+")";
 }
-function acceptData(output, queryUrl=null){
+function acceptData(output, queryUrl=null, paired=null){
   const variable=fields.variable.value;
   const result=analyze(output.points);
   if(result.status!=="exploratory"){
@@ -198,6 +207,16 @@ function acceptData(output, queryUrl=null){
   const warning=variable==="PRECTOTCORR"?
     " Precipitation records show large long-term differences; product homogeneity and independent validation have not yet been established.":"";
   setMessage("Source loaded. Trend calculated from "+result.n+" complete annual values. Statistical interpretation is provisional."+warning);
+  const placeName=fields.place.selectedOptions[0]?.textContent||"NASA point";
+  evidenceContext=buildEvidence(result,variable,placeName,output.meta.source,uiLanguage);
+  byId("evidence-brief").textContent=evidenceContext?.summary||"—";
+  byId("evidence-caveat").textContent=evidenceContext?.caution||"—";
+  comparisonContext=paired?.status==="exploratory"
+    ? compareEvidence(result,paired,placeName,fields.place.value==="liberia"?"Limón":"Liberia",uiLanguage) : "";
+  const compare=byId("comparison-output");
+  compare.hidden=!comparisonContext;
+  compare.textContent=comparisonContext;
+  byId("evidence-answer").textContent=uiLanguage==="es"?"Pregunta por tendencias, fuente, limitaciones o comparación.":"Ask about trends, source, limitations or comparison.";
 }
 async function snapshot(){
   try{
@@ -207,7 +226,10 @@ async function snapshot(){
     const response=await fetch("/telluris/explore/data/exp001-annual.json",{cache:"no-cache"});
     if(!response.ok) throw new Error("Archived data file unavailable (HTTP "+response.status+").");
     const archive=await response.json();
-    acceptData(fromSnapshot(archive,fields.place.value,fields.variable.value,start,end));
+    const current=fromSnapshot(archive,fields.place.value,fields.variable.value,start,end);
+    const otherPlace=fields.place.value==="liberia"?"limon":"liberia";
+    const paired=analyze(fromSnapshot(archive,otherPlace,fields.variable.value,start,end).points);
+    acceptData(current,null,paired);
   }catch(e){
     byId("results").hidden=true;
     setMessage("Archive load failed: "+e.message+" You can still request live NASA POWER data or import a saved JSON response.",true);
