@@ -1,0 +1,111 @@
+/* TELLURIS EXP-008 · NASA Earth visualization, bilingual mobile-ready layout. */
+.globe-card-v2{
+  padding:24px;
+  border-color:rgba(148,224,212,.25);
+  background:linear-gradient(148deg,rgba(7,37,53,.95),rgba(4,16,31,.96));
+  box-shadow:0 20px 55px rgba(0,10,24,.24);
+}
+.globe-card-v2 .globe-head{margin-bottom:17px}
+.globe-card-v2 .globe-head h3{font-size:clamp(21px,2.4vw,30px);letter-spacing:-.04em;margin-bottom:0}
+.globe-card-v2 .globe-source-tag{
+  border:1px solid rgba(128,215,204,.38);
+  border-radius:999px;padding:8px 11px;
+  color:#9fead9;font-size:10px;font-weight:800;letter-spacing:.07em;
+  background:rgba(8,74,73,.28)
+}
+.globe-card-v2 .globe-toolbar{display:grid;grid-template-columns:minmax(180px,1fr) minmax(165px,.7fr);gap:13px;margin-bottom:15px}
+.globe-card-v2 .globe-toolbar label{display:flex;flex-direction:column;gap:6px;color:#b8d8dd;font-size:11px;font-weight:750;letter-spacing:.02em}
+.globe-card-v2 .globe-toolbar select,.globe-card-v2 .globe-toolbar input{
+ width:100%;min-width:0;min-height:43px;
+ color:#e6f9f3;background:#071b2b;
+ border:1px solid rgba(151,218,215,.29);border-radius:9px;
+ padding:9px 10px;font:inherit;font-size:12px;color-scheme:dark
+}
+.globe-card-v2 .globe-toolbar select:focus-visible,.globe-card-v2 button:focus-visible{
+ outline:2px solid #a8efd7;outline-offset:3px
+}
+.globe-card-v2 .globe-viewport{position:relative;border-radius:15px;overflow:hidden;isolation:isolate}
+.globe-card-v2 .globe-stage{
+ height:460px;
+ background:radial-gradient(ellipse at 46% 48%,#12334d 0%,#051528 52%,#020b16 100%);
+ border:1px solid rgba(144,202,219,.22);
+ border-radius:15px
+}
+.globe-card-v2 .globe-viewport-label{
+ position:absolute;left:14px;bottom:14px;z-index:1;pointer-events:none;
+ font-size:10px;letter-spacing:.09em;font-weight:750;
+ color:#b9eee5;border:1px solid rgba(153,220,219,.25);
+ background:rgba(3,17,30,.77);padding:8px 11px;border-radius:99px
+}
+.globe-card-v2 .globe-command{
+ display:flex;justify-content:space-between;align-items:center;gap:12px;
+ flex-wrap:wrap;margin:13px 0
+}
+.globe-card-v2 .globe-camera-controls,.globe-card-v2 .globe-actions{
+ display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:0
+}
+.globe-card-v2 .globe-camera-controls button,
+.globe-card-v2 .globe-actions button,
+.globe-card-v2 .globe-selected button{
+ background:rgba(45,111,116,.21);
+ color:#dff9ed;border:1px solid rgba(141,205,202,.35);
+ border-radius:9px;padding:9px 12px;
+ font-size:11px;font-weight:750;cursor:pointer;
+ transition:background .2s,border-color .2s
+}
+.globe-card-v2 .globe-camera-controls button:hover,
+.globe-card-v2 .globe-actions button:hover,
+.globe-card-v2 .globe-selected button:hover{
+ background:rgba(73,165,156,.31);border-color:rgba(163,234,208,.65)
+}
+.globe-card-v2 .globe-camera-controls button:first-child,
+.globe-card-v2 .globe-camera-controls button:nth-child(2){
+ font-size:19px;padding:3px 13px;min-height:36px
+}
+.globe-card-v2 .globe-actions button[aria-pressed=true],
+.globe-card-v2 .globe-camera-controls button[aria-pressed=true]{
+ color:#07362d;background:#b0f3d4;border-color:#b0f3d4
+}
+.globe-card-v2 .globe-selected{
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+ gap:10px;background:rgba(3,16,29,.66);
+ border:1px solid rgba(142,222,203,.16);border-radius:12px;
+ padding:12px 14px;margin:12px 0
+}
+.globe-card-v2 .globe-selected>div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.globe-card-v2 .globe-selected small{color:#9fbfc0;font-size:10px;font-weight:800;letter-spacing:.08em}
+.globe-card-v2 .globe-selected strong{font-size:12px;color:#e1f7e7;overflow-wrap:anywhere}
+.globe-card-v2 .globe-selected button{
+ background:#a5edcf;color:#092b2f;font-weight:800;padding:11px 14px
+}
+.globe-card-v2 .globe-status{margin:13px 0 7px;font-size:12px;color:#b8eacb;line-height:1.6}
+.globe-card-v2 .globe-layer-meta{font-size:12px;line-height:1.7;color:#c7dad9;margin:8px 0}
+.globe-card-v2 .globe-credits{font-size:11px;color:#91c0bf;line-height:1.7;margin:10px 0}
+.globe-card-v2 .globe-credits a{color:#a8f0de;text-decoration:underline;text-underline-offset:3px}
+.globe-card-v2 .globe-disclaimer{font-size:11px;line-height:1.7;color:#a6bcc3;margin:10px 0 0}
+.globe-card-v2 .globe-nasa-legend{
+ padding:11px 13px;background:rgba(15,44,51,.64);
+ border:1px solid rgba(179,215,191,.25);border-radius:10px;
+ margin:10px 0
+}
+.globe-card-v2 .globe-nasa-legend[hidden]{display:none!important}
+.globe-card-v2 .globe-nasa-legend p{color:#c4dbda;font-size:11px;line-height:1.5}
+.globe-card-v2 .globe-nasa-legend img{
+ display:block;max-width:100%;height:auto;
+ margin:8px 0;border-radius:4px
+}
+@media(max-width:950px){
+ .globe-card-v2 .globe-stage{height:400px}
+ .globe-card-v2 .globe-command{align-items:flex-start}
+}
+@media(max-width:660px){
+ .globe-card-v2{padding:15px}
+ .globe-card-v2 .globe-toolbar{grid-template-columns:1fr}
+ .globe-card-v2 .globe-stage{height:310px}
+ .globe-card-v2 .globe-source-tag{font-size:9px}
+ .globe-card-v2 .globe-selected button{width:100%}
+ .globe-card-v2 .globe-viewport-label{font-size:8px;bottom:9px;left:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ .globe-card-v2 button{transition:none}
+}
