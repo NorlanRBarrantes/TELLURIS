@@ -88,3 +88,7 @@ The Explorer now includes a geography-only WebGL globe, deterministic evidence q
 - [EXP-005 — Statistical significance, Sen confidence intervals and reproducible scientific reports](docs/EXP-005-SIGNIFICANCE.md)
 
 - [EXP-006 — NASA GPM IMERG Final V07 scientific cross-product precipitation comparator](docs/EXP-006-IMERG-CROSS-VALIDATION.md)
+
+## EXP-007 — five-pillar extension (November 15, 2026)
+
+See the [A–E scientific expansion specification](docs/EXP-007-FIVE-PILLARS.md). **Initial code delivered for C and E:** an ES/EN monthly and calendar-quarter descriptive period comparison on complete-year NASA POWER live/original monthly input (not available for annual-only archive), plus an EXP-005 evidence-grounded print-ready report in HTML (browser Print → Save as PDF). These additions still require CI and BanaHosting/browser validation. **A** remains gated on real IMERG granules; **B** on verified NASA geospatial imagery; **D** on a secure server-side LLM proxy and provider credentials. Do not imply any of these blockers are solved.
