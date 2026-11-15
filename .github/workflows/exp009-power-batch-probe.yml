@@ -1,0 +1,53 @@
+name: EXP-009 NASA POWER multi-parameter live source verification
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/exp009-power-batch-probe.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-original-nasa-multi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Query NASA original monthly multi-variable point API
+        shell: bash
+        run: |
+          node --input-type=module <<'JS'
+          import {POWER_READY_CODES,VARIABLES} from "./website/public/assets/science.js";
+          import {planBatches,parseBatch} from "./website/public/assets/matrix-core.js";
+          const sites=[{id:"liberia",lat:10.63,lon:-85.44,label:"Liberia"},
+                       {id:"limon",lat:9.99,lon:-83.03,label:"Limón"}];
+          const requests=planBatches(sites,[...POWER_READY_CODES],2023,2023);
+          if(requests.length!==4)throw Error("Expected two sites and two source communities");
+          let total=0;
+          for(const req of requests){
+            const response=await fetch(req.url,{
+              signal:AbortSignal.timeout(90000),
+              headers:{"User-Agent":"ProjectUriel-TELLURIS-NASA-POWER-validation/1.0"}
+            });
+            console.log("NASA_POWER_BATCH",req.siteId,req.community,"requested",req.codes.join(","),
+              "HTTP",response.status);
+            if(!response.ok)throw Error("Original NASA batch HTTP "+response.status+": "+
+              (await response.text()).slice(0,500));
+            const payload=await response.json();
+            const parsed=parseBatch(payload,req,2023,2023);
+            for(const code of req.codes){
+              if(parsed[code].status==="unavailable")throw Error(code+" rejected: "+parsed[code].reason);
+              if(parsed[code].data.points.length!==1)throw Error(code+" missing complete 2023 source year");
+              if(parsed[code].data.meta.originalUnit===null)throw Error(code+" missing units");
+              total++;
+            }
+            console.log("NASA_BATCH_PASS",req.siteId,req.community,
+              "PARAMETERS",req.codes.length,"RETRIEVED_YEAR",2023);
+          }
+          console.log("NASA_MULTIVARIABLE_SOURCE_PASS",total,"site-parameter series");
+          JS
