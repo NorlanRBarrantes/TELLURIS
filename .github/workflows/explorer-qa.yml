@@ -63,3 +63,66 @@ jobs:
           path: website/public/
           if-no-files-found: error
           retention-days: 30
+
+deploy-bana:
+    name: Deploy tested static website to BanaHosting (opt-in)
+    needs: static-mvp
+    if: >-
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
+      github.ref == 'refs/heads/main' &&
+      vars.BANAHOSTING_AUTO_DEPLOY == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - name: Configure pinned SSH credentials
+        shell: bash
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.BANAHOSTING_SSH_PRIVATE_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.BANAHOSTING_SSH_KNOWN_HOSTS }}
+        run: |
+          test -n "$DEPLOY_SSH_KEY" || { echo "SSH private key not configured"; exit 1; }
+          test -n "$DEPLOY_KNOWN_HOSTS" || { echo "Pinned known_hosts not configured"; exit 1; }
+          mkdir -p "$HOME/.ssh"
+          chmod 700 "$HOME/.ssh"
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$HOME/.ssh/id_ed25519"
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/id_ed25519" "$HOME/.ssh/known_hosts"
+      - name: Back up current BanaHosting document root
+        shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.BANAHOSTING_SSH_HOST }}
+          DEPLOY_PORT: ${{ secrets.BANAHOSTING_SSH_PORT }}
+          DEPLOY_USER: ${{ secrets.BANAHOSTING_SSH_USER }}
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_HOST" && test -n "$DEPLOY_USER" && test -n "$DEPLOY_PORT"
+          ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o BatchMode=yes \
+            -i "$HOME/.ssh/id_ed25519" -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            'ROOT="$HOME/projecturiel.earth"; test -d "$ROOT" && test -w "$ROOT" && mkdir -p "$HOME/TELLURIS_BACKUPS" && chmod 700 "$HOME/TELLURIS_BACKUPS" && tar --exclude="*.zip" --exclude="*.tar.gz" -czf "$HOME/TELLURIS_BACKUPS/pre-auto-deploy-$(date +%Y%m%d_%H%M%S).tar.gz" -C "$ROOT" .'
+      - name: Synchronize tested site without deleting server-managed files
+        shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.BANAHOSTING_SSH_HOST }}
+          DEPLOY_PORT: ${{ secrets.BANAHOSTING_SSH_PORT }}
+          DEPLOY_USER: ${{ secrets.BANAHOSTING_SSH_USER }}
+        run: |
+          set -euo pipefail
+          rsync -az --no-owner --no-group --chmod=D755,F644 \
+            -e "ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o BatchMode=yes -i $HOME/.ssh/id_ed25519 -p $DEPLOY_PORT" \
+            website/public/ "$DEPLOY_USER@$DEPLOY_HOST:/home/cvzvwazj/projecturiel.earth/"
+          ssh -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o BatchMode=yes \
+            -i "$HOME/.ssh/id_ed25519" -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" \
+            'chmod 755 "$HOME/projecturiel.earth"'
+      - name: Public HTTPS smoke checks after publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          for route in / /telluris/ /telluris/explore/ /telluris/catalog/ \
+            /en/ /en/telluris/explore/ /en/telluris/catalog/ \
+            /telluris/explore/data/exp001-annual.json \
+            /telluris/catalog/data/catalog.json; do
+            curl --fail --location --silent --show-error \
+              --retry 2 --max-time 15 "https://projecturiel.earth$route" >/dev/null
+            echo "HTTP OK: $route"
+          done
