@@ -38,7 +38,7 @@ test("Block-order Monte Carlo is deterministic and its p-value is smoothed",()=>
  assert.equal(a.seed,20261115);
 });
 test("Missing years or fewer than six blocks prohibit block permutation",()=>{
- const gap=points(41,i=>i);gap[12].year+=.5;
+ const gap=points(41,i=>i);for(let i=12;i<gap.length;i++)gap[i].year+=1;
  assert.equal(blockOrderPermutation(gap,3).reason,"missing_annual_years");
  const short=points(24,i=>i);
  assert.equal(blockOrderPermutation(short,5).reason,"too_few_blocks");
