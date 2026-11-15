@@ -31,6 +31,10 @@
   <aside class="explore-controls" aria-labelledby="controls-title">
     <p class="eyebrow mint">01 / CONFIGURAR INVESTIGACIÓN</p>
     <h2 id="controls-title">Define la pregunta</h2>
+    <div class="question-presets" id="question-presets" aria-label="Preguntas sugeridas">
+      <p>Comienza con una pregunta científica:</p>
+      <div class="question-preset-buttons"><button type="button" data-question-variable="T2M">¿Cambia la temperatura?</button><button type="button" data-question-variable="PRECTOTCORR">¿Cambia la lluvia?</button><button type="button" data-question-variable="RH2M">¿Cambia la humedad?</button><button type="button" data-question-variable="WS10M">¿Cambian los vientos?</button><button type="button" data-question-variable="ALLSKY_SFC_SW_DWN">¿Varía la radiación solar?</button><button type="button" data-question-variable="GWETROOT">¿Cambia el agua del suelo?</button></div>
+    </div>
     <form id="explore-form">
       <label for="location">Ubicación</label>
       <select id="location" name="location"><option value="liberia">Liberia · Pacífico, Costa Rica</option><option value="limon">Limón · Caribe, Costa Rica</option><option value="custom">Coordenadas personalizadas</option></select>

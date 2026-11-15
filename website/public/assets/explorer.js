@@ -112,7 +112,8 @@ function updateVariableGuide() {
   if(!v)return;
   const guide=byId("variable-guide");
   if(guide)guide.textContent=(uiLanguage==="es"?v.nameEs:v.name)+
-    " · "+v.unit+" · NASA POWER ("+v.community+") · "+
+    " · "+(uiLanguage==="es"?v.descriptionEs:v.descriptionEn)+" · "+
+    v.unit+" · NASA POWER ("+v.community+") · "+
     (v.aggregation==="sum_rate"?
       (uiLanguage==="es"?"suma anual de la precipitación":"annual sum of precipitation"):
      v.aggregation==="circular"?
@@ -141,6 +142,14 @@ function updateCoordinates() {
   resetWhenChanged();
 }
 fields.place.addEventListener("change", updateCoordinates);
+byId("question-presets")?.addEventListener("click",event=>{
+  const choice=event.target.closest("button[data-question-variable]");
+  if(!choice || !Object.hasOwn(VARIABLES,choice.dataset.questionVariable))return;
+  fields.variable.value=choice.dataset.questionVariable;
+  resetWhenChanged();
+  fields.variable.focus();
+});
+
 for (const el of [fields.variable,fields.start,fields.end,fields.lat,fields.lon])
   el.addEventListener("change", resetWhenChanged);
 

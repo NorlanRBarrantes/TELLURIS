@@ -31,6 +31,10 @@
   <aside class="explore-controls" aria-labelledby="controls-title">
     <p class="eyebrow mint">01 / SET UP AN INVESTIGATION</p>
     <h2 id="controls-title">Define the question</h2>
+    <div class="question-presets" id="question-presets" aria-label="Suggested questions">
+      <p>Start from a scientific question:</p>
+      <div class="question-preset-buttons"><button type="button" data-question-variable="T2M">Is air temperature changing?</button><button type="button" data-question-variable="PRECTOTCORR">Is rainfall changing?</button><button type="button" data-question-variable="RH2M">Is humidity changing?</button><button type="button" data-question-variable="WS10M">Are winds changing?</button><button type="button" data-question-variable="ALLSKY_SFC_SW_DWN">Is solar radiation changing?</button><button type="button" data-question-variable="GWETROOT">Is soil wetness changing?</button></div>
+    </div>
     <form id="explore-form">
       <label for="location">Location</label>
       <select id="location" name="location"><option value="liberia">Liberia · Pacific, Costa Rica</option><option value="limon">Limón · Caribbean, Costa Rica</option><option value="custom">Custom coordinates</option></select>
