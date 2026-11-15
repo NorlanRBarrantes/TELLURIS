@@ -49,9 +49,9 @@ test("Bilingual static catalog has correct language, canonical and source assets
   assert.ok(html.includes('<link rel="canonical" href="https://projecturiel.earth'+route+'">'));
   for(const item of ["/telluris/catalog/","/en/telluris/catalog/"])assert.ok(html.includes('href="https://projecturiel.earth'+item+'"'));
   for(const p of ["site.css","catalog.css","catalog.js"]){
-    const url=(html.match(new RegExp('(?:href|src)="([^"]*'+p.replace(".","\\.")+')"'))||[])[1];
+    const url=(html.match(new RegExp('(?:href|src)="([^"]*'+p.replace(".","\\.")+'(?:\\?[^"]*)?)"'))||[])[1];
     assert.ok(url,"Missing "+p+" from "+file);
-    assert.ok(existsSync(path.resolve(root,path.dirname(file),url)),"Broken static asset "+url);
+    assert.ok(existsSync(path.resolve(root,path.dirname(file),url.split("?")[0])),"Broken static asset "+url);
   }
   assert.ok(html.includes('href="/telluris/catalog/data/catalog.json"'));
  }
