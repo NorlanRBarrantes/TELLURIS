@@ -11,11 +11,11 @@
 
 TELLURIS responds to **[Be An Earth System Trend Detective!](https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/)**, an advanced Earth Science / Software challenge in the 2026 NASA Space Apps Challenge.
 
-The planned application will make historical Earth-system observations understandable, transparent, and reproducible. The initial research focus is Costa Rica; the intended analytical workflow is location-independent.
+The formally approved mission is a **guided, multi-variable, multi-source Earth-system trend explorer**, covering atmosphere, land/vegetation, inland water, rivers and oceans. The initial NASA-backed research cases are in Costa Rica; neither a predetermined climate dipole nor a single climate variable defines the product.
 
 ## Intended experience
 
-1. Choose a geographic location and a scientific variable.
+1. Ask a plain-language research question, then select a scientifically defined NASA variable and appropriate location/footprint.
 2. Retrieve a time series from a documented NASA dataset.
 3. Explore the series and the estimated magnitude of change.
 4. Inspect an appropriate statistical significance test and its limitations.
@@ -29,6 +29,9 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 
 ## Documentation
 
+- [Formal 2026 product scope and stage gates](docs/SCOPE-2026.md)
+- [Every NASA recommendation and official resource tracked](docs/NASA-RECOMMENDATIONS-MATRIX.md)
+- [Expanded Earth-science variable catalog — including river discharge](docs/VARIABLE-CATALOG.md)
 - [Challenge interpretation](docs/CHALLENGE.md)
 - [Product vision, scope and acceptance criteria](docs/PRODUCT.md)
 - [NASA data sources and provenance](docs/DATA-SOURCES.md)

@@ -6,8 +6,8 @@
 - **Team:** Project Uriel
 - **Working positioning:** Earth System Trend Intelligence
 - **Audience:** Students, science educators, researchers, and curious members of the public.
-- **Demo focus:** Historical temperature and precipitation investigations with Costa Rican examples.
-- **Long-term vision:** Reusable global investigations, not a country-specific climate dashboard.
+- **Demo focus:** Guided, source-aware investigation across the Earth system; Liberia and Limón are introductory cases, not a predetermined dipole.
+- **Long-term vision:** Global, multi-variable, multi-source investigations across atmosphere, land/vegetation, freshwater, river reaches, and oceans.
 
 ## The problem
 
@@ -15,22 +15,28 @@ Earth science observations are rich but often difficult to discover, process, co
 
 ## Value proposition
 
-TELLURIS aims to turn a question about environmental change into a **reproducible evidence case**: a NASA dataset, a geographic selection, a clearly specified time range, a processed time series, a tested trend, and an interpretation with caveats.
+TELLURIS turns a learner's question about environmental change into a **reproducible evidence case**: a documented NASA mission/model variable, valid geographic footprint, time range, series, trend/rate, statistically justified significance assessment, and plain-language interpretation. Hypotheses may be confirmed, rejected or inconclusive. See [formally approved 2026 scope](SCOPE-2026.md) and [full NASA recommendations matrix](NASA-RECOMMENDATIONS-MATRIX.md).
 
 ## Proposed minimum viable product
 
 **P0 — Required for a credible demonstration**
-1. Select a coordinate-based location and either temperature or precipitation.
+1. Begin with a research question and select a documented NASA variable from a **discoverable** catalog, with an understandable definition; location type and time support depend on the chosen product.
 2. Retrieve genuine NASA historical values and disclose the dataset and retrieval parameters.
 3. Show the time series and the time span used for estimation.
 4. Estimate the slope and report meaningful units.
 5. Perform a correctly implemented significance test and disclose the result and limitations.
 6. Handle missing values and invalid / insufficient inputs without fabricating output.
-7. Demonstrate at least one reproducible investigation.
+7. Demonstrate at least two NASA-backed investigations, including one interpretable/non-significant or inconclusive case when supported by the actual data.
+8. Explain the statistical inference in plain language and preserve technical evidence/export; unsupported significance is never labeled validated.
+9. Keep NASA challenge *Potential Considerations* and all 13 resource references in a tracked roadmap, even when not yet implemented.
 
 **Scientific guardrails (P0 baseline):** Explicit provenance, units, temporal coverage, missing-value diagnostics and clear significance limitations are required with every reported trend. Advanced corrections and multi-dataset comparisons are optional extensions, not prerequisites for meeting the NASA challenge. See [Scientific guardrails](SCIENTIFIC-GUARDRAILS.md).
 
-**P1 — Valuable if P0 is stable**
+**P1 — Broader scientific platform, not prerequisites for every initial demo**
+- Extend verified NASA POWER beyond temperature/rain to RH2M, WS10M, ALLSKY_SFC_SW_DWN, with appropriate units and source-specific aggregation.
+- Add a second mission/data family: e.g. GLDAS hydrology, MODIS NDVI via AppEEARS, GPM IMERG precipitation or marine SST; keep SWOT river discharge in a dedicated reach-based workflow.
+- Show scientific-domain categories and sources that are researched but not yet connected, without offering nonworking buttons.
+
 - Compare two locations using identical variables, time spans, and procedures.
 - Export the provenance and results of an investigation.
 - Provide accessible language for scientific terminology.
@@ -43,7 +49,7 @@ TELLURIS aims to turn a question about environmental change into a **reproducibl
 
 **P2 — Not required for the hackathon**
 - Conversational AI assistance, if it can be constrained to verified results.
-- Additional missions/datasets (e.g., GPM or MODIS).
+- Additional third/fourth NASA missions beyond the first two validated providers, as bandwidth permits. Their inclusion is **retained in the scientific catalog**, not rejected.
 - Large-area spatial trend maps or globally indexed searching.
 - Authentication, user accounts, or a complex 3D globe.
 

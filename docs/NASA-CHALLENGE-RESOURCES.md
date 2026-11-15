@@ -65,3 +65,7 @@ Where material is actually incorporated into TELLURIS, record dataset collection
 - Cross-checked landing pages: [Giovanni](https://giovanni.gsfc.nasa.gov/), [KNMI Climate Explorer](https://climexp.knmi.nl/), [NOAA CDO](https://www.ncei.noaa.gov/cdo-web/), [NOAA CDO API documentation](https://www.ncei.noaa.gov/cdo-web/webservices/v2).
 - Other linked services and the SeaWiFS paper are **indexed as NASA-listed resources, not independently analyzed**.
 - No NASA service integration or scientific findings have been validated as a result of this catalog update.
+
+## November 14 scope policy update
+
+No official suggestion or Resources-tab reference is dropped from TELLURIS. Its implementation status and acceptance evidence are now listed in [NASA-RECOMMENDATIONS-MATRIX.md](NASA-RECOMMENDATIONS-MATRIX.md); mission-backed variable opportunities and the river-runoff/discharge distinction appear in [VARIABLE-CATALOG.md](VARIABLE-CATALOG.md). Some 2026 sources (e.g. SWOT RiverSP) have short records and require a separate scientific workflow instead of reusing 1985–2025 climatology assumptions. Research/use evaluation is **not the same** as mandatory technical integration or endorsement.

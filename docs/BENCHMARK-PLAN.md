@@ -1,6 +1,6 @@
 # EXP-002 research protocol — seasonal and cross-region falsification
 
-**Status (2026-11-14 Costa Rica): PLANNED, NOT YET EXECUTED.** This is a preregistration-style plan, not a table of observed/validated results. It expands the real-data EXP-001 investigation without selecting positive outcomes in advance.
+**Status (2026-11-14 Costa Rica): PLANNED, NOT YET EXECUTED; one scientific validation track within the broader [TELLURIS product scope](SCOPE-2026.md), not the product mission itself.** This is a preregistration-style plan, not a table of observed/validated results. It expands the real-data EXP-001 investigation without selecting positive outcomes in advance.
 
 ## Central question
 

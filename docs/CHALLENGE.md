@@ -20,6 +20,12 @@ Official challenge: https://www.spaceappschallenge.org/2026/challenges/earth-sys
 
 The challenge's official description recommends exploring local differences, providing approachable variable explanations, and using daily or monthly data to simplify analysis. AI-assisted variable discovery is optional, not a scientific prerequisite.
 
+## Explicit commitment to NASA's *every* Potential Consideration
+
+TELLURIS preserves **all** suggestions in the brief, not just the mandatory four elements: secondary/university/general-science audience, simple definitions, question-first exploration, two examples, optional AI as an accountable discovery assistant, daily/monthly inputs, meaningful non-significant results, effect of sample length, seasonal cycles, possible nonlinearity, linear trend as a valid first method, CUAHSI hydrology viewers, regionally opposite trends as *a possibility* and the Resources tab. Each item is mapped to features with status and evidence in [NASA recommendation traceability](NASA-RECOMMENDATIONS-MATRIX.md). Inclusion in scope **does not pretend all tools are integrated**.
+
+The earlier two-variable weather-only focus is replaced by a multi-domain [variable catalog](VARIABLE-CATALOG.md), including river discharge from SWOT versus runoff from GLDAS, vegetation from MODIS, stored water from GRACE, ocean conditions from PO.DAAC and atmosphere chemistry/profiles from OMI/AIRS.
+
 ## Resource catalog and optional ideas
 
 The [curated NASA challenge resource catalog](NASA-CHALLENGE-RESOURCES.md) preserves the tools and scientific/partner references provided in the official Resources tab, with distinct levels of applicability to TELLURIS. Their listing does not imply NASA endorsement, automatically permit third-party data reuse, or establish that each tool has been integrated.
@@ -37,7 +43,7 @@ The challenge also suggests guided question-based discovery, demonstrations, cle
 | Test significance | Named test, p-value/CI and limitations | Independent verification and sample counts |
 | Communicate | Plain-language evidence report | Same values as the underlying analysis |
 
-**Current verification state:** These are requirements and acceptance criteria. No completed integration, computed results, or deployment is asserted here.
+**Current verification state (2026-11-14):** NASA POWER/T2M/PRECTOTCORR retrieval, exploratory trend calculation, original MK display, a live browser demo and source provenance have been implemented; source-independent significance validation, a true question-guided wizard and multiple connected mission families remain pending. The user's public screenshots show the live site; new Spanish-first GitHub changes still require a hosting refresh. See [EXP-001](EXPERIMENT-001.md), [validated software checks](VALIDATION.md) and [formal scope](SCOPE-2026.md).
 
 ## Scientific boundary
 

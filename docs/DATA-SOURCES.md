@@ -101,3 +101,11 @@ Before NASA submission, list every non-original dataset, library, image, icon, b
 [Actions run #43656774519](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43656774519) obtained original NASA POWER monthly-point JSON using API version 2.10.0. Both Costa Rica points contain 41 complete years (1985–2025), original variables T2M (C) and PRECTOTCORR (mm/day), MERRA2 provider and -999 fill metadata. Raw source SHA-256: Liberia `2630001674b075e90a5a0d17edbc22370e8feb43a7df4e6230ab28958a27fd8b`; Limón `5c202f4d083412a53755a5900b4423ceebd1040efe496838377af93aa6299a19`. Original JSON is stored as a 30-day Actions artifact; derived rounded annual data is committed at [the Explorer's versioned sample](../website/public/telluris/explore/data/exp001-annual.json).
 
 **Interpretation restriction:** Large annual rainfall-rate changes require checks for potential product inhomogeneity and independent comparison against IMERG/station observations. Authentic NASA-model data are not automatically equivalent to in-situ measurements or validated physical trends. See [EXP-001](EXPERIMENT-001.md).
+
+## Multi-source expansion — formally scoped, not yet connected
+
+The original NASA POWER meteorology adapter is one provider in a larger mission/model source plan: **POWER** (RH2M, wind speed, solar irradiance), **GPM IMERG** (cross-validated rainfall), **GLDAS** (Qs/Qsb runoff, soil moisture and evapotranspiration), **SWOT RiverSP / river discharge** (reach-level water elevation/width/slope/estimated discharge), **MODIS/AppEEARS** (NDVI, EVI, land temperature and evapotranspiration), **SMAP/GRACE** (soil moisture/water-storage anomalies), **OMI/AIRS** (chemistry/profiles), **PO.DAAC** (sea-surface temperature/height). NASA's official sources are linked in the detailed [variable catalog](VARIABLE-CATALOG.md).
+
+**Important:** GLDAS runoff in kg m⁻² s⁻¹ is not measured streamflow in m³/s; SWOT river discharge is an estimate for a named reach, available over a much shorter mission period. Neither is interchangeable with a generic point meteorological request.
+
+**Current code:** Only NASA POWER T2M and PRECTOTCORR are integrated; all other variables await actual API access, QA/unit and numerical reference tests. The 2026 challenge Resources list is **fully tracked**, not rejected.

@@ -90,3 +90,9 @@ References:
 - **OpenAI ChatGPT:** Evaluated claimed expected signs and statistical shortcuts, researched the NASA challenge, CLLJ/midsummer-drought literature and IMERG official source, developed the bilingual public pages and localized browser messages, automated six-route/SEO/asset QA, and registered a falsifiable EXP-002 research plan.
 - **Rejected without evidence:** Guaranteed p-values/signs for Frankfurt–Delhi, Chile, Sahel–Congo or Liberia–Nicoya; causal attribution to a single driver; claims that naïve year shuffling controls false positives with autocorrelation, or that p>0.05 establishes equivalence.
 - **Evidence limit:** QA confirms implementation in GitHub; public Spanish pages still require deployment verification, and EXP-002 field analyses are not yet executed.
+
+## Broader scope and hydrology variable review — November 14, 2026
+
+- **OpenAI ChatGPT:** Compared the official NASA 2026 challenge text supplied by the team against the current repository, verified NASA source catalogs for POWER/GLDAS/SWOT/MODIS/SMAP/GRACE/PO.DAAC and CUAHSI, and formally drafted the wider mission, NASA requirements-to-implementation matrix and cross-domain variable catalog.
+- **Google Gemini:** An additional team-supplied EXP-002 research brief proposed hydrological and global comparisons and a Python script. It was read as a set of research leads only; **none of its unsupported trend-significance claims, causal narratives or untested code** were promoted to validated science. In particular, its arbitrary `value > -900` filtering and automatic Hamed–Rao choice were not adopted.
+- **Verification boundary:** New variable catalog entries are documented NASA product/source candidates, **not evidence of actual new API integrations, river-flow observations or numerical climate findings**.

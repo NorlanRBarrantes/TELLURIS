@@ -196,3 +196,13 @@ Do not replace proposed status with accepted until the underlying decision is ve
 - **Verification:** [Bilingual CI run #43660071020](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43660071020), 28/28 Node tests passed, six routes, asset paths and HTTP smoke validated. **Changes in GitHub do not automatically publish to BanaHosting.**
 - **Science:** [EXP-002 protocol](BENCHMARK-PLAN.md) registers JJA Liberia/Limón, same-Pacific control, IMERG precipitation cross-source check and optional global contrasts as research hypotheses, **not pre-known positive/negative trends**. Do not use simple non-significant p as proof of equivalence, and do not ignore climate autocorrelation in permutation tests.
 - **Next:** Explorer 0.2 comparative mode after source/QA validation; user-visible production bilingual behavior pending upload and browser inspection.
+
+## ADR-023 — Approve Earth-system detective scope and retain every NASA recommendation
+
+- **Date:** 2026-11-14 (Costa Rica)
+- **Status:** **Accepted** as product strategy; individual new source integrations remain research/proposed
+- **Decision:** Position TELLURIS as a guided, global, multi-variable, multi-source *Earth System Trend Detective*, not as a Costa Rica climate-dipole proof. Map **all** four mandatory NASA objectives and every optional consideration/resource to a traceable requirement/status/evidence record, without confusing NASA's optional suggestions with required integrations.
+- **Scientific families:** Air/meteorology, chemistry/profiles, radiation, vegetation/land temperature, terrestrial water cycle, runoff, **SWOT estimated river discharge**, ocean SST/height and GRACE terrestrial water storage. Distinguish model grid/runoff vs river reach/flow, units and short vs long observation spans.
+- **Near-term completion:** Preserve functional EXP-001; add learner-facing question-based discovery, variable explanations and independently justified significance; expand POWER variables (RH2M, WS10M, ALLSKY_SFC_SW_DWN) after API checks; add one verified distinct NASA data-source case and two examples. Keep JJA/IMERG/cross-region hypotheses in EXP-002 for validation.
+- **Rejected practices:** Predetermining slope signs/p-values, treating GLDAS runoff as a river-gauge discharge measurement, making source integrations appear live based on a documentation entry, blindly importing Gemini's proposed statistical code or declaring short SWOT series a multidecadal trend.
+- **Evidence:** [Formal scope](SCOPE-2026.md), [full NASA brief/resource matrix](NASA-RECOMMENDATIONS-MATRIX.md), [variable research catalog](VARIABLE-CATALOG.md), [official NASA resource index](NASA-CHALLENGE-RESOURCES.md), [existing EXP-001 validation](EXPERIMENT-001.md).
