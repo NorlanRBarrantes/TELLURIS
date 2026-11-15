@@ -13,7 +13,7 @@ test("The print report includes real NASA series and explicit uncertainty",()=>{
  assert.match(html,/Significancia climática no validada/);
  assert.match(html,/1985/);
  assert.match(html,/2025/);
- assert.equal(html.match(/<tr>/g).length,41);
+ assert.equal(html.match(/<tr><td/g).length,41);
 });
 test("Untrusted text is escaped in generated HTML",()=>{
  const src=fromSnapshot(snap,"liberia","T2M",1985,2025);
