@@ -24,14 +24,33 @@ export function buildEvidence(analysis,variable,location,source,lang="es"){
  const summary=lang==="es"
   ?"En "+location+", la "+topic+" presenta una pendiente Theil–Sen "+direction+" de "+slope+" "+unit+" en "+analysis.n+" años completos ("+analysis.start+"–"+analysis.end+")."
   :"At "+location+", "+topic+" has an "+direction+" Theil–Sen slope of "+slope+" "+unit+" from "+analysis.n+" complete years ("+analysis.start+"–"+analysis.end+").";
- return {summary,caution:cautious[lang],source:source||"NASA POWER",lang,analysis,unit};
+ const inference=analysis.inference;
+ const caution=inference?
+    (lang==="es"?
+      "Mann–Kendall y el intervalo Sen suponen años independientes; las permutaciones de bloques de 3 y 5 años son un análisis exploratorio, no una corrección universal. No se han validado homogeneidad de la fuente, estacionariedad ni causalidad.":
+      "Mann–Kendall and Sen rank intervals assume independent years; 3- and 5-year block-order permutations are exploratory sensitivity tests, not a universal correction. Source homogeneity, stationarity and causality remain unverified."):
+    cautious[lang];
+ return {summary,caution,source:source||"NASA POWER",lang,analysis,unit};
 }
-export function compareEvidence(first,other,firstName,otherName,lang="es"){
+export function compareEvidence(first,other,firstName,otherName,lang="es",pairedDifference=null){
  if(!first||!other||first.status!=="exploratory"||other.status!=="exploratory")return "";
  const line=firstName+": "+fmt(first.slopePerDecade,lang)+"; "+otherName+": "+fmt(other.slopePerDecade,lang);
- return lang==="es"
-  ?"Comparación de tendencias de dos puntos NASA ("+line+"). Ambas pendientes se estiman por separado; esto NO constituye una prueba estadística de diferencia entre regiones."
-  :"NASA two-point trend comparison ("+line+"). Each slope is estimated independently; this is NOT a statistical test of between-region differences.";
+ const prefix=lang==="es"?
+   "Pendientes estimadas por separado ("+line+").":
+   "Independently estimated slopes ("+line+").";
+ if(pairedDifference?.status==="exploratory"){
+   const d=pairedDifference,ci=d.inference?.senCI;
+   const range=ci?" ["+fmt(ci.lowPerDecade,lang)+", "+fmt(ci.highPerDecade,lang)+"]":"";
+   return prefix+" "+(lang==="es"?
+     "Analizamos la diferencia por año entre ambas celdas: pendiente "+fmt(d.slopePerDecade,lang)+
+       " por década; IC95 % condicional"+range+"; p original MK = "+d.mk.p.toFixed(4)+
+       ". Esta comparación es exploratoria, no prueba causal de un contraste regional.":
+     "We analyze year-matched grid-cell differences: slope "+fmt(d.slopePerDecade,lang)+
+       " per decade; conditional 95% CI"+range+"; original MK p = "+d.mk.p.toFixed(4)+
+       ". This comparison is exploratory and does not establish a causal regional contrast.");
+ }
+ return prefix+" "+(lang==="es"?
+   "No se ha realizado prueba pareada entre las series.":"No year-matched series test was performed.");
 }
 export function answerEvidence(question,evidence,comparison=""){
  if(!evidence)return "No data loaded / No hay datos cargados.";
@@ -39,14 +58,28 @@ export function answerEvidence(question,evidence,comparison=""){
  const q=String(question||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
  if(evidence.analysis.status==="descriptive")
   return evidence.summary+" "+evidence.caution;
- if(/signific|confian|certeza|p.valor|p-value|statistic/.test(q))
-  return (lang==="es"?"Valor p original: ":"Original p-value: ")+evidence.analysis.mk.p.toFixed(4)+". "+evidence.caution;
+ if(/signific|confian|certeza|p.valor|p-value|statistic|interval|bloque|block/.test(q)){
+  const inf=evidence.analysis.inference;
+  if(!inf)return evidence.caution;
+  const ci=inf.senCI,pp=inf.blockTests.map(x=>x.blockYears+"y: "+
+    (x.available?x.p.toFixed(3):"n/a")).join("; ");
+  return (lang==="es"?
+    "Mann–Kendall original p = "+evidence.analysis.mk.p.toFixed(4)+
+    "; intervalo Sen 95 % ["+fmt(ci.lowPerDecade,lang)+", "+fmt(ci.highPerDecade,lang)+
+    "] "+evidence.unit+"; sensibilidad por bloques "+pp+
+    ". Estado: "+(inf.status==="consistent_exploratory"?"pruebas exploratorias coincidentes":
+      inf.status==="inconclusive"?"inconcluso":"sensibilidad no evaluable")+". ":
+    "Original Mann–Kendall p = "+evidence.analysis.mk.p.toFixed(4)+
+    "; Sen 95% interval ["+fmt(ci.lowPerDecade,lang)+", "+fmt(ci.highPerDecade,lang)+
+    "] "+evidence.unit+"; block sensitivity "+pp+". Status: "+inf.status+". ")+
+    evidence.caution;
+ }
  if(/origen|fuente|nasa|source|dato/.test(q))
   return (lang==="es"?"Fuente identificada: ":"Identified source: ")+evidence.source+". "+(lang==="es"?"Los valores representan una rejilla de datos NASA POWER, no el promedio de una provincia.":"Values represent the NASA POWER data grid, not a region-wide average.");
- if(/autocorrel|incertid|limit|depend|error|uncert|reliab/.test(q))
+ if(/autocorrel|incertid|limit|depend|error|uncert|reliab|riesgo|sensitivity/.test(q))
   return evidence.caution+" "+(evidence.analysis.lag1===null?(lang==="es"?"Autocorrelación no estimable.":"Autocorrelation unavailable."):(lang==="es"?"Diagnóstico lag-1: ":"Lag-1 diagnostic: ")+evidence.analysis.lag1.toFixed(3)+".");
  if(/compar|region|liberia|limon|diferenc|compare/.test(q))
   return comparison|| (lang==="es"?"Compara Liberia y Limón usando el archivo NASA para observar ambas pendientes.":"Load the NASA archive to compare Liberia and Limón point slopes.");
  if(/tenden|cambi|sub|baj|pendient|trend|change|slope|rate/.test(q))return evidence.summary+" "+evidence.caution;
- return lang==="es"?"Pregunta por tendencia, fuente, incertidumbre, significancia o comparación.":"Ask about trend, source, uncertainty, significance or comparison.";
+ return lang==="es"?"Pregunta por tendencia, fuente, incertidumbre, intervalo de confianza, bloques o comparación.":"Ask about trend, source, uncertainty, confidence interval, block sensitivity or comparison.";
 }
