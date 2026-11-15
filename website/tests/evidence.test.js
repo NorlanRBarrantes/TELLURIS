@@ -8,7 +8,7 @@ test("No unvalidated significance classification",()=>{
  assert.doesNotMatch(answerEvidence("¿Es significativo?",e),/es estadísticamente significativo/);
 });
 test("No invented output for insufficient data",()=>assert.equal(buildEvidence({status:"insufficient"},"T2M","Liberia","MERRA2"),null));
-test("Two point contrast is explicitly descriptive",()=>assert.match(compareEvidence(sample(.12),sample(-.03),"Liberia","Limón"),/NO constituye/));
+test("Two point contrast is explicitly descriptive",()=>assert.match(compareEvidence(sample(.12),sample(-.03),"Liberia","Limón"),/No se ha realizado prueba pareada/));
 test("Traceability and English diagnostic",()=>{
  const e=buildEvidence(sample(.12),"T2M","Liberia","MERRA2","en");
  assert.match(answerEvidence("source",e),/MERRA2/);
