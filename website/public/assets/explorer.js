@@ -143,6 +143,7 @@ function resetWhenChanged() {
   requestGeneration++;
   updateVariableGuide();
   active = null;
+  window.dispatchEvent(new CustomEvent("telluris:source-data",{detail:null}));
   byId("monthly-panel").hidden=true;
   gpmComparison=null;
   byId("gpm-export").disabled=true;
@@ -413,6 +414,13 @@ function acceptData(output, queryUrl=null, paired=null){
   compare.hidden=!comparisonContext;
   compare.textContent=comparisonContext;
   byId("evidence-answer").textContent=uiLanguage==="es"?"Pregunta por tendencias, fuente, limitaciones o comparación.":"Ask about trends, source, limitations or comparison.";
+  // Read-only annual NASA evidence for a clearly labelled educational atmosphere.
+  // This never provides gridded wind directions or real-time weather.
+  const latest=ordered.at(-1);
+  window.dispatchEvent(new CustomEvent("telluris:source-data",{detail:{
+    variable,year:latest.year,value:latest.value,unit:def.unit,
+    origin:output.meta.kind||"NASA POWER"
+  }}));
 }
 async function snapshot(){
   try{
