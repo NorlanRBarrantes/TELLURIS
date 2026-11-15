@@ -1,0 +1,41 @@
+name: EXP-003B scientific MODIS QA and seasonal sensitivity
+
+on:
+  push:
+    paths:
+      - "analysis/audit_mod13q1_methodology.py"
+      - "tests/test_exp003_audit.py"
+      - ".github/workflows/exp003-method-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  audit-nasa-originals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Validate QA bit decoding and seasonal tests
+        run: python -m unittest discover -s tests -p "test_exp003_audit.py" -v
+      - name: Retrieve archived authentic EXP-003 NASA data
+        uses: actions/download-artifact@v4
+        with:
+          name: exp003-original-ornl-modis-2023-2025
+          run-id: 43738048688
+          github-token: ${{ github.token }}
+          path: data/raw/exp003
+      - name: Compare QA alternatives on actual MODIS sources
+        run: python -u analysis/audit_mod13q1_methodology.py
+      - name: Publish reproducible QA report
+        uses: actions/upload-artifact@v4
+        with:
+          name: exp003-detailed-qa-sensitivity
+          path: data/derived/exp003_modis_method_audit.json
+          if-no-files-found: error
+          retention-days: 30
