@@ -1,6 +1,9 @@
 /* TELLURIS scientific core · pure ECMAScript, zero dependencies.
- * All p values assume independent annual observations; climate inference is not validated.
+ * Original MK p and Sen rank CI assume independent annual observations.
+ * Block-order permutation is a non-final sensitivity check; physical model
+ * homogeneity, stationarity and external validation remain unresolved.
  */
+import {assessTrendEvidence} from "./inference.js";
 export const VARIABLES = Object.freeze({
   "T2M": {
     "name": "Air temperature at 2 m",
@@ -414,5 +417,6 @@ export function analyze(points) {
   }
   return {status:"exploratory", n, start:sorted[0].year, end:sorted[n-1].year,
     slope, slopePerDecade: slope*10, intercept, originYear, mk,
-    lag1, lag1Pairs:earlier.length, points:sorted};
+    lag1, lag1Pairs:earlier.length, points:sorted,
+    inference:assessTrendEvidence(sorted,mk,lag1,earlier.length)};
 }
