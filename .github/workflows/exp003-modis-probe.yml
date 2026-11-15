@@ -31,7 +31,9 @@ jobs:
           bands=fetch('/bands')
           print('BANDS',json.dumps(bands,ensure_ascii=False)[:6500])
           for site,lat,lon in [('liberia',10.63,-85.44),('limon',9.99,-83.03)]:
-            dates=fetch('/dates',{'latitude':lat,'longitude':lon})
+            response=fetch('/dates',{'latitude':lat,'longitude':lon})
+            print('DATES_KEYS',site,list(response.keys()) if isinstance(response,dict) else 'list')
+            dates=response['dates'] if isinstance(response,dict) else response
             print('DATES',site,'COUNT',len(dates),'FIRST',dates[:2],'LAST',dates[-2:])
             targets=[v['modis_date'] for v in dates if '2023' in v.get('calendar_date','') or v.get('modis_date','').startswith('A2023')]
             if not targets: raise RuntimeError('no 2023 composites available for '+site)
