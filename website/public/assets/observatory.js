@@ -248,11 +248,12 @@ function cell(row,value,cls=""){
 }
 function statusText(r,definition){
   if(!r)return "—";
-  if(r.status==="circular")return L("Circular · sin pendiente lineal","Circular · no linear slope");
+  if(r.status==="circular")return L("Circular · sin pendiente lineal","Circular · no linear slope")+
+    " · "+r.n+" "+L("años","years")+" ("+r.start+"–"+r.end+")";
   if(r.status!=="descriptive")return L("Sin datos verificables","Source unavailable");
   const direction=r.slopePerDecade>0?"↑":r.slopePerDecade<0?"↓":"↔";
   return direction+" "+N(r.slopePerDecade,3)+" "+definition.slopeUnit+
-    " · "+r.n+" "+L("años","years");
+    " · "+r.n+" "+L("años","years")+" ("+r.start+"–"+r.end+")";
 }
 function filterFamily(row,family){
   if(family==="all")return true;
