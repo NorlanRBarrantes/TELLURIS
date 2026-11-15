@@ -1,5 +1,6 @@
 /* Deterministic, source-grounded explanation. NOT generative AI. */
-const units={T2M:"°C / decade",PRECTOTCORR:"mm / decade"};
+import {VARIABLES} from "./science.js";
+const units=Object.fromEntries(Object.entries(VARIABLES).map(([code,info])=>[code,info.slopeUnit]));
 const fmt=(x,lang)=>Number(x).toLocaleString(lang==="es"?"es-CR":"en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
 const cautious={
  es:"El valor p original de Mann–Kendall es provisional: no se ha validado la independencia temporal ni la homogeneidad del producto. No demuestra por sí solo significancia estadística ni causalidad.",
@@ -7,8 +8,18 @@ const cautious={
 };
 export function buildEvidence(analysis,variable,location,source,lang="es"){
  if(analysis?.status!=="exploratory")return null;
+ const info=VARIABLES[variable];
+ if(!info)return null;
+ if(analysis.status==="descriptive"){
+   const topic=lang==="es"?info.nameEs:info.name;
+   const summary=lang==="es"?
+     "En "+location+", "+topic+" presenta promedios circulares anuales (grados) calculados a partir de las direcciones mensuales de NASA POWER; no se estima una pendiente lineal ni un valor p.":
+     "At "+location+", "+topic+" has annual circular averages (degrees) derived from NASA POWER monthly wind bearings. No linear slope or p-value is estimated.";
+   const caution=lang==="es"?"Los ángulos son circulares: 359° y 1° están próximos. No interpretes la secuencia como tendencia lineal ni como dirección de un viento local medido.":"Angles are circular: 359° and 1° are adjacent. Do not interpret the series as a linear trend or local measured wind direction.";
+   return {summary,caution,source:source||"NASA POWER",lang,analysis,unit:"°"};
+ }
  const slope=fmt(analysis.slopePerDecade,lang),unit=units[variable]||"units / decade";
- const topic=variable==="T2M"?(lang==="es"?"temperatura del aire a 2 m":"air temperature at 2 m"):(lang==="es"?"precipitación anual":"annual precipitation");
+ const topic=lang==="es"?info.nameEs:info.name;
  const direction=analysis.slopePerDecade>0?(lang==="es"?"ascendente":"upward"):analysis.slopePerDecade<0?(lang==="es"?"descendente":"downward"):(lang==="es"?"sin dirección neta":"without a net direction");
  const summary=lang==="es"
   ?"En "+location+", la "+topic+" presenta una pendiente Theil–Sen "+direction+" de "+slope+" "+unit+" en "+analysis.n+" años completos ("+analysis.start+"–"+analysis.end+")."
@@ -26,6 +37,8 @@ export function answerEvidence(question,evidence,comparison=""){
  if(!evidence)return "No data loaded / No hay datos cargados.";
  const lang=evidence.lang;
  const q=String(question||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+ if(evidence.analysis.status==="descriptive")
+  return evidence.summary+" "+evidence.caution;
  if(/signific|confian|certeza|p.valor|p-value|statistic/.test(q))
   return (lang==="es"?"Valor p original: ":"Original p-value: ")+evidence.analysis.mk.p.toFixed(4)+". "+evidence.caution;
  if(/origen|fuente|nasa|source|dato/.test(q))
