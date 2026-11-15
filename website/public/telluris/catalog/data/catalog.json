@@ -249,18 +249,15 @@
       "kind": "research_candidate",
       "implementation_status": "connected",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
+        "NASA POWER · RH2M"
       ],
       "integration_codes": [
         "RH2M"
       ],
       "integration_note_es": "",
-      "integration_note_en": ""
+      "integration_note_en": "",
+      "spatial_support_es": "Punto de rejilla meteorológica",
+      "validation_gate_es": "Ya consultable"
     },
     {
       "id": "C02",
@@ -273,12 +270,7 @@
       "kind": "research_candidate",
       "implementation_status": "connected",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
+        "NASA POWER · WS10M, WD10M, U10M, V10M"
       ],
       "integration_codes": [
         "WS10M",
@@ -287,7 +279,9 @@
         "V10M"
       ],
       "integration_note_es": "",
-      "integration_note_en": ""
+      "integration_note_en": "",
+      "spatial_support_es": "Punto de rejilla meteorológica",
+      "validation_gate_es": "Estadística circular para dirección"
     },
     {
       "id": "C03",
@@ -300,18 +294,15 @@
       "kind": "research_candidate",
       "implementation_status": "connected",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
+        "NASA POWER · ALLSKY_SFC_SW_DWN"
       ],
       "integration_codes": [
         "ALLSKY_SFC_SW_DWN"
       ],
       "integration_note_es": "",
-      "integration_note_en": ""
+      "integration_note_en": "",
+      "spatial_support_es": "Punto de rejilla de radiación",
+      "validation_gate_es": "Ya consultable"
     },
     {
       "id": "C04",
@@ -324,19 +315,16 @@
       "kind": "research_candidate",
       "implementation_status": "connected",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
+        "NASA POWER · T2M_MAX, T2M_MIN"
       ],
       "integration_codes": [
         "T2M_MAX",
         "T2M_MIN"
       ],
       "integration_note_es": "",
-      "integration_note_en": ""
+      "integration_note_en": "",
+      "spatial_support_es": "Punto de rejilla meteorológica",
+      "validation_gate_es": "No equivale al récord anual absoluto"
     },
     {
       "id": "C05",
@@ -349,18 +337,15 @@
       "kind": "research_candidate",
       "implementation_status": "connected",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
+        "NASA POWER · PS"
       ],
       "integration_codes": [
         "PS"
       ],
       "integration_note_es": "",
-      "integration_note_en": ""
+      "integration_note_en": "",
+      "spatial_support_es": "Punto de rejilla meteorológica",
+      "validation_gate_es": "Ya consultable"
     },
     {
       "id": "C06",
@@ -373,18 +358,16 @@
       "kind": "research_candidate",
       "implementation_status": "partial",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
+        "NASA POWER · CLOUD_AMT",
+        "NASA CERES / MODIS (espesor óptico)"
       ],
       "integration_codes": [
         "CLOUD_AMT"
       ],
       "integration_note_es": "Cantidad de nubosidad disponible; espesor óptico todavía no conectado.",
-      "integration_note_en": "Cloud amount is connected; optical thickness is not."
+      "integration_note_en": "Cloud amount is connected; optical thickness is not.",
+      "spatial_support_es": "Rejilla/celda satelital",
+      "validation_gate_es": "Falta integrar propiedades ópticas"
     },
     {
       "id": "C07",
@@ -397,13 +380,10 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
-      ]
+        "NASA OCO-2 / OCO-3 CO₂"
+      ],
+      "spatial_support_es": "Columnas/superficie atmosférica con selección espacial",
+      "validation_gate_es": "Conector misión CO₂ y QA"
     },
     {
       "id": "C08",
@@ -416,13 +396,10 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
-      ]
+        "NASA AIRS CH₄ / GES DISC"
+      ],
+      "spatial_support_es": "Columna/perfil atmosférico",
+      "validation_gate_es": "Producto de metano y QA"
     },
     {
       "id": "C09",
@@ -435,13 +412,12 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
-      ]
+        "NASA Aura OMI NO₂ / SO₂",
+        "NASA MOPITT CO",
+        "MODIS aerosol"
+      ],
+      "spatial_support_es": "Columnas atmosféricas de distintos sensores",
+      "validation_gate_es": "Un conector y QA por gas; no una variable única"
     },
     {
       "id": "C10",
@@ -454,13 +430,11 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
-      ]
+        "NASA Aura OMI O₃",
+        "NASA AIRS ozono"
+      ],
+      "spatial_support_es": "Columna/perfil atmosférico",
+      "validation_gate_es": "Verificar unidades de columna y producto"
     },
     {
       "id": "C11",
@@ -473,12 +447,8 @@
       "kind": "research_candidate",
       "implementation_status": "partial",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
+        "NASA CERES EBAF radiación TOA",
+        "NASA POWER SW/LW/albedo superficie"
       ],
       "integration_codes": [
         "ALLSKY_SFC_SW_DWN",
@@ -486,7 +456,9 @@
         "ALLSKY_SRF_ALB"
       ],
       "integration_note_es": "Radiación y albedo disponibles; no equivalen a un balance energético neto terrestre.",
-      "integration_note_en": "Radiation and albedo available; not a complete Earth energy budget."
+      "integration_note_en": "Radiation and albedo available; not a complete Earth energy budget.",
+      "spatial_support_es": "Grillas de balance TOA y superficie, no equivalentes",
+      "validation_gate_es": "Falta flujo neto y distinción TOA/superficie"
     },
     {
       "id": "C12",
@@ -499,13 +471,11 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "NASA POWER",
-        "OMI",
-        "OCO-2",
-        "CERES",
-        "MERRA-2",
-        "LIS/OTD"
-      ]
+        "NASA TRMM LIS",
+        "NASA ISS LIS"
+      ],
+      "spatial_support_es": "Eventos/densidad espacial de rayos",
+      "validation_gate_es": "Conector, periodo homogéneo, normalización por detección"
     },
     {
       "id": "C13",
@@ -518,19 +488,18 @@
       "kind": "research_candidate",
       "implementation_status": "partial",
       "source_candidates": [
-        "GLDAS",
-        "SMAP",
-        "SWOT",
-        "PACE",
-        "MODIS",
-        "PO.DAAC"
+        "NASA POWER · GWETTOP/GWETROOT",
+        "NASA SMAP L4",
+        "NASA GLDAS SoilMoi"
       ],
       "integration_codes": [
         "GWETTOP",
         "GWETROOT"
       ],
       "integration_note_es": "Humedad relativa modelada del suelo (0–1), no contenido volumétrico ni lectura SMAP.",
-      "integration_note_en": "Modeled relative soil wetness (0–1), not volumetric soil moisture or SMAP measurement."
+      "integration_note_en": "Modeled relative soil wetness (0–1), not volumetric soil moisture or SMAP measurement.",
+      "spatial_support_es": "Rejilla terrestre; fracción relativa ≠ volumen",
+      "validation_gate_es": "Falta SMAP/GLDAS volumétrico"
     },
     {
       "id": "C14",
@@ -543,18 +512,17 @@
       "kind": "research_candidate",
       "implementation_status": "partial",
       "source_candidates": [
-        "GLDAS",
-        "SMAP",
-        "SWOT",
-        "PACE",
-        "MODIS",
-        "PO.DAAC"
+        "NASA POWER · EVPTRNS (energía)",
+        "NASA GLDAS Evap",
+        "NASA MODIS MOD16A2"
       ],
       "integration_codes": [
         "EVPTRNS"
       ],
       "integration_note_es": "Flujo energético de evapotranspiración (MJ/m²/día), no precipitación ni pérdida de agua en mm.",
-      "integration_note_en": "Evapotranspiration energy flux (MJ/m²/day), not a water depth in mm."
+      "integration_note_en": "Evapotranspiration energy flux (MJ/m²/day), not a water depth in mm.",
+      "spatial_support_es": "Rejilla terrestre, flujo de energía o agua",
+      "validation_gate_es": "Falta equivalencia de unidades y conector de agua"
     },
     {
       "id": "C15",
@@ -567,13 +535,10 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "GLDAS",
-        "SMAP",
-        "SWOT",
-        "PACE",
-        "MODIS",
-        "PO.DAAC"
-      ]
+        "NASA GLDAS · Qs / Qsb"
+      ],
+      "spatial_support_es": "Escorrentía modelada por celda",
+      "validation_gate_es": "No confundir con m³/s de caudal fluvial"
     },
     {
       "id": "C16",
@@ -586,13 +551,10 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "GLDAS",
-        "SMAP",
-        "SWOT",
-        "PACE",
-        "MODIS",
-        "PO.DAAC"
-      ]
+        "NASA SWOT · RiverSP reach/node"
+      ],
+      "spatial_support_es": "Tramo de río y paso satelital",
+      "validation_gate_es": "Conector por tramo; resolución temporal corta"
     },
     {
       "id": "C17",
@@ -605,13 +567,10 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "GLDAS",
-        "SMAP",
-        "SWOT",
-        "PACE",
-        "MODIS",
-        "PO.DAAC"
-      ]
+        "NASA PO.DAAC · altimetría TOPEX/Jason/Sentinel-6"
+      ],
+      "spatial_support_es": "Trayectoria oceánica/nivel medio",
+      "validation_gate_es": "Conector altimetría, referencia vertical"
     },
     {
       "id": "C18",
@@ -624,13 +583,10 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "GLDAS",
-        "SMAP",
-        "SWOT",
-        "PACE",
-        "MODIS",
-        "PO.DAAC"
-      ]
+        "NASA PO.DAAC · MUR-JPL-L4-GLOB-v4.1"
+      ],
+      "spatial_support_es": "Rejilla oceánica SST",
+      "validation_gate_es": "Conector y máscara tierra-mar"
     },
     {
       "id": "C19",
@@ -643,13 +599,10 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "GLDAS",
-        "SMAP",
-        "SWOT",
-        "PACE",
-        "MODIS",
-        "PO.DAAC"
-      ]
+        "NASA PO.DAAC · SMAP_JPL_L3_SSS_CAP_MONTHLY_V5"
+      ],
+      "spatial_support_es": "Rejilla oceánica salinidad",
+      "validation_gate_es": "Conector y QA costero"
     },
     {
       "id": "C20",
@@ -662,13 +615,11 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "GLDAS",
-        "SMAP",
-        "SWOT",
-        "PACE",
-        "MODIS",
-        "PO.DAAC"
-      ]
+        "NASA PACE OCI",
+        "NASA OB.DAAC · MODIS ocean color"
+      ],
+      "spatial_support_es": "Píxel oceánico con QA óptico",
+      "validation_gate_es": "Conector, máscara de nubes y validación"
     },
     {
       "id": "C21",
@@ -681,13 +632,10 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "GLDAS",
-        "SMAP",
-        "SWOT",
-        "PACE",
-        "MODIS",
-        "PO.DAAC"
-      ]
+        "NASA PACE OCI reflectancia / partículas"
+      ],
+      "spatial_support_es": "Píxel de color oceánico",
+      "validation_gate_es": "Método específico para turbidez; reflectancia no turbidez directa"
     },
     {
       "id": "C22",
@@ -700,13 +648,10 @@
       "kind": "research_candidate",
       "implementation_status": "not_connected",
       "source_candidates": [
-        "GLDAS",
-        "SMAP",
-        "SWOT",
-        "PACE",
-        "MODIS",
-        "PO.DAAC"
-      ]
+        "NASA OPERA · DSWx-HLS / DSWx-S1"
+      ],
+      "spatial_support_es": "Mapa categórico de superficie de agua",
+      "validation_gate_es": "Agregación espacial de área, no usar pendiente sobre códigos de clase"
     },
     {
       "id": "C23",
