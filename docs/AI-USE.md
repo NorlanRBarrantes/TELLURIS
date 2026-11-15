@@ -104,3 +104,8 @@ The user submitted a markdown inventory requested by their sister in a separate 
 ## Gemini source comparison for EXP-003 — November 15, 2026
 
 A team-forwarded Gemini report compared MODIS vegetation indices, FIRMS fire detections/FRP and VIIRS Black Marble nightlights, supplying official NASA documentation links and an example ORNL request. OpenAI ChatGPT checked these against NASA official sources, executed an ORNL NASA real-response probe via GitHub Actions, discovered/corrected the object-wrapped dates parser, and implemented experimental Python retrieval + QA tests. Incorrect claims about FIRMS area API 10-day range, invalid treatment of raw -2000 and causal interpretation of cross-variable correlations were rejected. Neither model may claim a significant trend or guarantee a win without source data and independent statistical validation. See [EXP-003 review](EXP-003-VEGETATION.md).
+
+
+## Evidence assistant — November 15, 2026
+
+The active browser component is deterministic and rule-based, not a generative model or a live AI-provider connection. It rephrases calculations already supplied by the evidence engine and keeps provisional significance qualifications. A future LLM integration is documented in FEATURES-3D-EVIDENCE-AI.md but has NOT been built, secured, or validated.
