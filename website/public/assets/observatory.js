@@ -24,6 +24,13 @@ const form={
   variable:el("variable"),start:el("from-year"),end:el("to-year")
 };
 const second={place:el("obs-other-place"),lat:el("obs-other-lat"),lon:el("obs-other-lon")};
+const primary={
+  place:el("obs-main-place"),variable:el("obs-main-variable"),
+  lat:el("obs-main-lat"),lon:el("obs-main-lon"),
+  start:el("obs-main-start"),end:el("obs-main-end")
+};
+for(const child of form.variable.children)
+  primary.variable.append(child.cloneNode(true));
 const run=el("obs-run-live"),archiveButton=el("obs-run-archive"),cancel=el("obs-cancel");
 const status=el("obs-status"),results=el("obs-results"),summary=el("obs-summary");
 const matrixHead=el("obs-head"),matrixBody=el("obs-rows");
@@ -100,6 +107,13 @@ function updateSecond(){
   }
 }
 function syncPrimary(){
+  primary.place.value=form.place.value;
+  primary.variable.value=form.variable.value;
+  primary.lat.value=form.lat.value;
+  primary.lon.value=form.lon.value;
+  primary.start.value=form.start.value;
+  primary.end.value=form.end.value;
+  primary.lat.readOnly=primary.lon.readOnly=form.place.value!=="custom";
   const lat=Number(form.lat.value),lon=Number(form.lon.value);
   const label=form.place.selectedOptions[0]?.textContent||
     L("Coordenadas seleccionadas","Selected coordinates");
@@ -126,6 +140,17 @@ function clearResult(){
   cancelCurrent();
 }
 second.place.addEventListener("change",()=>{updateSecond();clearResult();});
+primary.place.addEventListener("change",()=>{
+  form.place.value=primary.place.value;
+  form.place.dispatchEvent(new Event("change",{bubbles:true}));
+});
+for(const key of ["variable","lat","lon","start","end"]){
+  primary[key].addEventListener("change",()=>{
+    if(["lat","lon"].includes(key)&&form.place.value!=="custom")return;
+    form[key].value=primary[key].value;
+    form[key].dispatchEvent(new Event("change",{bubbles:true}));
+  });
+}
 for(const f of [second.lat,second.lon,form.lat,form.lon,
   form.place,form.variable,form.start,form.end])
   f.addEventListener("change",()=>{
