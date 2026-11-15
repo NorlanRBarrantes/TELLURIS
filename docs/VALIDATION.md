@@ -152,3 +152,10 @@ Results must be computed before any place is described as having an observed sig
 - **Bilingual user-facing discovery:** `/telluris/catalog/` (Spanish), `/en/telluris/catalog/` (English); search/filter by topic, Earth-system area and integration status; no operational controls for unconnected variables.
 - **Automated checks:** [GitHub Actions run #43729854583](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43729854583) — **34/34 Node tests passed**, browser-source syntax checks and local HTTP smoke checks of both catalog routes and JSON passed, static deployment ZIP generated.
 - **Scientific limitation:** these are source/topic proposals, **not** 49 tested NASA endpoints or 10 computed indices. Current production still needs an upload/verification step, and no additional NASA science inference was established.
+
+## EXP-003 — NASA ORNL MODIS vegetation proof-of-capability (2026-11-15)
+
+- Live [ORNL API probe #43737483122](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43737483122): **success**; `/bands`, `/dates` and 1×1 `/subset` returned HTTP 200 for Liberia and Limón; provider metadata verified fill -3000, scale .0001 and valid inclusive range -2000..10000, pixel reliability -1/0..3, 614 composite dates each at probe time, source examples including a cloudy Limón observation correctly excluded.
+- An initial probe [#43737375446](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43737375446) failed due to incorrect assumption that `/dates` returned an array instead of `{"dates":[...]}`. Corrected by inspecting actual JSON.
+- A new [EXP-003 implementation](EXP-003-VEGETATION.md) stores raw source batches with SHA-256 and computes QA-screened descriptive annual medians. Ten deterministic adapter regression tests were created; record CI completion separately.
+- **Not yet validated:** full-year MODIS annual coverage after QA, exact underlying subset collection version, full 2000–2025 trend, independence-adjusted significance, browser presentation or causal attribution.

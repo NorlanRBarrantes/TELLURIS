@@ -216,3 +216,13 @@ Do not replace proposed status with accepted until the underlying decision is ve
 - **Science:** NASA FIRMS detections vs burned area, GLDAS runoff vs SWOT river discharge, LST vs air temperature, USGS earthquake events vs NASA mission measures, short records, QA and incomplete seismic catalog protections. Do not claim earthquake prediction or scientifically validated anomaly trends without tests.
 - **Implementation evidence:** [Normalized catalog](../website/public/telluris/catalog/data/catalog.json), [source review](TEAM-CATALOG-REVIEW.md), [source scope](SCOPE-2026.md). Any delivered UI is a roadmap, not evidence of 49 new NASA API integrations.
 - **Schedule:** Preserve submission priority; add more NASA data sources only after end-to-end retrieval and source-specific verification.
+
+## ADR-025 — Prioritize NASA MODIS Terra NDVI/EVI, gate inclusion on QA and real acquisition
+
+- **Date:** 2026-11-15 (Costa Rica)
+- **Status:** Experimental adapter accepted; production public integration and climate inference **not yet approved**
+- **Input:** Team-forwarded Gemini source comparison of MODIS/ORNL, FIRMS and VIIRS Black Marble; original claims checked against NASA documentation and [real ORNL probe](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43737483122).
+- **Decision:** First distinct mission product for TELLURIS is MODIS `MOD13Q1` EVI/NDVI using the official unauthenticated ORNL DAAC TESViS API, subject to actual collection version verification, strict QA/filtering, temporal completeness checks and reproducible raw archives.
+- **Not adopted from Gemini:** `raw_vi <= -2000` erroneous rejection, 10-day FIRMS area window (official maximum is 5), "correlation proves rain control", any claim of guaranteed contest outcome, or raw single-pixel NDVI described as citywide forest coverage.
+- **Integration boundaries:** Maintain FIRMS/Black Marble in research backlog; no fabricated APIs, NDVI/EVI trends, significance p-values or public integration badges before real checks.
+- **Evidence:** [EXP-003 audit/protocol](EXP-003-VEGETATION.md), [QA adapter](../analysis/exp003_modis.py), [tests](../tests/test_exp003_modis.py).
