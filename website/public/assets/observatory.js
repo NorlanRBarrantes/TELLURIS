@@ -98,6 +98,14 @@ function updateSecond(){
     second.lon.value=known[id].lon;
   }
 }
+function syncPrimary(){
+  const lat=Number(form.lat.value),lon=Number(form.lon.value);
+  const label=form.place.selectedOptions[0]?.textContent||
+    L("Coordenadas seleccionadas","Selected coordinates");
+  el("obs-primary-label").textContent=label+" · "+
+    (Number.isFinite(lat)?N(lat,3):"—")+"°, "+
+    (Number.isFinite(lon)?N(lon,3):"—")+"°";
+}
 function syncSecond(){
   const selected=form.place.value;
   if(selected==="liberia"&&second.place.value==="liberia")
@@ -105,6 +113,7 @@ function syncSecond(){
   else if(selected==="limon"&&second.place.value==="limon")
     second.place.value="liberia";
   updateSecond();
+  syncPrimary();
 }
 function clearResult(){
   if(current){
@@ -118,7 +127,11 @@ function clearResult(){
 second.place.addEventListener("change",()=>{updateSecond();clearResult();});
 for(const f of [second.lat,second.lon,form.lat,form.lon,
   form.place,form.variable,form.start,form.end])
-  f.addEventListener("change",()=>{if(f===form.place)syncSecond();clearResult();});
+  f.addEventListener("change",()=>{
+    if(f===form.place)syncSecond();
+    syncPrimary();
+    clearResult();
+  });
 root.querySelectorAll("[data-obs-mode]").forEach(b=>
   b.addEventListener("click",()=>setMode(b.dataset.obsMode)));
 
@@ -274,6 +287,7 @@ function drawChart(row){
     ...(row.b?.points?[{data:row.b.points,color:"#ffbb83",label:current.sites[1].label}]:[])
   ].filter(s=>s.data?.length);
   if(row.left.status==="circular"||!sequences.length){
+    el("obs-chart-legend").replaceChildren();
     focusChart.setAttribute("aria-label",L("Sin gráfica anual: datos ausentes o variable circular.",
       "No annual chart: data missing or circular variable."));
     return;
