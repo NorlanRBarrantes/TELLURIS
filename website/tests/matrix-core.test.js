@@ -161,3 +161,17 @@ test("Multi-variable evidence JSON keeps source, original annual observations an
  assert.match(csv,/unavailable/);
  assert.throws(()=>matrixCSV({schema:"wrong"}),/Invalid/);
 });
+
+
+test("Plain-language zone comparisons use matched-year original NASA values",()=>{
+ const data=parseArchive(archive,sites,chosenCodes("all-two","T2M"),1985,2025);
+ const rows=matrixRows(chosenCodes("all-two","T2M"),data,sites);
+ const rain=groundedAnswer("¿Qué zona tiene más lluvia?",rows,{lang:"es",sites});
+ assert.match(rain,/Promedio anual sobre años coincidentes/);
+ assert.match(rain,/mm \/ year/);
+ assert.match(rain,/n=41/);
+ assert.match(rain,/no estaciones ni explicación causal/);
+ const temp=groundedAnswer("¿Cómo cambió la temperatura?",rows,{lang:"es",sites});
+ assert.match(temp,/Temperatura del aire a 2 m/);
+ assert.match(temp,/°C \/ decade/);
+});
