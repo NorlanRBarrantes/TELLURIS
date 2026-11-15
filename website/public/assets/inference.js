@@ -90,6 +90,26 @@ export function blockOrderPermutation(points,blockYears=3,draws=999,seed=2026111
     exceed,p:(exceed+1)/(draws+1),null:"exchangeable_nonoverlapping_blocks",
     seed};
 }
+/** Predeclared half-period slope sensitivity. Splitting is descriptive:
+ * opposing half slopes suggest nonmonotonicity/structural issues but are NOT
+ * formal change-point tests or proof of instrument discontinuity.
+ */
+export function halfPeriodSensitivity(points) {
+  const a=assertAnnual(points);
+  const split=Math.floor(a.length/2);
+  if(split<10||a.length-split<10){
+    return {available:false,reason:"fewer_than_10_years_per_half"};
+  }
+  const left=a.slice(0,split),right=a.slice(split);
+  const aSlope=median(slopePairs(left)),bSlope=median(slopePairs(right));
+  return {
+    available:true,method:"predeclared_early_late_halves_descriptive",
+    earlier:{start:left[0].year,end:left.at(-1).year,n:left.length,slopePerDecade:aSlope*10},
+    later:{start:right[0].year,end:right.at(-1).year,n:right.length,slopePerDecade:bSlope*10},
+    oppositeSigns:aSlope*bSlope<0,
+    caveat:"Descriptive only; no change-point significance or causal attribution"
+  };
+}
 /** Evidence-tier classification explicitly NOT a validation label.
  * No hidden decision is allowed to turn numerical significance into proof.
  */
@@ -104,16 +124,17 @@ export function assessTrendEvidence(points,mk,lag1,lag1Pairs) {
     Math.abs(lag1)>lag1Threshold;
   const n=a.length;
   const allAvailable=block3.available&&block5.available;
+  const splitSensitivity=halfPeriodSensitivity(a);
   const conditionalSignal=mk.p<.05&&ci.excludesZero;
-  const sensitivityAgreement=allAvailable&&
-    block3.p<.05&&block5.p<.05;
+  const sensitivityAgreement=allAvailable&&block3.p<.05&&block5.p<.05&&
+    !splitSensitivity.oppositeSigns;
   return {
     status:!allAvailable?"insufficient_sensitivity":
        (conditionalSignal&&sensitivityAgreement?"consistent_exploratory":"inconclusive"),
     validatedSignificance:false,
     assumptionTested:"iid_monotonic_trend",
     alpha:.05, mkConditionalP:mk.p, mkConditionalBelowAlpha:mk.p<.05,
-    senCI:ci, blockTests:[block3,block5],
+    senCI:ci, blockTests:[block3,block5], halfPeriod:splitSensitivity,
     serialDiagnostic:{lag1,consecutivePairs:lag1Pairs,heuristicThreshold:lag1Threshold,
       flagged:serialFlag,interpretedAs:"diagnostic_not_independence_test"},
     n,contiguousYears,conditionalSignal,sensitivityAgreement,
