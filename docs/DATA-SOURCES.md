@@ -109,3 +109,8 @@ The original NASA POWER meteorology adapter is one provider in a larger mission/
 **Important:** GLDAS runoff in kg m⁻² s⁻¹ is not measured streamflow in m³/s; SWOT river discharge is an estimate for a named reach, available over a much shorter mission period. Neither is interchangeable with a generic point meteorological request.
 
 **Current code:** Only NASA POWER T2M and PRECTOTCORR are integrated; all other variables await actual API access, QA/unit and numerical reference tests. The 2026 challenge Resources list is **fully tracked**, not rejected.
+
+
+## Natural Earth geographic navigation — 2026-11-15
+
+The new 3D globe uses the Natural Earth 1:110m land boundaries (public domain, https://www.naturalearthdata.com/about/terms-of-use/ ) exclusively to draw coastlines, NOT as measured NASA climate data. The WebGL rendering library is Three.js r170, MIT. All colors and graticule lines are illustrative and must not be presented as NASA remotely sensed values.
