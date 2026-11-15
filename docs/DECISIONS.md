@@ -289,3 +289,14 @@ A second real-source run confirmed that the selected Limón point is classified 
 - **Status:** Comparator and extractor implemented; NASA GPM originals **not retrieved yet**; public deploy pending.
 - **Decision:** Require GPM Final 3IMERGM V07 0.1° monthly source (mm/hr), 12 complete months per year, identical requested site and full overlapping calendar years before comparing with NASA POWER PRECTOTCORR (mm/day annually accumulated). No fabricated observations, out-of-range pre-2000 expansion, unknown units, or unverified independent significance labels.
 - **Disclosure:** IMERG incorporates gauge calibration; this comparison is across NASA **products**, not independent ground truth. Convert raw NASA HDF5 locally using SHA-256, then explicitly import a provenance-labeled normalized JSON. Full method: [EXP-006](EXP-006-IMERG-CROSS-VALIDATION.md).
+
+## ADR-032 — Expand TELLURIS in five evidence-gated pillars, without fictional capabilities
+
+- **Date:** 2026-11-15 (Costa Rica)
+- **Status:** Accepted product roadmap; **C and E initial code complete with 82/82 site/Node CI tests**, site release and browser QA pending.
+- **Decision A:** extend EXP-006 NASA POWER vs GPM Final V07 only after downloading original authenticated NASA IMERG HDF5 and verifying source data, source granule hashes, overlapping complete years, units and spatial support.
+- **Decision B:** add genuine NASA scientific imagery to the geography-only Three.js globe only after verifying NASA product endpoints, dates, legends, raster georeferencing, usage rights and observable WebGL/mobile behavior; schematic colors are not measurements.
+- **Decision C:** retain validated source monthly observations, expose selected-period monthly anomalies and calendar-quarter differences, with explicit baseline and unit; defer source-independent significance, user-defined standard normals and advanced seasonal inference until validated.
+- **Decision D:** keep current evidence assistant accurately labeled rules-based. A generative assistant requires a backend runtime check, server-only provider secrets, bounded budget, source-grounded structured inputs, injection testing and claim validation. No model connection has been activated.
+- **Decision E:** offer a browser-local, visually formatted print/Save-as-PDF report from EXP-005 evidence JSON, maintaining raw series, source metadata, methodological uncertainty and HTML escaping; consider native PDF only after browser QA.
+- **Evidence:** [EXP-007 roadmap](EXP-007-FIVE-PILLARS.md); [successful CI #43764971107](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43764971107). Initial source commitment does **not** prove production deployment or climate significance.
