@@ -5,11 +5,13 @@ on:
     paths:
       - "website/public/**"
       - "website/tests/**"
+      - "scripts/deploy-bana-static.sh"
       - ".github/workflows/explorer-qa.yml"
   pull_request:
     paths:
       - "website/public/**"
       - "website/tests/**"
+      - "scripts/deploy-bana-static.sh"
       - ".github/workflows/explorer-qa.yml"
   workflow_dispatch:
 
@@ -25,6 +27,11 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: "22"
+      - name: Validate server deploy script (syntax and no-write comparison)
+        run: |
+          bash -n scripts/deploy-bana-static.sh
+          TARGET=$(mktemp -d)
+          TELLURIS_REPO="$PWD" TELLURIS_ROOT="$TARGET" bash scripts/deploy-bana-static.sh --check
       - name: Syntax-check browser source
         run: |
           node --check website/public/assets/science.js
