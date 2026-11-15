@@ -79,7 +79,7 @@ Original source code and project documentation are intended to be released under
 
 ## Experimental 3D / evidence interaction
 
-The Explorer now includes a geography-only WebGL globe, deterministic evidence question responses, and a descriptive Liberia/Limón archive comparison. Browser CDN access is required for pinned Three.js; climate colors are not plotted on the sphere. This is **not** generative AI or validated climate statistical inference. See [feature status and roadmap](docs/FEATURES-3D-EVIDENCE-AI.md). GitHub commits do not automatically publish to BanaHosting.
+The Explorer has a NASA GIBS geographic globe with dated MODIS Terra true-color and daytime land-surface-temperature visualization options (EXP-008, implemented in GitHub, production browser QA pending), deterministic evidence question responses and a descriptive Liberia/Limón archive comparison. Browser CDN and NASA GIBS access are required for textured WebGL imagery; no climate trend statistics are inferred from the image colors. This is **not** generative AI or validated climate statistical inference. See [feature status and roadmap](docs/FEATURES-3D-EVIDENCE-AI.md). GitHub commits do not automatically publish to BanaHosting.
 
 - [EXP-003C — spatial QA pre-screen of predeclared Caribbean MODIS candidates](docs/EXP-003C-SPATIAL-PRESCREEN.md)
 
@@ -91,4 +91,6 @@ The Explorer now includes a geography-only WebGL globe, deterministic evidence q
 
 ## EXP-007 — five-pillar extension (November 15, 2026)
 
-See the [A–E scientific expansion specification](docs/EXP-007-FIVE-PILLARS.md). **Initial code delivered for C and E:** an ES/EN monthly and calendar-quarter descriptive period comparison on complete-year NASA POWER live/original monthly input (not available for annual-only archive), plus an EXP-005 evidence-grounded print-ready report in HTML (browser Print → Save as PDF). These additions still require CI and BanaHosting/browser validation. **A** remains gated on real IMERG granules; **B** on verified NASA geospatial imagery; **D** on a secure server-side LLM proxy and provider credentials. Do not imply any of these blockers are solved.
+See the [A–E scientific expansion specification](docs/EXP-007-FIVE-PILLARS.md). **Initial code delivered for C and E:** an ES/EN monthly and calendar-quarter descriptive period comparison on complete-year NASA POWER live/original monthly input (not available for annual-only archive), plus an EXP-005 evidence-grounded print-ready report in HTML (browser Print → Save as PDF). These additions still require CI and BanaHosting/browser validation. **A** remains gated on real IMERG granules; **B** now has NASA GIBS source-tested imagery and requires public browser rendering/geo-registration QA (see EXP-008); **D** on a secure server-side LLM proxy and provider credentials. Do not imply any of these blockers are solved.
+
+- [EXP-008 — NASA GIBS scientific-layer globe with live original-map response checks](docs/EXP-008-NASA-GIBS-GLOBE.md)
