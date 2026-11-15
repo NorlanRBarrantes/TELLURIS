@@ -67,3 +67,15 @@ Image signatures were verified from original responses, **not** merely by succes
 - [NASA Worldview](https://worldview.earthdata.nasa.gov/)
 - [NASA GIBS MODIS legend directory](https://gibs.earthdata.nasa.gov/legends/)
 - [EXP-007 agreed research product stages](EXP-007-FIVE-PILLARS.md)
+
+## EXP-008 UV georegistration correction — 2026-11-15
+
+**Observed defect:** the BanaHosting operator supplied a production screenshot where the Liberia/Limón coordinate markers were plotted over West Africa while the selected coordinates remained (approximately 10.63°, -85.44°). The geometric marker, coastline and mouse picking share the TELLURIS geo-vector convention, so the error was isolated to the NASA WMS equirectangular texture transform.
+
+**Actual source:** [Three.js r170 SphereGeometry source](https://github.com/mrdoob/three.js/blob/r170/src/geometries/SphereGeometry.js) builds `x=-r*cos(phi)*sin(theta)`, `z=r*sin(phi)*sin(theta)` and `u=phi/(2*pi)`. Our geographic `globePoint` builds `x=r*cos(lat)*sin(lon)`, `z=r*cos(lat)*cos(lon)`. They imply `sphereU=(longitude+90)/360 mod 1`. NASA GIBS plate carrée raster implies `NASA_U=(longitude+180)/360 mod 1`.
+
+**Correction:** replace prior `texture.repeat.x=-1; texture.offset.x=.5` with `texture.repeat.set(1,1); texture.offset.set(0.25,0)`, keeping `RepeatWrapping`. This aligns Greenwich at 0°, Liberia at -85.44°, Limón at -83.03° and other anchor meridians. It applies consistently to Blue Marble, MODIS true color, and the transparent MODIS surface-temperature overlay. The earlier suggestion to reset offset to zero would still leave a 90° mismatch and is *not* adopted.
+
+**Regression protection:** a pure-function map-UV projection test checks direct NASA vs Three U correspondence at explicit longitudes; runtime source checks enforce the same transformation and reject negative repeat. The bilingual HTML bumps `globe.js` to `?v=exp008-uvfix-20261115`, and that module imports a versioned layer registry to bypass stale browser caches.
+
+**Validation status:** GitHub tests are required to pass again. The mathematical alignment is source-derived, but the final geography-on-image match in BanaHosting WebGL remains pending a new user screenshot; do not claim visual verification prematurely.

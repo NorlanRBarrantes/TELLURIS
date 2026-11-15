@@ -4,7 +4,7 @@
  * Three.js r170 (MIT); NASA GIBS; Natural Earth geography (public domain).
  */
 import {GLOBE_LAYERS,DEFAULT_GIBS_DATE,gibsWmsUrl,
-        gibsLayerDisclosure,validateGlobeDate} from "./globe-layers.js";
+        gibsLayerDisclosure,validateGlobeDate,GIBS_TEXTURE_U_OFFSET} from "./globe-layers.js?v=exp008-uvfix-20261115";
 
 const el=id=>document.getElementById(id);
 const stage=el("globe-stage"),status=el("globe-status");
@@ -209,10 +209,12 @@ async function boot(){
       loader.setCrossOrigin("anonymous");
       const promise=loader.loadAsync(url).then(texture=>{
         texture.colorSpace=T.SRGBColorSpace;
-        // NASA WMS image is lon-east, while default SphereGeometry UV is reversed.
+        // Longitude alignment: SphereGeometry U=(lon+90)/360 whereas
+        // NASA GIBS WMS U=(lon+180)/360. Shift +1/4 turn, never mirror.
+        // Also applies to the transparent LST overlay, preserving layer registration.
         texture.wrapS=T.RepeatWrapping;
-        texture.repeat.x=-1;
-        texture.offset.x=.5;
+        texture.repeat.set(1,1);
+        texture.offset.set(GIBS_TEXTURE_U_OFFSET,0);
         texture.anisotropy=Math.min(renderer.capabilities.getMaxAnisotropy(),4);
         texture.needsUpdate=true;
         return texture;

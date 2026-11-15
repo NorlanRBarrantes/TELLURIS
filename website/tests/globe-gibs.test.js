@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {
   GIBS_WMS,GLOBE_LAYERS,DEFAULT_GIBS_DATE,
-  validateGlobeDate,gibsWmsUrl,gibsTextureUV,gibsLayerDisclosure
+  validateGlobeDate,gibsWmsUrl,gibsTextureUV,sphereUVForLongitude,
+  GIBS_TEXTURE_U_OFFSET,gibsLayerDisclosure
 } from "../public/assets/globe-layers.js";
 
 test("NASA WMS 1.1.1 uses correct EPSG:4326 longitude-first bounds",()=>{
@@ -49,13 +50,25 @@ test("Reject unknown layer, impossible date and arbitrarily large images",()=>{
   assert.throws(()=>validateGlobeDate("2999-01-01"),/outside/);
 });
 
-test("NASA map texture east-positive alignment is not mirrored",()=>{
-  // Three SphereGeometry: longitude 0 -> u0, +90 -> u.75,
-  // -90 -> u.25, +/-180 -> u.5; NASA Plate Carrée expects .5,.75,.25,0.
-  assert.equal(gibsTextureUV(0),.5);
-  assert.equal(gibsTextureUV(.75),.75);
-  assert.equal(gibsTextureUV(.25),.25);
-  assert.equal(gibsTextureUV(.5),0);
+test("NASA WMS texture matches Three.js sphere geometry at known longitude anchors",()=>{
+  // Three r170: u=0 is longitude -90°, u=.25 Greenwich, u=.5 +90°.
+  // NASA equirectangular map: u=0 is -180°, u=.5 Greenwich.
+  assert.equal(GIBS_TEXTURE_U_OFFSET,.25);
+  assert.equal(sphereUVForLongitude(-90),0);
+  assert.equal(sphereUVForLongitude(0),.25);
+  assert.equal(sphereUVForLongitude(90),.5);
+  assert.equal(gibsTextureUV(0),.25);
+  assert.equal(gibsTextureUV(.25),.5);
+  assert.equal(gibsTextureUV(.5),.75);
+  assert.equal(gibsTextureUV(.75),0);
+  for(const longitude of [-179,-85.44,-83.03,-74.006,0,2.3522,90,179]){
+    const actual=gibsTextureUV(sphereUVForLongitude(longitude));
+    const expected=(longitude+180)/360;
+    assert.ok(Math.abs(actual-expected)<1e-12,
+      "NASA map misregistration at "+longitude+"°: "+actual+" != "+expected);
+  }
+  assert.throws(()=>sphereUVForLongitude(181),/Invalid longitude/);
+  assert.throws(()=>gibsTextureUV(NaN),/Invalid Three.js sphere U/);
 });
 
 test("Scientific disclosure does not confuse surface and air temperature",()=>{
@@ -75,8 +88,16 @@ test("Bilingual globe controls remain linked to the source-specific modules",()=
         "globe-analyze","globe-nasa-legend","globe-source-link"])
       assert.ok(page.includes('id="'+id+'"'),language+id);
     assert.ok(page.includes("globe.css?v=exp008-20261115"));
-    assert.ok(page.includes("globe.js?v=exp008-20261115"));
+    assert.ok(page.includes("globe.js?v=exp008-uvfix-20261115"));
     assert.ok(page.includes('option value="lst"'));
     assert.ok(page.includes('option value="truecolor"'));
   }
+});
+
+test("Runtime applies positive quarter-turn texture registration to NASA sources",()=>{
+  const js=readFileSync(new URL("../public/assets/globe.js",import.meta.url),"utf8");
+  assert.match(js,/texture\.repeat\.set\(1,1\)/);
+  assert.match(js,/texture\.offset\.set\(GIBS_TEXTURE_U_OFFSET,0\)/);
+  assert.ok(!js.includes("texture.repeat.x=-1"),"Reverse/negative U must never return");
+  assert.match(js,/globe-layers\.js\?v=exp008-uvfix-20261115/);
 });

@@ -48,13 +48,23 @@ export function gibsWmsUrl(id,{date=DEFAULT_GIBS_DATE,width=1536}={}) {
   if(layer.format==="image/png")query.set("TRANSPARENT","TRUE");
   return GIBS_WMS+"?"+query.toString();
 }
-/* Three SphereGeometry UV uses a seam at longitude zero and reverses U
- * relative to an east-positive 0°-centred equirectangular NASA WMS image.
- * Set RepeatWrapping and U' = 0.5 - U to align Washington, Liberia and Limón
- * with the geometry, rather than displaying mirrored/shifted continents.
+/* Three.js r170 SphereGeometry (phiStart=0) creates:
+ *   x=-cos(2πu)sinθ, z=sin(2πu)sinθ.
+ * TELLURIS globePoint uses x=cos(lat)sin(lon), z=cos(lat)cos(lon),
+ * so its geographic longitude maps to SphereGeometry u=(lon+90°)/360°.
+ * A geographic NASA GIBS EPSG:4326 WMS raster has U=(lon+180°)/360°.
+ * Thus the NASA WMS texture must shift +0.25 U WITHOUT mirroring.
+ * Pin the offset here and test known locations to prevent Africa/Costa Rica drift.
  */
+export const GIBS_TEXTURE_U_OFFSET=0.25;
+const wrap01=value=>((value%1)+1)%1;
+export function sphereUVForLongitude(lon){
+  if(!Number.isFinite(lon)||lon < -180||lon > 180)throw Error("Invalid longitude");
+  return wrap01((lon+90)/360);
+}
 export function gibsTextureUV(threeU) {
-  return ((0.5-threeU)%1+1)%1;
+  if(!Number.isFinite(threeU))throw Error("Invalid Three.js sphere U");
+  return wrap01(threeU+GIBS_TEXTURE_U_OFFSET);
 }
 export function gibsLayerDisclosure(id,lang="es",date=DEFAULT_GIBS_DATE) {
   const es=lang!=="en";
