@@ -300,3 +300,12 @@ A second real-source run confirmed that the selected Limón point is classified 
 - **Decision D:** keep current evidence assistant accurately labeled rules-based. A generative assistant requires a backend runtime check, server-only provider secrets, bounded budget, source-grounded structured inputs, injection testing and claim validation. No model connection has been activated.
 - **Decision E:** offer a browser-local, visually formatted print/Save-as-PDF report from EXP-005 evidence JSON, maintaining raw series, source metadata, methodological uncertainty and HTML escaping; consider native PDF only after browser QA.
 - **Evidence:** [EXP-007 roadmap](EXP-007-FIVE-PILLARS.md); [successful CI #43764971107](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43764971107). Initial source commitment does **not** prove production deployment or climate significance.
+
+## ADR-033 — Replace schematic navigation globe with source-authentic NASA GIBS visualizations
+
+- **Date:** 2026-11-15 (Costa Rica)
+- **Status:** EXP-008 implemented and source-verified on GitHub; production deployment/browser validation pending.
+- **Decision:** Retain the existing Three.js geography selector and add NASA GIBS `BlueMarble_NextGeneration`, `MODIS_Terra_CorrectedReflectance_TrueColor` (dated) and `MODIS_Terra_L3_Land_Surface_Temp_Daily_Day` (dated, transparent); official NASA LST legend, WMS 1.1.1 source-specific metadata/axis handling, accessible and bilingual navigation, and a numerical-research handoff to the existing POWER form.
+- **Scientific boundary:** A NASA rendered WMS image may describe *where a product is visualized* but does not supply numerical per-cell temperatures, Theil–Sen slopes, p-values, year-over-year changes, causality or source-homogeneity validation. MODIS LST/K is not POWER T2M. No datum may be fabricated when imagery fails; preserve geographic fallback.
+- **Verified evidence:** Original NASA GIBS WMS **1536×768** source test [#43767438162](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43767438162) returned three valid JPEG/PNG images, HTTP 200 and CORS `*`. The source website suite [#43767427309](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43767427309) passed **89/89** unit/site tests plus localhost HTTP.
+- **Pending:** real ES/EN browser UX, on-site NASA imagery texture/rotation alignment, mobile, 3D controls, source legend and provenance visibility. The public site was still on prior EXP-007 when the source changed. See [EXP-008 method and release gates](EXP-008-NASA-GIBS-GLOBE.md).
