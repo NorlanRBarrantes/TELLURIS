@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="../../assets/globe.css?v=exp008-20261115">
 <link rel="stylesheet" href="../../assets/observatory.css?v=exp009-20261115">
 <script type="module" src="../../assets/observatory.js?v=exp009-20261115"></script>
-<script type="module" src="../../assets/globe.js?v=exp008-uvfix-20261115"></script>
+<script type="module" src="../../assets/globe.js?v=exp009-atmos-20261115"></script>
 </head><body>
 <a class="skip" href="#explorer">Ir al explorador</a>
 <header class="header"><div class="container nav">
@@ -40,7 +40,7 @@
       <input id="globe-date" type="date" min="2000-03-01" value="2024-07-15">
     </label>
   </div>
-  <div class="globe-viewport"><div id="globe-stage" class="globe-stage" role="group" aria-label="Globo terrestre 3D de NASA; controles de teclado y botones de ubicación disponibles"></div><span class="globe-viewport-label">OBSERVACIÓN NASA · VISTA GEOGRÁFICA</span></div>
+  <div class="globe-viewport"><div id="globe-stage" class="globe-stage" role="group" aria-label="Globo terrestre 3D de NASA; controles de teclado y botones de ubicación disponibles"></div><canvas id="globe-weather-canvas" aria-hidden="true"></canvas><div id="globe-hover-tooltip" class="globe-hover-tooltip" role="tooltip" hidden></div><span class="globe-viewport-label">OBSERVACIÓN NASA · VISTA GEOGRÁFICA</span></div>
   <div class="globe-command">
     <div class="globe-camera-controls" role="group" aria-label="Controles de vista 3D">
       <button type="button" id="globe-zoom-in" aria-label="Acercar">+</button>
@@ -53,6 +53,9 @@
       <button type="button" data-globe-location="limon">Limón · Caribe</button>
     </div>
   </div>
+  <div class="globe-weather-toolbar"><label for="globe-weather-mode">Atmósfera ilustrativa
+      <select id="globe-weather-mode"><option value="none">Sin animación</option><option value="wind">Viento · requiere datos NASA</option><option value="rain">Lluvia · requiere datos NASA</option></select></label>
+    <p id="globe-weather-note">Las animaciones requieren observaciones anuales NASA POWER de la variable correspondiente. No representan el tiempo actual ni un campo espacial de viento o lluvia.</p></div>
   <div class="globe-selected"><div><small>UBICACIÓN SELECCIONADA</small><strong id="globe-selection">Liberia · 10.630°, -85.440°</strong></div><button type="button" id="globe-analyze">Investigar en NASA POWER ↗</button></div>
   <p id="globe-status" class="globe-status" role="status" aria-live="polite">Cargando globo geográfico…</p>
   <p id="globe-layer-meta" class="globe-layer-meta">NASA Blue Marble es una imagen de referencia, no una medición puntual.</p>
