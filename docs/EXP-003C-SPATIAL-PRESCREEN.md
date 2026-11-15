@@ -68,3 +68,18 @@ Do not promote inland source coordinates to the NASA MODIS public Explorer until
 - NASA MCD12Q1 landcover IGBP 500m guide: https://lpdaac.usgs.gov/documents/1409/MCD12_User_Guide_V61.pdf
 - NASA POWER provider model context: https://power.larc.nasa.gov/docs/methodology/data/sources_meteorology/
 - Prior real MODIS source QA: https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43740917213
+
+## Actual first-run evidence and transient NASA HTTP issue
+
+[First EXP-003C source acquisition run #43742780167](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43742780167) passed **8 synthetic tests** and acquired actual MOD13Q1 `A2023001` 9×9 response windows for the **four predeclared Caribbean sites**. Their central 3×3 source window results were:
+
+| Site | Land-class-1 pixels / 9 | NASA QA-clean NDVI/EVI pixels / 9 | Interpretation |
+| --- | ---: | ---: | --- |
+| Limón original | **0/9** | **0/9** | Explicit negative shoreline control. |
+| Río Banano candidate | **9/9** | **9/9** | Supports **single-composite terrestrial QA eligibility**, no ecological classification yet. |
+| Beverley candidate | **9/9** | **9/9** | Supports **single-composite terrestrial QA eligibility**. |
+| Hitoy candidate | **9/9** | **9/9** | Supports **single-composite terrestrial QA eligibility**, but its latitude lies outside the report's nominal MERRA-2 cell. |
+
+The **fifth, optional Liberia reference** returned NASA **HTTP 504 Gateway Timeout** even after retry. This made the first workflow's terminal status `failure`, **despite the successful four actual-source Caribbean site observations**. Their original NASA data and `site_prescreen.json` were still uploaded as a workflow artifact. Since Liberia already has a separate 69-record validated land QA archive in [EXP-003B](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43740917213), the follow-up workflow intentionally **reuses that prior independent reference** rather than re-querying Liberia and making coastal science depend on a redundant 504-sensitive request.
+
+**The observed 9/9 result is not 95% historic land cover, confirmed evergreen forest, 20 valid years, a measured environmental trend, or NASA POWER climate-series identity.** Every sample remains a predeclared candidate until independently verified.

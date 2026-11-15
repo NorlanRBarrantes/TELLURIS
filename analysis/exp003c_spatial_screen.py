@@ -24,7 +24,6 @@ SITES={
     "rio_banano_candidate":(9.8850,-83.1350),
     "beverley_candidate":(9.9650,-83.1150),
     "hitoy_cerere_candidate":(9.6710,-83.0240),
-    "liberia_reference":(10.6300,-85.4400),
 }
 BANDS=("250m_16_days_pixel_reliability","250m_16_days_VI_Quality",
        "250m_16_days_NDVI","250m_16_days_EVI")
@@ -150,6 +149,13 @@ def run(dest,modis_date=DATE,workers=2):
             "source_sample":"Single MODIS 16-day composite; 9x9 returned for 1km radius if API behavior matches documentation; 3x3 central subset",
             "landcover_api_check":landcover_product_probe(),
             "sites":{}}
+    print("LANDCOVER_METADATA",result["landcover_api_check"]["status"],
+          "LC_Type1",result["landcover_api_check"].get("LC_Type1_available"),flush=True)
+    result["external_reference"]=(
+        "Liberia historical QA already independently verified 69/69 land-class-1 "+
+        "in EXP-003B run https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43740917213. "+
+        "Initial EXP-003C reference API call returned HTTP 504; no need to refetch it "+
+        "to screen the four separately predeclared Caribbean locations.")
     with ThreadPoolExecutor(max_workers=workers) as pool:
         futures={pool.submit(inspect,name,location,dest,modis_date):name
                  for name,location in SITES.items()}

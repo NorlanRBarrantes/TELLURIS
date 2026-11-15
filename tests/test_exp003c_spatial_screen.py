@@ -61,3 +61,7 @@ class SpatialScreenTests(unittest.TestCase):
 
 if __name__=="__main__":
     unittest.main()
+
+    def test_site_screen_has_four_predeclared_caribbean_points(self):
+        self.assertEqual(set(s.SITES),{"limon_original","rio_banano_candidate",
+                                      "beverley_candidate","hitoy_cerere_candidate"})
