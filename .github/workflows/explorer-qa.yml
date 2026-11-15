@@ -37,6 +37,7 @@ jobs:
           node --check website/public/assets/science.js
           node --check website/public/assets/explorer.js
           node --check website/public/assets/globe.js
+          node --check website/public/assets/globe-layers.js
           node --check website/public/assets/evidence.js
           node --check website/public/assets/catalog.js
           node --check website/public/assets/inference.js
@@ -73,6 +74,10 @@ jobs:
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/explore/ | grep -q 'id="inference-panel"'
           curl --fail --silent --show-error http://127.0.0.1:8765/en/telluris/explore/ | grep -q 'id="download-report"'
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/ne_110m_land.geojson | grep -q 'FeatureCollection'
+          curl --fail --silent --show-error http://127.0.0.1:8765/assets/globe-layers.js | grep -q 'GIBS_WMS'
+          curl --fail --silent --show-error http://127.0.0.1:8765/assets/globe.css | grep -q 'globe-card-v2'
+          curl --fail --silent --show-error http://127.0.0.1:8765/telluris/explore/ | grep -q 'id="globe-layer"'
+          curl --fail --silent --show-error http://127.0.0.1:8765/en/telluris/explore/ | grep -q 'id="globe-nasa-legend"'
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/explore/ | grep -q 'globe-stage'
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/ | grep -q "TELLURIS"
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/catalog/ | grep -q 'lang="es"'
