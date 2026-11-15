@@ -51,3 +51,8 @@ The catalog's `C23` card (NDVI/EVI) now links to a successful [real NASA ORNL MO
 ## New interactive geography / interpretation module
 
 Both Explorer language routes now have a WebGL geographic globe, with a Natural Earth public-domain coastlines file and a pinned Three.js CDN dependency. The globe maps navigation points, not measured values. The deterministic evidence assistant uses only existing computed statistics and marks climate significance provisional. The archive supports an explicitly descriptive Liberia/Limón point comparison; generative AI is not connected. See docs/FEATURES-3D-EVIDENCE-AI.md for accepted scope and remaining verification.
+
+
+## CI verification — 2026-11-15
+
+GitHub Actions run [#43739956296](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43739956296) completed with SUCCESS at source commit 39d3b654af86e8608f813f8535be90d67e92550a. Reported successful steps: browser-source syntax checks (including globe and evidence), Node scientific/site tests, static localhost HTTP smoke checks (including Natural Earth asset), and site package generation. This confirms automated source/build checks only: manual 3D rendering on target browsers and deployment on BanaHosting remain unverified.
