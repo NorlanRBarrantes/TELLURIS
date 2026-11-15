@@ -242,3 +242,7 @@ Approved: implement a 3D geographic navigation layer, deterministic source-groun
 - **Unexpected finding:** Limón's chosen single MODIS pixel fails the experimental strict all-land filter on all 69 composite dates. Investigate its specific NASA land/water class and consider a predeclared inland alternative. Do not describe this as a region-wide NDVI failure.
 - **Rejected:** An automatic solar-zenith regression "correction", unvalidated Hamed–Rao p-values, causal conclusions, asserting 8/3 eliminates MNAR, or claiming cross-sensor tests already executed.
 - **Methods and caveats:** [EXP-003B method audit](EXP-003B-MOD13Q1-QA.md).
+
+### ADR-026 geographic follow-up (same date)
+
+A second real-source run confirmed that the selected Limón point is classified 67 times as MOD13Q1 QA shoreline (code 2) and twice as shallow ocean (code 0), while Liberia is land (code 1) across all 69 composites. Do not relax QA to force a vegetation trend at the shoreline point. Evaluate an inland land pixel under a separate source-provenance record instead. Evidence: [#43740917213](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43740917213).
