@@ -149,6 +149,7 @@ def audit(root):
         byyear=defaultdict(list)
         for r in rows:byyear[r["year"]].append(r)
         total=Counter(reason for r in rows for reason in r["rejections"])
+        land_classes=Counter(str((r["detailed"]>>11)&7) for r in rows)
         results={}
         for measure in MEASURES:
             year_comparisons=[]
@@ -166,7 +167,8 @@ def audit(root):
         report["locations"][loc]={
             "records":len(rows),"summary_qa_accepted":sum(r["rank"] in (0,1) for r in rows),
             "strict_qa_accepted":sum(not r["rejections"] for r in rows),
-            "rejection_reason_counts":dict(total),"indicators":results}
+            "rejection_reason_counts":dict(total),
+            "land_water_qa_class_counts":dict(land_classes),"indicators":results}
     return report
 
 
@@ -180,7 +182,8 @@ def main():
     opts.output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     for site,entry in result["locations"].items():
         print("QUALITY",site,"records",entry["records"],"summary",entry["summary_qa_accepted"],
-              "strict",entry["strict_qa_accepted"],"reasons",entry["rejection_reason_counts"])
+              "strict",entry["strict_qa_accepted"],"land_water_classes",entry["land_water_qa_class_counts"],
+              "reasons",entry["rejection_reason_counts"])
         for metric,details in entry["indicators"].items():
             years=details["comparison"]
             print("YEARS",site,metric,
