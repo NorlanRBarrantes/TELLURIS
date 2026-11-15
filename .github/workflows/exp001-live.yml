@@ -1,0 +1,62 @@
+name: EXP-001 NASA POWER live acquisition
+
+on:
+  push:
+    paths:
+      - ".github/workflows/exp001-live.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  nasa-source-acquisition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v5
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install scientific dependencies
+        run: python -m pip install -r analysis/requirements-exp001.txt
+      - name: Retrieve NASA POWER and perform exploratory calculations
+        run: python analysis/exp001_power.py --run --start 1985 --end 2025 --community RE
+      - name: Print verifiable acquisition summary
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          file = Path("data/raw/exp001/exp001_results.json")
+          result = json.loads(file.read_text(encoding="utf-8"))
+          print("NASA POWER EXP-001 — live retrieval completed")
+          for name, loc in result["locations"].items():
+              print(name, "requested=", loc["requested_coords"])
+              print(" source=", loc["qa"].get("source_header", {}).get("sources"))
+              print(" units=", loc["qa"]["units_source"])
+              print(" returned=", loc["qa"].get("coordinates_returned"))
+              print(" years=", loc["qa"]["n_complete_years"])
+              print(" earliest/latest=", {
+                  v: [loc["annual"][v][0]["year"], loc["annual"][v][-1]["year"]]
+                  if loc["annual"][v] else []
+                  for v in ["T2M", "PRECTOTCORR"]
+              })
+              for v, a in loc["analysis"].items():
+                  print(" ", v, "status=", a["status"],
+                        "slope_per_decade=", a.get("trend", {}).get("slope_per_decade"),
+                        "independence_unverified_MK_p=", a.get("mann_kendall_original", {}).get("p_value"))
+          for var, record in result["paired_difference"].items():
+              print("PAIRED", var, "n=", len(record["common_years"]),
+                    "slope_per_decade=", record["analysis"].get("trend", {}).get("slope_per_decade"))
+          print("All p-values exploratory. No serial-independence assurance.")
+          PY
+      - name: Archive NASA source JSON and reproducible results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exp001-nasa-power-originals
+          path: data/raw/exp001/
+          if-no-files-found: warn
+          retention-days: 30
