@@ -1,0 +1,96 @@
+/* TELLURIS research catalog · descriptive only; no unsupported data endpoints. */
+const lang=document.documentElement.lang==="en"?"en":"es";
+const tr=(es,en)=>lang==="es"?es:en;
+const el=id=>document.getElementById(id);
+const search=el("catalog-search"),group=el("catalog-group"),kind=el("catalog-kind");
+const grid=el("catalog-grid"),more=el("catalog-more"),summary=el("catalog-summary");
+let entries=[],shown=12;
+
+function itemCard(entry) {
+  const card=document.createElement("article");
+  card.className="catalog-card";
+  const head=document.createElement("div");head.className="catalog-card-top";
+  const type=document.createElement("span");type.className="catalog-type";
+  type.textContent=entry.category==="connected"?tr("Variable NASA disponible","Available NASA variable"):
+    entry.category==="derived"?tr("Indicador derivado","Derived indicator"):
+    tr("Variable o fenómeno candidato","Research variable or phenomenon");
+  const badge=document.createElement("span");
+  badge.className=entry.category==="connected"?"catalog-badge live":"catalog-badge";
+  badge.textContent=entry.category==="connected"?tr("Conectada","Connected"):
+    entry.status==="partial_exploratory"?tr("Prototipo exploratorio","Exploratory prototype"):
+    tr("En investigación","Research only");
+  head.append(type,badge);
+  const name=document.createElement("h3");name.textContent=lang==="es"?entry.name_es:entry.name_en;
+  const explain=document.createElement("p");
+  explain.className="catalog-description";
+  explain.textContent=entry.category==="connected"?
+    (entry.id==="T2M"?tr("Temperatura del aire a dos metros sobre la superficie, derivada de datos NASA POWER.","Air temperature two meters above the surface, derived from NASA POWER data."):
+     tr("Tasa de precipitación corregida del reanálisis MERRA-2. Las tendencias requieren evaluar homogeneidad.","Bias-corrected MERRA-2 precipitation rate. Long-term trends require homogeneity checks.")):
+    entry.category==="derived"?(lang==="es"?entry.description_es:tr("Requiere datos y validación metodológica específica.","Requires suitable data and separately validated methods.")):
+    (lang==="es"?entry.source_phrase_es:tr("Producto o medición candidata por verificar.","Candidate product or measurement to be verified."));
+  const small=document.createElement("div");small.className="catalog-card-bottom";
+  small.textContent=entry.category==="connected"?
+    "NASA POWER · MERRA-2":
+    entry.category==="derived"?tr("Cálculo metodológico propuesto","Proposed computed indicator"):
+    tr("Área: ","Domain: ")+(lang==="es"?entry.domain_es:entry.domain_en);
+  card.append(head,name,explain,small);
+  if(entry.category==="connected"){
+    const link=document.createElement("a");link.href=lang==="es"?"/telluris/explore/":"/en/telluris/explore/";
+    link.className="catalog-open";link.textContent=tr("Abrir en explorador ↗","Open in explorer ↗");
+    card.append(link);
+  } else if(entry.category==="research"){
+    const foot=document.createElement("p");foot.className="catalog-note";
+    foot.textContent=tr("Fuentes propuestas para esta familia: ","Candidate sources for this group: ")+entry.source_candidates.join(" · ");
+    card.append(foot);
+  }
+  return card;
+}
+function matches(entry,q,grp,type){
+ if(type!=="all"&&entry.category!==type)return false;
+ if(grp!=="all"&&entry.group!==grp)return false;
+ if(!q)return true;
+ const txt=[entry.name_es,entry.name_en,entry.id,entry.group,entry.source_phrase_es,entry.description_es,
+   ...(entry.source_candidates||[])].filter(Boolean).join(" ").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+ return txt.includes(q);
+}
+function render() {
+ const q=search.value.trim().normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+ const matching=entries.filter(e=>matches(e,q,group.value,kind.value));
+ grid.replaceChildren(...matching.slice(0,shown).map(itemCard));
+ summary.textContent=tr("Resultados: ","Results: ")+matching.length+" · "+tr("Mostrando ","Showing ")+Math.min(shown,matching.length);
+ more.hidden=shown>=matching.length;
+ if(!matching.length) {
+   const empty=document.createElement("p");empty.className="catalog-empty";
+   empty.textContent=tr("No hay coincidencias. Prueba otra palabra o categoría.","No matches. Try another keyword or category.");
+   grid.append(empty);
+ }
+}
+for(const input of [search,group,kind])input.addEventListener(input===search?"input":"change",()=>{shown=12;render();});
+more.addEventListener("click",()=>{shown+=12;render();});
+try{
+ const response=await fetch("/telluris/catalog/data/catalog.json",{cache:"no-cache"});
+ if(!response.ok)throw new Error("HTTP "+response.status);
+ const data=await response.json();
+ if(data.schema!=="telluris.catalog.2026-11-15.v1"||data.connected.length!==2||
+    data.candidates.length!==49||data.indicators.length!==10)throw new Error("Invalid catalog schema or entries.");
+ entries=[
+ ...data.connected.map(e=>({...e,category:"connected",group:"connected"})),
+ ...data.candidates.map(e=>({...e,category:"research",group:e.domain_es,status:e.implementation_status})),
+ ...data.indicators.map(e=>({...e,category:"derived",group:"indicators",status:e.implementation_status,
+ name_en:({1:"Climate anomalies",2:"Decadal trends",3:"Extreme heat days",4:"Standardized precipitation index (SPI)",5:"Consecutive dry days",6:"Temperature range",7:"Vapor pressure deficit (VPD)",8:"Multivariable correlations",9:"Change points",10:"Statistical uncertainty"})[e.number]}))
+ ];
+ for(const g of data.groups){
+   const option=document.createElement("option");
+   option.value=g.es;option.textContent=lang==="es"?g.es:g.en;group.append(option);
+ }
+ for(const [value,label] of [["connected",tr("Variables conectadas","Connected variables")],["indicators",tr("Indicadores derivados","Derived indicators")]]){
+   const option=document.createElement("option");option.value=value;option.textContent=label;group.append(option);
+ }
+ el("count-live").textContent=data.connected.length;
+ el("count-research").textContent=data.candidates.length;
+ el("count-derived").textContent=data.indicators.length;
+ render();
+}catch(error){
+ summary.textContent=tr("No se pudo cargar el catálogo: ","Unable to load catalog: ")+error.message;
+ summary.classList.add("catalog-error");
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark"><meta name="theme-color" content="#07121d">
+<title>Catálogo científico de TELLURIS — 49 campos de investigación | Project Uriel</title>
+<meta name="description" content="Explora 49 variables y fenómenos candidatos, 10 indicadores derivados y 2 variables NASA conectadas. Inventario científico de Project Uriel con estados verificables.">
+<link rel="canonical" href="https://projecturiel.earth/telluris/catalog/">
+<link rel="alternate" hreflang="es-CR" href="https://projecturiel.earth/telluris/catalog/">
+<link rel="alternate" hreflang="en" href="https://projecturiel.earth/en/telluris/catalog/">
+<link rel="alternate" hreflang="x-default" href="https://projecturiel.earth/telluris/catalog/">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/catalog.css">
+<script type="module" src="../../assets/catalog.js"></script>
+</head>
+<body>
+<a class="skip" href="#catalog">Ir al catálogo</a>
+<header class="header"><div class="container nav">
+<a class="brand" href="/" aria-label="Inicio de Project Uriel"><svg viewBox="0 0 42 42" fill="none" aria-hidden="true"><path d="M21 3 39 21 21 39 3 21 21 3Z" stroke="currentColor" stroke-width="1.35"/><circle cx="21" cy="21" r="8" stroke="currentColor" stroke-width="1.35"/><path d="M12 21h18M21 12v18" stroke="currentColor"/><circle cx="21" cy="21" r="2.3" fill="currentColor"/></svg><span><strong>PROJECT URIEL</strong><small>EARTH · TECHNOLOGY · DISCOVERY</small></span></a>
+<nav class="nav-links" aria-label="Navegación"><a href="/telluris/">TELLURIS</a><a href="/telluris/explore/">Explorador</a><a href="https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/" target="_blank" rel="noopener noreferrer">Desafío NASA</a></nav>
+<div class="nav-actions"><div class="language-switch" role="group" aria-label="Seleccionar idioma"><a href="/telluris/catalog/" lang="es" hreflang="es" title="Español" class="current" aria-current="page">ES</a><a href="/en/telluris/catalog/" lang="en" hreflang="en" title="English">EN</a></div><a class="nav-cta" href="/telluris/explore/">Abrir explorador ↗</a></div>
+</div></header>
+<main class="container catalog-layout" id="catalog">
+<section class="catalog-hero">
+<p class="eyebrow mint">TELLURIS / ENCICLOPEDIA EN DESARROLLO</p>
+<h1>Un planeta. Muchas preguntas.<br><em>Un catálogo con evidencia.</em></h1>
+<p>El inventario de Project Uriel reúne variables, fenómenos e indicadores para explorar cambios en el sistema terrestre. Los temas de investigación no son funcionalidades disponibles: cada fuente necesita validación antes de activarse.</p>
+<div class="catalog-hero-actions"><a href="/telluris/explore/" class="catalog-cta">Investigar datos NASA disponibles <span aria-hidden="true">↗</span></a><a href="/telluris/catalog/data/catalog.json" class="catalog-secondary" download>Ver inventario JSON</a></div>
+</section>
+<section class="catalog-stats" aria-label="Resumen del catálogo">
+<div class="catalog-stat"><strong id="count-live">2</strong><span>Variables conectadas</span></div>
+<div class="catalog-stat"><strong id="count-research">49</strong><span>Temas en investigación</span></div>
+<div class="catalog-stat"><strong id="count-derived">10</strong><span>Indicadores propuestos</span></div>
+</section>
+<section class="catalog-controls" aria-labelledby="catalog-controls-title">
+<div class="catalog-bar"><div><p class="eyebrow mint">INVESTIGAR / DESCUBRIR</p><h2 id="catalog-controls-title">Explora las posibilidades</h2></div><span class="catalog-state">Inventario · no es un menú de APIs</span></div>
+<div class="catalog-filters">
+<div><label for="catalog-search">Buscar variable, fenómeno o fuente</label><input id="catalog-search" type="search" placeholder="Ej.: incendios, ríos, ozono…" autocomplete="off"></div>
+<div><label for="catalog-group">Sistema terrestre</label><select id="catalog-group"><option value="all">Todas las áreas</option></select></div>
+<div><label for="catalog-kind">Estado / tipo</label><select id="catalog-kind"><option value="all">Todo el catálogo</option><option value="connected">Conectadas a NASA</option><option value="research">Candidatas en investigación</option><option value="derived">Indicadores derivados</option></select></div>
+</div>
+<div class="catalog-results-line"><p id="catalog-summary" role="status" aria-live="polite">Cargando inventario científico…</p><span class="catalog-info">Los datos nuevos no están disponibles hasta validar su conector.</span></div>
+<div id="catalog-grid" class="catalog-grid" aria-live="off"></div>
+<button id="catalog-more" type="button" class="catalog-more" hidden>Mostrar más resultados</button>
+</section>
+<section class="catalog-ethics"><p class="eyebrow">CRITERIO CIENTÍFICO</p><h2>Un catálogo amplio no equivale a 49 integraciones.</h2><p>Para activar una variable verificamos misión o proveedor, producto exacto, fechas, resolución, unidades, valores faltantes, máscaras de calidad, evidencia estadística y condiciones de uso. Los catálogos de eventos —como los sísmicos— requieren métodos distintos de las series climáticas.</p><a href="/telluris/">Conoce el método de TELLURIS ↗</a></section>
+<footer class="catalog-foot"><strong>PROJECT URIEL / TELLURIS</strong><span>Proyecto independiente de NASA Space Apps 2026; no avalado por NASA.</span></footer>
+</main>
+</body></html>
