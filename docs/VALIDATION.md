@@ -27,12 +27,12 @@
 
 | ID | Check | Status | Evidence |
 | --- | --- | --- | --- |
-| SCI-001 | POWER live retrieval for selected point | Pending | Add request + timestamp + valid response metadata |
-| SCI-002 | Units and temporal interpretation | Pending | Source metadata, aggregation example |
+| SCI-001 | POWER live retrieval for selected point | **Passed — real NASA source** | [EXP-001 retrieval run #43656774519](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43656774519), API v2.10.0 |
+| SCI-002 | Units and temporal interpretation | **Passed — source metadata checked** | Actual T2M C, PRECTOTCORR mm/day, year 13 excluded; [EXP-001](EXPERIMENT-001.md) |
 | SCI-003 | Missing/fill and incomplete-year handling | Pending | Fixture + expected result |
 | SCI-004 | OLS slope against independent reference | Pending | Reproducible fixture/test |
 | SCI-005 | Mann-Kendall implementation and ties | Pending | Independent library comparison |
-| SCI-006 | Sen's slope and units-per-decade scaling | Pending | Independent reference comparison |
+| SCI-006 | Sen's slope and units-per-decade scaling | **Passed — independent numerical comparison only** | Re-aggregation of original NASA JSON using SciPy; [EXP-001](EXPERIMENT-001.md) |
 | SCI-007 | Serial correlation / assumptions disclosed | Pending | Diagnostic or bounded caveat |
 | SCI-008 | Geographic footprint and labeling | Pending | Source resolution + selected coordinates |
 | UX-001 | Error, loading and no-data states | Pending | Repro steps + screenshot |
@@ -45,7 +45,7 @@
 
 | ID | Check | Status | Evidence |
 | --- | --- | --- | --- |
-| SCI-009 | NASA POWER monthly PRECTOTCORR units and day-weighted totals | Pending | NASA metadata + verified month/year calculation |
+| SCI-009 | NASA POWER monthly PRECTOTCORR units and day-weighted totals | **Passed — source units and numerical aggregation** | Actual NASA 1985–2025 source and independent SciPy reconstruction; physical interpretation still provisional |
 | SCI-010 | Two requested locations resolve to distinct effective source grid samples | Pending | Coordinates and grid metadata |
 | SCI-011 | Same-period, same-variable comparison and missing-data alignment | Pending | Reproducible two-location fixture |
 | SCI-012 | Annual vs seasonal Mann-Kendall behavior and slope units | Pending | Independent tests and method comparison |

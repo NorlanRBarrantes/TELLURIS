@@ -35,12 +35,12 @@ curl -sSI https://projecturiel.earth/sitemap.xml
 
 ## Validation and integrity
 
-- No live NASA data is retrieved. The interactive question builder drafts **questions only**; it never computes a trend.
-- QA claim (11 synthetic tests passed) comes from TELLURIS `docs/VALIDATION.md`, 2026-11-14 and is explicitly not a real-data result.
+- The legacy question builder drafts questions only, but the NEW `/telluris/explore/` prototype calculates exploratory trends from authentic archived NASA data and supports live NASA POWER requests. The archive is verified by source metadata; inferential climate validity still requires independent study.
+- QA: 21 synthetic Python tests and 12 browser-engine JavaScript tests passed in separate GitHub Actions workflows. Independently retrieved NASA data are archived as EXP-001; the JS original MK p-values remain exploratory.
 - External source references: [NASA challenge](https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/), [NASA POWER](https://power.larc.nasa.gov/), [NASA POWER monthly API](https://power.larc.nasa.gov/docs/services/api/temporal/monthly/).
 - Design and OpenGraph images are original assets. No NASA insignia or NASA-sourced imagery is used.
 - The connected GitHub source repository `NorlanRBarrantes/TELLURIS` was **private** at preparation time and is not linked from the public pages.
-- This bundle is not the planned functioning scientific product; it is a public introduction and a useful interactive research-question draft.
+- This bundle now includes a working experimental scientific explorer. Public deployment and independent verification of the in-browser NASA request remain pending.
 
 ## Repository alignment checklist
 

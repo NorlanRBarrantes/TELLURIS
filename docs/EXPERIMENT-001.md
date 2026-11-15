@@ -27,6 +27,8 @@ An independent local re-aggregation of the **original monthly JSON**, using exac
 
 **Do not equate a working static app or numerical algorithm parity with scientifically validated climate inference or verified public deployment.**
 
+**Historical notes further below:** Some earlier sections still describe the initial inability to access NASA; that stage was superseded by the verified 2026-11-15 UTC acquisition recorded above. Their old test statuses are retained as an audit trail, not current status.
+
 ## Scientific question
 
 Investigate historical trends in T2M temperature and PRECTOTCORR precipitation at two NASA POWER model/grid samples near Liberia (10.63 N, -85.44 W) and Limón (9.99 N, -83.03 W). These coordinates are provisional point requests, not in-situ station measurements or samples representing entire provinces.
