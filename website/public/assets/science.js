@@ -12,7 +12,9 @@ export const VARIABLES = Object.freeze({
       "C"
     ],
     "aggregation": "mean",
-    "fromAnnual": 1
+    "fromAnnual": 1,
+    "descriptionEs": "Temperatura del aire modelada a dos metros; la media anual pondera los meses según su duración.",
+    "descriptionEn": "Modeled air temperature at two meters; the annual mean weights each month by its length."
   },
   "PRECTOTCORR": {
     "name": "Annual precipitation",
@@ -24,7 +26,9 @@ export const VARIABLES = Object.freeze({
       "mm/day"
     ],
     "aggregation": "sum_rate",
-    "fromAnnual": 2
+    "fromAnnual": 2,
+    "descriptionEs": "Tasa de precipitación corregida del modelo; sumamos milímetros por día multiplicados por los días de cada mes. Se necesita contrastar con datos independientes.",
+    "descriptionEn": "Model-corrected precipitation rate; annual millimeters sum the monthly mm/day times days. Independent cross-check remains necessary."
   },
   "RH2M": {
     "name": "Relative humidity at 2 m",
@@ -39,7 +43,9 @@ export const VARIABLES = Object.freeze({
     "range": [
       0,
       100
-    ]
+    ],
+    "descriptionEs": "Porcentaje de humedad del aire respecto de la saturación a dos metros, no masa absoluta de vapor.",
+    "descriptionEn": "Humidity as a percentage of saturation at two meters, not absolute water vapor mass."
   },
   "WS10M": {
     "name": "Wind speed at 10 m",
@@ -50,7 +56,9 @@ export const VARIABLES = Object.freeze({
     "nativeUnits": [
       "m/s"
     ],
-    "aggregation": "mean"
+    "aggregation": "mean",
+    "descriptionEs": "Velocidad media modelada del viento a diez metros; no representa ráfagas ni mediciones entre edificios.",
+    "descriptionEn": "Modeled mean wind speed at ten meters; not gust speed or readings between buildings."
   },
   "WD10M": {
     "name": "Wind direction at 10 m",
@@ -62,7 +70,9 @@ export const VARIABLES = Object.freeze({
       "Degrees"
     ],
     "aggregation": "circular",
-    "trendCompatible": false
+    "trendCompatible": false,
+    "descriptionEs": "Dirección desde la que viene el viento, en grados (0° norte, 90° este). El promedio anual es circular; no se calcula pendiente lineal.",
+    "descriptionEn": "Bearing from which the wind blows (0° north, 90° east). The annual average is circular; linear trends are not calculated."
   },
   "U10M": {
     "name": "Eastward wind at 10 m",
@@ -73,7 +83,9 @@ export const VARIABLES = Object.freeze({
     "nativeUnits": [
       "m/s"
     ],
-    "aggregation": "mean"
+    "aggregation": "mean",
+    "descriptionEs": "Componente este-oeste de la velocidad a diez metros; positivo hacia el este y negativo hacia el oeste.",
+    "descriptionEn": "East-west wind component at ten meters; positive eastward and negative westward."
   },
   "V10M": {
     "name": "Northward wind at 10 m",
@@ -84,7 +96,9 @@ export const VARIABLES = Object.freeze({
     "nativeUnits": [
       "m/s"
     ],
-    "aggregation": "mean"
+    "aggregation": "mean",
+    "descriptionEs": "Componente norte-sur de la velocidad a diez metros; positivo hacia el norte y negativo hacia el sur.",
+    "descriptionEn": "North-south wind component at ten meters; positive northward and negative southward."
   },
   "ALLSKY_SFC_SW_DWN": {
     "name": "Solar shortwave irradiance at surface",
@@ -95,7 +109,9 @@ export const VARIABLES = Object.freeze({
     "nativeUnits": [
       "kW-hr/m^2/day"
     ],
-    "aggregation": "mean"
+    "aggregation": "mean",
+    "descriptionEs": "Energía solar de onda corta que llega a la superficie por unidad de área y día, con nubosidad.",
+    "descriptionEn": "Shortwave sunlight reaching the surface per area and day under all-sky conditions."
   },
   "T2M_MAX": {
     "name": "Mean of monthly maximum temperatures",
@@ -106,7 +122,9 @@ export const VARIABLES = Object.freeze({
     "nativeUnits": [
       "C"
     ],
-    "aggregation": "mean"
+    "aggregation": "mean",
+    "descriptionEs": "Resumen anual de los valores máximos mensuales del aire, ponderados por días; no es el récord anual absoluto.",
+    "descriptionEn": "Day-weighted annual summary of monthly maximum-air-temperature values, not an absolute annual record."
   },
   "T2M_MIN": {
     "name": "Mean of monthly minimum temperatures",
@@ -117,7 +135,9 @@ export const VARIABLES = Object.freeze({
     "nativeUnits": [
       "C"
     ],
-    "aggregation": "mean"
+    "aggregation": "mean",
+    "descriptionEs": "Resumen anual de los valores mínimos mensuales del aire, ponderados por días; no es el mínimo anual absoluto.",
+    "descriptionEn": "Day-weighted annual summary of monthly minimum-air-temperature values, not the absolute year's lowest reading."
   },
   "PS": {
     "name": "Surface air pressure",
@@ -128,7 +148,9 @@ export const VARIABLES = Object.freeze({
     "nativeUnits": [
       "kPa"
     ],
-    "aggregation": "mean"
+    "aggregation": "mean",
+    "descriptionEs": "Presión atmosférica estimada en la superficie del terreno por el modelo, en kilopascales.",
+    "descriptionEn": "Modeled atmospheric pressure at the local ground surface, in kilopascals."
   },
   "CLOUD_AMT": {
     "name": "Cloud amount",
@@ -143,7 +165,9 @@ export const VARIABLES = Object.freeze({
     "range": [
       0,
       100
-    ]
+    ],
+    "descriptionEs": "Fracción de la zona cubierta por nubes expresada en porcentaje; no mide por sí sola su espesor óptico.",
+    "descriptionEn": "The percentage of the region covered by clouds; not a measurement of cloud optical thickness."
   },
   "QV2M": {
     "name": "Specific humidity at 2 m",
@@ -154,7 +178,9 @@ export const VARIABLES = Object.freeze({
     "nativeUnits": [
       "g/kg"
     ],
-    "aggregation": "mean"
+    "aggregation": "mean",
+    "descriptionEs": "Cantidad de vapor de agua por kilogramo de aire a dos metros, expresada en g/kg.",
+    "descriptionEn": "Water vapor mass per kilogram of air at two meters, in g/kg."
   },
   "ALLSKY_SFC_LW_DWN": {
     "name": "Downward longwave at surface",
@@ -165,7 +191,9 @@ export const VARIABLES = Object.freeze({
     "nativeUnits": [
       "kW-hr/m^2/day"
     ],
-    "aggregation": "mean"
+    "aggregation": "mean",
+    "descriptionEs": "Flujo energético infrarrojo descendente que llega a la superficie; no equivale al balance energético total.",
+    "descriptionEn": "Downward longwave infrared energy flux reaching the surface; not the entire Earth energy balance."
   },
   "ALLSKY_SRF_ALB": {
     "name": "All-sky surface albedo",
@@ -180,7 +208,9 @@ export const VARIABLES = Object.freeze({
     "range": [
       0,
       1
-    ]
+    ],
+    "descriptionEs": "Fracción de radiación solar que la superficie refleja (0 a 1); no equivale a cambio de cobertura terrestre.",
+    "descriptionEn": "Fraction of incoming sunlight reflected by the surface (0 to 1); not a direct land-cover change measure."
   },
   "EVPTRNS": {
     "name": "Evapotranspiration energy flux",
@@ -191,7 +221,9 @@ export const VARIABLES = Object.freeze({
     "nativeUnits": [
       "MJ/m^2/day"
     ],
-    "aggregation": "mean"
+    "aggregation": "mean",
+    "descriptionEs": "Flujo de energía asociado a evapotranspiración, en MJ/m²/día. No lo presentamos como milímetros de agua.",
+    "descriptionEn": "Energy flux associated with evapotranspiration, in MJ/m²/day. It is not shown as millimeters of water."
   },
   "GWETROOT": {
     "name": "Root-zone soil wetness",
@@ -206,7 +238,9 @@ export const VARIABLES = Object.freeze({
     "range": [
       0,
       1
-    ]
+    ],
+    "descriptionEs": "Índice modelado de humedad relativa de la zona de raíces, entre 0 y 1; no es contenido volumétrico ni caudal.",
+    "descriptionEn": "Modeled root-zone relative wetness on a 0–1 scale; not volumetric soil water or river discharge."
   },
   "GWETTOP": {
     "name": "Surface soil wetness",
@@ -221,7 +255,9 @@ export const VARIABLES = Object.freeze({
     "range": [
       0,
       1
-    ]
+    ],
+    "descriptionEs": "Índice modelado de humedad del suelo superficial, entre 0 y 1; no es sensor in situ ni satélite SMAP.",
+    "descriptionEn": "Modeled surface soil wetness on a 0–1 scale; not a ground sensor or SMAP satellite measurement."
   }
 });
 export const POWER_READY_CODES = Object.freeze(Object.keys(VARIABLES));
