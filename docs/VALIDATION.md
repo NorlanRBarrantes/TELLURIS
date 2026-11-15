@@ -166,3 +166,8 @@ Results must be computed before any place is described as having an observed sig
 - Website research catalog `C23` links to the actual NASA proof while retaining `implementation_status=not_connected` and **the count of two connected POWER variables**.
 - [Website CI #43738552963](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738552963): **35/35 Node tests passed**, including one explicit guard against showing a research-only MODIS candidate as publicly connected, and local HTTP smoke checks passed.
 - [Separate Python EXP-003 acquisition workflow](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738048688): 2023–2025 original NASA ORNL retrieval and annual QA-screened descriptive medians; confirm its final execution status before claiming live multi-year results.
+
+
+## 2026-11-15 — Geographic and evidence features
+
+New test fixtures check provisional significance and two-point descriptive comparison. The browser's WebGL behavior and public hosting deployment are not automatically verified by these fixtures. See GitHub Actions for actual run status; no new scientific confidence claim has been made.
