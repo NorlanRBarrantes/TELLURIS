@@ -60,3 +60,7 @@ This validates request shape, metadata and the necessity of QA, **not a full MOD
 ## Research catalog discovery integration
 
 The public-site source now includes an evidence link for the research candidate `C23 — Índices de vegetación`. The source proof is a real NASA ORNL response, but the catalog still labels the variable **not connected**; it does not offer broken/unverified data-analysis actions. The [website QA run #43738552963](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738552963) passed **35/35 tests**. The experimental Python original-data acquisition is tracked separately at [EXP-003 run #43738048688](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738048688).
+
+## Detailed QA and Terra orbital drift method audit (EXP-003B)
+
+A team-forwarded Gemini report was reviewed and its testable contributions implemented **alongside**, not on top of, the original source science. [EXP-003B audit](EXP-003B-MOD13Q1-QA.md) decodes original `VI_Quality`, checks annual coverage, reads original source `sun_zenith_angle`, and explicitly distinguishes approved NASA flag definitions from user-selected strict rules. The [real-source audit #43740806990](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43740806990) passed 12 new tests and found the original single Limón grid cell unsuitable for a strict *unambiguous land only* filter; this is a geographical sampling limitation that must be checked. No scientific significance or trend was inferred.

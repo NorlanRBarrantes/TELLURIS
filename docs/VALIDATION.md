@@ -176,3 +176,11 @@ New test fixtures check provisional significance and two-point descriptive compa
 ## CI verification — 2026-11-15
 
 GitHub Actions run [#43739956296](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43739956296) completed with SUCCESS at source commit 39d3b654af86e8608f813f8535be90d67e92550a. Reported successful steps: browser-source syntax checks (including globe and evidence), Node scientific/site tests, static localhost HTTP smoke checks (including Natural Earth asset), and site package generation. This confirms automated source/build checks only: manual 3D rendering on target browsers and deployment on BanaHosting remain unverified.
+
+## EXP-003B detailed MODIS QA and solar-geometry screening — 2026-11-15
+
+- Source: authentic two-point MOD13Q1 original-data archive [acquired in EXP-003 #43738048688](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738048688), 69 composites each, 2023–2025.
+- [EXP-003B method QA run #43740806990](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43740806990): **12/12 new deterministic tests PASS**; re-downloaded the original source archive (verified artifact SHA-256), extracted DetailedQA and solar-zenith data, and generated an auditable JSON report.
+- Summary QA accepted 51/69 Liberia and 26/69 Limón. Experimental strict QA accepted 44/69 Liberia, **0/69 Limón**. Strict all-land restriction rejected all 69 Limón observations; this is a **single-source-pixel geography/QA** issue needing NASA land/water class inspection, **not a validated regional climate conclusion**. Overlapping rejection reasons cannot be totaled.
+- Annual coverage comparison: original 12/year + 2/quarter = Liberia 3/3, Limón 0/3; strict same threshold = Liberia 2/3, Limón 0/3; strict 8/year in 3 quarters = Liberia 3/3, Limón 0/3. **No significance p-values or derived climate trend** were calculated. Five-year climatology threshold is intentionally unmet with only three years of data.
+- The QA mask, all-land bit rule, annual thresholds and cycle anomaly are **experimental team-selected policies**, not compulsory NASA scientific guidance. Full methods: [EXP-003B](EXP-003B-MOD13Q1-QA.md).

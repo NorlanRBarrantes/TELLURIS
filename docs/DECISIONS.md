@@ -231,3 +231,14 @@ Do not replace proposed status with accepted until the underlying decision is ve
 ## 2026-11-15 — Geographic globe and grounded assistant
 
 Approved: implement a 3D geographic navigation layer, deterministic source-grounded explanations and an exploratory two-point archive comparison. All computed statistics remain unchanged and provisional. True generative AI requires a separately validated secure backend before activation. See FEATURES-3D-EVIDENCE-AI.md.
+
+## ADR-026 — Retain both MODIS QA policies for source-grounded sensitivity auditing
+
+- **Date:** 2026-11-15 (Costa Rica)
+- **Status:** Accepted as experimental QA audit; **strict land mask and annual anomaly methodology NOT yet approved for public trend inference**
+- **Input:** User-forwarded Gemini audit of Terra orbital drift, MOD13Q1 VI Quality, seasonal missingness and climatological anomaly method.
+- **Decision:** Preserve original 2023–2025 MODIS records and original EXP-003 statistical summaries; separately decode detailed VI_Quality, apply an explicit experimental strict mask to both summary rank 0 and rank 1, record solar zenith, compare the original 12/2 and alternative 8/3 coverage thresholds, and prevent seasonal climatology from being estimated from only three years.
+- **Empirical evidence:** [NASA original-data acquisition #43738048688](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738048688); [12 deterministic QA tests and actual-record reanalysis #43740806990](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43740806990).
+- **Unexpected finding:** Limón's chosen single MODIS pixel fails the experimental strict all-land filter on all 69 composite dates. Investigate its specific NASA land/water class and consider a predeclared inland alternative. Do not describe this as a region-wide NDVI failure.
+- **Rejected:** An automatic solar-zenith regression "correction", unvalidated Hamed–Rao p-values, causal conclusions, asserting 8/3 eliminates MNAR, or claiming cross-sensor tests already executed.
+- **Methods and caveats:** [EXP-003B method audit](EXP-003B-MOD13Q1-QA.md).

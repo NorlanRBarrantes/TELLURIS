@@ -34,6 +34,7 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 - [Expanded Earth-science variable catalog — including river discharge](docs/VARIABLE-CATALOG.md)
 - [Team-contributed 49-variable inventory + 10 derived indicators](docs/TEAM-CATALOG-2026-11-15.md)
 - [EXP-003 MODIS NDVI/EVI independent NASA-source validation and experimental adapter](docs/EXP-003-VEGETATION.md)
+- [EXP-003B MODIS detailed QA/orbital-geometry sensitivity on real source data](docs/EXP-003B-MOD13Q1-QA.md)
 - [Scientific review of team inventory and integration status](docs/TEAM-CATALOG-REVIEW.md)
 - [Challenge interpretation](docs/CHALLENGE.md)
 - [Product vision, scope and acceptance criteria](docs/PRODUCT.md)

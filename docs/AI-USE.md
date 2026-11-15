@@ -109,3 +109,7 @@ A team-forwarded Gemini report compared MODIS vegetation indices, FIRMS fire det
 ## Evidence assistant — November 15, 2026
 
 The active browser component is deterministic and rule-based, not a generative model or a live AI-provider connection. It rephrases calculations already supplied by the evidence engine and keeps provisional significance qualifications. A future LLM integration is documented in FEATURES-3D-EVIDENCE-AI.md but has NOT been built, secured, or validated.
+
+## Gemini MODIS QA and Terra drift audit — November 15, 2026
+
+The team forwarded an additional Gemini report asserting orbit-drift effects, detailed MOD13Q1 QA bit definitions, revised annual sampling thresholds and anomaly-by-16-day-cycle methods; it included example Python with tests. OpenAI ChatGPT assessed the assertions against official NASA MODIS sources and original ORNL API data, adopted testable QA fields and coverage-sensitivity comparisons, and rejected mandatory sign-of-bias forecasts, automatic Hamed–Rao and SZA "corrections", and unsupported claims that a 3-year baseline proves any long-term trend. A separate pure-Python [EXP-003B audit](EXP-003B-MOD13Q1-QA.md) reprocesses authenticated archival NASA JSON without overwriting the originals; 12 automated unit tests and one original-data run passed. Team authorship/AI origins remain disclosed; neither system produced validated NDVI/EVI climate trends.
