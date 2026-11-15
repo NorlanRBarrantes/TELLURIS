@@ -31,7 +31,7 @@ jobs:
           for name,expected,date in layers:
               params={"SERVICE":"WMS","VERSION":"1.1.1","REQUEST":"GetMap",
                 "LAYERS":name,"STYLES":"","SRS":"EPSG:4326",
-                "BBOX":"-180,-90,180,90","WIDTH":"512","HEIGHT":"256",
+                "BBOX":"-180,-90,180,90","WIDTH":"1536","HEIGHT":"768",
                 "FORMAT":expected}
               if date:params["TIME"]=date
               if expected=="image/png":params["TRANSPARENT"]="TRUE"
