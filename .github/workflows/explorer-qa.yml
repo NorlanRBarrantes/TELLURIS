@@ -54,7 +54,7 @@ jobs:
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/ | grep -q "TELLURIS"
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/catalog/ | grep -q 'lang="es"'
           curl --fail --silent --show-error http://127.0.0.1:8765/en/telluris/catalog/ | grep -q 'lang="en"'
-          curl --fail --silent --show-error http://127.0.0.1:8765/telluris/catalog/data/catalog.json | grep -q 'telluris.catalog.2026-11-15.v1'
+          curl --fail --silent --show-error http://127.0.0.1:8765/telluris/catalog/data/catalog.json | grep -q 'telluris.catalog.2026-11-15.v2'
       - name: Package complete static site for BanaHosting
         if: success()
         uses: actions/upload-artifact@v4

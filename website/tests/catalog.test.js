@@ -9,8 +9,8 @@ const read=rel=>readFileSync(path.join(root,rel),"utf8");
 const data=JSON.parse(read("telluris/catalog/data/catalog.json"));
 
 test("Team source is preserved; catalog JSON is versioned and all entries retained",()=>{
- assert.equal(data.schema,"telluris.catalog.2026-11-15.v1");
- assert.equal(data.connected.length,2);
+ assert.equal(data.schema,"telluris.catalog.2026-11-15.v2");
+ assert.equal(data.connected.length,18);
  assert.equal(data.candidates.length,49);
  assert.equal(data.indicators.length,10);
  assert.equal(data.groups.length,6);
@@ -20,9 +20,17 @@ test("Team source is preserved; catalog JSON is versioned and all entries retain
  assert.equal(new Set(data.candidates.map(x=>x.id)).size,49);
 });
 test("Only the actual NASA POWER variable pair is connected",()=>{
- assert.deepEqual(data.connected.map(x=>x.id),["T2M","PRECTOTCORR"]);
+ assert.ok(data.connected.some(x=>x.id==="T2M"));
+ assert.ok(data.connected.some(x=>x.id==="PRECTOTCORR"));
+ assert.ok(data.connected.some(x=>x.id==="RH2M"));
+ assert.ok(data.connected.some(x=>x.id==="WD10M"));
+ assert.ok(data.connected.some(x=>x.id==="EVPTRNS"));
+ assert.equal(new Set(data.connected.map(x=>x.id)).size,18);
  assert.ok(data.connected.every(x=>x.implementation_status==="connected"));
- assert.ok(data.candidates.every(x=>x.implementation_status==="not_connected"));
+ assert.equal(data.candidates.length,49);
+ assert.equal(data.candidates.find(x=>x.id==="C01").implementation_status,"connected");
+ assert.equal(data.candidates.find(x=>x.id==="C13").implementation_status,"partial");
+ assert.ok(data.candidates.find(x=>x.id==="C17").implementation_status==="not_connected");
  assert.ok(data.indicators.every(x=>x.implementation_status!=="connected"));
 });
 test("Source catalog includes key geosphere/cryosphere/human domains",()=>{
@@ -82,4 +90,18 @@ test("MODIS IGBP 2023 spatial QA is evidence only and not a connected variable",
  assert.equal(e.spatial_evidence.status,"one_date_spatial_qa_and_one_year_landcover_verified");
  assert.ok(e.spatial_evidence.verification_url.includes("EXP-003D-IGBP.md"));
  assert.ok(read("assets/catalog.js").includes("one_date_spatial_qa_and_one_year_landcover_verified"));
+});
+
+test("18 NASA POWER links target distinct and available explorer parameter IDs",()=>{
+ const vars=JSON.parse(read("telluris/catalog/data/catalog.json"));
+ assert.equal(vars.connected.length,18);
+ const html=read("telluris/explore/index.html");
+ const en=read("en/telluris/explore/index.html");
+ for(const x of vars.connected){
+  assert.ok(html.includes('value="'+x.id+'"'),"Missing Spanish selector "+x.id);
+  assert.ok(en.includes('value="'+x.id+'"'),"Missing English selector "+x.id);
+ }
+ const js=read("assets/catalog.js");
+ assert.ok(js.includes('encodeURIComponent(entry.id)'));
+ assert.ok(js.includes('entry.integration_codes'));
 });

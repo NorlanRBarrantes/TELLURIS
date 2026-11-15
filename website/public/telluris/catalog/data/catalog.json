@@ -1,28 +1,208 @@
 {
-  "schema": "telluris.catalog.2026-11-15.v1",
+  "schema": "telluris.catalog.2026-11-15.v2",
   "owner": "Project Uriel",
   "original_contributor": "Team-submitted scientific variable inventory; user reports it was requested by a teammate (sister) in another chat",
   "source_document": "docs/TEAM-CATALOG-2026-11-15.md",
-  "notice_es": "Inventario de investigación, no garantía de disponibilidad ni implementación. Solo T2M y PRECTOTCORR están conectadas al explorador.",
-  "notice_en": "Research inventory, not a guarantee of availability or implementation. Only T2M and PRECTOTCORR are currently connected to the explorer.",
+  "notice_es": "Inventario de 49 temas científicos del equipo. De ellos, 18 parámetros NASA POWER están conectados. Algunas entradas representan conjuntos o requieren fuentes adicionales.",
+  "notice_en": "Team inventory of 49 science topics. Currently 18 NASA POWER parameters are connected; some inventory entries are composites or still need specialized data sources.",
   "connected": [
     {
       "id": "T2M",
-      "name_es": "Temperatura del aire a 2 metros",
-      "name_en": "Near-surface air temperature",
-      "source": "NASA POWER / MERRA-2",
+      "name_es": "Temperatura del aire a 2 m",
+      "name_en": "Air temperature at 2 m",
+      "source": "NASA POWER · RE",
       "unit": "°C",
       "kind": "measured_or_modeled_variable",
-      "implementation_status": "connected"
+      "implementation_status": "connected",
+      "community": "RE",
+      "aggregation": "mean"
     },
     {
       "id": "PRECTOTCORR",
-      "name_es": "Precipitación corregida",
-      "name_en": "Bias-corrected precipitation",
-      "source": "NASA POWER / MERRA-2",
-      "unit": "mm/día (original); mm/año (agregado)",
+      "name_es": "Precipitación anual",
+      "name_en": "Annual precipitation",
+      "source": "NASA POWER · RE",
+      "unit": "mm / year",
       "kind": "measured_or_modeled_variable",
-      "implementation_status": "connected"
+      "implementation_status": "connected",
+      "community": "RE",
+      "aggregation": "sum_rate"
+    },
+    {
+      "id": "RH2M",
+      "name_es": "Humedad relativa a 2 m",
+      "name_en": "Relative humidity at 2 m",
+      "source": "NASA POWER · AG",
+      "unit": "%",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "AG",
+      "aggregation": "mean"
+    },
+    {
+      "id": "WS10M",
+      "name_es": "Velocidad del viento a 10 m",
+      "name_en": "Wind speed at 10 m",
+      "source": "NASA POWER · RE",
+      "unit": "m/s",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "RE",
+      "aggregation": "mean"
+    },
+    {
+      "id": "WD10M",
+      "name_es": "Dirección del viento a 10 m",
+      "name_en": "Wind direction at 10 m",
+      "source": "NASA POWER · RE",
+      "unit": "°",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "RE",
+      "aggregation": "circular"
+    },
+    {
+      "id": "U10M",
+      "name_es": "Componente este del viento a 10 m",
+      "name_en": "Eastward wind at 10 m",
+      "source": "NASA POWER · RE",
+      "unit": "m/s",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "RE",
+      "aggregation": "mean"
+    },
+    {
+      "id": "V10M",
+      "name_es": "Componente norte del viento a 10 m",
+      "name_en": "Northward wind at 10 m",
+      "source": "NASA POWER · RE",
+      "unit": "m/s",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "RE",
+      "aggregation": "mean"
+    },
+    {
+      "id": "ALLSKY_SFC_SW_DWN",
+      "name_es": "Radiación solar superficial incidente",
+      "name_en": "Solar shortwave irradiance at surface",
+      "source": "NASA POWER · RE",
+      "unit": "kWh/m²/day",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "RE",
+      "aggregation": "mean"
+    },
+    {
+      "id": "T2M_MAX",
+      "name_es": "Media anual de las máximas mensuales",
+      "name_en": "Mean of monthly maximum temperatures",
+      "source": "NASA POWER · AG",
+      "unit": "°C",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "AG",
+      "aggregation": "mean"
+    },
+    {
+      "id": "T2M_MIN",
+      "name_es": "Media anual de las mínimas mensuales",
+      "name_en": "Mean of monthly minimum temperatures",
+      "source": "NASA POWER · AG",
+      "unit": "°C",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "AG",
+      "aggregation": "mean"
+    },
+    {
+      "id": "PS",
+      "name_es": "Presión atmosférica superficial",
+      "name_en": "Surface air pressure",
+      "source": "NASA POWER · AG",
+      "unit": "kPa",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "AG",
+      "aggregation": "mean"
+    },
+    {
+      "id": "CLOUD_AMT",
+      "name_es": "Cantidad de nubosidad",
+      "name_en": "Cloud amount",
+      "source": "NASA POWER · AG",
+      "unit": "%",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "AG",
+      "aggregation": "mean"
+    },
+    {
+      "id": "QV2M",
+      "name_es": "Humedad específica a 2 m",
+      "name_en": "Specific humidity at 2 m",
+      "source": "NASA POWER · AG",
+      "unit": "g/kg",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "AG",
+      "aggregation": "mean"
+    },
+    {
+      "id": "ALLSKY_SFC_LW_DWN",
+      "name_es": "Radiación infrarroja descendente",
+      "name_en": "Downward longwave at surface",
+      "source": "NASA POWER · RE",
+      "unit": "kWh/m²/day",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "RE",
+      "aggregation": "mean"
+    },
+    {
+      "id": "ALLSKY_SRF_ALB",
+      "name_es": "Albedo superficial",
+      "name_en": "All-sky surface albedo",
+      "source": "NASA POWER · RE",
+      "unit": "fraction",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "RE",
+      "aggregation": "mean"
+    },
+    {
+      "id": "EVPTRNS",
+      "name_es": "Flujo energético de evapotranspiración",
+      "name_en": "Evapotranspiration energy flux",
+      "source": "NASA POWER · AG",
+      "unit": "MJ/m²/day",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "AG",
+      "aggregation": "mean"
+    },
+    {
+      "id": "GWETROOT",
+      "name_es": "Humedad relativa de la zona radicular",
+      "name_en": "Root-zone soil wetness",
+      "source": "NASA POWER · AG",
+      "unit": "fraction",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "AG",
+      "aggregation": "mean"
+    },
+    {
+      "id": "GWETTOP",
+      "name_es": "Humedad relativa del suelo superficial",
+      "name_en": "Surface soil wetness",
+      "source": "NASA POWER · AG",
+      "unit": "fraction",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected",
+      "community": "AG",
+      "aggregation": "mean"
     }
   ],
   "groups": [
@@ -67,7 +247,7 @@
       "domain_es": "Atmósfera y clima",
       "domain_en": "Atmosphere and climate",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "connected",
       "source_candidates": [
         "NASA POWER",
         "OMI",
@@ -75,7 +255,12 @@
         "CERES",
         "MERRA-2",
         "LIS/OTD"
-      ]
+      ],
+      "integration_codes": [
+        "RH2M"
+      ],
+      "integration_note_es": "",
+      "integration_note_en": ""
     },
     {
       "id": "C02",
@@ -86,7 +271,7 @@
       "domain_es": "Atmósfera y clima",
       "domain_en": "Atmosphere and climate",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "connected",
       "source_candidates": [
         "NASA POWER",
         "OMI",
@@ -94,7 +279,15 @@
         "CERES",
         "MERRA-2",
         "LIS/OTD"
-      ]
+      ],
+      "integration_codes": [
+        "WS10M",
+        "WD10M",
+        "U10M",
+        "V10M"
+      ],
+      "integration_note_es": "",
+      "integration_note_en": ""
     },
     {
       "id": "C03",
@@ -105,7 +298,7 @@
       "domain_es": "Atmósfera y clima",
       "domain_en": "Atmosphere and climate",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "connected",
       "source_candidates": [
         "NASA POWER",
         "OMI",
@@ -113,7 +306,12 @@
         "CERES",
         "MERRA-2",
         "LIS/OTD"
-      ]
+      ],
+      "integration_codes": [
+        "ALLSKY_SFC_SW_DWN"
+      ],
+      "integration_note_es": "",
+      "integration_note_en": ""
     },
     {
       "id": "C04",
@@ -124,7 +322,7 @@
       "domain_es": "Atmósfera y clima",
       "domain_en": "Atmosphere and climate",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "connected",
       "source_candidates": [
         "NASA POWER",
         "OMI",
@@ -132,7 +330,13 @@
         "CERES",
         "MERRA-2",
         "LIS/OTD"
-      ]
+      ],
+      "integration_codes": [
+        "T2M_MAX",
+        "T2M_MIN"
+      ],
+      "integration_note_es": "",
+      "integration_note_en": ""
     },
     {
       "id": "C05",
@@ -143,7 +347,7 @@
       "domain_es": "Atmósfera y clima",
       "domain_en": "Atmosphere and climate",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "connected",
       "source_candidates": [
         "NASA POWER",
         "OMI",
@@ -151,7 +355,12 @@
         "CERES",
         "MERRA-2",
         "LIS/OTD"
-      ]
+      ],
+      "integration_codes": [
+        "PS"
+      ],
+      "integration_note_es": "",
+      "integration_note_en": ""
     },
     {
       "id": "C06",
@@ -162,7 +371,7 @@
       "domain_es": "Atmósfera y clima",
       "domain_en": "Atmosphere and climate",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "partial",
       "source_candidates": [
         "NASA POWER",
         "OMI",
@@ -170,7 +379,12 @@
         "CERES",
         "MERRA-2",
         "LIS/OTD"
-      ]
+      ],
+      "integration_codes": [
+        "CLOUD_AMT"
+      ],
+      "integration_note_es": "Cantidad de nubosidad disponible; espesor óptico todavía no conectado.",
+      "integration_note_en": "Cloud amount is connected; optical thickness is not."
     },
     {
       "id": "C07",
@@ -257,7 +471,7 @@
       "domain_es": "Atmósfera y clima",
       "domain_en": "Atmosphere and climate",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "partial",
       "source_candidates": [
         "NASA POWER",
         "OMI",
@@ -265,7 +479,14 @@
         "CERES",
         "MERRA-2",
         "LIS/OTD"
-      ]
+      ],
+      "integration_codes": [
+        "ALLSKY_SFC_SW_DWN",
+        "ALLSKY_SFC_LW_DWN",
+        "ALLSKY_SRF_ALB"
+      ],
+      "integration_note_es": "Radiación y albedo disponibles; no equivalen a un balance energético neto terrestre.",
+      "integration_note_en": "Radiation and albedo available; not a complete Earth energy budget."
     },
     {
       "id": "C12",
@@ -295,7 +516,7 @@
       "domain_es": "Hidrosfera y océanos",
       "domain_en": "Hydrosphere and oceans",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "partial",
       "source_candidates": [
         "GLDAS",
         "SMAP",
@@ -303,7 +524,13 @@
         "PACE",
         "MODIS",
         "PO.DAAC"
-      ]
+      ],
+      "integration_codes": [
+        "GWETTOP",
+        "GWETROOT"
+      ],
+      "integration_note_es": "Humedad relativa modelada del suelo (0–1), no contenido volumétrico ni lectura SMAP.",
+      "integration_note_en": "Modeled relative soil wetness (0–1), not volumetric soil moisture or SMAP measurement."
     },
     {
       "id": "C14",
@@ -314,7 +541,7 @@
       "domain_es": "Hidrosfera y océanos",
       "domain_en": "Hydrosphere and oceans",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "partial",
       "source_candidates": [
         "GLDAS",
         "SMAP",
@@ -322,7 +549,12 @@
         "PACE",
         "MODIS",
         "PO.DAAC"
-      ]
+      ],
+      "integration_codes": [
+        "EVPTRNS"
+      ],
+      "integration_note_es": "Flujo energético de evapotranspiración (MJ/m²/día), no precipitación ni pérdida de agua en mm.",
+      "integration_note_en": "Evapotranspiration energy flux (MJ/m²/day), not a water depth in mm."
     },
     {
       "id": "C15",
