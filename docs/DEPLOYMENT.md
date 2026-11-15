@@ -69,3 +69,30 @@ The previously selected `https://telluris.lynxglobals.net/` in this document rem
 ## Deployed-site path for Explorer MVP 0.1
 
 The static Explorer source is `website/public/telluris/explore/`. Project Uriel landing pages link directly to this path. Deploy the complete contents of `website/public/` into the existing BanaHosting document root, preserving the current server-side SSL and routing rules. The prior `telluris.lynxglobals.net` host remains an alternate concept, not a necessary dependency. Production HTTPS/routing and live browser CORS behavior are not yet verified.
+
+
+## Verified GitHub → BanaHosting incremental release method (2026-11-15)
+
+**Observed production release:** commit \`5fddb6c\` was manually copied to the BanaHosting document root \`/home/cvzvwazj/projecturiel.earth\` and five affected files matched their public HTTPS SHA-256 checks. This does **not** mean newer GitHub source commits are deployed. GitHub checkout is kept outside the web root at \`/home/cvzvwazj/telluris-source\`; it uses a repository-specific read-only SSH Deploy Key. Do not store private keys in the public document root.
+
+The release script [\`scripts/deploy-bana-static.sh\`](../scripts/deploy-bana-static.sh) replaces earlier broken \`/dev/fd/63\` process substitution and ZIP-dependent manual deployments. It supports \`--check\` (no changes) and \`--deploy\` (explicit deployment), compares only \`website/public/\`, skips \`.htaccess\` and \`.well-known/\`, refuses unknown extensions/symlinks, archives the existing public root, copies changed files without \`--delete\`, verifies every changed file over HTTPS and writes \`TELLURIS_BACKUPS/production-current.txt\`. If verification fails, it attempts to restore the backup and remove newly introduced files.
+
+The script received Bash syntax + dry-run validation in [Actions #43765203183](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43765203183). A dry run on GitHub's Linux runner is **not** a confirmed BanaHosting deployment; that remains a manual acceptance gate.
+
+### On the existing BanaHosting SSH shell
+
+\`\`\`bash
+export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/telluris_deploy -o IdentitiesOnly=yes"
+git -C "$HOME/telluris-source" fetch origin main
+git -C "$HOME/telluris-source" pull --ff-only origin main
+bash "$HOME/telluris-source/scripts/deploy-bana-static.sh" --check
+\`\`\`
+
+Review the changed file list and verify that the GitHub Actions website QA run is successful. Once the NASA submission and live demo are protected, release explicitly:
+
+\`\`\`bash
+bash "$HOME/telluris-source/scripts/deploy-bana-static.sh" --deploy
+cat "$HOME/TELLURIS_BACKUPS/production-current.txt"
+\`\`\`
+
+After deployment: open both language routes, test archived/live NASA retrieval, the EXP-005 statistical caveats, EXP-006 IMERG import restrictions, the new EXP-007C monthly panel using real monthly NASA JSON and EXP-007E browser Print → Save as PDF, plus mobile layout and network failures. Do not claim EXP-007 fully operational until witnessed. Record the published full commit, visual QA and issues in docs/VALIDATION.md. Keep secrets and research-only materials out of \`website/public/\`.
