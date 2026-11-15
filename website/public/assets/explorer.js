@@ -1,5 +1,71 @@
 import {VARIABLES, powerUrl, fromPower, fromSnapshot, analyze} from "./science.js";
 
+const uiLanguage = document.documentElement.lang.toLowerCase().startsWith("es") ? "es" : "en";
+const locale = uiLanguage === "es" ? "es-CR" : "en-US";
+// UI strings are localized; scientific parameter codes, values and source metadata are never altered.
+const spanishPhrases = {
+  "Coordinates are required.": "Las coordenadas son obligatorias.",
+  "Choose complete years between 1981 and 2025.": "Selecciona años completos entre 1981 y 2025.",
+  "Select at least ten years for exploratory trend analysis.": "Selecciona al menos diez años para estimar la tendencia.",
+  "Enter valid latitude and longitude.": "Ingresa coordenadas válidas.",
+  "Awaiting new data": "Esperando nuevos datos",
+  "Settings changed. Request NASA data or load the archived NASA sample.": "La configuración cambió. Consulta NASA o carga la muestra archivada.",
+  "Yearly values from the selected NASA model grid point. The amber line shows the Theil–Sen estimate; it is not a forecast.": "Valores anuales de la celda del modelo NASA. La línea naranja muestra la estimación Theil–Sen; no es un pronóstico.",
+  "Data origin": "Origen de los datos",
+  "NASA source": "Fuente NASA",
+  "POWER API version": "Versión de POWER API",
+  "Original units": "Unidades originales",
+  "Reported coordinates": "Coordenadas reportadas",
+  "Dataset retrieved": "Fecha de obtención",
+  "Sample count": "Cantidad de años",
+  "Source hash": "Huella de archivo",
+  "Not provided": "No especificado",
+  "Unknown": "Desconocido",
+  "Use downloaded response": "Consultar respuesta original",
+  "Original NASA archive and execution ↗": "Ver archivo original y ejecución NASA ↗",
+  "Original NASA POWER request ↗": "Ver solicitud NASA POWER ↗",
+  "Air temperature at 2 m": "Temperatura del aire a 2 m",
+  "Annual precipitation": "Precipitación anual",
+  "Fewer than ten complete annual observations were available. Check the period and data coverage.": "Se obtuvieron menos de diez años completos. Revisa el período y la cobertura.",
+  "Estimated upward direction": "Dirección estimada ascendente",
+  "Estimated downward direction": "Dirección estimada descendente",
+  "No estimated direction": "Sin dirección estimada",
+  " years": " años",
+  " months per year": " meses por año",
+  "Lag-1 residual correlation: insufficient consecutive pairs.": "Correlación residual de retardo 1: no hay suficientes pares consecutivos.",
+  "Lag-1 residual correlation (diagnostic only): ": "Correlación residual de retardo 1 (solo diagnóstico): ",
+  " using ": " con ",
+  " consecutive-year pairs.": " pares de años consecutivos.",
+  "Selected location": "Ubicación seleccionada",
+  " Precipitation records show large long-term differences; product homogeneity and independent validation have not yet been established.": " La precipitación presenta diferencias históricas muy grandes; aún no se ha comprobado la homogeneidad del producto ni su validación independiente.",
+  "Source loaded. Trend calculated from ": "Fuente cargada. Tendencia calculada con ",
+  " complete annual values. Statistical interpretation is provisional.": " valores anuales completos. La interpretación estadística es provisional.",
+  "Archived samples are available only for Liberia and Limón.": "Las muestras archivadas solo están disponibles para Liberia y Limón.",
+  "Loading archived original NASA-derived annual series…": "Cargando series anuales archivadas obtenidas de NASA…",
+  "Archived data file unavailable (HTTP ": "Archivo archivado no disponible (HTTP ",
+  "Archive load failed: ": "Error al cargar el archivo: ",
+  " You can still request live NASA POWER data or import a saved JSON response.": " Aún puedes consultar NASA en vivo o importar un JSON guardado.",
+  "Requesting historical NASA POWER data. This may take a moment.": "Consultando datos históricos de NASA POWER…",
+  "NASA returned HTTP ": "NASA devolvió HTTP ",
+  "Returned NASA coordinates do not match the requested point.": "Las coordenadas de NASA no coinciden con el punto solicitado.",
+  "NASA request failed: ": "No se pudo consultar NASA: ",
+  "time limit exceeded": "se excedió el tiempo límite",
+  ". If the browser blocks cross-origin requests, load the archived sample or import NASA JSON.": ". Si el navegador bloquea solicitudes entre dominios, utiliza la muestra archivada o importa un JSON de NASA.",
+  "This file's reported point differs from selected coordinates.": "El punto del archivo difiere de las coordenadas seleccionadas.",
+  "IMPORTED NASA POWER JSON (verify origin)": "JSON NASA POWER IMPORTADO (verificar origen)",
+  "Unknown: locally imported file": "Desconocida: archivo importado",
+  "Cannot import source file: ": "No se pudo importar el archivo: ",
+  "NASA POWER LIVE JSON": "NASA POWER EN VIVO",
+  "ARCHIVED NASA POWER · EXP-001": "NASA POWER ARCHIVADO · EXP-001"
+};
+function L(value) {
+  let result = String(value);
+  if (uiLanguage === "es") {
+    for (const [original, translated] of Object.entries(spanishPhrases))
+      result = result.replaceAll(original, translated);
+  }
+  return result;
+}
 const byId = id => document.getElementById(id);
 const form = byId("explore-form");
 const fields = {place:byId("location"), lat:byId("latitude"),lon:byId("longitude"),
@@ -9,7 +75,7 @@ let active = null;
 
 function setMessage(message, error=false) {
   const box = byId("message");
-  box.textContent = message;
+  box.textContent = L(message);
   box.classList.toggle("error", error);
 }
 function bounds() {
@@ -26,7 +92,7 @@ function bounds() {
 function resetWhenChanged() {
   active = null;
   byId("results").hidden = true;
-  byId("source-mode").textContent = "Awaiting new data";
+  byId("source-mode").textContent = L("Awaiting new data");
   setMessage("Settings changed. Request NASA data or load the archived NASA sample.");
 }
 function updateCoordinates() {
@@ -74,9 +140,9 @@ function renderChart(points, analysis, variable) {
     circle.append(node("title",{},p.year+": "+p.value.toFixed(variable==="T2M"?2:1)+" "+VARIABLES[variable].unit));
     svg.append(circle);
   });
-  byId("chart-caption").textContent="Yearly values from the selected NASA model grid point. The amber line shows the Theil–Sen estimate; it is not a forecast.";
+  byId("chart-caption").textContent=L("Yearly values from the selected NASA model grid point. The amber line shows the Theil–Sen estimate; it is not a forecast.");
 }
-function display(n, value) {byId(n).textContent=value;}
+function display(n, value) {byId(n).textContent=L(value);}
 function renderProvenance(meta,variable,n) {
   const values=[
     ["Data origin",meta.kind],
@@ -91,21 +157,21 @@ function renderProvenance(meta,variable,n) {
   const dl=byId("provenance");dl.replaceChildren();
   for(const [label,value] of values){
     const dt=document.createElement("dt"),dd=document.createElement("dd");
-    dt.textContent=label;dd.textContent=String(value);dl.append(dt,dd);
+    dt.textContent=L(label);dd.textContent=L(value);dl.append(dt,dd);
   }
   const a=byId("source-link");
   a.href=meta.archiveLink || active?.queryUrl || "https://power.larc.nasa.gov/";
-  a.textContent=meta.archiveLink ? "Original NASA archive and execution ↗" : "Original NASA POWER request ↗";
+  a.textContent=L(meta.archiveLink ? "Original NASA archive and execution ↗" : "Original NASA POWER request ↗");
 }
 function renderTable(points,variable){
   const body=byId("annual-rows");body.replaceChildren();
   for(const p of points){
     const tr=document.createElement("tr"),th=document.createElement("th"),td=document.createElement("td");
     th.textContent=String(p.year);th.scope="row";
-    td.textContent=p.value.toLocaleString("en-US",{minimumFractionDigits:variable==="T2M"?2:1,maximumFractionDigits:2});
+    td.textContent=p.value.toLocaleString(locale,{minimumFractionDigits:variable==="T2M"?2:1,maximumFractionDigits:2});
     tr.append(th,td);body.append(tr);
   }
-  byId("unit-header").textContent=VARIABLES[variable].name+" ("+VARIABLES[variable].unit+")";
+  byId("unit-header").textContent=L(VARIABLES[variable].name)+" ("+VARIABLES[variable].unit+")";
 }
 function acceptData(output, queryUrl=null){
   const variable=fields.variable.value;
@@ -117,18 +183,18 @@ function acceptData(output, queryUrl=null){
   }
   active={points:result.points,analysis:result,variable,meta:output.meta,queryUrl};
   byId("results").hidden=false;
-  const fmt=(x,d=2)=>Number(x).toLocaleString("en-US",{minimumFractionDigits:d,maximumFractionDigits:d});
+  const fmt=(x,d=2)=>Number(x).toLocaleString(locale,{minimumFractionDigits:d,maximumFractionDigits:d});
   display("slope-value",(result.slopePerDecade>=0?"+":"")+fmt(result.slopePerDecade)+" "+VARIABLES[variable].slopeUnit);
   display("slope-direction",result.slopePerDecade>0?"Estimated upward direction":result.slopePerDecade<0?"Estimated downward direction":"No estimated direction");
   display("sample-value",String(result.n)+" years");
   display("sample-period",result.start+"–"+result.end+" · 12/12 months per year");
   display("p-value",result.mk.p<.001?"< 0.001":result.mk.p.toFixed(4));
   display("autocorr-note",result.lag1===null?"Lag-1 residual correlation: insufficient consecutive pairs.":"Lag-1 residual correlation (diagnostic only): "+result.lag1.toFixed(3)+" using "+result.lag1Pairs+" consecutive-year pairs.");
-  display("chart-title",VARIABLES[variable].name+" · "+(fields.place.selectedOptions[0]?.textContent||"Selected location"));
+  display("chart-title",L(VARIABLES[variable].name)+" · "+(fields.place.selectedOptions[0]?.textContent||L("Selected location")));
   renderChart(result.points,result,variable);
   renderTable(result.points,variable);
   renderProvenance(output.meta,variable,result.n);
-  byId("source-mode").textContent=output.meta.kind;
+  byId("source-mode").textContent=L(output.meta.kind);
   const warning=variable==="PRECTOTCORR"?
     " Precipitation records show large long-term differences; product homogeneity and independent validation have not yet been established.":"";
   setMessage("Source loaded. Trend calculated from "+result.n+" complete annual values. Statistical interpretation is provisional."+warning);
@@ -138,7 +204,7 @@ async function snapshot(){
     const {start,end}=bounds();
     if(fields.place.value==="custom") throw new Error("Archived samples are available only for Liberia and Limón.");
     setMessage("Loading archived original NASA-derived annual series…");
-    const response=await fetch("./data/exp001-annual.json",{cache:"no-cache"});
+    const response=await fetch("/telluris/explore/data/exp001-annual.json",{cache:"no-cache"});
     if(!response.ok) throw new Error("Archived data file unavailable (HTTP "+response.status+").");
     const archive=await response.json();
     acceptData(fromSnapshot(archive,fields.place.value,fields.variable.value,start,end));
