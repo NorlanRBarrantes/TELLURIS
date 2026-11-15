@@ -402,3 +402,29 @@ body:has(#observatory){
 }
 .obs-export button:hover{background:rgba(32,107,108,.51);border-color:#b5f4dc}
 @media(max-width:560px){.obs-export button{width:100%}}
+
+/* Shared A-side research controls: no separate, drifting coordinates/years. */
+.obs-primary-config{
+ border-top:1px solid rgba(169,219,211,.2);
+ margin-top:7px;padding-top:11px;min-width:0
+}
+.obs-primary-config summary{
+ cursor:pointer;color:#b9f5d9;font-size:11px;font-weight:800;line-height:1.5
+}
+.obs-config-grid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:9px;margin-top:13px
+}
+.obs-config-grid label{
+ display:flex;flex-direction:column;gap:5px;color:#b6dadd;
+ font-size:10px;font-weight:750;min-width:0
+}
+.obs-config-grid input,.obs-config-grid select{
+ min-width:0;max-width:100%;width:100%;
+ padding:8px 9px;color:#e4f8f3;background:#051b2b;
+ border:1px solid rgba(153,218,213,.31);border-radius:8px;
+ font:inherit;font-size:11px;color-scheme:dark
+}
+.obs-config-grid input[readonly]{opacity:.72}
+@media(max-width:760px){.obs-config-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.obs-config-grid{grid-template-columns:1fr}}
