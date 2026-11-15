@@ -71,3 +71,9 @@ Catalog examples: https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1 ; htt
 **Technical architecture:** each scientific variable needs \`id, source, collection, version, category, spatial_support, temporal_support, unit, aggregation, valid_years, quality_masks, source_url, interpretation, integration_status\`. Do not flatten raster/river reach/station to the same "point" abstraction. Use actual source availability to filter the UI.
 
 **Scientific research hygiene:** the supplied Gemini EXP-002 text provides useful candidates and a provisional script, not executed measurements. Do not import its \`value > -900\` filter, unvalidated Hamed–Rao selection or categorical artifact conclusions. Test against real NASA metadata and independent references first.
+
+## Team-generated expanded inventory (15 November 2026)
+
+The sibling/team-contributed [original scientific inventory](TEAM-CATALOG-2026-11-15.md) adds **49 research candidates and ten proposed derived indicators** spanning atmosphere, freshwater/oceans, biosphere, geosphere, cryosphere and human footprint. **All are retained** in the normalized [JSON index](../website/public/telluris/catalog/data/catalog.json) and integrated into the exploratory web catalog (not live data connectors). The definitions and scientific corrections are in [TEAM-CATALOG-REVIEW.md](TEAM-CATALOG-REVIEW.md). T2M and PRECTOTCORR are the **only connected NASA variables** at this stage; sources mentioned in the team's document are candidates until individually verified.
+
+**New high-impact opportunity:** NASA FIRMS MODIS/VIIRS active fire detections and FRP, plus distinct burned area products; NASA VIIRS Black Marble nighttime radiance; and NASA InSAR/ARIA, LHASA and USGS contextual event records. These require event/categorical/quality-specific scientific analysis rather than blindly reusing annual precipitation Mann–Kendall.

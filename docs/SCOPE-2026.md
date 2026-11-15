@@ -70,3 +70,7 @@ Each family will be presented as a **discoverable catalog**, including entries n
 **Priority:** Close mandatory challenge gaps before implementing every suggested satellite mission. NASA's own challenge states that basic linear trends are an excellent starting point; the research extensions are intentionally retained rather than discarded.
 
 **Decision references:** [NASA recommendation traceability](NASA-RECOMMENDATIONS-MATRIX.md), [scientific source catalog](VARIABLE-CATALOG.md), [EXP-002 research protocol](BENCHMARK-PLAN.md), [NASA resource index](NASA-CHALLENGE-RESOURCES.md), [statistical methodology](SCIENTIFIC-METHODOLOGY.md).
+
+## November 15 team contribution — expanded Earth-system coverage
+
+The team submitted a wider [49-entry inventory and ten derived indicators](TEAM-CATALOG-2026-11-15.md) explicitly spanning **geosphere, cryosphere, human footprint and fire event data**, in addition to earlier atmosphere/water/land/ocean scope. The formal mission is unchanged: a source-aware, question-led NASA trend exploration tool; the new domain coverage is a **tracked research roadmap**, not a commitment that 49 connectors work today. Integration decisions and scientific cautions: [TEAM-CATALOG-REVIEW.md](TEAM-CATALOG-REVIEW.md). A static catalog page makes available versus planned sources visually distinguishable.

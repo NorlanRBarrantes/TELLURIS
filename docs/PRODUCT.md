@@ -81,3 +81,9 @@ Question → variable selection → explicit spatial/time selection → NASA dat
 ## Non-goals
 
 Weather forecasting, disaster warnings, causal attribution without suitable modeling, precise local ground-station claims from coarse NASA gridded data, and unvalidated AI-generated scientific conclusions.
+
+## Team-submitted full scientific inventory — November 15, 2026
+
+All 49 candidate variables/phenomena and ten proposed indices from the team's new [scientific catalog](TEAM-CATALOG-2026-11-15.md) are accepted into **product discovery scope** across six original domains. This **does not** change the verified two NASA POWER variables or make future integrations obligations before submission. See the technical review [TEAM-CATALOG-REVIEW.md](TEAM-CATALOG-REVIEW.md) and [machine-readable catalog](../website/public/telluris/catalog/data/catalog.json).
+
+Of special interest for subsequent mission-backed investigations are MODIS/VIIRS fire/vegetation, VIIRS Black Marble nighttime lights, ICESat-2/GRACE cryosphere and NASA InSAR/LHASA geohazards. USGS earthquake records are external context, not NASA Earth-observation mission variables. Future geophysical event modeling must not simply apply our annual continuous-valued meteorological significance test.

@@ -1,0 +1,1058 @@
+{
+  "schema": "telluris.catalog.2026-11-15.v1",
+  "owner": "Project Uriel",
+  "original_contributor": "Team-submitted scientific variable inventory; user reports it was requested by a teammate (sister) in another chat",
+  "source_document": "docs/TEAM-CATALOG-2026-11-15.md",
+  "notice_es": "Inventario de investigación, no garantía de disponibilidad ni implementación. Solo T2M y PRECTOTCORR están conectadas al explorador.",
+  "notice_en": "Research inventory, not a guarantee of availability or implementation. Only T2M and PRECTOTCORR are currently connected to the explorer.",
+  "connected": [
+    {
+      "id": "T2M",
+      "name_es": "Temperatura del aire a 2 metros",
+      "name_en": "Near-surface air temperature",
+      "source": "NASA POWER / MERRA-2",
+      "unit": "°C",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected"
+    },
+    {
+      "id": "PRECTOTCORR",
+      "name_es": "Precipitación corregida",
+      "name_en": "Bias-corrected precipitation",
+      "source": "NASA POWER / MERRA-2",
+      "unit": "mm/día (original); mm/año (agregado)",
+      "kind": "measured_or_modeled_variable",
+      "implementation_status": "connected"
+    }
+  ],
+  "groups": [
+    {
+      "es": "Atmósfera y clima",
+      "en": "Atmosphere and climate",
+      "count": 12
+    },
+    {
+      "es": "Hidrosfera y océanos",
+      "en": "Hydrosphere and oceans",
+      "count": 10
+    },
+    {
+      "es": "Biosfera y vegetación",
+      "en": "Biosphere and vegetation",
+      "count": 8
+    },
+    {
+      "es": "Geosfera y actividad sísmica",
+      "en": "Geosphere and seismic activity",
+      "count": 9
+    },
+    {
+      "es": "Criosfera",
+      "en": "Cryosphere",
+      "count": 5
+    },
+    {
+      "es": "Actividad humana y territorio",
+      "en": "Human activity and territory",
+      "count": 5
+    }
+  ],
+  "candidates": [
+    {
+      "id": "C01",
+      "number": 1,
+      "name_es": "Humedad relativa",
+      "name_en": "Relative humidity",
+      "source_phrase_es": "RH2M",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C02",
+      "number": 2,
+      "name_es": "Velocidad y dirección del viento",
+      "name_en": "Wind speed and direction",
+      "source_phrase_es": "WS10M y componentes del viento",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C03",
+      "number": 3,
+      "name_es": "Radiación solar superficial",
+      "name_en": "Surface solar irradiance",
+      "source_phrase_es": "ALLSKY_SFC_SW_DWN",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C04",
+      "number": 4,
+      "name_es": "Temperatura máxima y mínima",
+      "name_en": "Maximum and minimum temperature",
+      "source_phrase_es": "T2M_MAX, T2M_MIN",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C05",
+      "number": 5,
+      "name_es": "Presión atmosférica",
+      "name_en": "Atmospheric pressure",
+      "source_phrase_es": "Presión superficial",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C06",
+      "number": 6,
+      "name_es": "Cobertura y propiedades de nubes",
+      "name_en": "Cloud cover and properties",
+      "source_phrase_es": "Fracción de nubosidad y espesor óptico",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C07",
+      "number": 7,
+      "name_es": "Dióxido de carbono",
+      "name_en": "Carbon dioxide",
+      "source_phrase_es": "Concentración atmosférica de CO₂",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C08",
+      "number": 8,
+      "name_es": "Metano",
+      "name_en": "Methane",
+      "source_phrase_es": "Concentración atmosférica de CH₄",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C09",
+      "number": 9,
+      "name_es": "Contaminantes atmosféricos",
+      "name_en": "Air pollutants",
+      "source_phrase_es": "NO₂, SO₂, CO y aerosoles",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C10",
+      "number": 10,
+      "name_es": "Ozono atmosférico",
+      "name_en": "Atmospheric ozone",
+      "source_phrase_es": "Columna de O₃",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C11",
+      "number": 11,
+      "name_es": "Balance energético terrestre",
+      "name_en": "Earth energy balance",
+      "source_phrase_es": "Radiación entrante, reflejada, emitida y/o neta",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C12",
+      "number": 12,
+      "name_es": "Actividad eléctrica atmosférica",
+      "name_en": "Atmospheric lightning activity",
+      "source_phrase_es": "Densidad o frecuencia de rayos",
+      "domain_es": "Atmósfera y clima",
+      "domain_en": "Atmosphere and climate",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "NASA POWER",
+        "OMI",
+        "OCO-2",
+        "CERES",
+        "MERRA-2",
+        "LIS/OTD"
+      ]
+    },
+    {
+      "id": "C13",
+      "number": 13,
+      "name_es": "Humedad del suelo",
+      "name_en": "Soil moisture",
+      "source_phrase_es": "Contenido de agua en el suelo",
+      "domain_es": "Hidrosfera y océanos",
+      "domain_en": "Hydrosphere and oceans",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "GLDAS",
+        "SMAP",
+        "SWOT",
+        "PACE",
+        "MODIS",
+        "PO.DAAC"
+      ]
+    },
+    {
+      "id": "C14",
+      "number": 14,
+      "name_es": "Evapotranspiración",
+      "name_en": "Evapotranspiration",
+      "source_phrase_es": "ET",
+      "domain_es": "Hidrosfera y océanos",
+      "domain_en": "Hydrosphere and oceans",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "GLDAS",
+        "SMAP",
+        "SWOT",
+        "PACE",
+        "MODIS",
+        "PO.DAAC"
+      ]
+    },
+    {
+      "id": "C15",
+      "number": 15,
+      "name_es": "Escorrentía superficial",
+      "name_en": "Surface runoff",
+      "source_phrase_es": "Runoff",
+      "domain_es": "Hidrosfera y océanos",
+      "domain_en": "Hydrosphere and oceans",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "GLDAS",
+        "SMAP",
+        "SWOT",
+        "PACE",
+        "MODIS",
+        "PO.DAAC"
+      ]
+    },
+    {
+      "id": "C16",
+      "number": 16,
+      "name_es": "Niveles y extensión de ríos",
+      "name_en": "River levels and extent",
+      "source_phrase_es": "Altura o superficie observada",
+      "domain_es": "Hidrosfera y océanos",
+      "domain_en": "Hydrosphere and oceans",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "GLDAS",
+        "SMAP",
+        "SWOT",
+        "PACE",
+        "MODIS",
+        "PO.DAAC"
+      ]
+    },
+    {
+      "id": "C17",
+      "number": 17,
+      "name_es": "Nivel medio del mar",
+      "name_en": "Mean sea level",
+      "source_phrase_es": "Altimetría y anomalías",
+      "domain_es": "Hidrosfera y océanos",
+      "domain_en": "Hydrosphere and oceans",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "GLDAS",
+        "SMAP",
+        "SWOT",
+        "PACE",
+        "MODIS",
+        "PO.DAAC"
+      ]
+    },
+    {
+      "id": "C18",
+      "number": 18,
+      "name_es": "Temperatura superficial oceánica",
+      "name_en": "Sea surface temperature",
+      "source_phrase_es": "SST",
+      "domain_es": "Hidrosfera y océanos",
+      "domain_en": "Hydrosphere and oceans",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "GLDAS",
+        "SMAP",
+        "SWOT",
+        "PACE",
+        "MODIS",
+        "PO.DAAC"
+      ]
+    },
+    {
+      "id": "C19",
+      "number": 19,
+      "name_es": "Salinidad superficial oceánica",
+      "name_en": "Sea surface salinity",
+      "source_phrase_es": "SSS",
+      "domain_es": "Hidrosfera y océanos",
+      "domain_en": "Hydrosphere and oceans",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "GLDAS",
+        "SMAP",
+        "SWOT",
+        "PACE",
+        "MODIS",
+        "PO.DAAC"
+      ]
+    },
+    {
+      "id": "C20",
+      "number": 20,
+      "name_es": "Clorofila-a",
+      "name_en": "Chlorophyll-a",
+      "source_phrase_es": "Concentración estimada",
+      "domain_es": "Hidrosfera y océanos",
+      "domain_en": "Hydrosphere and oceans",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "GLDAS",
+        "SMAP",
+        "SWOT",
+        "PACE",
+        "MODIS",
+        "PO.DAAC"
+      ]
+    },
+    {
+      "id": "C21",
+      "number": 21,
+      "name_es": "Turbidez y propiedades ópticas del agua",
+      "name_en": "Water turbidity and optical properties",
+      "source_phrase_es": "Reflectancia y variables ópticas",
+      "domain_es": "Hidrosfera y océanos",
+      "domain_en": "Hydrosphere and oceans",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "GLDAS",
+        "SMAP",
+        "SWOT",
+        "PACE",
+        "MODIS",
+        "PO.DAAC"
+      ]
+    },
+    {
+      "id": "C22",
+      "number": 22,
+      "name_es": "Extensión de inundaciones",
+      "name_en": "Flood extent",
+      "source_phrase_es": "Área inundada detectada",
+      "domain_es": "Hidrosfera y océanos",
+      "domain_en": "Hydrosphere and oceans",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "GLDAS",
+        "SMAP",
+        "SWOT",
+        "PACE",
+        "MODIS",
+        "PO.DAAC"
+      ]
+    },
+    {
+      "id": "C23",
+      "number": 23,
+      "name_es": "Índices de vegetación",
+      "name_en": "Vegetation indices",
+      "source_phrase_es": "NDVI, EVI",
+      "domain_es": "Biosfera y vegetación",
+      "domain_en": "Biosphere and vegetation",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS",
+        "FIRMS",
+        "GEDI",
+        "ECOSTRESS",
+        "HLS",
+        "OPERA"
+      ]
+    },
+    {
+      "id": "C24",
+      "number": 24,
+      "name_es": "Cobertura forestal",
+      "name_en": "Forest cover",
+      "source_phrase_es": "Porcentaje o superficie",
+      "domain_es": "Biosfera y vegetación",
+      "domain_en": "Biosphere and vegetation",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS",
+        "FIRMS",
+        "GEDI",
+        "ECOSTRESS",
+        "HLS",
+        "OPERA"
+      ]
+    },
+    {
+      "id": "C25",
+      "number": 25,
+      "name_es": "Deforestación y cambio de uso del suelo",
+      "name_en": "Deforestation and land-use change",
+      "source_phrase_es": "Superficie transformada",
+      "domain_es": "Biosfera y vegetación",
+      "domain_en": "Biosphere and vegetation",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS",
+        "FIRMS",
+        "GEDI",
+        "ECOSTRESS",
+        "HLS",
+        "OPERA"
+      ]
+    },
+    {
+      "id": "C26",
+      "number": 26,
+      "name_es": "Biomasa forestal",
+      "name_en": "Forest biomass",
+      "source_phrase_es": "Biomasa aérea estimada",
+      "domain_es": "Biosfera y vegetación",
+      "domain_en": "Biosphere and vegetation",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS",
+        "FIRMS",
+        "GEDI",
+        "ECOSTRESS",
+        "HLS",
+        "OPERA"
+      ]
+    },
+    {
+      "id": "C27",
+      "number": 27,
+      "name_es": "Altura del dosel",
+      "name_en": "Canopy height",
+      "source_phrase_es": "Altura vegetal",
+      "domain_es": "Biosfera y vegetación",
+      "domain_en": "Biosphere and vegetation",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS",
+        "FIRMS",
+        "GEDI",
+        "ECOSTRESS",
+        "HLS",
+        "OPERA"
+      ]
+    },
+    {
+      "id": "C28",
+      "number": 28,
+      "name_es": "Área quemada por incendios",
+      "name_en": "Wildfire burned area",
+      "source_phrase_es": "Superficie afectada",
+      "domain_es": "Biosfera y vegetación",
+      "domain_en": "Biosphere and vegetation",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS",
+        "FIRMS",
+        "GEDI",
+        "ECOSTRESS",
+        "HLS",
+        "OPERA"
+      ]
+    },
+    {
+      "id": "C29",
+      "number": 29,
+      "name_es": "Puntos calientes e intensidad térmica",
+      "name_en": "Active fire hotspots and thermal intensity",
+      "source_phrase_es": "Anomalías térmicas y potencia radiativa",
+      "domain_es": "Biosfera y vegetación",
+      "domain_en": "Biosphere and vegetation",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS",
+        "FIRMS",
+        "GEDI",
+        "ECOSTRESS",
+        "HLS",
+        "OPERA"
+      ]
+    },
+    {
+      "id": "C30",
+      "number": 30,
+      "name_es": "Estrés hídrico vegetal",
+      "name_en": "Vegetation water stress",
+      "source_phrase_es": "Índices asociados a evapotranspiración",
+      "domain_es": "Biosfera y vegetación",
+      "domain_en": "Biosphere and vegetation",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS",
+        "FIRMS",
+        "GEDI",
+        "ECOSTRESS",
+        "HLS",
+        "OPERA"
+      ]
+    },
+    {
+      "id": "C31",
+      "number": 31,
+      "name_es": "Frecuencia sísmica",
+      "name_en": "Earthquake frequency",
+      "source_phrase_es": "Número de eventos por período",
+      "domain_es": "Geosfera y actividad sísmica",
+      "domain_en": "Geosphere and seismic activity",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "USGS",
+        "NASA ARIA",
+        "NASA LHASA",
+        "InSAR",
+        "OMI",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C32",
+      "number": 32,
+      "name_es": "Magnitud sísmica",
+      "name_en": "Earthquake magnitude",
+      "source_phrase_es": "Magnitud por evento",
+      "domain_es": "Geosfera y actividad sísmica",
+      "domain_en": "Geosphere and seismic activity",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "USGS",
+        "NASA ARIA",
+        "NASA LHASA",
+        "InSAR",
+        "OMI",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C33",
+      "number": 33,
+      "name_es": "Profundidad de hipocentros",
+      "name_en": "Hypocenter depth",
+      "source_phrase_es": "Kilómetros",
+      "domain_es": "Geosfera y actividad sísmica",
+      "domain_en": "Geosphere and seismic activity",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "USGS",
+        "NASA ARIA",
+        "NASA LHASA",
+        "InSAR",
+        "OMI",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C34",
+      "number": 34,
+      "name_es": "Distribución de epicentros",
+      "name_en": "Epicenter distribution",
+      "source_phrase_es": "Coordenadas y densidad espacial",
+      "domain_es": "Geosfera y actividad sísmica",
+      "domain_en": "Geosphere and seismic activity",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "USGS",
+        "NASA ARIA",
+        "NASA LHASA",
+        "InSAR",
+        "OMI",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C35",
+      "number": 35,
+      "name_es": "Deformación de la superficie",
+      "name_en": "Surface deformation",
+      "source_phrase_es": "Desplazamiento estimado mediante InSAR",
+      "domain_es": "Geosfera y actividad sísmica",
+      "domain_en": "Geosphere and seismic activity",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "USGS",
+        "NASA ARIA",
+        "NASA LHASA",
+        "InSAR",
+        "OMI",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C36",
+      "number": 36,
+      "name_es": "Emisiones volcánicas",
+      "name_en": "Volcanic emissions",
+      "source_phrase_es": "SO₂ observado o estimado",
+      "domain_es": "Geosfera y actividad sísmica",
+      "domain_en": "Geosphere and seismic activity",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "USGS",
+        "NASA ARIA",
+        "NASA LHASA",
+        "InSAR",
+        "OMI",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C37",
+      "number": 37,
+      "name_es": "Anomalías térmicas volcánicas",
+      "name_en": "Volcanic thermal anomalies",
+      "source_phrase_es": "Anomalías de temperatura superficial",
+      "domain_es": "Geosfera y actividad sísmica",
+      "domain_en": "Geosphere and seismic activity",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "USGS",
+        "NASA ARIA",
+        "NASA LHASA",
+        "InSAR",
+        "OMI",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C38",
+      "number": 38,
+      "name_es": "Susceptibilidad a deslizamientos",
+      "name_en": "Landslide susceptibility",
+      "source_phrase_es": "Indicadores modelados",
+      "domain_es": "Geosfera y actividad sísmica",
+      "domain_en": "Geosphere and seismic activity",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "USGS",
+        "NASA ARIA",
+        "NASA LHASA",
+        "InSAR",
+        "OMI",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C39",
+      "number": 39,
+      "name_es": "Subsidencia terrestre",
+      "name_en": "Land subsidence",
+      "source_phrase_es": "Desplazamiento vertical estimado",
+      "domain_es": "Geosfera y actividad sísmica",
+      "domain_en": "Geosphere and seismic activity",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "USGS",
+        "NASA ARIA",
+        "NASA LHASA",
+        "InSAR",
+        "OMI",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C40",
+      "number": 40,
+      "name_es": "Extensión de glaciares",
+      "name_en": "Glacier extent",
+      "source_phrase_es": "Superficie cubierta",
+      "domain_es": "Criosfera",
+      "domain_en": "Cryosphere",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "ICESat-2",
+        "GRACE/GRACE-FO",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C41",
+      "number": 41,
+      "name_es": "Cambios de elevación del hielo",
+      "name_en": "Ice surface elevation changes",
+      "source_phrase_es": "Diferencias altimétricas",
+      "domain_es": "Criosfera",
+      "domain_en": "Cryosphere",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "ICESat-2",
+        "GRACE/GRACE-FO",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C42",
+      "number": 42,
+      "name_es": "Cambios de masa de hielo",
+      "name_en": "Ice mass changes",
+      "source_phrase_es": "Variaciones de masa estimada",
+      "domain_es": "Criosfera",
+      "domain_en": "Cryosphere",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "ICESat-2",
+        "GRACE/GRACE-FO",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C43",
+      "number": 43,
+      "name_es": "Cobertura de nieve",
+      "name_en": "Snow cover",
+      "source_phrase_es": "Superficie y persistencia",
+      "domain_es": "Criosfera",
+      "domain_en": "Cryosphere",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "ICESat-2",
+        "GRACE/GRACE-FO",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C44",
+      "number": 44,
+      "name_es": "Extensión del hielo marino",
+      "name_en": "Sea ice extent",
+      "source_phrase_es": "Área cubierta",
+      "domain_es": "Criosfera",
+      "domain_en": "Cryosphere",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "ICESat-2",
+        "GRACE/GRACE-FO",
+        "MODIS"
+      ]
+    },
+    {
+      "id": "C45",
+      "number": 45,
+      "name_es": "Temperatura superficial urbana",
+      "name_en": "Urban land-surface temperature",
+      "source_phrase_es": "Diferencias espaciales e islas de calor",
+      "domain_es": "Actividad humana y territorio",
+      "domain_en": "Human activity and territory",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS Black Marble",
+        "Landsat",
+        "HLS"
+      ]
+    },
+    {
+      "id": "C46",
+      "number": 46,
+      "name_es": "Expansión urbana",
+      "name_en": "Urban expansion",
+      "source_phrase_es": "Superficie construida",
+      "domain_es": "Actividad humana y territorio",
+      "domain_en": "Human activity and territory",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS Black Marble",
+        "Landsat",
+        "HLS"
+      ]
+    },
+    {
+      "id": "C47",
+      "number": 47,
+      "name_es": "Luces nocturnas",
+      "name_en": "Nighttime lights",
+      "source_phrase_es": "Radiancia nocturna",
+      "domain_es": "Actividad humana y territorio",
+      "domain_en": "Human activity and territory",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS Black Marble",
+        "Landsat",
+        "HLS"
+      ]
+    },
+    {
+      "id": "C48",
+      "number": 48,
+      "name_es": "Cambios en cobertura del suelo",
+      "name_en": "Land-cover change",
+      "source_phrase_es": "Clases de uso y cobertura",
+      "domain_es": "Actividad humana y territorio",
+      "domain_en": "Human activity and territory",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS Black Marble",
+        "Landsat",
+        "HLS"
+      ]
+    },
+    {
+      "id": "C49",
+      "number": 49,
+      "name_es": "Exposición poblacional a amenazas",
+      "name_en": "Population exposure to hazards",
+      "source_phrase_es": "Indicador combinado con datos demográficos",
+      "domain_es": "Actividad humana y territorio",
+      "domain_en": "Human activity and territory",
+      "kind": "research_candidate",
+      "implementation_status": "not_connected",
+      "source_candidates": [
+        "MODIS",
+        "VIIRS Black Marble",
+        "Landsat",
+        "HLS"
+      ]
+    }
+  ],
+  "indicators": [
+    {
+      "id": "I01",
+      "number": 1,
+      "name_es": "Anomalías climáticas",
+      "description_es": "¿Cuánto difiere una observación del comportamiento histórico de referencia?",
+      "kind": "derived_indicator",
+      "implementation_status": "not_connected"
+    },
+    {
+      "id": "I02",
+      "number": 2,
+      "name_es": "Tendencias por década",
+      "description_es": "¿A qué ritmo cambia una variable?",
+      "kind": "derived_indicator",
+      "implementation_status": "partial_exploratory"
+    },
+    {
+      "id": "I03",
+      "number": 3,
+      "name_es": "Días de calor extremo",
+      "description_es": "¿Cambian los días que superan un umbral o percentil térmico?",
+      "kind": "derived_indicator",
+      "implementation_status": "not_connected"
+    },
+    {
+      "id": "I04",
+      "number": 4,
+      "name_es": "Índice estandarizado de precipitación (SPI)",
+      "description_es": "¿Hay déficits o excesos anómalos de lluvia?",
+      "kind": "derived_indicator",
+      "implementation_status": "not_connected"
+    },
+    {
+      "id": "I05",
+      "number": 5,
+      "name_es": "Períodos secos consecutivos",
+      "description_es": "¿Están aumentando la frecuencia o duración de los períodos sin lluvia significativa?",
+      "kind": "derived_indicator",
+      "implementation_status": "not_connected"
+    },
+    {
+      "id": "I06",
+      "number": 6,
+      "name_es": "Amplitud térmica",
+      "description_es": "¿Cómo cambia la diferencia entre máximas y mínimas?",
+      "kind": "derived_indicator",
+      "implementation_status": "not_connected"
+    },
+    {
+      "id": "I07",
+      "number": 7,
+      "name_es": "Déficit de presión de vapor (VPD)",
+      "description_es": "¿Cómo cambia la demanda evaporativa atmosférica?",
+      "kind": "derived_indicator",
+      "implementation_status": "not_connected"
+    },
+    {
+      "id": "I08",
+      "number": 8,
+      "name_es": "Correlaciones multivariables",
+      "description_es": "¿Qué variables presentan asociaciones temporales o geográficas?",
+      "kind": "derived_indicator",
+      "implementation_status": "not_connected"
+    },
+    {
+      "id": "I09",
+      "number": 9,
+      "name_es": "Puntos de cambio",
+      "description_es": "¿Existen posibles rupturas de comportamiento en una serie?",
+      "kind": "derived_indicator",
+      "implementation_status": "not_connected"
+    },
+    {
+      "id": "I10",
+      "number": 10,
+      "name_es": "Incertidumbre estadística",
+      "description_es": "¿Qué precisión y robustez tienen las estimaciones obtenidas?",
+      "kind": "derived_indicator",
+      "implementation_status": "not_connected"
+    }
+  ]
+}

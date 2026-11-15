@@ -206,3 +206,13 @@ Do not replace proposed status with accepted until the underlying decision is ve
 - **Near-term completion:** Preserve functional EXP-001; add learner-facing question-based discovery, variable explanations and independently justified significance; expand POWER variables (RH2M, WS10M, ALLSKY_SFC_SW_DWN) after API checks; add one verified distinct NASA data-source case and two examples. Keep JJA/IMERG/cross-region hypotheses in EXP-002 for validation.
 - **Rejected practices:** Predetermining slope signs/p-values, treating GLDAS runoff as a river-gauge discharge measurement, making source integrations appear live based on a documentation entry, blindly importing Gemini's proposed statistical code or declaring short SWOT series a multidecadal trend.
 - **Evidence:** [Formal scope](SCOPE-2026.md), [full NASA brief/resource matrix](NASA-RECOMMENDATIONS-MATRIX.md), [variable research catalog](VARIABLE-CATALOG.md), [official NASA resource index](NASA-CHALLENGE-RESOURCES.md), [existing EXP-001 validation](EXPERIMENT-001.md).
+
+## ADR-024 — Preserve and integrate team scientific inventory as research catalog
+
+- **Date:** 2026-11-15 (Costa Rica)
+- **Status:** Accepted for documented discovery scope; **NOT accepted as 49 connected variables**
+- **Contribution:** Team-submitted inventory prepared from a request by a Project Uriel member (the user's sister), preserved verbatim as [TEAM-CATALOG-2026-11-15.md](TEAM-CATALOG-2026-11-15.md).
+- **Decision:** Retain every one of its **49 candidate measurements/phenomena** and **10 proposed derived indicators** alongside the 2 connected NASA POWER variables. Expose a clearly labeled, searchable, bilingual **research inventory** but no executable buttons for unsupported sources. Preserve original six categories, with scientific cross-references and distinctive data types.
+- **Science:** NASA FIRMS detections vs burned area, GLDAS runoff vs SWOT river discharge, LST vs air temperature, USGS earthquake events vs NASA mission measures, short records, QA and incomplete seismic catalog protections. Do not claim earthquake prediction or scientifically validated anomaly trends without tests.
+- **Implementation evidence:** [Normalized catalog](../website/public/telluris/catalog/data/catalog.json), [source review](TEAM-CATALOG-REVIEW.md), [source scope](SCOPE-2026.md). Any delivered UI is a roadmap, not evidence of 49 new NASA API integrations.
+- **Schedule:** Preserve submission priority; add more NASA data sources only after end-to-end retrieval and source-specific verification.
