@@ -136,3 +136,11 @@ Results must be computed before any place is described as having an observed sig
 - **Pending:** update hosted cPanel document root; verify all six public routes, actual language switching, live NASA fetch and mobile responsiveness after deployment.
 - User screenshots of the previous English version indicate the hosted Explorer is accessible and able to load live NASA POWER; this **does not establish bilingual deployment**, which remains pending.
 - Next research gate: [EXP-002 falsifiable seasonal and global comparisons](BENCHMARK-PLAN.md); no pre-set scientific outcomes accepted.
+
+## Formal NASA challenge re-scoping and variable-source research — 2026-11-14
+
+- [Scope decision](SCOPE-2026.md): broad guided Earth-system trend detective mission, replacing any implicit obligation to prove a Costa Rican climate dipole.
+- [NASA recommendation traceability](NASA-RECOMMENDATIONS-MATRIX.md): **25** individually mapped official objectives, recommendations, motivations and practical considerations, plus **13** links preserved from the official Resources-tab index.
+- [Variable catalog](VARIABLE-CATALOG.md): NASA POWER atmosphere/radiation candidates; GLDAS runoff and soil water; SWOT **estimated river discharge** and reach geometry; MODIS vegetation/temperature/evaporation; GPM precipitation; SMAP soil moisture; GRACE terrestrial water storage; AIRS/OMI atmosphere; PO.DAAC ocean series.
+- **Evidence limitation:** Catalog coverage verifies plausible official sources, **not** software integrations or valid climate findings. The only connected NASA variables remain POWER T2M/PRECTOTCORR. River discharge is a 2022+ SWOT reach-level estimate, not a 1985–2025 hydrograph or GLDAS Qs runoff.
+- **Next acceptance gates:** validated significance inference, live metadata-driven additional POWER parameters, educational question flow, at least one non-meteorological NASA source extraction, deployment/update verification and publicly reviewable competition submission.

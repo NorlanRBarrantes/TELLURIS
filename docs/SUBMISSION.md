@@ -11,6 +11,14 @@
 - Deadline shown by NASA: Sunday, November 15, 2026, **11:59 p.m. local event time**.
 - Official event information: https://www.spaceappschallenge.org/2026/
 
+## Critical scope gate before final submission
+
+The [2026 NASA Scope](SCOPE-2026.md) is approved: TELLURIS addresses the broad Earth-system detective workflow, not a predetermined Liberia/Limón dipole. All four required components and the optional recommendations are traced in [NASA-RECOMMENDATIONS-MATRIX.md](NASA-RECOMMENDATIONS-MATRIX.md), with new NASA-family variable candidates recorded in [VARIABLE-CATALOG.md](VARIABLE-CATALOG.md).
+
+**Competition timing:** NASA states the 2026 project submission closes **Sunday, November 15, 2026 at 11:59 p.m. LOCAL event time**: https://www.spaceappschallenge.org/2026/ . Given this deadline, prioritize a functioning, accessible and reproducible experience that meets the challenge's four core requirements. Do **not** delay submission to integrate every source listed by NASA: officially suggested enhancements are tracked as research, and only verified implementations should be marked completed.
+
+The English project narrative, demo, credits, public project link and submission itself remain separate final gates. Do not infer from an uploaded public website that the GitHub repository has been made public or that the NASA project tab was submitted.
+
 ## Submission deliverables
 
 - [ ] Project title and concise English-language summary.
