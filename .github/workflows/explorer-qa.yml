@@ -29,6 +29,7 @@ jobs:
         run: |
           node --check website/public/assets/science.js
           node --check website/public/assets/explorer.js
+          node --check website/public/assets/catalog.js
       - name: Run science and archived NASA parity tests
         run: node --test website/tests/*.test.js
       - name: Run local HTTP smoke test
@@ -47,6 +48,9 @@ jobs:
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/explore/data/exp001-annual.json | grep -q "MERRA2"
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/explorer.js | grep -q "fromSnapshot"
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/ | grep -q "TELLURIS"
+          curl --fail --silent --show-error http://127.0.0.1:8765/telluris/catalog/ | grep -q 'lang="es"'
+          curl --fail --silent --show-error http://127.0.0.1:8765/en/telluris/catalog/ | grep -q 'lang="en"'
+          curl --fail --silent --show-error http://127.0.0.1:8765/telluris/catalog/data/catalog.json | grep -q 'telluris.catalog.2026-11-15.v1'
       - name: Package complete static site for BanaHosting
         if: success()
         uses: actions/upload-artifact@v4
