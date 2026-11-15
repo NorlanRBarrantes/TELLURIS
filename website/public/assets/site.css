@@ -14,3 +14,69 @@ body[data-lang="es"] .home-hero h1{white-space:normal;font-size:clamp(50px,5.25v
 
 /* Accessible bilingual locale switch; Spanish is canonical root. */
 .language-switch{display:inline-flex;gap:3px;align-items:center;border:1px solid rgba(181,235,207,.30);border-radius:9px;padding:3px;flex-shrink:0}.language-switch a{font-weight:750;font-size:11px;letter-spacing:.07em;color:#b7c9c9;padding:6px 9px;border-radius:6px;min-width:30px;text-align:center;text-decoration:none;transition:background .2s}.language-switch a.current{background:#b8edc6;color:#061721}.language-switch a:not(.current):hover{background:rgba(184,237,198,.15);color:#e1fae9}.language-switch a:focus-visible{outline:2px solid #b8edc6;outline-offset:2px}@media(max-width:560px){.language-switch a{padding:5px 7px}.nav-actions{gap:8px}.nav-cta{padding:8px 9px;font-size:10px}.brand strong{font-size:12px}}
+
+
+/* Project Uriel Design Language v2 · shared across landing, TELLURIS and Explorer.
+ * Presentational improvements only, no simulated Earth science assets. */
+:root{
+ --bg:#05131f;--panel:#0a2533;--text:#effaf7;
+ --sub:#afc9ce;--muted:#8baeb7;
+ --line:rgba(153,226,209,.2);
+ --mint:#b0f5d6;--aqua:#7bdee0;--radius:19px
+}
+.header{
+ background:rgba(5,17,29,.9);
+ box-shadow:0 12px 42px rgba(0,5,15,.15);
+ border-bottom:1px solid rgba(153,222,224,.13);
+}
+.nav-cta,.language-switch{backdrop-filter:blur(14px)}
+.nav-cta{
+ border-radius:10px;transition:transform .2s,background .2s,border-color .2s;
+ background:rgba(7,37,50,.38)
+}
+.nav-cta:hover{transform:translateY(-2px);background:rgba(30,105,106,.21)}
+.nav-links a{text-underline-offset:7px}
+.nav-links a:hover{text-decoration:underline;text-decoration-color:rgba(180,239,217,.65)}
+.button,.giant-cta,.underlined{transition:transform .18s,box-shadow .18s,background .18s}
+.button-primary,.giant-cta{
+ color:#062f2f;background:linear-gradient(113deg,#b0f5d6,#93dddc);
+ box-shadow:0 12px 34px rgba(51,177,160,.15)
+}
+.button-primary:hover,.giant-cta:hover{
+ background:linear-gradient(113deg,#d7ffeb,#a6e9e3);
+ box-shadow:0 15px 38px rgba(78,200,175,.2)
+}
+.home-hero h1,.tell-hero h1{text-shadow:0 12px 44px rgba(0,0,0,.14)}
+.hero-art:before{background:radial-gradient(circle,rgba(28,122,139,.25),transparent 72%)}
+.planet-svg{filter:drop-shadow(0 0 48px rgba(44,164,160,.17))}
+.principle,.question-card,.status-card,.coordinate-screen,.feature-panel,.lab-panel{
+ border-color:rgba(159,231,210,.22);
+ box-shadow:inset 0 1px 0 rgba(228,255,249,.035),0 14px 40px rgba(0,12,26,.12)
+}
+.principle,.question-card,.status-card{
+ background:linear-gradient(150deg,rgba(15,46,58,.96),rgba(8,25,39,.97));
+ transition:transform .2s,border-color .2s,box-shadow .2s
+}
+.principle:hover,.question-card:hover,.status-card:hover{
+ transform:translateY(-3px);
+ border-color:rgba(177,240,212,.42);
+ box-shadow:0 15px 38px rgba(0,9,24,.26)
+}
+.feature-panel{
+ background:radial-gradient(circle at 95% 15%,rgba(41,121,123,.22),transparent 43%),
+ linear-gradient(140deg,#10343f,#082032 65%,#071928)
+}
+.coordinate-screen{border-radius:19px}
+.feature-signals,.geo-outline{border-color:rgba(170,223,214,.22)}
+.eyebrow.mint{color:#b9f6d9}
+.footer{background:linear-gradient(110deg,#071a29,#081a25)}
+input,select,button{accent-color:#b0f5d6}
+button:disabled{cursor:not-allowed}
+@media(hover:none){
+ .principle:hover,.question-card:hover,.status-card:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .principle,.question-card,.status-card,.button,.nav-cta,.giant-cta{
+  transition:none!important;transform:none!important
+ }
+}
