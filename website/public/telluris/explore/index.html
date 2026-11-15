@@ -1,72 +1,73 @@
 <!doctype html>
-<html lang="en"><head>
+<html lang="es"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#07121d"><meta name="color-scheme" content="dark">
-<title>TELLURIS Explorer — Historical NASA Earth Trends | Project Uriel</title>
-<meta name="description" content="Investigate NASA POWER air temperature and precipitation across Costa Rica with transparent historical graphs and exploratory statistical trend calculations.">
+<title>TELLURIS — Explorador de tendencias terrestres con NASA | Project Uriel</title>
+<meta name="description" content="Investiga datos históricos de temperatura y lluvia en Costa Rica con NASA POWER, gráficos y análisis de tendencias exploratorios.">
 <link rel="canonical" href="https://projecturiel.earth/telluris/explore/">
+<link rel="alternate" hreflang="es-CR" href="https://projecturiel.earth/telluris/explore/"><link rel="alternate" hreflang="en" href="https://projecturiel.earth/en/telluris/explore/"><link rel="alternate" hreflang="x-default" href="https://projecturiel.earth/telluris/explore/">
 <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="../../assets/explorer.css">
 <script type="module" src="../../assets/explorer.js"></script>
 </head><body>
-<a class="skip" href="#explorer">Skip to explorer</a>
+<a class="skip" href="#explorer">Ir al explorador</a>
 <header class="header"><div class="container nav">
-<a class="brand" href="/" aria-label="Project Uriel home">
+<a class="brand" href="/" aria-label="Inicio de Project Uriel">
 <svg viewBox="0 0 42 42" fill="none" aria-hidden="true"><path d="M21 3 39 21 21 39 3 21 21 3Z" stroke="currentColor" stroke-width="1.35"/><circle cx="21" cy="21" r="8" stroke="currentColor" stroke-width="1.35"/><path d="M12 21h18M21 12v18" stroke="currentColor"/><circle cx="21" cy="21" r="2.3" fill="currentColor"/></svg>
 <span><strong>PROJECT URIEL</strong><small>EARTH · TECHNOLOGY · DISCOVERY</small></span></a>
-<nav class="nav-links" aria-label="Navigation"><a href="/telluris/">TELLURIS</a><a href="/telluris/#method">Method</a><a href="https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/" target="_blank" rel="noopener noreferrer">NASA Challenge</a></nav>
-<div class="nav-actions"><a class="nav-cta" href="/telluris/">Project overview ↗</a></div>
+<nav class="nav-links" aria-label="Navegación"><a href="/telluris/">TELLURIS</a><a href="/telluris/#method">Metodología</a><a href="https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/" target="_blank" rel="noopener noreferrer">Desafío de NASA</a></nav>
+<div class="nav-actions"><div class="language-switch" role="group" aria-label="Seleccionar idioma"><a href="/telluris/explore/" lang="es" hreflang="es" title="Español" class="current" aria-current="page">ES</a><a href="/en/telluris/explore/" lang="en" hreflang="en" title="English">EN</a></div><a class="nav-cta" href="/telluris/">Ver el proyecto ↗</a></div>
 </div></header>
 <main class="container explorer-shell" id="explorer">
 <div class="explorer-intro">
-  <p class="eyebrow mint">TELLURIS / RESEARCH LAB / EXPERIMENT 001</p>
-  <h1>Earth changes.<br><em>Follow the evidence.</em></h1>
-  <p>Explore historical NASA POWER data, calculate a robust trend and inspect what we can—and cannot—conclude. Every result traces back to a scientific source.</p>
-  <div class="intro-flags"><span>NASA POWER · MERRA-2</span><span>1985–2025</span><span>Exploratory science</span></div>
+  <p class="eyebrow mint">TELLURIS / LABORATORIO CIENTÍFICO / EXPERIMENTO 001</p>
+  <h1>La Tierra cambia.<br><em>Sigamos la evidencia.</em></h1>
+  <p>Explora datos históricos de NASA POWER, calcula tendencias robustas y distingue lo que podemos concluir de lo que todavía no. Cada resultado se vincula a una fuente científica.</p>
+  <div class="intro-flags"><span>NASA POWER · MERRA-2</span><span>1985–2025</span><span>Ciencia exploratoria</span></div>
 </div>
 <div class="explore-layout">
   <aside class="explore-controls" aria-labelledby="controls-title">
-    <p class="eyebrow mint">01 / SET UP AN INVESTIGATION</p>
-    <h2 id="controls-title">Define the question</h2>
+    <p class="eyebrow mint">01 / CONFIGURAR INVESTIGACIÓN</p>
+    <h2 id="controls-title">Define la pregunta</h2>
     <form id="explore-form">
-      <label for="location">Location</label>
-      <select id="location" name="location"><option value="liberia">Liberia · Pacific, Costa Rica</option><option value="limon">Limón · Caribbean, Costa Rica</option><option value="custom">Custom coordinates</option></select>
-      <div class="coordinate-fields"><div><label for="latitude">Latitude</label><input id="latitude" type="number" step="any" min="-90" max="90" value="10.63" required readonly></div><div><label for="longitude">Longitude</label><input id="longitude" type="number" step="any" min="-180" max="180" value="-85.44" required readonly></div></div>
-      <label for="variable">Scientific variable</label>
-      <select id="variable"><option value="T2M">Near-surface air temperature · °C</option><option value="PRECTOTCORR">Annual precipitation · mm</option></select>
-      <div class="coordinate-fields"><div><label for="from-year">From</label><input id="from-year" type="number" min="1981" max="2025" value="1985" required></div><div><label for="to-year">Through</label><input id="to-year" type="number" min="1981" max="2025" value="2025" required></div></div>
-      <button id="live-btn" class="explore-primary" type="submit">Request live NASA data <span aria-hidden="true">↗</span></button>
-      <button id="snapshot-btn" class="explore-secondary" type="button">Use archived NASA sample</button>
-      <label class="import-label" for="file-input">Or import original NASA JSON (.json)</label>
+      <label for="location">Ubicación</label>
+      <select id="location" name="location"><option value="liberia">Liberia · Pacífico, Costa Rica</option><option value="limon">Limón · Caribe, Costa Rica</option><option value="custom">Coordenadas personalizadas</option></select>
+      <div class="coordinate-fields"><div><label for="latitude">Latitud</label><input id="latitude" type="number" step="any" min="-90" max="90" value="10.63" required readonly></div><div><label for="longitude">Longitud</label><input id="longitude" type="number" step="any" min="-180" max="180" value="-85.44" required readonly></div></div>
+      <label for="variable">Variable científica</label>
+      <select id="variable"><option value="T2M">Temperatura del aire a 2 m · °C</option><option value="PRECTOTCORR">Precipitación anual · mm</option></select>
+      <div class="coordinate-fields"><div><label for="from-year">Desde</label><input id="from-year" type="number" min="1981" max="2025" value="1985" required></div><div><label for="to-year">Hasta</label><input id="to-year" type="number" min="1981" max="2025" value="2025" required></div></div>
+      <button id="live-btn" class="explore-primary" type="submit">Consultar datos NASA en vivo <span aria-hidden="true">↗</span></button>
+      <button id="snapshot-btn" class="explore-secondary" type="button">Usar muestra archivada NASA</button>
+      <label class="import-label" for="file-input">O importar un JSON original de NASA (.json)</label>
       <input id="file-input" type="file" accept=".json,application/json">
     </form>
-    <p class="control-note">Live requests depend on NASA service availability and cross-origin browser access. The archived example is authentic NASA data retrieved for this investigation—not a synthetic simulation.</p>
+    <p class="control-note">Las consultas en vivo dependen de la disponibilidad de NASA y de los permisos del navegador. La muestra archivada contiene datos auténticos de NASA, no una simulación.</p>
   </aside>
-  <section class="explore-workspace" aria-label="Investigation results">
+  <section class="explore-workspace" aria-label="Resultados de investigación">
     <div class="workspace-top">
-      <div><p class="eyebrow mint">02 / EVIDENCE & ANALYSIS</p><h2>Historical signal</h2></div>
-      <span class="status-pill" id="source-mode">Awaiting source</span>
+      <div><p class="eyebrow mint">02 / EVIDENCIA Y ANÁLISIS</p><h2>Señal histórica</h2></div>
+      <span class="status-pill" id="source-mode">Esperando datos</span>
     </div>
-    <p id="message" class="explore-message" role="status" aria-live="polite">Loading verified NASA sample…</p>
+    <p id="message" class="explore-message" role="status" aria-live="polite">Cargando muestra NASA verificada…</p>
     <div id="results" hidden>
       <div class="metric-grid">
-        <div class="metric"><small>Estimated Sen trend / decade</small><strong id="slope-value">—</strong><span id="slope-direction">—</span></div>
-        <div class="metric"><small>Valid annual samples</small><strong id="sample-value">—</strong><span id="sample-period">—</span></div>
-        <div class="metric"><small>Original Mann–Kendall p</small><strong id="p-value">—</strong><span>Exploratory; independence unverified</span></div>
+        <div class="metric"><small>Tendencia estimada de Sen / década</small><strong id="slope-value">—</strong><span id="slope-direction">—</span></div>
+        <div class="metric"><small>Años completos</small><strong id="sample-value">—</strong><span id="sample-period">—</span></div>
+        <div class="metric"><small>Valor p de Mann–Kendall original</small><strong id="p-value">—</strong><span>Exploratorio; independencia no verificada</span></div>
       </div>
       <section class="chart-card" aria-labelledby="chart-title">
-        <div class="chart-head"><div><p class="eyebrow">ANNUAL TIME SERIES</p><h3 id="chart-title">Observed model series</h3></div><div class="chart-legend"><span class="legend-data">Annual value</span><span class="legend-trend">Sen trend</span></div></div>
-        <svg id="trend-chart" viewBox="0 0 760 350" role="img" aria-label="Annual NASA model data and estimated Sen trend" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="chart-head"><div><p class="eyebrow">SERIE TEMPORAL ANUAL</p><h3 id="chart-title">Serie histórica modelada</h3></div><div class="chart-legend"><span class="legend-data">Valor anual</span><span class="legend-trend">Tendencia de Sen</span></div></div>
+        <svg id="trend-chart" viewBox="0 0 760 350" role="img" aria-label="Datos anuales del modelo NASA y tendencia Sen estimada" preserveAspectRatio="xMidYMid meet"></svg>
         <p class="chart-caption" id="chart-caption">—</p>
       </section>
       <div class="evidence-grid">
-        <section class="evidence-card"><p class="eyebrow">03 / SCIENTIFIC TRACEABILITY</p><h3>Data provenance</h3><dl id="provenance"></dl><a id="source-link" href="https://power.larc.nasa.gov/" target="_blank" rel="noopener noreferrer">Inspect source ↗</a></section>
-        <section class="evidence-card caution-card"><p class="eyebrow">04 / INTERPRETATION</p><h3>What the numbers do not prove</h3><p>Statistical significance is not yet established for serially dependent climate observations. The original Mann–Kendall p-value is shown for audit, not as a validated conclusion.</p><p>These are model-grid values, not meteorological station readings. Precipitation trends may reflect product inhomogeneity and require independent cross-validation.</p><p id="autocorr-note">—</p></section>
+        <section class="evidence-card"><p class="eyebrow">03 / TRAZABILIDAD CIENTÍFICA</p><h3>Procedencia de los datos</h3><dl id="provenance"></dl><a id="source-link" href="https://power.larc.nasa.gov/" target="_blank" rel="noopener noreferrer">Ver fuente original ↗</a></section>
+        <section class="evidence-card caution-card"><p class="eyebrow">04 / INTERPRETACIÓN</p><h3>Lo que los datos no demuestran</h3><p>La significancia estadística no se ha demostrado para series climáticas con dependencia temporal. El valor p original de Mann–Kendall se muestra para auditoría y no constituye una conclusión validada.</p><p>Estos valores proceden de celdas de modelos, no de estaciones meteorológicas. Las tendencias de precipitación podrían reflejar discontinuidades de la fuente y necesitan contrastes independientes.</p><p id="autocorr-note">—</p></section>
       </div>
-      <section class="table-section"><div class="table-heading"><div><p class="eyebrow">05 / INSPECT THE RECORD</p><h3>Annual observations</h3></div><button id="download-csv" class="explore-secondary" type="button">Export CSV ↧</button></div><div class="table-scroll"><table><thead><tr><th scope="col">Year</th><th scope="col" id="unit-header">Annual value</th></tr></thead><tbody id="annual-rows"></tbody></table></div></section>
+      <section class="table-section"><div class="table-heading"><div><p class="eyebrow">05 / INSPECCIONAR REGISTROS</p><h3>Observaciones anuales</h3></div><button id="download-csv" class="explore-secondary" type="button">Exportar CSV ↧</button></div><div class="table-scroll"><table><thead><tr><th scope="col">Año</th><th scope="col" id="unit-header">Valor anual</th></tr></thead><tbody id="annual-rows"></tbody></table></div></section>
     </div>
   </section>
 </div>
-<footer class="explore-foot"><div><strong>PROJECT URIEL / TELLURIS</strong><p>Independent NASA Space Apps 2026 participant project; not endorsed by NASA. Scientific findings are provisional until independently validated.</p></div><a href="/telluris/">Back to the project ↗</a></footer>
+<footer class="explore-foot"><div><strong>PROJECT URIEL / TELLURIS</strong><p>Proyecto independiente participante de NASA Space Apps 2026, sin respaldo oficial de NASA. Los hallazgos son provisionales hasta su validación independiente.</p></div><a href="/telluris/">Volver al proyecto ↗</a></footer>
 </main></body></html>
