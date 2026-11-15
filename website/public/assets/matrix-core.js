@@ -193,6 +193,22 @@ export function groundedAnswer(question,rows,{lang="es",sites=[]}={}){
   if(!rows?.length)return es?"Primero carga observaciones NASA verificables.":"Load verifiable NASA observations first.";
   const matches=rows.filter(r=>q.includes(r.code.toLowerCase())||
     q.includes((es?r.definition.nameEs:r.definition.name).toLowerCase()));
+  if(/(pistas|correlac|relacion|asocia|mueven|co-var|clue|related|correlat|co.?mov)/.test(q)){
+    const clues=coMovementClues(rows,sites);
+    if(!clues.length)return es?
+      "No hay suficientes pares originales NASA con años consecutivos compartidos para identificar asociaciones exploratorias. Consulta todas las variables o usa otro periodo.":
+      "There are not enough original NASA source pairs with matched consecutive years for exploratory associations. Query all variables or another period.";
+    const descriptions=clues.slice(0,5).map(c=>{
+      const names=(es?VARIABLES[c.first].nameEs:VARIABLES[c.first].name)+
+        " / "+(es?VARIABLES[c.second].nameEs:VARIABLES[c.second].name);
+      return names+": "+c.sites.map(s=>s.site+" r="+s.r.toFixed(2)+" (n="+s.n+")").join("; ");
+    });
+    return (es?"Asociaciones descriptivas en cambios de años consecutivos: ":
+      "Descriptive co-movement of consecutive-year changes: ")+
+      descriptions.join(" | ")+". "+(es?
+        "Son pistas para formular hipótesis, no significancia validada, causalidad ni fuentes independientes.":
+        "These are hypothesis-generating clues, not validated significance, causation or independent sources.");
+  }
   if(/(causa|por qué|porque|responsable|cause|why|causality)/.test(q))
     return es?
       "No podemos determinar por qué ocurrió un cambio solo con estas series. Podemos contrastar señales compatibles, pero correlación y coincidencia temporal no demuestran causalidad; hacen falta procesos físicos, controles espaciales y fuentes independientes.":
