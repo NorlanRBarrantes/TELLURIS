@@ -84,6 +84,7 @@ const fields = {place:byId("location"), lat:byId("latitude"),lon:byId("longitude
   variable:byId("variable"), start:byId("from-year"),end:byId("to-year")};
 const known = {liberia:[10.63,-85.44],limon:[9.99,-83.03]};
 let active = null;
+let requestGeneration=0;
 let evidenceContext = null;
 let comparisonContext = "";
 byId("evidence-form")?.addEventListener("submit", event => {
@@ -122,10 +123,18 @@ function updateVariableGuide() {
   const allowedArchive=["T2M","PRECTOTCORR"].includes(fields.variable.value)
     &&fields.place.value!=="custom";
   byId("snapshot-btn").disabled=!allowedArchive;
+  const compare=byId("compare-locations");
+  if(compare){
+    compare.disabled=fields.place.value==="custom"||v.aggregation==="circular";
+    if(compare.disabled)compare.checked=false;
+    compare.title=compare.disabled?(uiLanguage==="es"?
+      "Solo para dos sitios conocidos y variables no circulares.":"For two known sites and non-circular variables only."):"";
+  }
   byId("snapshot-btn").title=allowedArchive?"":L(
     "NASA annual archive covers only T2M and PRECTOTCORR. Choose Live NASA for the selected variable.");
 }
 function resetWhenChanged() {
+  requestGeneration++;
   updateVariableGuide();
   active = null;
   evidenceContext = null;
@@ -288,10 +297,12 @@ async function snapshot(){
     if(fields.place.value==="custom") throw new Error("Archived samples are available only for Liberia and Limón.");
     if(!["T2M","PRECTOTCORR"].includes(fields.variable.value))
       throw new Error("NASA annual archive covers only T2M and PRECTOTCORR. Choose Live NASA for the selected variable.");
+    const requestToken=requestGeneration;
     setMessage("Loading archived original NASA-derived annual series…");
     const response=await fetch("/telluris/explore/data/exp001-annual.json",{cache:"no-cache"});
     if(!response.ok) throw new Error("Archived data file unavailable (HTTP "+response.status+").");
     const archive=await response.json();
+    if(requestToken!==requestGeneration)return;
     const current=fromSnapshot(archive,fields.place.value,fields.variable.value,start,end);
     const otherPlace=fields.place.value==="liberia"?"limon":"liberia";
     const paired=analyze(fromSnapshot(archive,otherPlace,fields.variable.value,start,end).points);
@@ -306,7 +317,12 @@ form.addEventListener("submit",async event=>{
   event.preventDefault();
   let cfg;
   try{cfg=bounds();}catch(e){setMessage(e.message,true);return;}
-  const query=powerUrl(cfg.lat,cfg.lon,cfg.start,cfg.end,fields.variable.value);
+  const variable=fields.variable.value;
+  const requestToken=requestGeneration;
+  const comparisonRequested=byId("compare-locations")?.checked===true
+    &&fields.place.value!=="custom" &&VARIABLES[variable].aggregation!=="circular";
+  const comparisonPlace=comparisonRequested?(fields.place.value==="liberia"?"limon":"liberia"):null;
+  const query=powerUrl(cfg.lat,cfg.lon,cfg.start,cfg.end,variable);
   const controller=new AbortController();
   const button=byId("live-btn");button.disabled=true;
   const timeout=setTimeout(()=>controller.abort(),60000);
@@ -319,7 +335,32 @@ form.addEventListener("submit",async event=>{
         Math.abs(Number(payload.geometry.coordinates[0])-cfg.lon)>.1 ||
         Math.abs(Number(payload.geometry.coordinates[1])-cfg.lat)>.1)
       throw new Error("Returned NASA coordinates do not match the requested point.");
-    acceptData(fromPower(payload,fields.variable.value,cfg.start,cfg.end),query);
+    if(requestToken!==requestGeneration)return;
+    const primary=fromPower(payload,variable,cfg.start,cfg.end);
+    let other=null,compareProblem="";
+    if(comparisonPlace){
+      try{
+        const [otherLat,otherLon]=known[comparisonPlace];
+        const otherQuery=powerUrl(otherLat,otherLon,cfg.start,cfg.end,variable);
+        const otherResponse=await fetch(otherQuery,{signal:controller.signal,mode:"cors"});
+        if(!otherResponse.ok)throw new Error("HTTP "+otherResponse.status);
+        const otherPayload=await otherResponse.json();
+        if(requestToken!==requestGeneration)return;
+        if(!Array.isArray(otherPayload.geometry?.coordinates)||
+           Math.abs(Number(otherPayload.geometry.coordinates[0])-otherLon)>.1 ||
+           Math.abs(Number(otherPayload.geometry.coordinates[1])-otherLat)>.1)
+          throw new Error("NASA returned unexpected comparison coordinates.");
+        other=analyze(fromPower(otherPayload,variable,cfg.start,cfg.end).points);
+        if(other.status!=="exploratory")other=null;
+      }catch(err){
+        compareProblem=uiLanguage==="es"?
+          " No se pudo completar la comparación adicional; se conserva la serie principal.":
+          " The additional comparison could not complete; primary data are preserved.";
+      }
+    }
+    if(requestToken!==requestGeneration)return;
+    acceptData(primary,query,other);
+    if(compareProblem)setMessage(byId("message").textContent+compareProblem);
   }catch(e){
     setMessage("NASA request failed: "+(e.name==="AbortError"?"time limit exceeded":e.message)+
       ". If the browser blocks cross-origin requests, load the archived sample or import NASA JSON.",true);

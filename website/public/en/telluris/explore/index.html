@@ -44,6 +44,7 @@
       <p id="variable-guide" class="control-note variable-guide">Select a variable to see source, units and aggregation.</p>
       <div class="coordinate-fields"><div><label for="from-year">From</label><input id="from-year" type="number" min="1981" max="2025" value="1985" required></div><div><label for="to-year">Through</label><input id="to-year" type="number" min="1981" max="2025" value="2025" required></div></div>
       <button id="live-btn" class="explore-primary" type="submit">Request live NASA data <span aria-hidden="true">↗</span></button>
+      <label class="compare-label" for="compare-locations"><input type="checkbox" id="compare-locations"><span>Also compare with the other Costa Rican coast (additional NASA request)</span></label>
       <button id="snapshot-btn" class="explore-secondary" type="button">Use archived NASA sample</button>
       <label class="import-label" for="file-input">Or import original NASA JSON (.json)</label>
       <input id="file-input" type="file" accept=".json,application/json">
