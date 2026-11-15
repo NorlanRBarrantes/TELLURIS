@@ -1,0 +1,26 @@
+name: EXP-006 NASA IMERG original HDF5 parser QA
+
+on:
+  push:
+    paths:
+      - "analysis/exp006_extract_imerg.py"
+      - "tests/test_exp006_extract.py"
+      - ".github/workflows/exp006-raw-hdf5.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-parser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install data-reader dependencies
+        run: python -m pip install "numpy>=2.0,<3" "h5py>=3.11,<4"
+      - name: Verify NASA native HDF5 shape, units, geolocation and hashes
+        run: python -m unittest discover -s tests -p "test_exp006_extract.py" -v
