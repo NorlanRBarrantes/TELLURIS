@@ -18,11 +18,11 @@ Make TELLURIS a global, bilingual, evidence-driven Earth-system investigator: di
 
 ## B. Scientific NASA layers on 3D globe — high visual/scientific priority
 
-**In place:** Three.js geographical globe, clickable coordinates and NASA POWER navigation; colors are schematic, not satellite measurements.
+**In place (EXP-008 source implementation):** Three.js geographical globe, clickable coordinates, NASA POWER navigation, NASA GIBS Blue Marble baseline, dated MODIS Terra true-color and daytime land-surface-temperature visualizations, source metadata and a NASA temperature legend. The browser never derives numerical measurements from image colors. Exact original WMS responses/CORS were independently probed in CI; production WebGL QA still pending.
 
 **Target:** A source-specific layer registry (prefer official NASA GIBS/Worldview products after endpoint and rights verification), map projection compatibility, dated observation, pixel/footprint resolution, legend, unit, source and source-license link, cached/unavailable states, mobile/WebGL fallback and accessibility. Clicking a point opens the associated verified time-series query. Keep NASA satellite imagery distinct from a modeled trend field; don't infer measured temperature from background RGB.
 
-**Acceptance:** One genuine NASA geospatial product visualized, official product/date legend, correct geolocation and ES/EN interaction tests, clear fallback. **Not yet implemented.**
+**Acceptance:** One genuine NASA geospatial product visualized, official product/date legend, correct geolocation and ES/EN interaction tests, clear fallback. **Implemented in GitHub and source-probed (EXP-008); deploy and complete manual ES/EN/WebGL/mobile browser QA before marking this production-verified.** See [EXP-008](EXP-008-NASA-GIBS-GLOBE.md).
 
 ## C. Monthly/seasonal and historical comparison — high priority
 
