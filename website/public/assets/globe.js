@@ -235,6 +235,10 @@ async function boot(){
     }
     describeLayer(id,resultDate);
     const turn=++generation;
+    // Never display the prior selected product under a new source/date label.
+    overlay.visible=false;
+    planetMat.map=null;planetMat.color.setHex(0x176080);planetMat.needsUpdate=true;
+    if(controls.legend)controls.legend.hidden=true;
     setStatus(messages.loading);
     try{
       if(id==="lst"){
@@ -253,12 +257,14 @@ async function boot(){
         planetMat.needsUpdate=true;
         overlay.visible=false;
       }
+      if(controls.legend)controls.legend.hidden=id!=="lst";
       setStatus(messages.ready);
     }catch{
       if(turn!==generation)return;
-      // Retain last successfully loaded NASA imagery if any; vector remains.
+      // No stale raster may be presented as the newly selected NASA product.
       overlay.visible=false;
-      if(!planetMat.map)planetMat.color.setHex(0x176080);
+      planetMat.map=null;planetMat.color.setHex(0x176080);planetMat.needsUpdate=true;
+      if(controls.legend)controls.legend.hidden=true;
       setStatus(messages.failed);
     }
   }
