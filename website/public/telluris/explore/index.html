@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="../../assets/explorer.css">
 <script type="module" src="../../assets/explorer.js"></script>
+<script type="module" src="../../assets/globe.js"></script>
 </head><body>
 <a class="skip" href="#explorer">Ir al explorador</a>
 <header class="header"><div class="container nav">
@@ -45,6 +46,7 @@
     <p class="control-note">Las consultas en vivo dependen de la disponibilidad de NASA y de los permisos del navegador. La muestra archivada contiene datos auténticos de NASA, no una simulación.</p>
   </aside>
   <section class="explore-workspace" aria-label="Resultados de investigación">
+<section class="globe-card" aria-labelledby="globe-title"><div class="globe-head"><div><p class="eyebrow mint">MAPA INTERACTIVO / EXPLORACIÓN GEOGRÁFICA</p><h3 id="globe-title">La Tierra en 3D</h3></div><span>NAVEGACIÓN, NO DATOS CLIMÁTICOS</span></div><div id="globe-stage" class="globe-stage" role="img" aria-label="Mapa terrestre 3D; los botones permiten seleccionar lugares alternativamente"></div><p id="globe-status" class="globe-status" role="status">Preparando mapa…</p><div class="globe-actions"><button type="button" data-globe-location="liberia">Liberia · Guanacaste</button><button type="button" data-globe-location="limon">Limón · Caribe</button></div><p class="globe-disclaimer">Gira el globo y selecciona cualquier coordenada; luego consulta NASA para obtener datos. Los colores no muestran mediciones. Contornos geográficos: Natural Earth (dominio público).</p></section>
     <div class="workspace-top">
       <div><p class="eyebrow mint">02 / EVIDENCIA Y ANÁLISIS</p><h2>Señal histórica</h2></div>
       <span class="status-pill" id="source-mode">Esperando datos</span>
@@ -65,6 +67,7 @@
         <section class="evidence-card"><p class="eyebrow">03 / TRAZABILIDAD CIENTÍFICA</p><h3>Procedencia de los datos</h3><dl id="provenance"></dl><a id="source-link" href="https://power.larc.nasa.gov/" target="_blank" rel="noopener noreferrer">Ver fuente original ↗</a></section>
         <section class="evidence-card caution-card"><p class="eyebrow">04 / INTERPRETACIÓN</p><h3>Lo que los datos no demuestran</h3><p>La significancia estadística no se ha demostrado para series climáticas con dependencia temporal. El valor p original de Mann–Kendall se muestra para auditoría y no constituye una conclusión validada.</p><p>Estos valores proceden de celdas de modelos, no de estaciones meteorológicas. Las tendencias de precipitación podrían reflejar discontinuidades de la fuente y necesitan contrastes independientes.</p><p id="autocorr-note">—</p></section>
       </div>
+<section class="evidence-assistant" aria-labelledby="evidence-title"><p class="eyebrow mint">05 / LECTURA DE EVIDENCIAS</p><h3 id="evidence-title">Asistente científico</h3><p id="evidence-brief" class="assistant-brief">—</p><p id="evidence-caveat" class="assistant-caveat">—</p><div id="comparison-output" class="comparison-output" hidden></div><form id="evidence-form"><label for="evidence-question">Pregunta sobre estos datos</label><div class="assistant-question"><input id="evidence-question" type="text" maxlength="250" placeholder="¿Qué cambia? ¿Es significativo? ¿Cuál es la fuente?" required><button type="submit">Preguntar</button></div></form><p id="evidence-answer" class="assistant-answer" aria-live="polite">Haz una pregunta sobre la serie calculada.</p><p class="globe-disclaimer">Asistente basado en reglas transparentes; no es IA generativa. No afirma significancia climática validada.</p></section>
       <section class="table-section"><div class="table-heading"><div><p class="eyebrow">05 / INSPECCIONAR REGISTROS</p><h3>Observaciones anuales</h3></div><button id="download-csv" class="explore-secondary" type="button">Exportar CSV ↧</button></div><div class="table-scroll"><table><thead><tr><th scope="col">Año</th><th scope="col" id="unit-header">Valor anual</th></tr></thead><tbody id="annual-rows"></tbody></table></div></section>
     </div>
   </section>
