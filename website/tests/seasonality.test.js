@@ -16,7 +16,7 @@ test("Internal two-period climatology and month-matched anomalies",()=>{
 });
 test("Day-weighted quarterly mean is not arithmetic mean",()=>{
  const source=sample();source[0].value=20;
- const p=summarizeMonthly(source(),{aggregation:"mean"});
+ const p=summarizeMonthly(source,{aggregation:"mean"});
  assert.ok(p.quarters[0].reference>2);
 });
 test("Duplicate months and circular direction are rejected",()=>{
