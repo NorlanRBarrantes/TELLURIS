@@ -298,11 +298,12 @@ export function fromPower(payload, variable, start, end) {
   const nativeUnit=payload.parameters[variable].units;
   if (!def.nativeUnits.includes(nativeUnit))
     throw new Error("Unexpected "+variable+" unit: "+String(nativeUnit));
-  const points=[],incomplete=[];
+  const points=[],incomplete=[],monthly=[];
   let ignoredAnnualKeys=0;
   for(let year=start;year<=end;year++){
     if(Object.hasOwn(series,String(year)+"13"))ignoredAnnualKeys++;
     let weighted=0,daysTotal=0,count=0,sines=0,cosines=0;
+    const yearMonths=[];
     for(let month=1;month<=12;month++){
       const key=String(year)+String(month).padStart(2,"0");
       const value=finite(series[key],fill);
@@ -314,7 +315,10 @@ export function fromPower(payload, variable, start, end) {
       if(def.aggregation==="circular"){
         const radians=value*Math.PI/180;
         sines+=Math.sin(radians)*d;cosines+=Math.cos(radians)*d;
-      }else{weighted+=value*d;}
+      }else{
+        weighted+=value*d;
+        yearMonths.push({year,month,days:d,value:def.aggregation==="sum_rate"?value*d:value});
+      }
       daysTotal+=d;count++;
     }
     if(count===12){
@@ -324,11 +328,14 @@ export function fromPower(payload, variable, start, end) {
         const norm=Math.hypot(sines,cosines)/daysTotal;
         value=norm<1e-8?null:(Math.atan2(sines,cosines)*180/Math.PI+360)%360;
       }else value=weighted/daysTotal;
-      if(value!==null && Number.isFinite(value))points.push({year,value});
+      if(value!==null && Number.isFinite(value)){
+        points.push({year,value});
+        if(def.aggregation!=="circular")monthly.push(...yearMonths);
+      }
       else incomplete.push(year);
     }else incomplete.push(year);
   }
-  return {points,meta:{
+  return {points,monthly,meta:{
     kind:"NASA POWER LIVE JSON",
     source:(payload.header.sources||[]).join(", ")||"Not specified",
     version:payload.header.api?.version||"Not specified",
