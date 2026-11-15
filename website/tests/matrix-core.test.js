@@ -6,7 +6,8 @@ import {INVESTIGATION_MODES,VARIABLE_FAMILIES,chosenCodes,siteCount,
   batchPowerUrl,planBatches,verifyLocation,parseBatch,parseArchive,
   summarizeSeries,matchedDifference,matrixRows,standardizedObservations,
   summarizeInvestigation,groundedAnswer,annualDifferences,
-  annualCoMovement,coMovementClues,PREDECLARED_PAIRS} from "../public/assets/matrix-core.js";
+  annualCoMovement,coMovementClues,PREDECLARED_PAIRS,
+  buildMatrixEvidence,matrixCSV} from "../public/assets/matrix-core.js";
 
 const sites=[{id:"liberia",label:"Liberia",lat:10.63,lon:-85.44},
              {id:"limon",label:"Limón",lat:9.99,lon:-83.03}];
@@ -135,4 +136,28 @@ test("Only predeclared source-backed multi-variable clues are calculated",()=>{
  const answer=groundedAnswer("pistas correlación",rows,{lang:"es",sites});
  assert.match(answer,/Asociaciones descriptivas/);
  assert.match(answer,/no significancia validada/);
+});
+
+test("Multi-variable evidence JSON keeps source, original annual observations and unavailable rows",()=>{
+ const codes=chosenCodes("all-two","T2M");
+ const original=parseArchive(archive,sites,codes,1985,2025);
+ const rows=matrixRows(codes,original,sites);
+ const report=buildMatrixEvidence({rows,sites,records:original,mode:"all-two",source:"archive",start:1985,end:2025});
+ assert.equal(report.schema,"telluris.exp009.research_matrix.v1");
+ assert.equal(report.variables.length,18);
+ assert.deepEqual(report.requestedYears,[1985,2025]);
+ const t=report.variables.find(v=>v.code==="T2M");
+ assert.equal(t.locations[0].annualObservations.length,41);
+ assert.equal(t.locations[1].annualObservations.length,41);
+ assert.equal(t.locations[0].status,"ready");
+ assert.equal(t.locations[0].validatedSignificance,false);
+ const missing=report.variables.find(v=>v.code==="RH2M");
+ assert.equal(missing.locations[0].status,"unavailable");
+ assert.equal(missing.locations[0].annualObservations.length,0);
+ assert.ok(report.limitation.includes("no validated significance"));
+ const csv=matrixCSV(report);
+ assert.equal(csv.trim().split("\r\n").length,37);
+ assert.match(csv,/PRECTOTCORR/);
+ assert.match(csv,/unavailable/);
+ assert.throws(()=>matrixCSV({schema:"wrong"}),/Invalid/);
 });
