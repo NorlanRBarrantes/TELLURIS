@@ -1,0 +1,34 @@
+name: EXP-003 retrieve real MODIS vegetation data (QA pilot)
+
+on:
+  push:
+    paths:
+      - "analysis/exp003_modis.py"
+      - "tests/test_exp003_modis.py"
+      - ".github/workflows/exp003-modis.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-modis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Test MODIS metadata, sentinel, quality and annual completeness
+        run: python -m unittest discover -s tests -p "test_exp003_modis.py" -v
+      - name: Retrieve ORNL NASA MOD13Q1 in two Costa Rican locations
+        run: python -u analysis/exp003_modis.py --start 2023 --end 2025
+      - name: Archive original NASA JSON and quality results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exp003-original-ornl-modis-2023-2025
+          path: data/raw/exp003/
+          if-no-files-found: warn
+          retention-days: 30
