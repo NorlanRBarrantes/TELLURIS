@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="../../../assets/site.css">
 <link rel="stylesheet" href="../../../assets/explorer.css?v=exp007-20261115">
 <script type="module" src="../../../assets/explorer.js?v=exp007-20261115"></script>
-<script type="module" src="../../../assets/globe.js"></script>
+<link rel="stylesheet" href="../../../assets/globe.css?v=exp008-20261115">
+<script type="module" src="../../../assets/globe.js?v=exp008-20261115"></script>
 </head><body>
 <a class="skip" href="#explorer">Skip to explorer</a>
 <header class="header"><div class="container nav">
@@ -52,7 +53,36 @@
     <p class="control-note">Live requests depend on NASA service availability and cross-origin browser access. The archived example is authentic NASA data retrieved for this investigation—not a synthetic simulation.</p>
   </aside>
   <section class="explore-workspace" aria-label="Investigation results">
-<section class="globe-card" aria-labelledby="globe-title"><div class="globe-head"><div><p class="eyebrow mint">INTERACTIVE GEOGRAPHY</p><h3 id="globe-title">Explore Earth in 3D</h3></div><span>NAVIGATION, NOT CLIMATE DATA</span></div><div id="globe-stage" class="globe-stage" role="img" aria-label="Interactive 3D Earth; location buttons provide an accessible alternative"></div><p id="globe-status" class="globe-status" role="status">Preparing map…</p><div class="globe-actions"><button type="button" data-globe-location="liberia">Liberia · Guanacaste</button><button type="button" data-globe-location="limon">Limón · Caribbean</button></div><p class="globe-disclaimer">Rotate and select any coordinate, then request NASA data. Map colors do not encode measurements. Geography: Natural Earth (public domain).</p></section>
+<section class="globe-card globe-card-v2" aria-labelledby="globe-title">
+  <div class="globe-head"><div><p class="eyebrow mint">EXP-008 / SCIENTIFIC EARTH VISUALIZATION</p><h3 id="globe-title">Explore Earth in 3D</h3></div><span class="globe-source-tag">NASA GIBS · MODIS · BLUE MARBLE</span></div>
+  <div class="globe-toolbar">
+    <label for="globe-layer">NASA Earth layer
+      <select id="globe-layer"><option value="marble">Blue Marble · global reference</option><option value="truecolor">MODIS Terra · true-color observation</option><option value="lst">MODIS Terra · daytime land-surface temperature</option></select>
+    </label>
+    <label for="globe-date">Observation date (MODIS)
+      <input id="globe-date" type="date" min="2000-03-01" value="2024-07-15">
+    </label>
+  </div>
+  <div class="globe-viewport"><div id="globe-stage" class="globe-stage" role="group" aria-label="3D NASA Earth globe; accessible keyboard and location buttons below"></div><span class="globe-viewport-label">NASA EARTH OBSERVATION · GEOGRAPHIC VIEW</span></div>
+  <div class="globe-command">
+    <div class="globe-camera-controls" role="group" aria-label="3D view controls">
+      <button type="button" id="globe-zoom-in" aria-label="Zoom in">+</button>
+      <button type="button" id="globe-zoom-out" aria-label="Zoom out">−</button>
+      <button type="button" id="globe-reset">Costa Rica</button>
+      <button type="button" id="globe-spin" aria-pressed="false">Auto rotate</button>
+    </div>
+    <div class="globe-actions" role="group" aria-label="Example research locations">
+      <button type="button" data-globe-location="liberia">Liberia · Pacific</button>
+      <button type="button" data-globe-location="limon">Limón · Caribbean</button>
+    </div>
+  </div>
+  <div class="globe-selected"><div><small>SELECTED LOCATION</small><strong id="globe-selection">Liberia · 10.630°, -85.440°</strong></div><button type="button" id="globe-analyze">Investigate with NASA POWER ↗</button></div>
+  <p id="globe-status" class="globe-status" role="status" aria-live="polite">Loading geographical globe…</p>
+  <p id="globe-layer-meta" class="globe-layer-meta">NASA Blue Marble is an Earth reference image, not a measurement at this point.</p>
+  <div id="globe-nasa-legend" class="globe-nasa-legend" hidden><p>Official NASA GIBS MODIS land-surface-temperature legend. Source visualization is in Kelvin; verify its palette in NASA Worldview before reading numeric values.</p><img src="https://gibs.earthdata.nasa.gov/legends/MODIS_Land_Surface_Temp_H.png" alt="NASA GIBS MODIS land-surface temperature color legend" loading="lazy" decoding="async"></div>
+  <p class="globe-credits"><a id="globe-source-link" href="https://nasa-gibs.github.io/gibs-api-docs/access-basics/" target="_blank" rel="noopener noreferrer">NASA source and documentation ↗</a> · NASA GIBS / ESDIS; coastlines: Natural Earth (public domain); rendering: Three.js (MIT).</p>
+  <p class="globe-disclaimer">Rotate the sphere, zoom, or select a coordinate to prepare a NASA POWER investigation. MODIS map layers are dated imagery, not multidecadal trend maps. Land surface temperature is not 2 m air temperature; do not interpret color as a precise point reading. Missing imagery is never filled with simulated observations.</p>
+</section>
     <div class="workspace-top">
       <div><p class="eyebrow mint">02 / EVIDENCE & ANALYSIS</p><h2>Historical signal</h2></div>
       <span class="status-pill" id="source-mode">Awaiting source</span>
