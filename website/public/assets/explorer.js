@@ -1,5 +1,6 @@
 import {VARIABLES, powerUrl, fromPower, fromSnapshot, analyze} from "./science.js";
 import {buildEvidence, compareEvidence, answerEvidence} from "./evidence.js";
+import {pairedAnnualDifferences} from "./inference.js";
 
 const uiLanguage = document.documentElement.lang.toLowerCase().startsWith("es") ? "es" : "en";
 const locale = uiLanguage === "es" ? "es-CR" : "en-US";
@@ -241,6 +242,61 @@ function renderTable(points,variable){
   }
   byId("unit-header").textContent=L(VARIABLES[variable].name)+" ("+VARIABLES[variable].unit+")";
 }
+function renderInference(result,variable,pairedDifference=null){
+  const card=byId("inference-panel");
+  if(!card)return;
+  if(VARIABLES[variable].aggregation==="circular" || !result.inference){
+    card.hidden=true;return;
+  }
+  card.hidden=false;
+  const info=result.inference,ci=info.senCI;
+  const es=uiLanguage==="es";
+  const fmt=(x)=>Number(x).toLocaleString(locale,{minimumFractionDigits:2,maximumFractionDigits:2});
+  const status=info.status==="consistent_exploratory"?
+    (es?"Pruebas exploratorias coincidentes":"Exploratory tests agree"):
+    info.status==="insufficient_sensitivity"?
+      (es?"Sensibilidad incompleta":"Sensitivity incomplete"):
+      (es?"Evidencia inconclusa":"Inconclusive evidence");
+  byId("inference-verdict").textContent=status;
+  byId("sen-interval").textContent=
+    "["+fmt(ci.lowPerDecade)+", "+fmt(ci.highPerDecade)+"] "+VARIABLES[variable].slopeUnit;
+  byId("ci-interpretation").textContent=ci.excludesZero?
+    (es?"No incluye cero, solo bajo el supuesto de independencia.":
+        "Excludes zero under the independence assumption only."):
+    (es?"Incluye cero: no excluye una pendiente nula bajo los supuestos usados.":
+        "Includes zero: a null slope is not excluded under these assumptions.");
+  const blocks=info.blockTests;
+  const fmtP=(test)=>!test.available?
+    (es?"no evaluable":"unavailable"):("p = "+test.p.toFixed(3));
+  byId("block-sensitivity").textContent="3 "+(es?"años":"years")+": "+fmtP(blocks[0])+
+    " · 5 "+(es?"años":"years")+": "+fmtP(blocks[1]);
+  const lag=info.serialDiagnostic;
+  byId("lag-diagnostic").textContent=lag.lag1===null?
+    (es?"No estimable":"Unavailable"):
+    fmt(lag.lag1)+" · "+(lag.flagged?
+      (es?"posible dependencia":"possible persistence"):
+      (es?"sin alerta lag-1":"no lag-1 alert"));
+  const hint=es?
+    "El intervalo del 95 % y Mann–Kendall original requieren independencia. "+
+    "Las permutaciones por bloques (999 por tamaño, semilla fija) son solo una sensibilidad bajo bloques estacionarios intercambiables. "+
+    "No se han validado homogeneidad del producto NASA, dependencia a largo plazo ni causalidad.":
+    "The 95% Sen interval and original Mann–Kendall assume independent years. "+
+    "Non-overlapping block-order permutations (999 per size, fixed seed) only test sensitivity under exchangeable stationary blocks. "+
+    "NASA product homogeneity, long-memory dependence and causality remain unverified.";
+  byId("inference-caution").textContent=hint;
+  const pair=byId("paired-inference");
+  pair.hidden=pairedDifference?.status!=="exploratory";
+  if(!pair.hidden){
+    const d=pairedDifference,p=d.inference;
+    const ciDifference=p?.senCI;
+    pair.textContent=(es?"Diferencia pareada (sitio elegido − otra vertiente)":"Paired difference (selected location − other coast)")+
+      ": "+(es?"pendiente":"slope")+" "+fmt(d.slopePerDecade)+" "+VARIABLES[variable].slopeUnit+
+      ", IC95% ["+fmt(ciDifference.lowPerDecade)+", "+fmt(ciDifference.highPerDecade)+"]"+
+      ", MK "+(es?"condicional":"conditional")+" p = "+d.mk.p.toFixed(4)+
+      "; "+(es?"solo sensibilidad exploratoria, no demostración causal.":
+        "exploratory sensitivity only; not causal evidence.");
+  }
+}
 function acceptData(output, queryUrl=null, paired=null){
   const variable=fields.variable.value;
   const def=VARIABLES[variable];
@@ -272,6 +328,9 @@ function acceptData(output, queryUrl=null, paired=null){
     "Lag-1 residual correlation (diagnostic only): "+result.lag1.toFixed(3)+" using "+result.lag1Pairs+" consecutive-year pairs.");
   display("chart-title",L(VARIABLES[variable].name)+" · "+(fields.place.selectedOptions[0]?.textContent||L("Selected location")));
   renderChart(result.points,result,variable);
+  const pairedDiff=!circular && paired?.status==="exploratory"?
+    analyze(pairedAnnualDifferences(result.points,paired.points)):null;
+  renderInference(result,variable,pairedDiff);
   renderTable(result.points,variable);
   renderProvenance(output.meta,variable,result.n);
   byId("source-mode").textContent=L(output.meta.kind);
@@ -285,7 +344,7 @@ function acceptData(output, queryUrl=null, paired=null){
   byId("evidence-brief").textContent=evidenceContext?.summary||"—";
   byId("evidence-caveat").textContent=evidenceContext?.caution||"—";
   comparisonContext=!circular && paired?.status==="exploratory"
-    ? compareEvidence(result,paired,placeName,fields.place.value==="liberia"?"Limón":"Liberia",uiLanguage) : "";
+    ? compareEvidence(result,paired,placeName,fields.place.value==="liberia"?"Limón":"Liberia",uiLanguage,pairedDiff) : "";
   const compare=byId("comparison-output");
   compare.hidden=!comparisonContext;
   compare.textContent=comparisonContext;
@@ -384,7 +443,16 @@ byId("download-csv").addEventListener("click",()=>{
   if(!active)return;
   const title="year,value_"+active.variable.toLowerCase();
   const meta="# unit: "+VARIABLES[active.variable].unit+"; annual aggregation: "+VARIABLES[active.variable].aggregation;
-  const lines=[meta,title,...active.points.map(p=>p.year+","+p.value)];
+  const proof=active.analysis.inference;
+  const comments=proof?[
+    "# EXP-005 trend inference is exploratory; not independently climate-validated",
+    "# Original MK p (independence assumption): "+proof.mkConditionalP,
+    "# Sen 95pct iid slope CI per decade: ["+proof.senCI.lowPerDecade+","+proof.senCI.highPerDecade+"]",
+    ...proof.blockTests.map(x=>"# Block-order permutation, "+x.blockYears+"yr, Monte Carlo p: "+
+      (x.available?x.p:"not_available")+", seed: "+(x.seed??"not_applicable")),
+    "# NASA product homogeneity and temporal independence are not certified"
+  ]:[];
+  const lines=[meta,...comments,title,...active.points.map(p=>p.year+","+p.value)];
   const blob=new Blob([lines.join("\n")+"\n"],{type:"text/csv;charset=utf-8"});
   const url=URL.createObjectURL(blob),a=document.createElement("a");
   a.href=url;a.download="telluris_"+fields.place.value+"_"+active.variable+"_"+active.analysis.start+"-"+active.analysis.end+".csv";
