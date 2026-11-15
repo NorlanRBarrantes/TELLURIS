@@ -52,7 +52,7 @@ test("Sen uses elapsed years across calendar gaps",()=>{
 test("Mann-Kendall continuity and ties",()=>{
   const y=[10,10,10,11.5,12,12,12,12,14.2,15,15,18];
   const r=mannKendall(y);
-  assert.equal(r.s,53);
+  assert.equal(r.s,56);
   assert.ok(Math.abs(r.p-0.000097958)<0.00002);
   assert.equal(mannKendall(Array(20).fill(5)).p>0.999999,true);
 });
