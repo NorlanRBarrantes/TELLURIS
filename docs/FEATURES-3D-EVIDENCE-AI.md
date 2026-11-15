@@ -44,3 +44,6 @@ The current scientific assistant is rule-based and is NOT a connected LLM. A tru
 - Manually open ES/EN, rotate globe, select both sample points, select custom coords, and verify result reset.
 - Validate local Natural Earth fetch, CDN fallback, archived paired sample, chart and provenance.
 - Confirm the public domain uses the committed new static files; a GitHub commit does not publish on BanaHosting.
+## EXP-008 follow-up — real NASA geospatial imagery
+
+The original implementation documented above was a geography-only WebGL selector. That limitation is superseded at **source level** by [EXP-008 NASA GIBS globe](EXP-008-NASA-GIBS-GLOBE.md): authentic Blue Marble, dated Terra MODIS true-color and L3 daytime land-surface-temperature images rendered as selectable globe layers. The WMS source responses at 1536×768 and CORS were independently checked in [NASA probe #43767438162](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43767438162). ES/EN source CI passed 89/89 tests in [run #43767427309](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43767427309). **No updated BanaHosting browser release or visual verification is yet claimed.** MODIS land-surface temperatures cannot substitute for POWER T2M or be extracted from screenshot RGB values; generative AI remains disconnected.
