@@ -42,3 +42,7 @@ The [bilingual CI run #43660071020](https://github.com/NorlanRBarrantes/TELLURIS
 ## Research variable catalog from team contribution — November 15
 
 The Spanish-first browseable inventory is at `/telluris/catalog/`, with English at `/en/telluris/catalog/`. The site reads [catalog.json](public/telluris/catalog/data/catalog.json) and exposes **2 genuinely connected NASA POWER variables, 49 research candidates and ten proposed derived indicators**. The catalog is a discovery/roadmap interface, **NOT** a claim that 49 additional NASA source integrations work. Unconnected cards have no functional "analyze" button; the two connected items link to the existing working explorer. All records and their review provenance are in [TEAM-CATALOG-REVIEW.md](../docs/TEAM-CATALOG-REVIEW.md).
+
+## EXP-003 vegetation research evidence (not connected)
+
+The catalog's `C23` card (NDVI/EVI) now links to a successful [real NASA ORNL MOD13Q1 API probe](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43737483122). This is a research proof-of-capability **not an enabled third public variable**, and does not imply that MODIS multiyear statistics have been validated. The [latest website CI run #43738552963](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738552963) passed **35/35 Node tests** plus all local HTTP smoke checks.

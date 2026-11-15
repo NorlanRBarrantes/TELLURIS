@@ -56,3 +56,7 @@ This validates request shape, metadata and the necessity of QA, **not a full MOD
 - [NASA FIRMS /api/area](https://firms.modaps.eosdis.nasa.gov/api/area): current 1–5-day window, MAP_KEY requirement.
 - [NASA LAADS Black Marble](https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/science-domain/nighttime-lights): monthly/yearly VIIRS nightlight collections.
 - [NASA MOD13Q1.061 catalog](https://doi.org/10.5067/MODIS/MOD13Q1.061): mission product lineage, collection and user guides.
+
+## Research catalog discovery integration
+
+The public-site source now includes an evidence link for the research candidate `C23 — Índices de vegetación`. The source proof is a real NASA ORNL response, but the catalog still labels the variable **not connected**; it does not offer broken/unverified data-analysis actions. The [website QA run #43738552963](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738552963) passed **35/35 tests**. The experimental Python original-data acquisition is tracked separately at [EXP-003 run #43738048688](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738048688).

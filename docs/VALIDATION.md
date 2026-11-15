@@ -159,3 +159,10 @@ Results must be computed before any place is described as having an observed sig
 - An initial probe [#43737375446](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43737375446) failed due to incorrect assumption that `/dates` returned an array instead of `{"dates":[...]}`. Corrected by inspecting actual JSON.
 - A new [EXP-003 implementation](EXP-003-VEGETATION.md) stores raw source batches with SHA-256 and computes QA-screened descriptive annual medians. Ten deterministic adapter regression tests were created; record CI completion separately.
 - **Not yet validated:** full-year MODIS annual coverage after QA, exact underlying subset collection version, full 2000–2025 trend, independence-adjusted significance, browser presentation or causal attribution.
+
+## EXP-003 research-evidence catalog check — 2026-11-15
+
+- Verified actual ORNL MOD13Q1 API bands, real dates and center-pixel NDVI/EVI/QA: [successful probe #43737483122](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43737483122).
+- Website research catalog `C23` links to the actual NASA proof while retaining `implementation_status=not_connected` and **the count of two connected POWER variables**.
+- [Website CI #43738552963](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738552963): **35/35 Node tests passed**, including one explicit guard against showing a research-only MODIS candidate as publicly connected, and local HTTP smoke checks passed.
+- [Separate Python EXP-003 acquisition workflow](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738048688): 2023–2025 original NASA ORNL retrieval and annual QA-screened descriptive medians; confirm its final execution status before claiming live multi-year results.
