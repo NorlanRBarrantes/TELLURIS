@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="../../../assets/explorer.css?v=exp007-20261115">
 <script type="module" src="../../../assets/explorer.js?v=exp007-20261115"></script>
 <link rel="stylesheet" href="../../../assets/globe.css?v=exp008-20261115">
+<link rel="stylesheet" href="../../../assets/observatory.css?v=exp009-20261115">
+<script type="module" src="../../../assets/observatory.js?v=exp009-20261115"></script>
 <script type="module" src="../../../assets/globe.js?v=exp008-uvfix-20261115"></script>
 </head><body>
 <a class="skip" href="#explorer">Skip to explorer</a>
@@ -23,36 +25,11 @@
 </div></header>
 <main class="container explorer-shell" id="explorer">
 <div class="explorer-intro">
-  <p class="eyebrow mint">TELLURIS / RESEARCH LAB / EXPERIMENTS 001–004</p>
+  <p class="eyebrow mint">TELLURIS / SCIENTIFIC EARTH OBSERVATORY / EXPERIMENTS 001–009</p>
   <h1>Earth changes.<br><em>Follow the evidence.</em></h1>
   <p>Explore historical NASA POWER data, calculate a robust trend and inspect what we can—and cannot—conclude. Every result traces back to a scientific source.</p>
   <div class="intro-flags"><span>NASA POWER · MERRA-2 / CERES</span><span>1985–2025</span><span>Exploratory science</span></div>
 </div>
-<div class="explore-layout">
-  <aside class="explore-controls" aria-labelledby="controls-title">
-    <p class="eyebrow mint">01 / SET UP AN INVESTIGATION</p>
-    <h2 id="controls-title">Define the question</h2>
-    <div class="question-presets" id="question-presets" aria-label="Suggested questions">
-      <p>Start from a scientific question:</p>
-      <div class="question-preset-buttons"><button type="button" data-question-variable="T2M">Is air temperature changing?</button><button type="button" data-question-variable="PRECTOTCORR">Is rainfall changing?</button><button type="button" data-question-variable="RH2M">Is humidity changing?</button><button type="button" data-question-variable="WS10M">Are winds changing?</button><button type="button" data-question-variable="ALLSKY_SFC_SW_DWN">Is solar radiation changing?</button><button type="button" data-question-variable="GWETROOT">Is soil wetness changing?</button></div>
-    </div>
-    <form id="explore-form">
-      <label for="location">Location</label>
-      <select id="location" name="location"><option value="liberia">Liberia · Pacific, Costa Rica</option><option value="limon">Limón · Caribbean, Costa Rica</option><option value="custom">Custom coordinates</option></select>
-      <div class="coordinate-fields"><div><label for="latitude">Latitude</label><input id="latitude" type="number" step="any" min="-90" max="90" value="10.63" required readonly></div><div><label for="longitude">Longitude</label><input id="longitude" type="number" step="any" min="-180" max="180" value="-85.44" required readonly></div></div>
-      <label for="variable">Scientific variable</label>
-      <select id="variable"><optgroup label="Atmosphere and wind"><option value="T2M">Air temperature at 2 m · T2M</option><option value="T2M_MAX">Monthly maximum air temperature · T2M_MAX</option><option value="T2M_MIN">Monthly minimum air temperature · T2M_MIN</option><option value="RH2M">Relative humidity at 2 m · RH2M</option><option value="QV2M">Specific humidity at 2 m · QV2M</option><option value="WS10M">Wind speed at 10 m · WS10M</option><option value="WD10M">Wind direction at 10 m · circular only · WD10M</option><option value="U10M">Eastward wind component · U10M</option><option value="V10M">Northward wind component · V10M</option><option value="PS">Surface air pressure · PS</option><option value="CLOUD_AMT">Cloud amount · CLOUD_AMT</option></optgroup><optgroup label="Radiation and energy"><option value="ALLSKY_SFC_SW_DWN">Solar shortwave irradiance · ALLSKY_SFC_SW_DWN</option><option value="ALLSKY_SFC_LW_DWN">Downward longwave radiation · ALLSKY_SFC_LW_DWN</option><option value="ALLSKY_SRF_ALB">Surface albedo · ALLSKY_SRF_ALB</option></optgroup><optgroup label="Water and soil"><option value="PRECTOTCORR">Annual precipitation · PRECTOTCORR</option><option value="EVPTRNS">Evapotranspiration energy flux · EVPTRNS</option><option value="GWETTOP">Surface soil wetness · GWETTOP</option><option value="GWETROOT">Root-zone soil wetness · GWETROOT</option></optgroup></select>
-      <p id="variable-guide" class="control-note variable-guide">Select a variable to see source, units and aggregation.</p>
-      <div class="coordinate-fields"><div><label for="from-year">From</label><input id="from-year" type="number" min="1981" max="2025" value="1985" required></div><div><label for="to-year">Through</label><input id="to-year" type="number" min="1981" max="2025" value="2025" required></div></div>
-      <button id="live-btn" class="explore-primary" type="submit">Request live NASA data <span aria-hidden="true">↗</span></button>
-      <label class="compare-label" for="compare-locations"><input type="checkbox" id="compare-locations"><span>Also compare with the other Costa Rican coast (additional NASA request)</span></label>
-      <button id="snapshot-btn" class="explore-secondary" type="button">Use archived NASA sample</button>
-      <label class="import-label" for="file-input">Or import original NASA JSON (.json)</label>
-      <input id="file-input" type="file" accept=".json,application/json">
-    </form>
-    <p class="control-note">Live requests depend on NASA service availability and cross-origin browser access. The archived example is authentic NASA data retrieved for this investigation—not a synthetic simulation.</p>
-  </aside>
-  <section class="explore-workspace" aria-label="Investigation results">
 <section class="globe-card globe-card-v2" aria-labelledby="globe-title">
   <div class="globe-head"><div><p class="eyebrow mint">EXP-008 / SCIENTIFIC EARTH VISUALIZATION</p><h3 id="globe-title">Explore Earth in 3D</h3></div><span class="globe-source-tag">NASA GIBS · MODIS · BLUE MARBLE</span></div>
   <div class="globe-toolbar">
@@ -83,6 +60,75 @@
   <p class="globe-credits"><a id="globe-source-link" href="https://nasa-gibs.github.io/gibs-api-docs/access-basics/" target="_blank" rel="noopener noreferrer">NASA source and documentation ↗</a> · NASA GIBS / ESDIS; coastlines: Natural Earth (public domain); rendering: Three.js (MIT).</p>
   <p class="globe-disclaimer">Rotate the sphere, zoom, or select a coordinate to prepare a NASA POWER investigation. MODIS map layers are dated imagery, not multidecadal trend maps. Land surface temperature is not 2 m air temperature; do not interpret color as a precise point reading. Missing imagery is never filled with simulated observations.</p>
 </section>
+
+<section class="observatory" id="observatory" aria-labelledby="obs-title">
+  <header class="obs-heading">
+    <div><p class="eyebrow mint">EXP-009 / MULTIVARIABLE RESEARCH LAB</p><h2 id="obs-title">Earth Systems Observatory</h2><p>Compare NASA POWER source variables by location, then open any scientific parameter in the detailed explorer below. Comparisons keep their original physical units and explicitly flag incomplete data.</p></div>
+    <span class="obs-head-label">NASA POWER · 18 VERIFIED PARAMETERS</span>
+  </header>
+  <div class="obs-modes" role="group" aria-label="Choose the investigation scope"><button class="obs-mode" type="button" data-obs-mode="one-one" aria-pressed="false"><small>01 / 01</small><strong>One variable · one location</strong><span>Deep investigation of one source</span></button>
+<button class="obs-mode" type="button" data-obs-mode="one-two" aria-pressed="false"><small>01 / 02</small><strong>One variable · two locations</strong><span>Matched annual contrasts</span></button>
+<button class="obs-mode" type="button" data-obs-mode="all-one" aria-pressed="false"><small>18 / 01</small><strong>All variables · one location</strong><span>Environmental context</span></button>
+<button class="obs-mode" type="button" data-obs-mode="all-two" aria-pressed="true"><small>18 / 02</small><strong>All variables · two locations</strong><span>Full regional contrast</span></button></div>
+  <div class="obs-query">
+    <div class="obs-query-context"><small>LOCATION A</small><strong id="obs-primary-label">Selected in research controls</strong><span>Primary coordinates, variable and years are taken from section 01 below.</span></div>
+    <div id="obs-second-controls" class="obs-second-controls">
+      <label for="obs-other-place">LOCATION B
+        <select id="obs-other-place"><option value="limon">Limón · Caribbean, Costa Rica</option><option value="liberia">Liberia · Pacific, Costa Rica</option><option value="custom">Custom coordinates</option></select></label>
+      <div class="obs-coordinate-pair"><label for="obs-other-lat">Latitude<input id="obs-other-lat" type="number" min="-90" max="90" step="any" value="9.99" readonly></label><label for="obs-other-lon">Longitude<input id="obs-other-lon" type="number" min="-180" max="180" step="any" value="-83.03" readonly></label></div>
+    </div>
+    <div class="obs-query-actions"><p id="obs-single-hint" hidden>The selected variable in section 01 is used for this mode.</p>
+      <button id="obs-run-live" type="button" class="obs-action-primary">Explore NASA data live <span aria-hidden="true">↗</span></button>
+      <button id="obs-run-archive" type="button" class="obs-action-secondary">Try original NASA archive</button>
+      <button id="obs-cancel" type="button" hidden>Cancel requests</button></div>
+  </div>
+  <p class="obs-status" id="obs-status" role="status" aria-live="polite">Select a mode and load original NASA observations.</p>
+  <div id="obs-results" class="obs-results" hidden>
+    <p class="obs-source-kind" id="obs-source-kind"></p>
+    <p class="obs-summary" id="obs-summary"></p>
+    <div class="obs-kpis">
+      <div><small>Available series</small><strong id="obs-kpi-available">—</strong></div>
+      <div><small>Positive slopes · A</small><strong id="obs-kpi-up">—</strong></div>
+      <div><small>Negative slopes · A</small><strong id="obs-kpi-down">—</strong></div>
+      <div><small>Missing sources</small><strong id="obs-kpi-unavailable">—</strong></div>
+    </div>
+    <div class="obs-matrix-header"><div><h3>Comparative evidence matrix</h3><p>Select a variable to inspect real annual series; do not compare slopes across different physical units.</p></div><label for="obs-family-filter">Source family<select id="obs-family-filter"><option value="all">All NASA parameters</option><option value="atmosphere">Atmosphere</option><option value="wind">Wind</option><option value="water">Water and soil</option><option value="energy">Energy and radiation</option></select></label></div>
+    <p class="obs-matrix-count">Shown: <strong id="obs-count">—</strong></p>
+    <div class="obs-table-scroll"><table class="obs-table"><thead><tr id="obs-head"></tr></thead><tbody id="obs-rows"></tbody></table></div>
+    <section class="obs-focus" aria-labelledby="obs-focus-title"><div class="obs-focus-top"><div><small>SELECTED SOURCE / ONE PHYSICAL UNIT</small><h3 id="obs-focus-title">—</h3></div><button type="button" id="obs-drilldown">Open detailed research controls ↗</button></div><p id="obs-focus-detail"></p><svg id="obs-chart" viewBox="0 0 720 260" aria-label="Annual NASA data chart"></svg><div class="obs-chart-legend" id="obs-chart-legend"></div><div class="obs-provenance" id="obs-provenance"></div></section>
+    <section class="obs-explainer" aria-labelledby="obs-explainer-title"><div><p class="eyebrow mint">TELLURIS / EVIDENCE INTERPRETER</p><h3 id="obs-explainer-title">What might these observations mean?</h3><div id="obs-explanation" class="obs-explanation"></div></div>
+      <div class="obs-qa"><p>Ask the evidence</p><form id="obs-question-form"><label for="obs-question" class="sr-only">Question</label><input id="obs-question" type="text" maxlength="240" placeholder="Why did it change? Is T2M significant?"><button type="submit">Explain</button></form><div class="obs-prompt-list"><button type="button" data-obs-prompt="Why did the climate change?">Possible causes</button><button type="button" data-obs-prompt="Is it significant?">Evidence confidence</button><button type="button" data-obs-prompt="PRECTOTCORR">Rainfall</button></div><p id="obs-answer" class="obs-answer" aria-live="polite"></p><p class="obs-ai-disclosure">Deterministic, source-grounded interpreter — not generative AI. It does not infer causation or invent measurements.</p></div>
+    </section>
+  </div>
+  <details class="obs-glossary"><summary>Translate scientific terms into plain language</summary><div class="obs-glossary-buttons"><button type="button" data-obs-term="sen">Theil–Sen</button><button type="button" data-obs-term="pvalue">p-value</button><button type="button" data-obs-term="ci">Confidence interval</button><button type="button" data-obs-term="paired">Matched years</button><button type="button" data-obs-term="model">NASA POWER</button></div><p id="obs-glossary-answer" aria-live="polite"></p></details>
+  <p class="obs-integrity">Source integrity: NASA POWER supplies original monthly observations grouped by RE/AG community (maximum 20 parameters per request). Annual aggregations are deterministic. Comparative trends here are descriptive, unadjusted for serial dependence and multiple testing; co-occurrence is not causation. Annual-only EXP-001 archive covers just T2M and PRECTOTCORR in Liberia/Limón.</p>
+</section>
+<div class="explore-layout">
+  <aside class="explore-controls" aria-labelledby="controls-title">
+    <p class="eyebrow mint">01 / SET UP AN INVESTIGATION</p>
+    <h2 id="controls-title">Define the question</h2>
+    <div class="question-presets" id="question-presets" aria-label="Suggested questions">
+      <p>Start from a scientific question:</p>
+      <div class="question-preset-buttons"><button type="button" data-question-variable="T2M">Is air temperature changing?</button><button type="button" data-question-variable="PRECTOTCORR">Is rainfall changing?</button><button type="button" data-question-variable="RH2M">Is humidity changing?</button><button type="button" data-question-variable="WS10M">Are winds changing?</button><button type="button" data-question-variable="ALLSKY_SFC_SW_DWN">Is solar radiation changing?</button><button type="button" data-question-variable="GWETROOT">Is soil wetness changing?</button></div>
+    </div>
+    <form id="explore-form">
+      <label for="location">Location</label>
+      <select id="location" name="location"><option value="liberia">Liberia · Pacific, Costa Rica</option><option value="limon">Limón · Caribbean, Costa Rica</option><option value="custom">Custom coordinates</option></select>
+      <div class="coordinate-fields"><div><label for="latitude">Latitude</label><input id="latitude" type="number" step="any" min="-90" max="90" value="10.63" required readonly></div><div><label for="longitude">Longitude</label><input id="longitude" type="number" step="any" min="-180" max="180" value="-85.44" required readonly></div></div>
+      <label for="variable">Scientific variable</label>
+      <select id="variable"><optgroup label="Atmosphere and wind"><option value="T2M">Air temperature at 2 m · T2M</option><option value="T2M_MAX">Monthly maximum air temperature · T2M_MAX</option><option value="T2M_MIN">Monthly minimum air temperature · T2M_MIN</option><option value="RH2M">Relative humidity at 2 m · RH2M</option><option value="QV2M">Specific humidity at 2 m · QV2M</option><option value="WS10M">Wind speed at 10 m · WS10M</option><option value="WD10M">Wind direction at 10 m · circular only · WD10M</option><option value="U10M">Eastward wind component · U10M</option><option value="V10M">Northward wind component · V10M</option><option value="PS">Surface air pressure · PS</option><option value="CLOUD_AMT">Cloud amount · CLOUD_AMT</option></optgroup><optgroup label="Radiation and energy"><option value="ALLSKY_SFC_SW_DWN">Solar shortwave irradiance · ALLSKY_SFC_SW_DWN</option><option value="ALLSKY_SFC_LW_DWN">Downward longwave radiation · ALLSKY_SFC_LW_DWN</option><option value="ALLSKY_SRF_ALB">Surface albedo · ALLSKY_SRF_ALB</option></optgroup><optgroup label="Water and soil"><option value="PRECTOTCORR">Annual precipitation · PRECTOTCORR</option><option value="EVPTRNS">Evapotranspiration energy flux · EVPTRNS</option><option value="GWETTOP">Surface soil wetness · GWETTOP</option><option value="GWETROOT">Root-zone soil wetness · GWETROOT</option></optgroup></select>
+      <p id="variable-guide" class="control-note variable-guide">Select a variable to see source, units and aggregation.</p>
+      <div class="coordinate-fields"><div><label for="from-year">From</label><input id="from-year" type="number" min="1981" max="2025" value="1985" required></div><div><label for="to-year">Through</label><input id="to-year" type="number" min="1981" max="2025" value="2025" required></div></div>
+      <button id="live-btn" class="explore-primary" type="submit">Request live NASA data <span aria-hidden="true">↗</span></button>
+      <label class="compare-label" for="compare-locations"><input type="checkbox" id="compare-locations"><span>Also compare with the other Costa Rican coast (additional NASA request)</span></label>
+      <button id="snapshot-btn" class="explore-secondary" type="button">Use archived NASA sample</button>
+      <label class="import-label" for="file-input">Or import original NASA JSON (.json)</label>
+      <input id="file-input" type="file" accept=".json,application/json">
+    </form>
+    <p class="control-note">Live requests depend on NASA service availability and cross-origin browser access. The archived example is authentic NASA data retrieved for this investigation—not a synthetic simulation.</p>
+  </aside>
+  <section class="explore-workspace" aria-label="Investigation results">
+
     <div class="workspace-top">
       <div><p class="eyebrow mint">02 / EVIDENCE & ANALYSIS</p><h2>Historical signal</h2></div>
       <span class="status-pill" id="source-mode">Awaiting source</span>
