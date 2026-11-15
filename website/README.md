@@ -46,3 +46,8 @@ The Spanish-first browseable inventory is at `/telluris/catalog/`, with English 
 ## EXP-003 vegetation research evidence (not connected)
 
 The catalog's `C23` card (NDVI/EVI) now links to a successful [real NASA ORNL MOD13Q1 API probe](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43737483122). This is a research proof-of-capability **not an enabled third public variable**, and does not imply that MODIS multiyear statistics have been validated. The [latest website CI run #43738552963](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43738552963) passed **35/35 Node tests** plus all local HTTP smoke checks.
+
+
+## New interactive geography / interpretation module
+
+Both Explorer language routes now have a WebGL geographic globe, with a Natural Earth public-domain coastlines file and a pinned Three.js CDN dependency. The globe maps navigation points, not measured values. The deterministic evidence assistant uses only existing computed statistics and marks climate significance provisional. The archive supports an explicitly descriptive Liberia/Limón point comparison; generative AI is not connected. See docs/FEATURES-3D-EVIDENCE-AI.md for accepted scope and remaining verification.
