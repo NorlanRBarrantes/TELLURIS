@@ -226,3 +226,8 @@ Do not replace proposed status with accepted until the underlying decision is ve
 - **Not adopted from Gemini:** `raw_vi <= -2000` erroneous rejection, 10-day FIRMS area window (official maximum is 5), "correlation proves rain control", any claim of guaranteed contest outcome, or raw single-pixel NDVI described as citywide forest coverage.
 - **Integration boundaries:** Maintain FIRMS/Black Marble in research backlog; no fabricated APIs, NDVI/EVI trends, significance p-values or public integration badges before real checks.
 - **Evidence:** [EXP-003 audit/protocol](EXP-003-VEGETATION.md), [QA adapter](../analysis/exp003_modis.py), [tests](../tests/test_exp003_modis.py).
+
+
+## 2026-11-15 — Geographic globe and grounded assistant
+
+Approved: implement a 3D geographic navigation layer, deterministic source-grounded explanations and an exploratory two-point archive comparison. All computed statistics remain unchanged and provisional. True generative AI requires a separately validated secure backend before activation. See FEATURES-3D-EVIDENCE-AI.md.
