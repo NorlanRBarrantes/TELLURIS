@@ -30,7 +30,7 @@ Make TELLURIS a global, bilingual, evidence-driven Earth-system investigator: di
 
 **Acceptance:** Pure-function unit tests against synthetic fixtures; independent real NASA monthly replay; bilingual web comparison; selected period, baseline, n and missingness; no asserted significance without appropriate dependence-aware inference.
 
-**Status:** Historical annual two-half slope sensitivity exists in EXP-005; genuine month-level UX and explicit climatological baselines remain to implement.
+**Status:** Initial EXP-007C descriptive source-month panel, month-matched differences/anomalies and calendar-quarter summaries are now implemented in GitHub source with tests. User-defined fixed climatological baselines, independent source replay and production/browser QA remain pending.
 
 ## D. Real evidence-grounded AI investigator — high discovery priority
 
@@ -46,7 +46,7 @@ Make TELLURIS a global, bilingual, evidence-driven Earth-system investigator: di
 
 **Target:** Source-preserving print report in ES/EN containing observations, SVG chart, parameter/units/coordinates, NASA provenance/version, Sen slope and CI, Mann–Kendall original p with assumptions, time-window sensitivity, missing-data treatment, uncertainty warnings, limitations, bibliography and independent-project attribution. Prefer browser **Print → Save as PDF** initially: it avoids a secret-bearing third-party PDF service and works with static hosting; subsequently consider direct PDF export once browser fidelity, licensing and pagination are tested.
 
-**Acceptance:** Output equality with JSON, safe HTML escaping and no unverified significance labels, print CSS with A4 page breaks, real browser PDF save test and reproducibility link. **Print-ready output pending implementation.**
+**Acceptance:** Output equality with JSON, safe HTML escaping and no unverified significance labels, print CSS with A4 page breaks, real browser PDF save test and reproducibility link. **Initial source-code print formatter, ES/EN user control and tests added; native direct PDF export and real browser QA remain pending.**
 
 ## Order of execution and release gates
 
