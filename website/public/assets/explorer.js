@@ -474,8 +474,10 @@ byId("file-input").addEventListener("change",async event=>{
 byId("gpm-file")?.addEventListener("change",async event=>{
  const file=event.target.files?.[0];
  if(!file||!active||active.variable!=="PRECTOTCORR")return;
+ const token=requestGeneration,source=active;
  try{
    const raw=JSON.parse(await file.text());
+   if(token!==requestGeneration||active!==source)return;
    const imerg=parseIMERG(raw,Number(fields.lat.value),Number(fields.lon.value));
    const comparison=comparePrecipitation(active.points,imerg);
    gpmComparison={comparison,imergMetadata:{
