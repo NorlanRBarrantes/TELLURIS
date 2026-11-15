@@ -51,6 +51,16 @@ function itemCard(entry) {
       evidence.textContent=tr("Ver prueba real de NASA ↗","View real NASA verification ↗");
       card.append(note,evidence);
     }
+    if(entry.spatial_evidence &&
+       entry.spatial_evidence.status==="one_date_spatial_qa_and_one_year_landcover_verified"){
+      const note=document.createElement("p");note.className="catalog-note";
+      note.textContent=lang==="es"?entry.spatial_evidence.description_es:entry.spatial_evidence.description_en;
+      const evidence=document.createElement("a");
+      evidence.className="catalog-open";evidence.href=entry.spatial_evidence.verification_url;
+      evidence.target="_blank";evidence.rel="noopener noreferrer";
+      evidence.textContent=tr("Ver auditoría geográfica NASA ↗","View NASA site audit ↗");
+      card.append(note,evidence);
+    }
   }
   return card;
 }

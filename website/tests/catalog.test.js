@@ -75,3 +75,11 @@ test("MODIS probe is visibly evidenced but not represented as a connected variab
  assert.ok(src.includes("api_sample_verified"));
  assert.ok(src.includes('entry.category==="connected"'));
 });
+
+test("MODIS IGBP 2023 spatial QA is evidence only and not a connected variable",()=>{
+ const e=data.candidates.find(x=>x.id==="C23");
+ assert.equal(e.implementation_status,"not_connected");
+ assert.equal(e.spatial_evidence.status,"one_date_spatial_qa_and_one_year_landcover_verified");
+ assert.ok(e.spatial_evidence.verification_url.includes("EXP-003D-IGBP.md"));
+ assert.ok(read("assets/catalog.js").includes("one_date_spatial_qa_and_one_year_landcover_verified"));
+});

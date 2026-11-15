@@ -256,3 +256,12 @@ A second real-source run confirmed that the selected Limón point is classified 
 - **Crucial caveats:** Gemini's Hitoy candidate (9.671, -83.024) is **outside** the nominal MERRA cell latitude range asserted in the same report. A nominal grid box does not prove identical POWER API outputs. Names, landcover, altitudes, and protected boundaries are research claims until verified.
 - **No cherry-picking:** Original coastal pixel stays archived; candidate points are fixed before any scientific time trend results. No A/B winner based on effect size or statistical significance.
 - **Code and test evidence:** [spatial pre-screen](../analysis/exp003c_spatial_screen.py), [test suite](../tests/test_exp003c_spatial_screen.py), [NASA API workflow](../.github/workflows/exp003c-spatial-screen.yml). Status of live run must be verified before describing source findings.
+
+## ADR-028 — Prefer pre-registered Río Banano candidate for next NASA vegetation pilot
+
+- **Date:** 2026-11-15 (Costa Rica)
+- **Status:** Accepted for **follow-up data acquisition only**, not public scientific trend conclusions or geographic reserve identification.
+- **Source evidence:** [MOD13Q1 original QA / 9 Python tests #43743357320](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43743357320) and [MCD12Q1 annual IGBP 2023 / 8 tests #43743662878](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43743662878).
+- **Decision:** Retain all three Gemini-proposed inland sites without looking at NDVI/EVI slopes. Prioritize **candidate A (9.885, -83.135)** for longer MOD13Q1 sample acquisition: 9/9 land and clean MOD13Q1 pixels on A2023001, MCD12Q1 IGBP **class 2 evergreen broadleaf forest** in 2023, nominal MERRA grid box in range. Candidate B is class 8 woody savanna; candidate C is class 2 but outside the stated nominal MERRA latitude box. The original Limón source pixel is preserved as a coastal negative control.
+- **Caveat:** IGBP 2023 alone cannot establish forest stability, actual legal reserve limits, site elevation or stable long-term NDVI quality. Each product has a distinct footprint; **no claim of identical NASA POWER point values** or climate causality is authorized.
+- **Next:** Verify spatial provenance in more years, then 2000–2025 MODIS QA and Terra/Aqua sensitivity; investigate statistical inference only after coverage checks.
