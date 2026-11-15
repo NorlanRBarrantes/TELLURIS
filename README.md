@@ -30,6 +30,7 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 ## Documentation
 
 - [Formal 2026 product scope and stage gates](docs/SCOPE-2026.md)
+- [EXP-004 staged release plan: 18 verified live parameters and all 22 requested Earth domains](docs/RELEASE-STAGES-EXP004.md)
 - [Every NASA recommendation and official resource tracked](docs/NASA-RECOMMENDATIONS-MATRIX.md)
 - [Expanded Earth-science variable catalog — including river discharge](docs/VARIABLE-CATALOG.md)
 - [Team-contributed 49-variable inventory + 10 derived indicators](docs/TEAM-CATALOG-2026-11-15.md)

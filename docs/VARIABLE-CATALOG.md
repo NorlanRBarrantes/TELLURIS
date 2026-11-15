@@ -81,3 +81,7 @@ The sibling/team-contributed [original scientific inventory](TEAM-CATALOG-2026-1
 ## EXP-003 — MODIS vegetation selected for an evidence-first pilot (2026-11-15)
 
 [EXP-003 source audit](EXP-003-VEGETATION.md) documents live ORNL TESViS MOD13Q1 NDVI, EVI and pixel-reliability responses, precise inclusive valid ranges and the requirement to QA-mask cloudy pixels. A new Python NASA retrieval adapter and 10 synthetic regression checks have been added; they are **not** evidence of a multi-decade validated vegetation trend or an already-connected public third source. FIRMS and Black Marble are retained in the team research catalog with corrected source limits and interpretation cautions.
+
+## EXP-004 — connected NASA POWER 18 parameters
+
+The browser Explorer registry now exposes exactly **18 single-variable monthly POWER responses that were individually tested against NASA on November 15, 2026**. Catalog JSON v2 preserves the 49 original team candidate topics, but labels each of the 22 recently requested environment/water topics as **5 fulfilled, 4 partially fulfilled and 13 awaiting specialized mission connectors**. Current connected parameters are listed with unit-aware, domain-aware aggregation in the source registry `website/public/assets/science.js`. See [release staging and exact topic matrix](RELEASE-STAGES-EXP004.md). **Connection means NASA API retrieval + programming, not a validated climate trend.**

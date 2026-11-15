@@ -265,3 +265,12 @@ A second real-source run confirmed that the selected Limón point is classified 
 - **Decision:** Retain all three Gemini-proposed inland sites without looking at NDVI/EVI slopes. Prioritize **candidate A (9.885, -83.135)** for longer MOD13Q1 sample acquisition: 9/9 land and clean MOD13Q1 pixels on A2023001, MCD12Q1 IGBP **class 2 evergreen broadleaf forest** in 2023, nominal MERRA grid box in range. Candidate B is class 8 woody savanna; candidate C is class 2 but outside the stated nominal MERRA latitude box. The original Limón source pixel is preserved as a coastal negative control.
 - **Caveat:** IGBP 2023 alone cannot establish forest stability, actual legal reserve limits, site elevation or stable long-term NDVI quality. Each product has a distinct footprint; **no claim of identical NASA POWER point values** or climate causality is authorized.
 - **Next:** Verify spatial provenance in more years, then 2000–2025 MODIS QA and Terra/Aqua sensitivity; investigate statistical inference only after coverage checks.
+
+## ADR-029 — Deliver verified NASA POWER 18-parameter integration as stage 1, no false completion claims
+
+- **Date:** 2026-11-15 Costa Rica
+- **Status:** Implemented and CI green in GitHub, production deployment **manual/pending**
+- **Decision:** Add precisely 18 parameters **actually confirmed via live NASA POWER API** in [EXP-004 runs #43751240278](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43751240278) and [#43751362556](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43751362556), with original units/communities/aggregation. Preserve the 49-topic team inventory and accurately map all 22 requested topics as 5 connected, 4 partially connected and 13 requiring specialized sources. Do not claim 18 missions: this is **one NASA service with 18 scientific parameters**.
+- **Safety:** WD10M only circular descriptive, not linear MK; annual max/min are summaries of monthly max/min; EVPTRNS energy flux not depth; POWER soil wetness not river flow/volumetric soil moisture; original MK p remains exploratory.
+- **UX:** question-first controls, 18 ES/EN definitions, source lineage, one-click optional second coast live comparison for continuous variables, export, and stale-request protection.
+- **Next:** publish newest ZIP in BanaHosting and test real NASA source in browser before integrating any more unverified sources. [Four-stage shipping plan](RELEASE-STAGES-EXP004.md).
