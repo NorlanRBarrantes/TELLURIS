@@ -88,7 +88,7 @@ test("Bilingual globe controls remain linked to the source-specific modules",()=
         "globe-analyze","globe-nasa-legend","globe-source-link"])
       assert.ok(page.includes('id="'+id+'"'),language+id);
     assert.ok(page.includes("globe.css?v=exp008-20261115"));
-    assert.ok(page.includes("globe.js?v=exp008-uvfix-20261115"));
+    assert.ok(page.includes("globe.js?v=exp009-atmos-20261115"));
     assert.ok(page.includes('option value="lst"'));
     assert.ok(page.includes('option value="truecolor"'));
   }
