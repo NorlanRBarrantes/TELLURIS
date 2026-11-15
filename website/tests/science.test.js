@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
-import {powerUrl, fromPower, fromSnapshot, analyze, mannKendall, senSlope} from "../public/assets/science.js";
+import {VARIABLES, POWER_READY_CODES, powerUrl, fromPower, fromSnapshot, analyze, mannKendall, senSlope} from "../public/assets/science.js";
 
 const snapshot = JSON.parse(readFileSync(new URL("../public/telluris/explore/data/exp001-annual.json", import.meta.url),"utf8"));
 function fixture(fill=-999) {
@@ -43,7 +43,7 @@ test("Alternate fill metadata read exactly",()=>{
 });
 test("Unexpected scientific units reject rather than silently convert",()=>{
   const f=fixture();f.parameters.PRECTOTCORR.units="mm/hr";
-  assert.throws(()=>fromPower(f,"PRECTOTCORR",2023,2024),/Unexpected precipitation unit/);
+  assert.throws(()=>fromPower(f,"PRECTOTCORR",2023,2024),/Unexpected PRECTOTCORR unit/);
 });
 test("Sen uses elapsed years across calendar gaps",()=>{
   const x=[{year:2000,value:10},{year:2001,value:12},{year:2003,value:16},{year:2007,value:24}];
@@ -90,4 +90,61 @@ test("Use actual NASA coordinates and prevent invalid requests",()=>{
 test("Fewer than 10 annual points cannot claim a trend",()=>{
   const x=fromSnapshot(snapshot,"limon","T2M",2021,2025);
   assert.equal(analyze(x.points).status,"insufficient");
+});
+
+test("Live-verified NASA POWER registry has 18 distinct codes and correct communities",()=>{
+ assert.equal(POWER_READY_CODES.length,18);
+ assert.equal(new Set(POWER_READY_CODES).size,18);
+ for(const code of POWER_READY_CODES){
+  const v=VARIABLES[code];
+  assert.ok(v.nativeUnits?.length);
+  assert.ok(["AG","RE"].includes(v.community));
+  assert.ok(["mean","sum_rate","circular"].includes(v.aggregation));
+  const url=new URL(powerUrl(10.63,-85.44,2023,2025,code));
+  assert.equal(url.searchParams.get("parameters"),code);
+  assert.equal(url.searchParams.get("community"),v.community);
+ }
+});
+test("All 18 verified POWER metadata schemas aggregate 12 months correctly",()=>{
+ for(const code of POWER_READY_CODES){
+  const v=VARIABLES[code];
+  const source={"PRECTOTCORR":2,"T2M":25,"T2M_MAX":31,"T2M_MIN":18,
+  "RH2M":70,"WS10M":5,"WD10M":60,"U10M":-3,"V10M":-4,
+  "ALLSKY_SFC_SW_DWN":5.2,"PS":100,"CLOUD_AMT":40,"QV2M":16,
+  "ALLSKY_SFC_LW_DWN":9.5,"ALLSKY_SRF_ALB":.11,
+  "EVPTRNS":2.48,"GWETROOT":.57,"GWETTOP":.53}[code];
+  const series={};
+  for(const year of [2023,2024]) for(let month=1;month<=12;month++)
+    series[year+String(month).padStart(2,"0")]=source;
+  const payload={header:{fill_value:-999,sources:["MERRA2"],api:{version:"test"}},
+   parameters:{[code]:{units:v.nativeUnits[0]}},
+   geometry:{coordinates:[-85.44,10.63,0]},properties:{parameter:{[code]:series}}};
+  const rows=fromPower(payload,code,2023,2024).points;
+  assert.equal(rows.length,2,code);
+  if(code==="PRECTOTCORR")assert.deepEqual(rows.map(x=>x.value),[730,732]);
+  else assert.ok(rows.every(x=>Math.abs(x.value-source)<1e-8),code);
+  payload.parameters[code].units="WRONG-UNIT";
+  assert.throws(()=>fromPower(payload,code,2023,2024),/Unexpected .* unit/);
+ }
+});
+test("Wind direction uses circular average and is excluded from linear trend interpretation",()=>{
+ const code="WD10M",series={};
+ for(let m=1;m<=12;m++)series["2023"+String(m).padStart(2,"0")]=m%2?359:1;
+ const payload={header:{fill_value:-999},parameters:{WD10M:{units:"Degrees"}},
+  properties:{parameter:{WD10M:series}}};
+ const p=fromPower(payload,code,2023,2023).points[0];
+ assert.ok(p.value<3||p.value>357,"Angles 359° and 1° must average near NORTH, not 180°.");
+ assert.equal(VARIABLES.WD10M.trendCompatible,false);
+});
+test("Rate and mean aggregations have distinct annual units",()=>{
+ assert.equal(VARIABLES.PRECTOTCORR.aggregation,"sum_rate");
+ assert.equal(VARIABLES.EVPTRNS.aggregation,"mean");
+ assert.equal(VARIABLES.EVPTRNS.unit,"MJ/m²/day");
+ assert.equal(VARIABLES.GWETROOT.nativeUnits[0],"1");
+ assert.equal(VARIABLES.ALLSKY_SFC_SW_DWN.nativeUnits[0],"kW-hr/m^2/day");
+});
+test("Archived NASA data refuse non-archived variables",()=>{
+ for(const variable of ["RH2M","WS10M","EVPTRNS","WD10M"]){
+  assert.throws(()=>fromSnapshot(snapshot,"liberia",variable,1985,2025),/only for T2M/);
+ }
 });
