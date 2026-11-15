@@ -82,3 +82,11 @@ References:
 - **OpenAI ChatGPT:** Created the source-acquisition workflow, inspected its NASA artifacts, independently recalculated four slopes using SciPy, implemented static browser Explorer 0.1 with scientific provenance and exploratory caveats, wrote JavaScript tests and deployment instructions.
 - **Google Gemini:** Earlier concept/review contributions remain documented above; no Gemini climate numbers have been substituted for real NASA data.
 - **Boundary:** Neither API retrieval nor algorithm parity validates underlying time-series homogeneity, serial-independence assumptions, statistical significance claims or public deployment.
+
+
+## Spanish-first site and Gemini global benchmark critique — November 14, 2026
+
+- **Google Gemini:** Suggested global pairs, Pacific-side control, June–August rainfall analysis, mirrored-slope invariants and random permutations as possible validation. The suggestions are hypotheses, not proof of pre-known NASA POWER trend signs or valid significance.
+- **OpenAI ChatGPT:** Evaluated claimed expected signs and statistical shortcuts, researched the NASA challenge, CLLJ/midsummer-drought literature and IMERG official source, developed the bilingual public pages and localized browser messages, automated six-route/SEO/asset QA, and registered a falsifiable EXP-002 research plan.
+- **Rejected without evidence:** Guaranteed p-values/signs for Frankfurt–Delhi, Chile, Sahel–Congo or Liberia–Nicoya; causal attribution to a single driver; claims that naïve year shuffling controls false positives with autocorrelation, or that p>0.05 establishes equivalence.
+- **Evidence limit:** QA confirms implementation in GitHub; public Spanish pages still require deployment verification, and EXP-002 field analyses are not yet executed.

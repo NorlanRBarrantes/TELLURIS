@@ -6,10 +6,13 @@ Prepared: 2026-11-14. Deployment is **not** performed by this package.
 
 | Public route | Language | Purpose |
 |---|---|---|
-| `/` | English | Team identity and large TELLURIS call to action |
-| `/es/` | Spanish | Team identity in Spanish |
-| `/telluris/` | English | Science-first product research preview |
-| `/es/telluris/` | Spanish | Product research preview in Spanish |
+| `/` | Spanish (default) | Team identity and large TELLURIS call to action |
+| `/en/` | English | Team identity (English) |
+| `/telluris/` | Spanish (default) | Product introduction |
+| `/en/telluris/` | English | Product introduction (English) |
+| `/telluris/explore/` | Spanish (default) | Working exploratory NASA data viewer |
+| `/en/telluris/explore/` | English | Working exploratory NASA data viewer (English) |
+| `/es/`, `/es/telluris/` | Spanish legacy | Existing links remain accessible with canonical URLs |
 
 Built as plain HTML/CSS/JavaScript, with no external dependencies, tracking cookies or build-time production server.
 
@@ -70,3 +73,12 @@ This bundle now includes the functional `/telluris/explore/` route, associated b
 To update a site that is already running on BanaHosting, retain the existing HTTPS/.htaccess setup, back up the current document root, then copy the **contents** of `website/public/` (or the CI ZIP contents) into that root. Verify `/telluris/explore/` loads the archived series, and attempt **Request live NASA data** separately; the latter may be restricted by cross-origin browser policy. Do not claim production deployment until it is confirmed from a browser.
 
 The browser displays exploratory Theil–Sen and original MK computations on authentic NASA-derived model data; this is not a publication-grade climate significance inference.
+
+
+## Spanish-first release checklist — 2026-11-14 (Costa Rica)
+
+- GitHub Actions bilingual CI #43660071020: 28 of 28 automated checks passed and site ZIP generated.
+- **Manual deployment still needed:** upload/extract the complete new ZIP in the existing `/home/cvzvwazj/projecturiel.earth/` document root, replacing earlier HTML/assets without deleting production `.well-known` or `.htaccess` configuration.
+- The previously observed 403 came from mode 600 static files; if the cPanel ZIP extractor repeats that, set **644 for public static files and 755 for directories** in the intended document root only. Do not apply world-readable permissions to any private or unrelated files.
+- Check six primary routes at HTTPS, selectors ES/EN at the top, live and archived NASA runs, the shared JSON, styling on mobile, the updated `sitemap.xml` and external links.
+- The ZIP's root is already the contents of `website/public/`. Do not extract it into an extra nested directory.

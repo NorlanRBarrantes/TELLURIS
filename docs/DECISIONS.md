@@ -185,3 +185,14 @@ Do not replace proposed status with accepted until the underlying decision is ve
 - **Tradeoff:** A static vanilla ES module implementation meets shared-hosting constraints immediately; React/TypeScript remains a future option, not a prerequisite.
 - **Important warnings:** NASA model-grid samples are not meteorological station observations; large rainfall trends may be nonhomogeneous; original MK inference is not independence-robust. No assumption of NASA endorsement or production deployment.
 - **Deployment:** Build-free site archive is available in the CI artifact for manual BanaHosting upload. Browser direct NASA CORS and production routing must be separately verified.
+
+
+## ADR-022 — Spanish-first bilingual site and independently falsifiable regional benchmarks
+
+- **Date:** 2026-11-14 (Costa Rica)
+- **Status:** Spanish-first localization implemented and tested; EXP-002 benchmark protocol proposed, not experimentally executed
+- **Website:** Spanish canonical pages at `/`, `/telluris/`, `/telluris/explore/`; English pages at corresponding `/en/` routes. Keep old `/es/` pages functional but canonicalized; use explicit ES/EN top-nav links and accurate hreflang/sitemap. Localize scientific UI messages, not variable codes/source values.
+- **Motivation:** Project Uriel is based in Costa Rica but requires an accessible international presentation.
+- **Verification:** [Bilingual CI run #43660071020](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43660071020), 28/28 Node tests passed, six routes, asset paths and HTTP smoke validated. **Changes in GitHub do not automatically publish to BanaHosting.**
+- **Science:** [EXP-002 protocol](BENCHMARK-PLAN.md) registers JJA Liberia/Limón, same-Pacific control, IMERG precipitation cross-source check and optional global contrasts as research hypotheses, **not pre-known positive/negative trends**. Do not use simple non-significant p as proof of equivalence, and do not ignore climate autocorrelation in permutation tests.
+- **Next:** Explorer 0.2 comparative mode after source/QA validation; user-visible production bilingual behavior pending upload and browser inspection.

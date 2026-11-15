@@ -126,3 +126,13 @@ For each verified item add: execution date (UTC), exact code commit, environment
 - Comparison of two point time series with the same period and methodology.
 
 Results must be computed before any place is described as having an observed significant increase or decrease.
+
+
+## Spanish-first public web localization — 2026-11-14 (Costa Rica)
+
+- Source implementation: Spanish canonical routes `/`, `/telluris/`, `/telluris/explore/` and English mirror routes `/en/`, `/en/telluris/`, `/en/telluris/explore/`; historical `/es/` paths retained with Spanish canonical links.
+- [GitHub Actions run #43660071020](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43660071020): **28/28 Node tests passed** (12 scientific + 16 language/metadata/asset-path tests) and static HTTP route/asset smoke passed.
+- Verified: HTML lang attributes, reciprocal ES/EN selector links, absolute canonical/hreflang, local JS/CSS/favicon references, legacy Spanish URL preservation, dynamic Spanish scientific messages, one shared archived NASA JSON source.
+- **Pending:** update hosted cPanel document root; verify all six public routes, actual language switching, live NASA fetch and mobile responsiveness after deployment.
+- User screenshots of the previous English version indicate the hosted Explorer is accessible and able to load live NASA POWER; this **does not establish bilingual deployment**, which remains pending.
+- Next research gate: [EXP-002 falsifiable seasonal and global comparisons](BENCHMARK-PLAN.md); no pre-set scientific outcomes accepted.
