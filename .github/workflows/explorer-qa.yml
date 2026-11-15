@@ -64,7 +64,7 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
-deploy-bana:
+  deploy-bana:
     name: Deploy tested static website to BanaHosting (opt-in)
     needs: static-mvp
     if: >-
