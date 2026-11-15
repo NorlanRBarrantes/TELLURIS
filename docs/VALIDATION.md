@@ -171,3 +171,8 @@ Results must be computed before any place is described as having an observed sig
 ## 2026-11-15 — Geographic and evidence features
 
 New test fixtures check provisional significance and two-point descriptive comparison. The browser's WebGL behavior and public hosting deployment are not automatically verified by these fixtures. See GitHub Actions for actual run status; no new scientific confidence claim has been made.
+
+
+## CI verification — 2026-11-15
+
+GitHub Actions run [#43739956296](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43739956296) completed with SUCCESS at source commit 39d3b654af86e8608f813f8535be90d67e92550a. Reported successful steps: browser-source syntax checks (including globe and evidence), Node scientific/site tests, static localhost HTTP smoke checks (including Natural Earth asset), and site package generation. This confirms automated source/build checks only: manual 3D rendering on target browsers and deployment on BanaHosting remain unverified.
