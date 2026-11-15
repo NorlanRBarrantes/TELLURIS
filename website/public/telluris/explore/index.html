@@ -140,17 +140,17 @@
     <p id="message" class="explore-message" role="status" aria-live="polite">Cargando muestra NASA verificada…</p>
     <div id="results" hidden>
       <div class="metric-grid">
-        <div class="metric"><small>Tendencia estimada de Sen / década</small><strong id="slope-value">—</strong><span id="slope-direction">—</span></div>
+        <div class="metric"><small>Tendencia estimada de Sen / década <abbr class="scientific-hover" tabindex="0" title="Theil–Sen estima la mediana de pendientes entre valores anuales. No es un pronóstico ni una explicación causal.">ⓘ</abbr></small><strong id="slope-value">—</strong><span id="slope-direction">—</span></div>
         <div class="metric"><small>Años completos</small><strong id="sample-value">—</strong><span id="sample-period">—</span></div>
-        <div class="metric"><small>Valor p de Mann–Kendall · hipótesis de independencia</small><strong id="p-value">—</strong><span id="p-value-note">Exploratorio; independencia no verificada</span></div>
+        <div class="metric"><small>Valor p de Mann–Kendall · hipótesis de independencia <abbr class="scientific-hover" tabindex="0" title="El valor p original supone independencia temporal. NO demuestra significancia climática validada ni causas.">ⓘ</abbr></small><strong id="p-value">—</strong><span id="p-value-note">Exploratorio; independencia no verificada</span></div>
       </div>
       
       <section class="inference-panel" id="inference-panel" aria-labelledby="inference-title">
         <div class="inference-header"><div><p class="eyebrow mint">03 / PRUEBAS DE SIGNIFICANCIA</p><h3 id="inference-title">¿Qué tan sólida es esta tendencia?</h3></div><span id="inference-verdict" class="inference-verdict">Sin evaluación</span></div>
         <div class="inference-grid">
-          <div><small>Intervalo de confianza Theil–Sen al 95 %</small><strong id="sen-interval">—</strong><span id="ci-interpretation">Asume observaciones anuales independientes.</span></div>
+          <div><small>Intervalo de confianza Theil–Sen al 95 % <abbr class="scientific-hover" tabindex="0" title="El intervalo depende de supuestos. Si incluye cero, una pendiente nula sigue siendo compatible con ellos.">ⓘ</abbr></small><strong id="sen-interval">—</strong><span id="ci-interpretation">Asume observaciones anuales independientes.</span></div>
           <div><small>Pruebas exploratorias de sensibilidad temporal</small><strong id="block-sensitivity">—</strong><span>Permutaciones por bloques de 3 y 5 años · 999 simulaciones</span></div>
-          <div><small>Autocorrelación residual de un año</small><strong id="lag-diagnostic">—</strong><span>Diagnóstico orientativo, no prueba de independencia.</span></div>
+          <div><small>Autocorrelación residual de un año <abbr class="scientific-hover" tabindex="0" title="Diagnóstico de similitud entre residuos de años vecinos; no certifica independencia temporal.">ⓘ</abbr></small><strong id="lag-diagnostic">—</strong><span>Diagnóstico orientativo, no prueba de independencia.</span></div>
         </div>
 <p id="period-sensitivity" class="inference-paired"></p>
                 <p id="inference-caution" class="inference-caution">No se ha demostrado homogeneidad del producto NASA ni independencia temporal. Ningún valor p de esta pantalla garantiza una tendencia climática validada.</p>
