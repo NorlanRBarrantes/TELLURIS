@@ -67,7 +67,7 @@ jobs:
               site,variable:name,n:result.n,slopeDecade:result.slopePerDecade,
               mkRawP:result.mk.p,ci95:proof.senCI,
               blocks:proof.blockTests.map(x=>({size:x.blockYears,p:x.p})),
-              lag1:result.lag1,interpretation:proof.status,
+              lag1:result.lag1,halves:proof.halfPeriod,interpretation:proof.status,
               validatedSignificance:proof.validatedSignificance
             }));
           }
