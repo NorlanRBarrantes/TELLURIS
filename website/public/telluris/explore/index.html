@@ -74,7 +74,14 @@
 <button class="obs-mode" type="button" data-obs-mode="all-one" aria-pressed="false"><small>18 / 01</small><strong>Todas las variables · una zona</strong><span>Contexto ambiental completo</span></button>
 <button class="obs-mode" type="button" data-obs-mode="all-two" aria-pressed="true"><small>18 / 02</small><strong>Todas las variables · dos zonas</strong><span>Contraste regional integral</span></button></div>
   <div class="obs-query">
-    <div class="obs-query-context"><small>ZONA A</small><strong id="obs-primary-label">Seleccionada en los controles de investigación</strong><span>Se usan las coordenadas, variable y años de la sección 01 inferior.</span></div>
+    <div class="obs-query-context"><small>ZONA A</small><strong id="obs-primary-label">Seleccionada en los controles de investigación</strong><span>Los controles se comparten con el explorador científico inferior.</span><details class="obs-primary-config"><summary>Editar zona A, variable y años</summary><div class="obs-config-grid">
+ <label for="obs-main-place">Zona A<select id="obs-main-place"><option value="liberia">Liberia · Pacífico</option><option value="limon">Limón · Caribe</option><option value="custom">Coordenadas propias</option></select></label>
+ <label for="obs-main-variable">Variable científica<select id="obs-main-variable"></select></label>
+ <label for="obs-main-lat">Latitud<input id="obs-main-lat" type="number" min="-90" max="90" step="any" value="10.63" readonly></label>
+ <label for="obs-main-lon">Longitud<input id="obs-main-lon" type="number" min="-180" max="180" step="any" value="-85.44" readonly></label>
+ <label for="obs-main-start">Desde<input id="obs-main-start" type="number" min="1981" max="2025" value="1985"></label>
+ <label for="obs-main-end">Hasta<input id="obs-main-end" type="number" min="1981" max="2025" value="2025"></label>
+ </div></details></span></div>
     <div id="obs-second-controls" class="obs-second-controls">
       <label for="obs-other-place">ZONA B
         <select id="obs-other-place"><option value="limon">Limón · Caribe, Costa Rica</option><option value="liberia">Liberia · Pacífico, Costa Rica</option><option value="custom">Coordenadas personalizadas</option></select></label>
