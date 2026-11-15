@@ -3,7 +3,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#07121d"><meta name="color-scheme" content="dark">
 <title>TELLURIS Explorer — Historical NASA Earth Trends | Project Uriel</title>
-<meta name="description" content="Investigate NASA POWER air temperature and precipitation across Costa Rica with transparent historical graphs and exploratory statistical trend calculations.">
+<meta name="description" content="Explore 18 NASA POWER scientific parameters across atmosphere, wind, radiation, rain and soil wetness with transparent statistical safeguards.">
 <link rel="canonical" href="https://projecturiel.earth/en/telluris/explore/">
 <link rel="alternate" hreflang="es-CR" href="https://projecturiel.earth/telluris/explore/"><link rel="alternate" hreflang="en" href="https://projecturiel.earth/en/telluris/explore/"><link rel="alternate" hreflang="x-default" href="https://projecturiel.earth/telluris/explore/">
 <link rel="icon" type="image/svg+xml" href="../../../assets/favicon.svg">
@@ -36,7 +36,8 @@
       <select id="location" name="location"><option value="liberia">Liberia · Pacific, Costa Rica</option><option value="limon">Limón · Caribbean, Costa Rica</option><option value="custom">Custom coordinates</option></select>
       <div class="coordinate-fields"><div><label for="latitude">Latitude</label><input id="latitude" type="number" step="any" min="-90" max="90" value="10.63" required readonly></div><div><label for="longitude">Longitude</label><input id="longitude" type="number" step="any" min="-180" max="180" value="-85.44" required readonly></div></div>
       <label for="variable">Scientific variable</label>
-      <select id="variable"><option value="T2M">Near-surface air temperature · °C</option><option value="PRECTOTCORR">Annual precipitation · mm</option></select>
+      <select id="variable"><optgroup label="Atmosphere and wind"><option value="T2M">Air temperature at 2 m · T2M</option><option value="T2M_MAX">Monthly maximum air temperature · T2M_MAX</option><option value="T2M_MIN">Monthly minimum air temperature · T2M_MIN</option><option value="RH2M">Relative humidity at 2 m · RH2M</option><option value="QV2M">Specific humidity at 2 m · QV2M</option><option value="WS10M">Wind speed at 10 m · WS10M</option><option value="WD10M">Wind direction at 10 m · circular only · WD10M</option><option value="U10M">Eastward wind component · U10M</option><option value="V10M">Northward wind component · V10M</option><option value="PS">Surface air pressure · PS</option><option value="CLOUD_AMT">Cloud amount · CLOUD_AMT</option></optgroup><optgroup label="Radiation and energy"><option value="ALLSKY_SFC_SW_DWN">Solar shortwave irradiance · ALLSKY_SFC_SW_DWN</option><option value="ALLSKY_SFC_LW_DWN">Downward longwave radiation · ALLSKY_SFC_LW_DWN</option><option value="ALLSKY_SRF_ALB">Surface albedo · ALLSKY_SRF_ALB</option></optgroup><optgroup label="Water and soil"><option value="PRECTOTCORR">Annual precipitation · PRECTOTCORR</option><option value="EVPTRNS">Evapotranspiration energy flux · EVPTRNS</option><option value="GWETTOP">Surface soil wetness · GWETTOP</option><option value="GWETROOT">Root-zone soil wetness · GWETROOT</option></optgroup></select>
+      <p id="variable-guide" class="control-note variable-guide">Select a variable to see source, units and aggregation.</p>
       <div class="coordinate-fields"><div><label for="from-year">From</label><input id="from-year" type="number" min="1981" max="2025" value="1985" required></div><div><label for="to-year">Through</label><input id="to-year" type="number" min="1981" max="2025" value="2025" required></div></div>
       <button id="live-btn" class="explore-primary" type="submit">Request live NASA data <span aria-hidden="true">↗</span></button>
       <button id="snapshot-btn" class="explore-secondary" type="button">Use archived NASA sample</button>
@@ -56,10 +57,10 @@
       <div class="metric-grid">
         <div class="metric"><small>Estimated Sen trend / decade</small><strong id="slope-value">—</strong><span id="slope-direction">—</span></div>
         <div class="metric"><small>Valid annual samples</small><strong id="sample-value">—</strong><span id="sample-period">—</span></div>
-        <div class="metric"><small>Original Mann–Kendall p</small><strong id="p-value">—</strong><span>Exploratory; independence unverified</span></div>
+        <div class="metric"><small>Original Mann–Kendall p</small><strong id="p-value">—</strong><span id="p-value-note">Exploratory; independence unverified</span></div>
       </div>
       <section class="chart-card" aria-labelledby="chart-title">
-        <div class="chart-head"><div><p class="eyebrow">ANNUAL TIME SERIES</p><h3 id="chart-title">Observed model series</h3></div><div class="chart-legend"><span class="legend-data">Annual value</span><span class="legend-trend">Sen trend</span></div></div>
+        <div class="chart-head"><div><p class="eyebrow">ANNUAL TIME SERIES</p><h3 id="chart-title">Observed model series</h3></div><div class="chart-legend" id="chart-legend"><span class="legend-data">Annual value</span><span class="legend-trend">Sen trend</span></div></div>
         <svg id="trend-chart" viewBox="0 0 760 350" role="img" aria-label="Annual NASA model data and estimated Sen trend" preserveAspectRatio="xMidYMid meet"></svg>
         <p class="chart-caption" id="chart-caption">—</p>
       </section>

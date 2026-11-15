@@ -21,3 +21,6 @@
 .assistant-question input{flex:1;min-width:0;background:#071521;color:#e8f8f4;border:1px solid rgba(155,207,212,.3);border-radius:8px;padding:11px}
 .assistant-answer{min-height:35px}
 @media(max-width:660px){.globe-stage{height:280px}.globe-card,.evidence-assistant{padding:15px}.assistant-question{flex-direction:column}}
+
+/* EXP-004 metadata-driven NASA variable details. */
+.variable-guide{margin:7px 0 15px;line-height:1.65;color:#b8d9cb;font-size:12px;border-left:2px solid #9bdaba;padding-left:10px}
