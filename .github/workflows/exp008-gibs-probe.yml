@@ -1,0 +1,52 @@
+name: TELLURIS EXP-008 NASA GIBS source response probe
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/exp008-gibs-probe.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  probe-wms:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify NASA GIBS WMS and MODIS map response
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.parse
+          import urllib.request
+          import datetime
+
+          base="https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi"
+          layers=[
+            ("BlueMarble_NextGeneration","image/jpeg",None),
+            ("MODIS_Terra_CorrectedReflectance_TrueColor","image/jpeg","2024-07-15"),
+            ("MODIS_Terra_L3_Land_Surface_Temp_Daily_Day","image/png","2024-07-15")
+          ]
+          for name,expected,date in layers:
+              params={"SERVICE":"WMS","VERSION":"1.1.1","REQUEST":"GetMap",
+                "LAYERS":name,"STYLES":"","SRS":"EPSG:4326",
+                "BBOX":"-180,-90,180,90","WIDTH":"512","HEIGHT":"256",
+                "FORMAT":expected}
+              if date:params["TIME"]=date
+              if expected=="image/png":params["TRANSPARENT"]="TRUE"
+              url=base+"?"+urllib.parse.urlencode(params)
+              req=urllib.request.Request(url,headers={"User-Agent":"TELLURIS-scientific-source-probe/1.0"})
+              with urllib.request.urlopen(req,timeout=35) as resp:
+                  data=resp.read(9_000_000)
+                  actual=resp.headers.get("Content-Type","")
+                  cors=resp.headers.get("Access-Control-Allow-Origin","(missing)")
+                  print("NASA_GIBS",name,"STATUS",resp.status,"FORMAT",actual,
+                        "BYTES",len(data),"CORS",cors)
+                  assert resp.status==200 and len(data)>1500
+                  if expected=="image/jpeg":
+                      assert data.startswith(bytes.fromhex("ffd8ff")),"Not a JPEG map image"
+                  else:
+                      assert data.startswith(bytes.fromhex("89504e470d0a1a0a")),"Not a PNG map image"
+          print("GIBS_PROBE_PASS: NASA original map image responses verified")
+          PY
