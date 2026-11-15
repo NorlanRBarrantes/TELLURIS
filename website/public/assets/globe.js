@@ -5,6 +5,7 @@
  */
 import {GLOBE_LAYERS,DEFAULT_GIBS_DATE,gibsWmsUrl,
         gibsLayerDisclosure,validateGlobeDate,GIBS_TEXTURE_U_OFFSET} from "./globe-layers.js?v=exp008-uvfix-20261115";
+import {initWeatherCanvas} from "./globe-weather.js?v=exp009-20261115";
 
 const el=id=>document.getElementById(id);
 const stage=el("globe-stage"),status=el("globe-status");
@@ -82,6 +83,10 @@ async function boot(){
   renderer.setClearColor(0x000000,0);
   renderer.outputColorSpace=T.SRGBColorSpace;
   stage.append(renderer.domElement);
+  const weather=initWeatherCanvas(el("globe-weather-canvas"),
+    el("globe-weather-mode"),el("globe-weather-note"),{language:lang});
+  const receiveEvidence=event=>weather.update(event.detail);
+  window.addEventListener("telluris:source-data",receiveEvidence);
 
   const scene=new T.Scene();
   const camera=new T.PerspectiveCamera(36,1,.1,80);
@@ -296,6 +301,39 @@ async function boot(){
       say("Pausar giro","Pause rotation"):say("Giro automático","Auto rotate");
   });
 
+  const tooltip=el("globe-hover-tooltip");
+  const hoverRay=new T.Raycaster();
+  function hideTooltip(){if(tooltip)tooltip.hidden=true;}
+  function showHover(ev){
+    if(!tooltip||ev.pointerType==="touch"){hideTooltip();return;}
+    const area=renderer.domElement.getBoundingClientRect();
+    const mouse=new T.Vector2(
+      (ev.clientX-area.left)*2/area.width-1,
+      1-(ev.clientY-area.top)*2/area.height
+    );
+    hoverRay.setFromCamera(mouse,camera);
+    const hits=hoverRay.intersectObjects([...markers,sphere]);
+    if(!hits.length){hideTooltip();return;}
+    const key=hits[0].object.userData.key;
+    let label,lat,lon;
+    if(key){
+      [lat,lon]=locations[key];
+      label=key==="liberia"?"Liberia · Costa Rica":"Limón · Costa Rica";
+    }else{
+      const point=group.worldToLocal(hits[0].point.clone()).normalize();
+      lat=Math.asin(point.y)*180/Math.PI;
+      lon=Math.atan2(point.x,point.z)*180/Math.PI;
+      label=say("Punto geográfico","Geographic point");
+    }
+    tooltip.textContent=label+" · "+lat.toFixed(2)+"°, "+lon.toFixed(2)+"° · "+
+      say("Clic para investigar (no medición climática).",
+          "Click to investigate (not a climate measurement).");
+    tooltip.style.left=Math.max(8,Math.min(area.width-270,
+      ev.clientX-area.left+14))+"px";
+    tooltip.style.top=Math.max(8,Math.min(area.height-60,
+      ev.clientY-area.top-60))+"px";
+    tooltip.hidden=false;
+  }
   let pointer=null,moved=false;
   const canvas=renderer.domElement;
   canvas.tabIndex=0;
@@ -307,11 +345,14 @@ async function boot(){
   canvas.style.touchAction="none";
   canvas.addEventListener("pointerdown",ev=>{
     if(ev.button!==0)return;
+    hideTooltip();
     pointer=[ev.clientX,ev.clientY,group.rotation.x,group.rotation.y,ev.pointerId];
     moved=false;canvas.setPointerCapture(ev.pointerId);
   });
   canvas.addEventListener("pointermove",ev=>{
-    if(!pointer||pointer[4]!==ev.pointerId)return;
+    if(!pointer){showHover(ev);return;}
+    if(pointer[4]!==ev.pointerId)return;
+    hideTooltip();
     const dx=ev.clientX-pointer[0],dy=ev.clientY-pointer[1];
     if(Math.abs(dx)+Math.abs(dy)>6)moved=true;
     if(moved){
@@ -319,7 +360,8 @@ async function boot(){
       group.rotation.x=Math.max(-1.25,Math.min(1.25,pointer[2]+dy*.006));
     }
   });
-  canvas.addEventListener("pointercancel",()=>{pointer=null;});
+  canvas.addEventListener("pointercancel",()=>{pointer=null;hideTooltip();});
+  canvas.addEventListener("pointerleave",hideTooltip);
   canvas.addEventListener("pointerup",ev=>{
     if(!pointer||pointer[4]!==ev.pointerId)return;
     pointer=null;if(moved)return;
@@ -375,12 +417,14 @@ async function boot(){
     if(!running)return;
     if(spinning&&!reduced&&!document.hidden)group.rotation.y+=.001;
     if(!document.hidden)renderer.render(scene,camera);
+    weather.frame(performance.now());
     requestAnimationFrame(animate);
   }
   animate();
   window.addEventListener("pagehide",()=>{
     running=false;generation++;observer?.disconnect();
-    renderer.dispose();
+    window.removeEventListener("telluris:source-data",receiveEvidence);
+    weather.dispose();renderer.dispose();
   },{once:true});
 }
 boot();
