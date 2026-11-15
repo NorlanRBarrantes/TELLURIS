@@ -64,7 +64,7 @@ test("Scientific disclosure does not confuse surface and air temperature",()=>{
   assert.match(en,/not air/);
   assert.match(en,/downsampled/);
   assert.match(en,/not numeric temperatures/);
-  assert.match(gibsLayerDisclosure("marble","es"),/no muestra tendencias/);
+  assert.match(gibsLayerDisclosure("marble","es"),/No muestra tendencias/);
 });
 
 test("Bilingual globe controls remain linked to the source-specific modules",()=>{
