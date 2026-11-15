@@ -22,10 +22,10 @@
 </div></header>
 <main class="container explorer-shell" id="explorer">
 <div class="explorer-intro">
-  <p class="eyebrow mint">TELLURIS / RESEARCH LAB / EXPERIMENT 001</p>
+  <p class="eyebrow mint">TELLURIS / RESEARCH LAB / EXPERIMENTS 001–004</p>
   <h1>Earth changes.<br><em>Follow the evidence.</em></h1>
   <p>Explore historical NASA POWER data, calculate a robust trend and inspect what we can—and cannot—conclude. Every result traces back to a scientific source.</p>
-  <div class="intro-flags"><span>NASA POWER · MERRA-2</span><span>1985–2025</span><span>Exploratory science</span></div>
+  <div class="intro-flags"><span>NASA POWER · MERRA-2 / CERES</span><span>1985–2025</span><span>Exploratory science</span></div>
 </div>
 <div class="explore-layout">
   <aside class="explore-controls" aria-labelledby="controls-title">
@@ -71,7 +71,7 @@
       </section>
       <div class="evidence-grid">
         <section class="evidence-card"><p class="eyebrow">03 / SCIENTIFIC TRACEABILITY</p><h3>Data provenance</h3><dl id="provenance"></dl><a id="source-link" href="https://power.larc.nasa.gov/" target="_blank" rel="noopener noreferrer">Inspect source ↗</a></section>
-        <section class="evidence-card caution-card"><p class="eyebrow">04 / INTERPRETATION</p><h3>What the numbers do not prove</h3><p>Statistical significance is not yet established for serially dependent climate observations. The original Mann–Kendall p-value is shown for audit, not as a validated conclusion.</p><p>These are model-grid values, not meteorological station readings. Precipitation trends may reflect product inhomogeneity and require independent cross-validation.</p><p id="autocorr-note">—</p></section>
+        <section class="evidence-card caution-card"><p class="eyebrow">04 / INTERPRETATION</p><h3>What the numbers do not prove</h3><p>Statistical significance is not yet established for serially dependent climate observations. The original Mann–Kendall p-value is shown for audit, not as a validated conclusion.</p><p>NASA POWER data are gridded reanalysis or satellite-derived products, not measurements made exactly at the selected coordinates. Trends require homogeneity checks, serial-dependence review and independent comparison.</p><p id="autocorr-note">—</p></section>
       </div>
 <section class="evidence-assistant" aria-labelledby="evidence-title"><p class="eyebrow mint">05 / READING THE EVIDENCE</p><h3 id="evidence-title">Scientific assistant</h3><p id="evidence-brief" class="assistant-brief">—</p><p id="evidence-caveat" class="assistant-caveat">—</p><div id="comparison-output" class="comparison-output" hidden></div><form id="evidence-form"><label for="evidence-question">Ask about these data</label><div class="assistant-question"><input id="evidence-question" type="text" maxlength="250" placeholder="What changes? Is it significant? What is the source?" required><button type="submit">Ask</button></div></form><p id="evidence-answer" class="assistant-answer" aria-live="polite">Ask about the computed series.</p><p class="globe-disclaimer">Transparent rule-based evidence assistant, not generative AI. Climate significance remains unvalidated.</p></section>
       <section class="table-section"><div class="table-heading"><div><p class="eyebrow">05 / INSPECT THE RECORD</p><h3>Annual observations</h3></div><button id="download-csv" class="explore-secondary" type="button">Export CSV ↧</button></div><div class="table-scroll"><table><thead><tr><th scope="col">Year</th><th scope="col" id="unit-header">Annual value</th></tr></thead><tbody id="annual-rows"></tbody></table></div></section>

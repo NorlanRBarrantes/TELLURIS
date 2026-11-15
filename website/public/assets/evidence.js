@@ -42,7 +42,7 @@ export function answerEvidence(question,evidence,comparison=""){
  if(/signific|confian|certeza|p.valor|p-value|statistic/.test(q))
   return (lang==="es"?"Valor p original: ":"Original p-value: ")+evidence.analysis.mk.p.toFixed(4)+". "+evidence.caution;
  if(/origen|fuente|nasa|source|dato/.test(q))
-  return (lang==="es"?"Fuente identificada: ":"Identified source: ")+evidence.source+". "+(lang==="es"?"Los valores son de una celda de modelo, no un promedio provincial.":"Values represent a model-grid point, not a region-wide average.");
+  return (lang==="es"?"Fuente identificada: ":"Identified source: ")+evidence.source+". "+(lang==="es"?"Los valores representan una rejilla de datos NASA POWER, no el promedio de una provincia.":"Values represent the NASA POWER data grid, not a region-wide average.");
  if(/autocorrel|incertid|limit|depend|error|uncert|reliab/.test(q))
   return evidence.caution+" "+(evidence.analysis.lag1===null?(lang==="es"?"Autocorrelación no estimable.":"Autocorrelation unavailable."):(lang==="es"?"Diagnóstico lag-1: ":"Lag-1 diagnostic: ")+evidence.analysis.lag1.toFixed(3)+".");
  if(/compar|region|liberia|limon|diferenc|compare/.test(q))

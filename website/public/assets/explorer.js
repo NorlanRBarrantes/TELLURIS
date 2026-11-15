@@ -11,7 +11,7 @@ const spanishPhrases = {
   "Enter valid latitude and longitude.": "Ingresa coordenadas válidas.",
   "Awaiting new data": "Esperando nuevos datos",
   "Settings changed. Request NASA data or load the archived NASA sample.": "La configuración cambió. Consulta NASA o carga la muestra archivada.",
-  "Yearly values from the selected NASA model grid point. The amber line shows the Theil–Sen estimate; it is not a forecast.": "Valores anuales de la celda del modelo NASA. La línea naranja muestra la estimación Theil–Sen; no es un pronóstico.",
+  "Yearly values from the selected NASA POWER data grid. The amber line shows the Theil–Sen estimate; it is not a forecast.": "Valores anuales de la rejilla de datos NASA POWER. La línea naranja muestra la estimación Theil–Sen; no es un pronóstico.",
   "Data origin": "Origen de los datos",
   "NASA source": "Fuente NASA",
   "POWER API version": "Versión de POWER API",
@@ -202,7 +202,7 @@ function renderChart(points, analysis, variable) {
   });
   byId("chart-caption").textContent=L(circular?
     "Wind direction is circular: 359° is adjacent to 1°. The markers display circular annual summaries; no linear trend is drawn.":
-    "Yearly values from the selected NASA model grid point. The amber line shows the Theil–Sen estimate; it is not a forecast.");
+    "Yearly values from the selected NASA POWER data grid. The amber line shows the Theil–Sen estimate; it is not a forecast.");
   byId("chart-legend").hidden=circular;
 }
 function display(n, value) {byId(n).textContent=L(value);}
