@@ -3,6 +3,8 @@ import {buildEvidence, compareEvidence, answerEvidence} from "./evidence.js";
 import {pairedAnnualDifferences} from "./inference.js";
 import {buildScientificReport} from "./report.js";
 import {parseIMERG,comparePrecipitation} from "./gpm.js";
+import {summarizeMonthly} from "./seasonality.js";
+import {printableScientificReport} from "./scientific-print.js";
 
 const uiLanguage = document.documentElement.lang.toLowerCase().startsWith("es") ? "es" : "en";
 const locale = uiLanguage === "es" ? "es-CR" : "en-US";
@@ -141,6 +143,7 @@ function resetWhenChanged() {
   requestGeneration++;
   updateVariableGuide();
   active = null;
+  byId("monthly-panel").hidden=true;
   gpmComparison=null;
   byId("gpm-export").disabled=true;
   byId("gpm-file").value="";
@@ -334,7 +337,36 @@ function acceptData(output, queryUrl=null, paired=null){
     setMessage("Fewer than ten complete annual observations were available. Check the period and data coverage.",true);
     return;
   }
-  active={points:result.points,analysis:result,variable,meta:output.meta,queryUrl};
+  active={points:result.points,analysis:result,variable,meta:output.meta,queryUrl,monthly:output.monthly||null};
+  const monthPanel=byId("monthly-panel");
+  monthPanel.hidden=true;
+  if(!circular && active.monthly?.length){
+    const summary=summarizeMonthly(active.monthly,{
+      aggregation:def.aggregation,unit:def.aggregation==="sum_rate"?"mm/month":def.unit
+    });
+    if(summary.status==="descriptive"){
+      const fmtMonth=x=>Number(x).toLocaleString(locale,{maximumFractionDigits:2});
+      byId("monthly-description").textContent=(uiLanguage==="es"?"Referencia interna ":"Internal reference ")+
+        summary.referenceYears.join("–")+(uiLanguage==="es"?" frente a ":" versus ")+
+        summary.recentYears.join("–")+". "+
+        (uiLanguage==="es"?"Diferencias descriptivas, no pruebas de significancia. ":"Descriptive differences, not significance tests. ")+
+        (uiLanguage==="es"?"Unidad: ":"Unit: ")+summary.unit;
+      const rows=byId("monthly-rows");rows.replaceChildren();
+      for(const record of summary.monthly){
+        const tr=document.createElement("tr");
+        for(const val of [record.month,fmtMonth(record.reference),fmtMonth(record.recent),
+                          fmtMonth(record.delta),fmtMonth(record.latestAnomaly)]){
+          const td=document.createElement("td");td.textContent=String(val);tr.append(td);
+        }
+        rows.append(tr);
+      }
+      const quarterText=summary.quarters.map(q=>"Q"+q.quarter+": "+(q.delta>=0?"+":"")+fmtMonth(q.delta)).join(" · ");
+      byId("quarter-description").textContent=(uiLanguage==="es"?
+        "Diferencia reciente − referencia por trimestre calendario: ":
+        "Recent − reference difference by calendar quarter: ")+quarterText;
+      monthPanel.hidden=false;
+    }
+  }
   gpmComparison=null;
   byId("gpm-export").disabled=true;
   byId("gpm-file").value="";
@@ -529,6 +561,26 @@ byId("download-report")?.addEventListener("click",()=>{
     active.analysis.start+"-"+active.analysis.end+".json";
   document.body.append(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(url),2000);
+});
+byId("print-report")?.addEventListener("click",()=>{
+  if(!active)return;
+  const doc=buildScientificReport(active,{
+    unit:VARIABLES[active.variable].unit,
+    placeLabel:fields.place.selectedOptions[0]?.textContent,
+    inputCoordinates:[Number(fields.lat.value),Number(fields.lon.value)]
+  });
+  const page=window.open("","_blank");
+  if(!page){
+    setMessage(uiLanguage==="es"?
+      "El navegador bloqueó la pestaña del informe; permite ventanas emergentes para imprimir.":
+      "The report tab was blocked; allow pop-ups to print.",true);
+    return;
+  }
+  page.opener=null;
+  page.document.open();
+  page.document.write(printableScientificReport(doc,{language:uiLanguage}));
+  page.document.close();
+  page.focus();
 });
 byId("download-csv").addEventListener("click",()=>{
   if(!active)return;
