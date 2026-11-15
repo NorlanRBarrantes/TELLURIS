@@ -7,7 +7,7 @@ const cautious={
  en:"The original Mann–Kendall p-value is provisional: serial independence and product homogeneity have not been validated. It alone does not establish statistical significance or causation."
 };
 export function buildEvidence(analysis,variable,location,source,lang="es"){
- if(analysis?.status!=="exploratory")return null;
+ if(!analysis || !["exploratory","descriptive"].includes(analysis.status))return null;
  const info=VARIABLES[variable];
  if(!info)return null;
  if(analysis.status==="descriptive"){
