@@ -1,0 +1,223 @@
+El hallazgo experimental de Project Uriel sobre la coordenada original de Limón (9.99, -83.03) demuestra el valor de la auditoría a nivel de bits: mientras que para NASA POWER (MERRA-2) esa coordenada funciona porque cae dentro de una macro-celda continental-costera de $0.5^\circ \times 0.625^\circ$ ($\sim 55 \times 68\text{ km}$), en la grilla sinusoidal de $250\text{ m}$ de MOD13Q1.061, el punto 9.99° N, -83.03° W cae exactamente sobre el rompeolas y zona intermareal del puerto de Limón / Isla Uvita.Por eso los bits 11–13 de 250m 16 days VI Quality (Land/Water Mask) devuelven sistemáticamente 2 (010 = Shoreline / Costa) y 0 (000 = Shallow Ocean), y cero registros como 1 (001 = Land). Mezclar agua marina o espuma de oleaje dentro de un píxel de $250\text{ m}$ colapsa la reflectancia del Infrarrojo Cercano (NIR) y corrompe cualquier serie temporal de NDVI/EVI.A continuación se presenta el protocolo científico verificable para reubicar la estación de muestreo de vegetación en el Caribe costarricense sin incurrir en sesgo de selección (cherry-picking), garantizando que siga dentro de la misma celda climática de NASA POWER y del régimen del Chorro de Bajo Nivel del Caribe (CLLJ).1. Diagnóstico Físico y Geodésico del Fallo en (9.99, -83.03)1.1 Decodificación Oficial de Bits 11–13 (Land/Water Mask) en MOD13Q1.061De acuerdo con el MODIS Vegetation Index User's Guide Collection 6.1 (Didan et al., 2021, LP DAAC), los bits 11, 12 y 13 del campo 250m 16 days VI Quality ((vi_quality >> 11) & 0b111) provienen del producto MODIS Land/Water Mask (MOD44W C6, $250\text{ m}$) y codifican 8 estados:Valor Decimal ((qa >> 11) & 7)Binario (Bits 13..11)Clasificación Oficial NASA (MOD13Q1.061)Aptitud para Series Temporales de NDVI/EVI0000Shallow ocean (Océano poco profundo, $< 5\text{ km}$ de la costa o $< 50\text{ m}$ de prof.)INVÁLIDO. Dominado por absorción de agua en el NIR.1001Land (Nothing else but land) (Tierra firme 100% inequívoca)ÚNICO VALOR ACEPTABLE para tendencias de vegetación terrestre.2010Ocean coastlines and lake shorelines (Línea de costa o ribera)INVÁLIDO. Píxel mixto tierra-agua sujeto a mareas y oleaje.3011Shallow inland water (Agua continental somera / estuarios / lagunas)INVÁLIDO. Común en canales de Tortuguero y Moín.4100Ephemeral water (Agua efímera / llanura de inundación estacional)INVÁLIDO. Sesga el NDVI según el nivel de inundación.5101Deep inland water (Ríos anchos / lagos profundos)INVÁLIDO.6110Moderate or continental ocean (Océano moderado/continental)INVÁLIDO.7111Deep ocean (Océano profundo)INVÁLIDO.1.2 Restricción de Coherencia con NASA POWER (MERRA-2)Para no romper la comparabilidad con las series de temperatura (T2M) y precipitación (PRECTOTCORR) del Experimento #001 y #002, el nuevo punto de vegetación de MOD13Q1 debe caer dentro de la misma celda nativa de MERRA-2 ($0.5^\circ \times 0.625^\circ$) o en la llanura/piedemonte inmediato de la provincia de Limón:La celda MERRA-2 centrada en 10.00° N, -83.125° W abarca desde 9.75° N hasta 10.25° N en latitud y desde -83.4375° W hasta -82.8125° W en longitud.Por tanto, cualquier ubicación interior situada entre 9.75° N y 10.20° N y entre -83.40° W y -83.06° W comparte exactamente el mismo registro atmosférico de NASA POWER que (9.99, -83.03), pero se sitúa sobre tierra firme continental (Land/Water QA == 1).2. Propuesta de Ubicaciones Interiores Verificables (Cero Sesgo de Tendencia)Regla contra el sesgo de selección (Anti-Cherry-Picking Rule): Las ubicaciones candidatas se seleccionan exclusivamente a partir de límites de áreas silvestres protegidas oficiales de Costa Rica (SINAC), elevación topográfica (NASA SRTM NASADEM) y clasificación de cobertura terrestre (NASA MODIS MCD12Q1.061 IGBP), antes e independientemente de calcular cualquier pendiente o valor $p$ de NDVI/EVI.Se proponen 3 ubicaciones interiores verificables dentro del régimen climático de Limón (ordenadas de mayor a menor integridad ecológica):ID CandidatoUbicación Geográfica y Ecológica (Provincia de Limón)Coordenadas (lat, lon)Distancia a la CostaElevación aprox. (SRTM)Cobertura Esperada en MCD12Q1.061 (LC_Type1 IGBP)Ventaja Científica PrincipalCandidato 1 (Recomendado Primario)Reserva Biológica Hitoy Cerere (Valle de La Estrella / Piedemonte Caribe, Limón)9.6710, -83.0240 (o sector norte dentro de la celda 10.00N: 9.8850, -83.1350, Fila Matama / Cuenca del Río Banano)$\sim 13\text{ km}$ tierra adentro$150\text{–}350\text{ m}$Clase 2: Evergreen Broadleaf Forests (Bosque Latifoliado Siempreverde)Bosque húmedo tropical primario/maduro protegido de la tala agrícola y de la urbanización portuaria; mide la respuesta pura del ecosistema al clima.Candidato 2 (Misma Celda Exacta MERRA-2)Cuenca Media del Río Banano / Faldas de Fila Matama (Agua potable de Limón)9.8850, -83.1350$\sim 12\text{ km}$ al suroeste del puerto de Limón$\sim 180\text{ m}$Clase 2: Evergreen Broadleaf ForestsCae exactamente dentro de la misma celda MERRA-2 (10.00° N, -83.125° W) que el punto original (9.99, -83.03), manteniendo el 100% de compatibilidad con el JSON de NASA POWER ya descargado.Candidato 3 (Llanura Aluvial Caribeña)Llanura Interior de Limón / Sector Beverley–Matina (Interior no inundable)9.9650, -83.1150$\sim 9\text{ km}$ al oeste del rompeolas de Limón$\sim 35\text{ m}$Clases 2 / 8 / 12 (Mosaico forestal/agroforestal de llanura)Representa la llanura baja a la misma latitud exacta que Limón centro, fuera de la máscara costera de MOD44W. (Advertencia: mayor influencia de manejo agrícola bananero/cacaotero).Nota de simetría metodológica para el Pacífico (Liberia): Si la coordenada original de Liberia (10.63, -85.44) cae sobre el casco urbano asfaltado de la ciudad de Liberia o pastizales intervenidos (Clases IGBP 13 Urban o 10/12), para una comparación ecológica simétrica pueden documentar si representa sabana/agroecosistema o contrastarla con el bosque tropical seco protegido del Parque Nacional Santa Rosa (10.8350, -85.6150) o Parque Nacional Rincón de la Vieja (10.7650, -85.3450).3. Evaluación Metodológica: ¿Muestra Puntual ($1 \times 1$) o Ventana Multi-Píxel ($3 \times 3$ / $5 \times 5$)?3.1 Por qué una ventana multi-píxel ($3 \times 3$ de $750\text{ m} \times 750\text{ m}$) es científicamente muy superior a un único píxel ($1 \times 1$ de $250\text{ m}$)Consultar kmAboveBelow=0&kmLeftRight=0 ($1 \times 1\text{ píxel}$) en MOD13Q1 tiene tres vulnerabilidades conocidas en la literatura de validación de MODIS (Tan et al., 2006; Wolfe et al., 2002):Incertidumbre de geolocalización y Point Spread Function (PSF) triangular de MODIS: La incertidumbre de geolocalización de MODIS Terra ($1\sigma \approx 50\text{ m}$) y el efecto de barrido fuera del nadir (bow-tie) hacen que el valor asignado a un píxel individual de $250\text{ m}$ provenga en realidad de una huella elíptica que se solapa con los píxeles vecinos.Perturbaciones estocásticas micro-locales: La caída de un solo árbol emergente por viento, un derrumbe puntual en la montaña o una pequeña finca de $3\text{ ha}$ altera un píxel de $250\text{ m}$, pero no representa una tendencia climática regional.Pérdida severa de muestras por nubes aisladas (Trade-wind cumuli): En el Caribe de Costa Rica, pequeños cúmulos de los vientos alisios tapan el píxel central (4, 4) en una fecha dada, dejando despejados los píxeles contiguos a $250\text{ m}$ de distancia. Con una muestra puntual ($1 \times 1$), esa fecha se pierde como NaN; con una ventana de $3 \times 3\text{ píxeles}$ ($9\text{ píxeles} = 0.75\text{ km} \times 0.75\text{ km}$), se calcula la mediana espacial de los píxeles libres de nubes, recuperando compuestos válidos y reduciendo la varianza de ruido radiométrico en un factor de $\sim \frac{1}{\sqrt{m}}$.3.2 Cómo Configurar la Extracción Multi-Píxel en la API REST de ORNL DAAC (TESViS)El endpoint /subset de ORNL DAAC soporta nativamente ventanas espaciales alrededor de la coordenada central sin requerir más llamadas HTTP:Para una ventana de $1 \times 1\text{ píxel}$ ($250\text{ m} \times 250\text{ m}$): kmAboveBelow=0&kmLeftRight=0 (devuelve un vector de 1 elemento por fecha).Para una ventana de $5 \times 5\text{ píxeles}$ ($1.25\text{ km} \times 1.25\text{ km}$): kmAboveBelow=0.5&kmLeftRight=0.5 (o kmAboveBelow=1&kmLeftRight=1 para $9 \times 9\text{ píxeles}$, de la cual se recorta la sub-matriz central de $3 \times 3\text{ píxeles}$ índices [3:6, 3:6]).4. Procedimiento Reproducible de Verificación y Criterios de Aceptación EspacialAntes de calcular un solo valor de tendencia temporal (Mann-Kendall o Theil-Sen), cualquier coordenada o ventana $3 \times 3$ debe superar 4 Criterios de Aceptación Espacial y de Cobertura (Pre-Screening Protocol) usando productos oficiales de NASA en la API REST de ORNL DAAC ([https://modis.ornl.gov/rst/api/v1/](https://modis.ornl.gov/rst/api/v1/)):4.1 Los 4 Criterios Cuantitativos de Aceptación (Sin mirar la tendencia)#Prueba de VerificaciónProducto y Banda Oficial NASACriterio Estricto de AceptaciónMotivo de Rechazo1Pureza de Tierra Firme (Land/Water Mask)MOD13Q1 $\rightarrow$ 250m_16_days_VI_Quality (Bits 11–13: (qa >> 11) & 0b111)$\ge 95\%$ de los compuestos históricos en el píxel (o en $\ge 7$ de los 9 píxeles del $3 \times 3$) deben tener land_water_mask == 1 (Land), y $0\%$ pueden ser 0 (océano) o 2 (costa).Rechaza automáticamente (9.99, -83.03) y cualquier punto sobre esteros, ríos anchos o playas.2Cobertura Vegetal Natural y Estable (MCD12Q1.061)MCD12Q1 (MODIS Land Cover Type Yearly L3 Global $500\text{ m}$ SIN Grid V061) $\rightarrow$ Banda LC_Type1 (Clasificación IGBP)Los píxeles deben pertenecer a clases de vegetación natural (IGBP 1..5 Bosques, 6..9 Sabanas/Arbustales o 10 Pastizales) y NO a 13 (Urban and Built-up), 15 (Snow/Ice), 16 (Barren) ni 17 (Water Bodies). Además, no debe haber transición a clase 13 (urbanización) entre 2001 y 2024.Evita medir la construcción de una carretera, barrio o muelle creyendo que es una sequía climática.3Coherencia de Celda Atmosférica MERRA-2Distancia geodésica / Límites de grilla de NASA POWER ($0.5^\circ \times 0.625^\circ$)El punto debe caer dentro de la celda MERRA-2 de referencia (lat $\in [9.75^\circ, 10.25^\circ]$, lon $\in [-83.4375^\circ, -82.8125^\circ]$) y con diferencia de elevación $< 300\text{ m}$ respecto a la llanura/piedemonte representativo.Garantiza que el forzante climático (T2M, PRECTOTCORR) corresponda físicamente a esa vegetación.4Suficiencia de Observaciones Libres de NubesMOD13Q1 $\rightarrow$ 250m_16_days_pixel_reliability + 250m_16_days_VI_QualityTras aplicar la máscara estricta de bits, la ventana debe retener al menos $N \ge 20\text{ años}$ válidos (con $\ge 8$ compuestos limpios/año para anomalías por ciclo) en el período 2000–2025.Evita cumbres de bosque nuboso permanentemente cubiertas al 100% por estratocúmulos orográficos.5. Script Python Reproducible de Auditoría y Selección Espacial (analysis/verify_caribbean_site.py)Este script consulta directamente los endpoints oficiales de ORNL DAAC (MOD13Q1 y MCD12Q1) para auditar a ciegas (sin calcular pendientes de NDVI/EVI) el punto costero fallido (9.99, -83.03) frente a los candidatos interiores propuestos, verificando tanto el píxel central ($1 \times 1$) como la ventana espacial ($3 \times 3$):Python#!/usr/bin/env python3
+"""
+TELLURIS — Protocolo de Selección y Auditoría Espacial Ciega (Sin Sesgo de Tendencia)
+Verifica candidatos en la vertiente Caribe de Costa Rica usando:
+1. MOD13Q1.061 -> '250m_16_days_VI_Quality' (Bits 11-13: Land/Water Mask)
+2. MCD12Q1.061 -> 'LC_Type1' (Cobertura terrestre anual IGBP 500m)
+3. Comparación de suficiencia muestral entre Píxel Único (1x1) y Ventana 3x3 (750m x 750m).
+
+IMPORTANTE: Este script NO calcula pendientes ni valores p de NDVI/EVI durante la
+selección del sitio para impedir el sesgo de selección (cherry-picking).
+"""
+
+import argparse
+import json
+from pathlib import Path
+from typing import Dict, Any, List
+
+import numpy as np
+import requests
+
+ORNL_BASE_URL = "https://modis.ornl.gov/rst/api/v1"
+
+# Clases IGBP oficiales en MCD12Q1.061 (LC_Type1)
+IGBP_CLASSES = {
+    1: "Evergreen Needleleaf Forests",
+    2: "Evergreen Broadleaf Forests",
+    3: "Deciduous Needleleaf Forests",
+    4: "Deciduous Broadleaf Forests",
+    5: "Mixed Forests",
+    6: "Closed Shrublands",
+    7: "Open Shrublands",
+    8: "Woody Savannas",
+    9: "Savannas",
+    10: "Grasslands",
+    11: "Permanent Wetlands",
+    12: "Croplands",
+    13: "Urban and Built-up Lands",
+    14: "Cropland/Natural Vegetation Mosaics",
+    15: "Permanent Snow and Ice",
+    16: "Barren",
+    17: "Water Bodies",
+}
+
+LAND_WATER_CODES = {
+    0: "Shallow ocean",
+    1: "Land (Unequivocal)",
+    2: "Shoreline / Coastline",
+    3: "Shallow inland water",
+    4: "Ephemeral water",
+    5: "Deep inland water",
+    6: "Moderate/continental ocean",
+    7: "Deep ocean",
+}
+
+CANDIDATE_SITES = {
+    "Limon_Original_Coastal_Port": {"lat": 9.9900, "lon": -83.0300, "role": "Baseline (Failed QA)"},
+    "Limon_Inland_RioBanano_Foothills": {"lat": 9.8850, "lon": -83.1350, "role": "Candidate A (Same MERRA-2 Cell, Forest)"},
+    "Limon_Inland_HitoyCerere_Reserve": {"lat": 9.6710, "lon": -83.0240, "role": "Candidate B (Protected Primary Rainforest)"},
+    "Limon_Inland_Beverley_Plain": {"lat": 9.9650, "lon": -83.1150, "role": "Candidate C (Same MERRA-2 Cell, Alluvial Plain)"},
+}
+
+
+def decode_mod13_vi_quality(qa_val: int) -> Dict[str, int]:
+    """Extrae los campos de bits oficiales de '250m_16_days_VI_Quality' (uint16)."""
+    qa = int(qa_val) & 0xFFFF
+    return {
+        "modland_qa": qa & 0b11,                 # Bits 0-1
+        "vi_usefulness": (qa >> 2) & 0b1111,     # Bits 2-5
+        "aerosol_quantity": (qa >> 6) & 0b11,    # Bits 6-7
+        "adjacent_cloud": (qa >> 8) & 0b1,       # Bit 8
+        "brdf_coupled": (qa >> 9) & 0b1,         # Bit 9
+        "mixed_clouds": (qa >> 10) & 0b1,        # Bit 10
+        "land_water_mask": (qa >> 11) & 0b111,   # Bits 11-13 (1 == Land)
+        "possible_snow_ice": (qa >> 14) & 0b1,   # Bit 14
+        "possible_shadow": (qa >> 15) & 0b1,     # Bit 15
+    }
+
+
+def is_clean_land_observation(qa_val: int) -> bool:
+    """
+    Criterio estricto para un píxel válido en tierra firme:
+    - Bits 11-13 (land_water_mask) == 1 (Tierra firme inequívoca)
+    - Bits 0-1 (modland_qa) in (0, 1)
+    - Sin aerosoles altos (Bits 6-7 != 3), sin nube adyacente, sin nubes mixtas ni sombra.
+    """
+    b = decode_mod13_vi_quality(qa_val)
+    return (
+        b["land_water_mask"] == 1
+        and b["modland_qa"] in (0, 1)
+        and b["aerosol_quantity"] != 3
+        and b["adjacent_cloud"] == 0
+        and b["mixed_clouds"] == 0
+        and b["possible_snow_ice"] == 0
+        and b["possible_shadow"] == 0
+    )
+
+
+def check_merra2_cell_match(lat: float, lon: float, ref_lat: float = 10.0, ref_lon: float = -83.125) -> bool:
+    """Verifica si la coordenada cae exactamente en la misma celda MERRA-2 (0.5° x 0.625°) que Limón."""
+    return (abs(lat - ref_lat) <= 0.25) and (abs(lon - ref_lon) <= 0.3125)
+
+
+def fetch_ornl_subset(
+    product: str, band: str, lat: float, lon: float, start_date: str, end_date: str, km_radius: float = 0.0
+) -> Dict[str, Any]:
+    """Consulta el endpoint síncrono /subset de ORNL DAAC TESViS API v1."""
+    url = (
+        f"{ORNL_BASE_URL}/{product}/subset"
+        f"?latitude={lat}&longitude={lon}&band={band}"
+        f"&startDate={start_date}&endDate={end_date}"
+        f"&kmAboveBelow={km_radius}&kmLeftRight={km_radius}"
+    )
+    headers = {"Accept": "application/json"}
+    resp = requests.get(url, headers=headers, timeout=30)
+    resp.raise_for_status()
+    return resp.json()
+
+
+def audit_site_spatial_qa(lat: float, lon: float, sample_start: str = "A2023001", sample_end: str = "A2023145") -> Dict[str, Any]:
+    """
+    Audita una ubicación consultando una ventana de 1x1 km (que contiene la matriz central 3x3 de 250m)
+    en MOD13Q1 ('250m_16_days_VI_Quality') y la cobertura terrestre en MCD12Q1 ('LC_Type1').
+    """
+    # 1. Consultar VI_Quality en ventana con km_radius=1.0 para extraer píxel central y vecindad 3x3
+    qa_payload = fetch_ornl_subset(
+        "MOD13Q1", "250m_16_days_VI_Quality", lat, lon, sample_start, sample_end, km_radius=1.0
+    )
+    nrows = int(qa_payload.get("nrows", 1))
+    ncols = int(qa_payload.get("ncols", 1))
+    center_idx = (nrows // 2) * ncols + (ncols // 2)
+
+    center_lw_counts: Dict[str, int] = {}
+    single_pixel_valid_dates = 0
+    window_3x3_valid_dates = 0
+    total_dates = len(qa_payload.get("subset", []))
+
+    for step in qa_payload.get("subset", []):
+        data_flat: List[int] = step["data"]
+        arr_2d = np.array(data_flat, dtype=np.int64).reshape((nrows, ncols))
+
+        # Píxel central (1x1)
+        r_c, c_c = nrows // 2, ncols // 2
+        center_qa = int(arr_2d[r_c, c_c])
+        lw_code = decode_mod13_vi_quality(center_qa)["land_water_mask"]
+        lw_label = f"{lw_code} ({LAND_WATER_CODES.get(lw_code, 'Unknown')})"
+        center_lw_counts[lw_label] = center_lw_counts.get(lw_label, 0) + 1
+
+        if is_clean_land_observation(center_qa):
+            single_pixel_valid_dates += 1
+
+        # Sub-ventana 3x3 alrededor del centro
+        r0, r1 = max(0, r_c - 1), min(nrows, r_c + 2)
+        c0, c1 = max(0, c_c - 1), min(ncols, c_c + 2)
+        sub_3x3 = arr_2d[r0:r1, c0:c1].flatten()
+        clean_count_3x3 = sum(1 for val in sub_3x3 if is_clean_land_observation(int(val)))
+        # Se acepta la fecha en la ventana 3x3 si al menos 3 de los 9 píxeles son tierra limpia
+        if clean_count_3x3 >= 3:
+            window_3x3_valid_dates += 1
+
+    # 2. Consultar cobertura terrestre MCD12Q1 (LC_Type1 IGBP)
+    lc_payload = fetch_ornl_subset("MCD12Q1", "LC_Type1", lat, lon, "A2022001", "A2023001", km_radius=0.0)
+    lc_classes = []
+    for step in lc_payload.get("subset", []):
+        code = int(step["data"][0])
+        lc_classes.append(f"{code}: {IGBP_CLASSES.get(code, 'Unknown')}")
+
+    passes_land_mask = all(k.startswith("1 ") for k in center_lw_counts.keys()) and len(center_lw_counts) > 0
+
+    return {
+        "coordinates": {"lat": lat, "lon": lon},
+        "same_merra2_cell_as_limon_port": check_merra2_cell_match(lat, lon),
+        "mod13q1_center_pixel_land_water_distribution": center_lw_counts,
+        "mcd12q1_igbp_land_cover": lc_classes,
+        "sample_composites_evaluated": total_dates,
+        "valid_clean_dates_single_pixel_1x1": single_pixel_valid_dates,
+        "valid_clean_dates_window_3x3": window_3x3_valid_dates,
+        "passes_unequivocal_land_criterion": passes_land_mask,
+    }
+
+
+# =============================================================================
+# PRUEBAS UNITARIAS DE AUDITORÍA (Ejecutar con: pytest verify_caribbean_site.py)
+# =============================================================================
+
+def test_land_water_bit_extraction_matches_limon_finding():
+    """
+    Verifica que los bits 11-13 de VI_Quality identifiquen correctamente:
+    - land_water_mask == 2 (Shoreline/Coastline) y 0 (Shallow ocean) como INVÁLIDOS.
+    - land_water_mask == 1 (Land) limpio como VÁLIDO.
+    """
+    # Caso 1: Shoreline ( código 2 en bits 11-13 -> 2 << 11 = 4096 )
+    qa_shoreline = (2 << 11) | 0b00
+    assert decode_mod13_vi_quality(qa_shoreline)["land_water_mask"] == 2
+    assert is_clean_land_observation(qa_shoreline) is False
+
+    # Caso 2: Shallow Ocean ( código 0 en bits 11-13 )
+    qa_ocean = (0 << 11) | 0b00
+    assert decode_mod13_vi_quality(qa_ocean)["land_water_mask"] == 0
+    assert is_clean_land_observation(qa_ocean) is False
+
+    # Caso 3: Tierra inequívoca ( código 1 en bits 11-13 -> 1 << 11 = 2048 ), aerosol bajo (1 << 6)
+    qa_clean_land = (1 << 11) | (1 << 6) | 0b00
+    assert decode_mod13_vi_quality(qa_clean_land)["land_water_mask"] == 1
+    assert is_clean_land_observation(qa_clean_land) is True
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Auditoría Espacial Ciega de Sitios MODIS en Limón")
+    parser.add_argument("--audit", action="store_true", help="Ejecutar auditoría contra ORNL DAAC API")
+    parser.add_argument("--out", type=str, default="./audit_caribbean_sites.json", help="Archivo JSON de salida")
+    args = parser.parse_args()
+
+    if args.audit:
+        results = {}
+        for site_id, info in CANDIDATE_SITES.items():
+            print(f"Auditando {site_id} ({info['lat']}, {info['lon']})...")
+            results[site_id] = {
+                "role": info["role"],
+                **audit_site_spatial_qa(info["lat"], info["lon"]),
+            }
+        Path(args.out).write_text(json.dumps(results, indent=2), encoding="utf-8")
+        print(f"Reporte guardado en {args.out}")
+6. Síntesis de Decisión Recomendada para Project UrielDocumentar el hallazgo de (9.99, -83.03) como un caso de éxito de su motor de QA/QC: No borren este hallazgo de la historia del proyecto. Mostrar ante el jurado en San José que su decodificador de bits VI_Quality detectó que (9.99, -83.03) tenía 67 compuestos costeros (QA=2) y 2 oceánicos (QA=0), impidiendo así que una señal marina contaminara la tendencia de vegetación de Limón, es una demostración sobresaliente de Viabilidad Científica (20%).   Adoptar la coordenada interior de la Cuenca del Río Banano / Piedemonte de Fila Matama (9.8850, -83.1350) (o Reserva Biológica Hitoy Cerere 9.6710, -83.0240) tras correr verify_caribbean_site.py --audit:9.8850, -83.1350 está a solo $\sim 12\text{ km}$ tierra adentro del puerto de Limón, cae exactamente dentro de la misma celda de $0.5^\circ \times 0.625^\circ$ de NASA POWER (10.00° N, -83.125° W) y corresponde a cobertura de bosque tropical húmedo siempreverde sobre tierra firme inequívoca (Land/Water Mask == 1).Si el tiempo de consultas a ORNL DAAC lo permite, usar la mediana espacial de una ventana de $3 \times 3\text{ píxeles}$ ($750\text{ m} \times 750\text{ m}$) filtrando previamente todo píxel con land_water_mask != 1; si mantienen la extracción de 1 solo píxel (kmAboveBelow=0&kmLeftRight=0) por velocidad de descarga, exigir como invariante en el código que el $100\%$ de los compuestos aceptados cumplan ((vi_quality >> 11) & 0b111) == 1.7. Referencias Oficiales y Enlaces VerificablesDidan, K., Munoz, A. B., Solano, R., & Huete, A. (2021): MODIS Vegetation Index User's Guide (MOD13 Series) Collection 6.1. NASA EOSDIS Land Processes DAAC (LP DAAC). Tabla de bits de VI_Quality (Bits 11–13 Land/Water Mask). Disponible en: [https://lpdaac.usgs.gov/documents/621/MOD13_User_Guide_V61.pdf](https://lpdaac.usgs.gov/documents/621/MOD13_User_Guide_V61.pdf)Carroll, M. L., DiMiceli, C. M., Townshend, J. R. G., Sohlberg, R. A., Elders, A. I., Devadiga, S., Sulla-Menashe, D., & Friedl, M. A. (2017): MODIS/Terra+Aqua Land Water Mask Derived from MODIS and SRTM L3 Global 250m SIN Grid V006 (MOD44W.006). NASA EOSDIS LP DAAC. [https://doi.org/10.5067/MODIS/MOD44W.006](https://doi.org/10.5067/MODIS/MOD44W.006)Friedl, M., & Sulla-Menashe, D. (2022): MODIS/Terra+Aqua Land Cover Type Yearly L3 Global 500m SIN Grid V061 (MCD12Q1.061). NASA EOSDIS LP DAAC. [https://doi.org/10.5067/MODIS/MCD12Q1.061](https://doi.org/10.5067/MODIS/MCD12Q1.061) y guía de usuario en: [https://lpdaac.usgs.gov/documents/1409/MCD12_User_Guide_V61.pdf](https://lpdaac.usgs.gov/documents/1409/MCD12_User_Guide_V61.pdf)Tan, B., Woodcock, C. E., Hu, J., Zhang, P., Ozdogan, M., Huang, D., Yang, W., Knyazikhin, Y., & Myneni, R. B. (2006): The impact of gridding artifacts on the local spatial properties of MODIS data: Evolution of the MOD13 series. Remote Sensing of Environment, 105(2), 129–144. [https://doi.org/10.1016/j.rse.2006.06.008](https://doi.org/10.1016/j.rse.2006.06.008) (Fundamenta por qué las ventanas multi-píxel de $3 \times 3$ corrigen el artefacto geométrico de grillado de un píxel aislado en MODIS).ORNL DAAC MODIS Global Subsetting API (TESViS) Documentation: NASA Oak Ridge National Laboratory DAAC. [https://modis.ornl.gov/data/modis_webservice.html](https://modis.ornl.gov/data/modis_webservice.html)

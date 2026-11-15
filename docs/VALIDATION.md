@@ -186,3 +186,10 @@ GitHub Actions run [#43739956296](https://github.com/NorlanRBarrantes/TELLURIS/a
 - The QA mask, all-land bit rule, annual thresholds and cycle anomaly are **experimental team-selected policies**, not compulsory NASA scientific guidance. Full methods: [EXP-003B](EXP-003B-MOD13Q1-QA.md).
 
 - **Geographic QA clarified:** [Follow-up original-data reanalysis #43740917213](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43740917213) decoded source land/water bits: Liberia **69 land class 1**; Limón **67 coastline class 2** and **2 shallow-ocean class 0**, zero unambiguous land observations. The strict rejection is therefore a documented **sampling-footprint limitation**, not a statement that Limón has no vegetation. A new mainland reference must be predeclared and verified, without rewriting the original results.
+
+## EXP-003C source-based coastal/inland MODIS site pre-screen — November 15, 2026
+
+- Original team's Gemini spatial-site report preserved in `docs/_working/GEMINI-EXP-003C-ORIGINAL.txt` for provenance. [Protocol](EXP-003C-SPATIAL-PRESCREEN.md) distinguishes unsupported ecological labels, guessed elevation, nominal grid versus NASA POWER actual output and the experiment's QA requirements.
+- New [spatial audit](../analysis/exp003c_spatial_screen.py) pre-registers the three suggested inland locations and the Limón/Liberia controls, extracts source 9×9 with a central 3×3 QA/VI subwindow, preserves original NASA JSON and no environmental trend or p calculation.
+- [Tests](../tests/test_exp003c_spatial_screen.py) exercise grid geometry, nominal geography, source band presence, mixed-coast rejection, shadow/mixed-cloud masks and absence of trend-driven site selection.
+- **Pending source gate until run completes:** actual location QA, remote MCD12Q1 bands availability, forest/landcover year and the provider spatial interpretation must be independently validated before promoting any candidate in the public Explorer.

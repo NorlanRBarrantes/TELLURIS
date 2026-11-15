@@ -79,3 +79,5 @@ Original source code and project documentation are intended to be released under
 ## Experimental 3D / evidence interaction
 
 The Explorer now includes a geography-only WebGL globe, deterministic evidence question responses, and a descriptive Liberia/Limón archive comparison. Browser CDN access is required for pinned Three.js; climate colors are not plotted on the sphere. This is **not** generative AI or validated climate statistical inference. See [feature status and roadmap](docs/FEATURES-3D-EVIDENCE-AI.md). GitHub commits do not automatically publish to BanaHosting.
+
+- [EXP-003C — spatial QA pre-screen of predeclared Caribbean MODIS candidates](docs/EXP-003C-SPATIAL-PRESCREEN.md)

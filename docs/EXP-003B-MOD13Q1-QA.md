@@ -90,3 +90,7 @@ Then fetch enough MODIS calendar years to build a stable cycle climatology (idea
 - NASA [MOD13 Collection 6.1 User Guide](https://lpdaac.usgs.gov/documents/621/MOD13_User_Guide_V61.pdf).
 - NASA [MOD13Q1 filespec / DetailedQA bit definitions](https://ladsweb.modaps.eosdis.nasa.gov/filespec/MODIS/6/MOD13Q1).
 - NASA [MODIS Land QA and orbit drift known issue](https://landweb.modaps.eosdis.nasa.gov/displayissue?id=1254).
+
+## Spatial site-selection follow-up — EXP-003C
+
+The team introduced candidate mainland locations to resolve the observed coastal QA classification. The candidates were **predeclared and fixed before any vegetation trend computation** in [EXP-003C](EXP-003C-SPATIAL-PRESCREEN.md); no original NASA samples were overwritten. A 9×9 ORNL query and center-3×3 screening test was created with QA and evidence retention. No site is considered verified inland evergreen forest based only on the Gemini description.

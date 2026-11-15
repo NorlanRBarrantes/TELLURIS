@@ -246,3 +246,13 @@ Approved: implement a 3D geographic navigation layer, deterministic source-groun
 ### ADR-026 geographic follow-up (same date)
 
 A second real-source run confirmed that the selected Limón point is classified 67 times as MOD13Q1 QA shoreline (code 2) and twice as shallow ocean (code 0), while Liberia is land (code 1) across all 69 composites. Do not relax QA to force a vegetation trend at the shoreline point. Evaluate an inland land pixel under a separate source-provenance record instead. Evidence: [#43740917213](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43740917213).
+
+## ADR-027 — Pre-register an independent MODIS spatial-site suitability screen
+
+- **Date:** 2026-11-15 (Costa Rica)
+- **Status:** ACCEPTED as evidence-first **experimental** spatial audit; exact inland site selection and public activation **not yet approved**.
+- **Source:** team-forwarded Gemini coordinates, source report preserved in [original research](./_working/GEMINI-EXP-003C-ORIGINAL.txt), independently critiqued in [EXP-003C](EXP-003C-SPATIAL-PRESCREEN.md).
+- **Plan:** Use ORNL MOD13Q1 original `VI_Quality` + `pixel_reliability` plus NDVI/EVI; request full central-grid window, compare source 1×1 versus central 3×3 without computing any slopes. Store raw SHA-256 and separate a MODIS 16-day site validity check from verified land cover and native-grid consistency.
+- **Crucial caveats:** Gemini's Hitoy candidate (9.671, -83.024) is **outside** the nominal MERRA cell latitude range asserted in the same report. A nominal grid box does not prove identical POWER API outputs. Names, landcover, altitudes, and protected boundaries are research claims until verified.
+- **No cherry-picking:** Original coastal pixel stays archived; candidate points are fixed before any scientific time trend results. No A/B winner based on effect size or statistical significance.
+- **Code and test evidence:** [spatial pre-screen](../analysis/exp003c_spatial_screen.py), [test suite](../tests/test_exp003c_spatial_screen.py), [NASA API workflow](../.github/workflows/exp003c-spatial-screen.yml). Status of live run must be verified before describing source findings.
