@@ -1,0 +1,47 @@
+name: EXP-003 ORNL MODIS API capability probe
+
+on:
+  push:
+    paths:
+      - .github/workflows/exp003-modis-probe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-real-ornl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Get ORNL MODIS bands, dates and one original subset
+        run: |
+          python - <<'PY'
+          import json, time, urllib.parse, urllib.request
+          base='https://modis.ornl.gov/rst/api/v1/MOD13Q1'
+          def fetch(path,query=None):
+            url=base+path
+            if query: url+='?'+urllib.parse.urlencode(query)
+            request=urllib.request.Request(url,headers={'Accept':'application/json','User-Agent':'TELLURIS-EXP003-Research/1.0'})
+            with urllib.request.urlopen(request,timeout=35) as resp:
+              status=resp.status
+              obj=json.load(resp)
+            print('REQUEST',path,'HTTP',status,'JSON type',type(obj).__name__)
+            return obj
+          bands=fetch('/bands')
+          print('BANDS',json.dumps(bands,ensure_ascii=False)[:6500])
+          for site,lat,lon in [('liberia',10.63,-85.44),('limon',9.99,-83.03)]:
+            dates=fetch('/dates',{'latitude':lat,'longitude':lon})
+            print('DATES',site,'COUNT',len(dates),'FIRST',dates[:2],'LAST',dates[-2:])
+            targets=[v['modis_date'] for v in dates if '2023' in v.get('calendar_date','') or v.get('modis_date','').startswith('A2023')]
+            if not targets: raise RuntimeError('no 2023 composites available for '+site)
+            date=targets[0]
+            subset=fetch('/subset',{'latitude':lat,'longitude':lon,'startDate':date,'endDate':date,'kmAboveBelow':0,'kmLeftRight':0})
+            if not isinstance(subset,dict): raise RuntimeError('Unexpected subset object')
+            print('SUBSET',site,'date',date,'fields',list(subset.keys()),'nrows',subset.get('nrows'),'ncols',subset.get('ncols'),'cellsize',subset.get('cellsize'))
+            x=subset.get('subset',[])
+            print('SUBSET_ENTRIES',len(x),'BANDS',[v.get('band') for v in x])
+            for v in x:
+              if v.get('band','').endswith(('NDVI','EVI','pixel_reliability','VI_Quality')):
+                print('SELECTED',v.get('band'),'VERSION',v.get('version'),'DATE',v.get('modis_date'),'DATA_SAMPLE',v.get('data',[])[:5])
+          PY
