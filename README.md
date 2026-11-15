@@ -86,3 +86,5 @@ The Explorer now includes a geography-only WebGL globe, deterministic evidence q
 - [EXP-003D — verified 2023 NASA land-cover classes at the predeclared Caribbean locations](docs/EXP-003D-IGBP.md)
 
 - [EXP-005 — Statistical significance, Sen confidence intervals and reproducible scientific reports](docs/EXP-005-SIGNIFICANCE.md)
+
+- [EXP-006 — NASA GPM IMERG Final V07 scientific cross-product precipitation comparator](docs/EXP-006-IMERG-CROSS-VALIDATION.md)

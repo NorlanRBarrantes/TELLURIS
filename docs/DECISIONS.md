@@ -282,3 +282,10 @@ A second real-source run confirmed that the selected Limón point is classified 
 - **Decision:** report original Mann–Kendall p **conditionally**, Sen slope 95% iid rank CI, lag-1 diagnostic, fixed-seed 3-year and 5-year *nonoverlapping block-order* permutation sensitivities, and an early/late half-period directional check. Never assert independent scientific validation or causal attribution. When no block test is eligible, mark sensitivity incomplete. Calendar-year-matched spatial differences are an additional exploratory analysis distinct from two independent slopes.
 - **Verification:** six original/source/synthetic SciPy cross-checks plus 66 passing Node site/source tests as of #43755613674. Explicit limitations are disclosed in bilingual web UI and JSON export, not left in source comments alone.
 - **Why:** NASA explicitly requests trend rate and statistical significance; a visually small MK p alone is insufficient under serial correlation and potential MERRA-2 inhomogeneity. See [full protocol](EXP-005-SIGNIFICANCE.md).
+
+## ADR-031 — Correct POWER precipitation interpretation with separately sourced NASA IMERG
+
+- **Date:** 2026-11-15
+- **Status:** Comparator and extractor implemented; NASA GPM originals **not retrieved yet**; public deploy pending.
+- **Decision:** Require GPM Final 3IMERGM V07 0.1° monthly source (mm/hr), 12 complete months per year, identical requested site and full overlapping calendar years before comparing with NASA POWER PRECTOTCORR (mm/day annually accumulated). No fabricated observations, out-of-range pre-2000 expansion, unknown units, or unverified independent significance labels.
+- **Disclosure:** IMERG incorporates gauge calibration; this comparison is across NASA **products**, not independent ground truth. Convert raw NASA HDF5 locally using SHA-256, then explicitly import a provenance-labeled normalized JSON. Full method: [EXP-006](EXP-006-IMERG-CROSS-VALIDATION.md).

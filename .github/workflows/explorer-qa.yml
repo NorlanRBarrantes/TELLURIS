@@ -34,6 +34,7 @@ jobs:
           node --check website/public/assets/catalog.js
           node --check website/public/assets/inference.js
           node --check website/public/assets/report.js
+          node --check website/public/assets/gpm.js
       - name: Run science and archived NASA parity tests
         run: node --test website/tests/*.test.js
       - name: Run local HTTP smoke test
@@ -53,6 +54,9 @@ jobs:
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/explorer.js | grep -q "fromSnapshot"
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/inference.js | grep -q "blockOrderPermutation"
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/report.js | grep -q "buildScientificReport"
+          curl --fail --silent --show-error http://127.0.0.1:8765/assets/gpm.js | grep -q "comparePrecipitation"
+          curl --fail --silent --show-error http://127.0.0.1:8765/telluris/explore/ | grep -q 'id="gpm-comparison"'
+          curl --fail --silent --show-error http://127.0.0.1:8765/en/telluris/explore/ | grep -q 'id="gpm-file"'
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/explore/ | grep -q 'id="inference-panel"'
           curl --fail --silent --show-error http://127.0.0.1:8765/en/telluris/explore/ | grep -q 'id="download-report"'
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/ne_110m_land.geojson | grep -q 'FeatureCollection'
