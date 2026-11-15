@@ -1,6 +1,7 @@
 import {VARIABLES, powerUrl, fromPower, fromSnapshot, analyze} from "./science.js";
 import {buildEvidence, compareEvidence, answerEvidence} from "./evidence.js";
 import {pairedAnnualDifferences} from "./inference.js";
+import {buildScientificReport} from "./report.js";
 
 const uiLanguage = document.documentElement.lang.toLowerCase().startsWith("es") ? "es" : "en";
 const locale = uiLanguage === "es" ? "es-CR" : "en-US";
@@ -331,6 +332,7 @@ function acceptData(output, queryUrl=null, paired=null){
   const pairedDiff=!circular && paired?.status==="exploratory"?
     analyze(pairedAnnualDifferences(result.points,paired.points)):null;
   renderInference(result,variable,pairedDiff);
+  active.pairedDifference=pairedDiff;
   renderTable(result.points,variable);
   renderProvenance(output.meta,variable,result.n);
   byId("source-mode").textContent=L(output.meta.kind);
@@ -438,6 +440,21 @@ byId("file-input").addEventListener("change",async event=>{
     parsed.meta.retrievedUtc="Unknown: locally imported file";
     acceptData(parsed);
   }catch(e){setMessage("Cannot import source file: "+e.message,true);}
+});
+byId("download-report")?.addEventListener("click",()=>{
+  if(!active)return;
+  const doc=buildScientificReport(active,{
+    unit:VARIABLES[active.variable].unit,
+    placeLabel:fields.place.selectedOptions[0]?.textContent,
+    inputCoordinates:[Number(fields.lat.value),Number(fields.lon.value)]
+  });
+  const blob=new Blob([JSON.stringify(doc,null,2)+"\n"],{type:"application/json;charset=utf-8"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;
+  a.download="telluris_EXP005_"+fields.place.value+"_"+active.variable+"_"+
+    active.analysis.start+"-"+active.analysis.end+".json";
+  document.body.append(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
 });
 byId("download-csv").addEventListener("click",()=>{
   if(!active)return;
