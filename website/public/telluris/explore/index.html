@@ -81,7 +81,19 @@
         <svg id="trend-chart" viewBox="0 0 760 350" role="img" aria-label="Datos anuales del modelo NASA y tendencia Sen estimada" preserveAspectRatio="xMidYMid meet"></svg>
         <p class="chart-caption" id="chart-caption">—</p>
       </section>
-      <div class="evidence-grid">
+      <section id="gpm-comparison" class="inference-panel" hidden aria-labelledby="gpm-title">
+  <div class="inference-header"><div><p class="eyebrow mint">EXP-006 / NASA POWER + GPM IMERG FINAL V07</p>
+    <h3 id="gpm-title">Contraste independiente de productos de precipitación</h3></div>
+    <span class="inference-verdict">Fuentes separadas</span>
+  </div>
+  <p class="inference-caution">IMERG necesita archivos NASA originales y acceso Earthdata. Esta sección no contiene valores simulados. Una carga local no autentica el origen de sus archivos.</p>
+  <label for="gpm-file">Importar JSON normalizado de IMERG Final V07 (mm/h, 12 meses completos por año)</label>
+  <input type="file" id="gpm-file" accept="application/json,.json"/>
+  <p id="gpm-output" class="inference-paired" role="status">Selecciona un archivo procedente de granulos NASA IMERG originales.</p>
+  <button type="button" id="gpm-export" class="explore-secondary" disabled>Exportar comparación científica JSON</button>
+  <p class="inference-caution">Solo se comparan años completos y comunes. Las pendientes, el acuerdo y los valores p no prueban causalidad ni homogeneidad de los productos.</p>
+</section>
+<div class="evidence-grid">
         <section class="evidence-card"><p class="eyebrow">03 / TRAZABILIDAD CIENTÍFICA</p><h3>Procedencia de los datos</h3><dl id="provenance"></dl><a id="source-link" href="https://power.larc.nasa.gov/" target="_blank" rel="noopener noreferrer">Ver fuente original ↗</a></section>
         <section class="evidence-card caution-card"><p class="eyebrow">04 / INTERPRETACIÓN</p><h3>Lo que los datos no demuestran</h3><p>La significancia estadística no se ha demostrado para series climáticas con dependencia temporal. El valor p original de Mann–Kendall se muestra para auditoría y no constituye una conclusión validada.</p><p>Las series proceden de productos NASA POWER en rejilla (reanálisis o satélites), no de sensores situados exactamente en las coordenadas. Las tendencias necesitan revisar homogeneidad, autocorrelación y fuentes independientes.</p><p id="autocorr-note">—</p></section>
       </div>

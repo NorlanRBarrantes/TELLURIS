@@ -2,6 +2,7 @@ import {VARIABLES, powerUrl, fromPower, fromSnapshot, analyze} from "./science.j
 import {buildEvidence, compareEvidence, answerEvidence} from "./evidence.js";
 import {pairedAnnualDifferences} from "./inference.js";
 import {buildScientificReport} from "./report.js";
+import {parseIMERG,comparePrecipitation} from "./gpm.js";
 
 const uiLanguage = document.documentElement.lang.toLowerCase().startsWith("es") ? "es" : "en";
 const locale = uiLanguage === "es" ? "es-CR" : "en-US";
@@ -86,6 +87,7 @@ const fields = {place:byId("location"), lat:byId("latitude"),lon:byId("longitude
   variable:byId("variable"), start:byId("from-year"),end:byId("to-year")};
 const known = {liberia:[10.63,-85.44],limon:[9.99,-83.03]};
 let active = null;
+let gpmComparison=null;
 let requestGeneration=0;
 let evidenceContext = null;
 let comparisonContext = "";
@@ -139,6 +141,12 @@ function resetWhenChanged() {
   requestGeneration++;
   updateVariableGuide();
   active = null;
+  gpmComparison=null;
+  byId("gpm-export").disabled=true;
+  byId("gpm-file").value="";
+  byId("gpm-output").textContent=uiLanguage==="es"?
+    "Importa observaciones NASA IMERG Final V07 de origen verificable.":
+    "Import verifiable NASA IMERG Final V07 source observations.";
   evidenceContext = null;
   comparisonContext = "";
   byId("results").hidden = true;
@@ -327,6 +335,13 @@ function acceptData(output, queryUrl=null, paired=null){
     return;
   }
   active={points:result.points,analysis:result,variable,meta:output.meta,queryUrl};
+  gpmComparison=null;
+  byId("gpm-export").disabled=true;
+  byId("gpm-file").value="";
+  byId("gpm-comparison").hidden=variable!=="PRECTOTCORR";
+  byId("gpm-output").textContent=uiLanguage==="es"?
+    "Carga una serie mensual NASA IMERG Final V07 para contrastar los años coincidentes.":
+    "Load a NASA IMERG Final V07 monthly series to compare overlapping calendar years.";
   byId("results").hidden=false;
   const fmt=(x,d=2)=>Number(x).toLocaleString(locale,{minimumFractionDigits:d,maximumFractionDigits:d});
   display("slope-value",circular?"—":(result.slopePerDecade>=0?"+":"")+fmt(result.slopePerDecade)+" "+def.slopeUnit);
@@ -455,6 +470,48 @@ byId("file-input").addEventListener("change",async event=>{
     parsed.meta.retrievedUtc="Unknown: locally imported file";
     acceptData(parsed);
   }catch(e){setMessage("Cannot import source file: "+e.message,true);}
+});
+byId("gpm-file")?.addEventListener("change",async event=>{
+ const file=event.target.files?.[0];
+ if(!file||!active||active.variable!=="PRECTOTCORR")return;
+ try{
+   const raw=JSON.parse(await file.text());
+   const imerg=parseIMERG(raw,Number(fields.lat.value),Number(fields.lon.value));
+   const comparison=comparePrecipitation(active.points,imerg);
+   gpmComparison={comparison,imergMetadata:{
+     dataset:imerg.dataset,version:imerg.version,
+     incompleteYears:imerg.incomplete,monthlyCount:imerg.monthlyCount,
+     gridCellCenter:imerg.gridCellCenter,sourceTrust:imerg.trust},
+     powerSource:active.queryUrl||active.meta.archiveLink||"Archived NASA POWER sample"};
+   const es=uiLanguage==="es",fmt=x=>Number(x).toLocaleString(locale,{maximumFractionDigits:2});
+   byId("gpm-output").textContent=
+     (es?"Años comunes: ":"Matched years: ")+comparison.yearsCompared+
+     " ("+comparison.firstYear+"–"+comparison.lastYear+"). "+
+     (es?"Diferencia media POWER − IMERG: ":"Mean POWER − IMERG difference: ")+
+       fmt(comparison.meanBiasMmYr)+" mm/año. "+
+     "RMSE "+fmt(comparison.rmseMmYr)+" mm/año; r = "+
+       (comparison.correlation===null?"—":fmt(comparison.correlation))+". "+
+     (comparison.trends?
+       (es?"Pendiente POWER: ":"POWER slope: ")+fmt(comparison.trends.power.slopeMmPerDecade)+
+       "; IMERG: "+fmt(comparison.trends.imerg.slopeMmPerDecade)+" mm/década. ":
+       (es?"Menos de diez años: sin estimación de pendientes. ":"Fewer than ten years: slopes unavailable. "))+
+     (es?"Archivo aportado por usuario; origen NASA por verificar de forma independiente.":
+        "User-supplied file; NASA source identity requires independent verification.");
+   byId("gpm-export").disabled=false;
+ }catch(err){
+   gpmComparison=null;
+   byId("gpm-export").disabled=true;
+   byId("gpm-output").textContent=(uiLanguage==="es"?"No se pudo validar IMERG: ":"IMERG validation failed: ")+err.message;
+ }
+});
+byId("gpm-export")?.addEventListener("click",()=>{
+ if(!gpmComparison)return;
+ const blob=new Blob([JSON.stringify(gpmComparison,null,2)+"\n"],
+                     {type:"application/json;charset=utf-8"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download="telluris_EXP006_POWER_vs_IMERG_"+fields.place.value+".json";
+ document.body.append(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),2000);
 });
 byId("download-report")?.addEventListener("click",()=>{
   if(!active)return;

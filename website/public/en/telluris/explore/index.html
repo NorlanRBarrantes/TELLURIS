@@ -81,7 +81,19 @@
         <svg id="trend-chart" viewBox="0 0 760 350" role="img" aria-label="Annual NASA model data and estimated Sen trend" preserveAspectRatio="xMidYMid meet"></svg>
         <p class="chart-caption" id="chart-caption">—</p>
       </section>
-      <div class="evidence-grid">
+      <section id="gpm-comparison" class="inference-panel" hidden aria-labelledby="gpm-title">
+  <div class="inference-header"><div><p class="eyebrow mint">EXP-006 / NASA POWER + GPM IMERG FINAL V07</p>
+    <h3 id="gpm-title">Cross-product precipitation assessment</h3></div>
+    <span class="inference-verdict">Separate products</span>
+  </div>
+  <p class="inference-caution">IMERG requires original NASA granules and Earthdata access. No synthetic observations are included. Locally imported files are not automatically authenticated.</p>
+  <label for="gpm-file">Import normalized IMERG Final V07 JSON (mm/hr, 12 complete months per year)</label>
+  <input type="file" id="gpm-file" accept="application/json,.json"/>
+  <p id="gpm-output" class="inference-paired" role="status">Select a file derived from original NASA IMERG granules.</p>
+  <button type="button" id="gpm-export" class="explore-secondary" disabled>Export scientific comparison JSON</button>
+  <p class="inference-caution">Only matched complete years are compared. Agreement, slopes and p-values do not establish causality or product homogeneity.</p>
+</section>
+<div class="evidence-grid">
         <section class="evidence-card"><p class="eyebrow">03 / SCIENTIFIC TRACEABILITY</p><h3>Data provenance</h3><dl id="provenance"></dl><a id="source-link" href="https://power.larc.nasa.gov/" target="_blank" rel="noopener noreferrer">Inspect source ↗</a></section>
         <section class="evidence-card caution-card"><p class="eyebrow">04 / INTERPRETATION</p><h3>What the numbers do not prove</h3><p>Statistical significance is not yet established for serially dependent climate observations. The original Mann–Kendall p-value is shown for audit, not as a validated conclusion.</p><p>NASA POWER data are gridded reanalysis or satellite-derived products, not measurements made exactly at the selected coordinates. Trends require homogeneity checks, serial-dependence review and independent comparison.</p><p id="autocorr-note">—</p></section>
       </div>

@@ -39,3 +39,9 @@
 .table-heading{gap:10px;flex-wrap:wrap}.table-heading button{max-width:100%}
 
 #period-sensitivity{margin:12px 0 0;padding:9px 12px;border-top:0;border-left:2px solid rgba(174,218,220,.4);background:rgba(24,61,65,.16)}
+
+/* EXP-006 — optional, source-backed GPM comparison. */
+#gpm-comparison label{display:block;margin:15px 0 8px;font-size:12px;color:#bddaca}
+#gpm-file{width:100%;padding:10px;max-width:100%;border:1px solid rgba(184,237,198,.25);border-radius:9px;background:rgba(8,25,34,.55);color:#c8e7d6}
+#gpm-output{white-space:normal;overflow-wrap:anywhere}
+#gpm-export{margin-top:12px;max-width:100%}
