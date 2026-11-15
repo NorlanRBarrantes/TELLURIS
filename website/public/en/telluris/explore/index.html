@@ -74,7 +74,14 @@
 <button class="obs-mode" type="button" data-obs-mode="all-one" aria-pressed="false"><small>18 / 01</small><strong>All variables · one location</strong><span>Environmental context</span></button>
 <button class="obs-mode" type="button" data-obs-mode="all-two" aria-pressed="true"><small>18 / 02</small><strong>All variables · two locations</strong><span>Full regional contrast</span></button></div>
   <div class="obs-query">
-    <div class="obs-query-context"><small>LOCATION A</small><strong id="obs-primary-label">Selected in research controls</strong><span>Primary coordinates, variable and years are taken from section 01 below.</span></div>
+    <div class="obs-query-context"><small>LOCATION A</small><strong id="obs-primary-label">Selected in research controls</strong><span>Primary controls are shared with the detailed Explorer below.</span><details class="obs-primary-config"><summary>Edit location A, variable and years</summary><div class="obs-config-grid">
+ <label for="obs-main-place">Location A<select id="obs-main-place"><option value="liberia">Liberia · Pacific</option><option value="limon">Limón · Caribbean</option><option value="custom">Custom coordinates</option></select></label>
+ <label for="obs-main-variable">Scientific parameter<select id="obs-main-variable"></select></label>
+ <label for="obs-main-lat">Latitude<input id="obs-main-lat" type="number" min="-90" max="90" step="any" value="10.63" readonly></label>
+ <label for="obs-main-lon">Longitude<input id="obs-main-lon" type="number" min="-180" max="180" step="any" value="-85.44" readonly></label>
+ <label for="obs-main-start">From<input id="obs-main-start" type="number" min="1981" max="2025" value="1985"></label>
+ <label for="obs-main-end">Through<input id="obs-main-end" type="number" min="1981" max="2025" value="2025"></label>
+ </div></details></span></div>
     <div id="obs-second-controls" class="obs-second-controls">
       <label for="obs-other-place">LOCATION B
         <select id="obs-other-place"><option value="limon">Limón · Caribbean, Costa Rica</option><option value="liberia">Liberia · Pacific, Costa Rica</option><option value="custom">Custom coordinates</option></select></label>
