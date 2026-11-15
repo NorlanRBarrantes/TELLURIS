@@ -83,3 +83,17 @@ After a **green** latest Actions run (Node tests, source syntax, localhost HTTP 
 A person must still test in an actual browser: Spanish and English; full-width NASA globe; geographic marker/texture alignment; hover lat/lon; wind/rain source gating; all four comparison modes; archive showing exactly 2 available and 16 unavailable; 2023 live API grouping and full 1985–2025 data; selected variable chart and links; no cause/significance hallucinations; existing single-variable JSON/CSV/PDF exports and EXP-006 import; mobile widths and screen-reader affordances.
 
 **Submission caution:** a real source API probe plus passing synthetic/source tests does not equal complete independent climate validation. No original GPM IMERG files or generative assistant were added in this release.
+
+## Latest source-verified historical coverage and extended deliverables — 2026-11-15
+
+**[NASA POWER full-period grouped source probe #43773261601](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43773261601) — PASS.** The original NASA monthly API responses for Liberia and Limón, RE/AG and all 18 codes were parsed over 1985–2025. Of 36 source/site combinations, **34 have 41 complete annual years (1985–2025)**. The other **two are surface albedo ALLSKY_SRF_ALB**, with **25 complete years (2001–2025)** and explicitly missing 1985–2000 at both locations. This verifies source coverage, not long-term homogeneity, causal interpretation or statistical significance. The comparative matrix presents each series' real date range and count.
+
+The observatory also includes:
+- **Editable site A controls directly in the Observatory** (site, coordinates, variable and start/end years), synchronized with the original single-variable form and globe.
+- **Original-source comparative JSON export**, preserving source metadata, query links, all available source-derived annual observations, missing-data decisions, per-zone coordinates, original units and same-year pair contrasts. **CSV** is a concise summary, not a row-by-row annual export.
+- **Plain-language evidence explanations** for common questions such as which zone has higher mean rainfall, computed on matched-calendar-year NASA observations, not an unrestricted generative model.
+- **Focused scientific help**, hover/focus definitions for conditional Mann–Kendall p, Sen trend and CI, and five predeclared, noncausal cross-variable clue cards.
+
+**[GitHub website QA #43773623733](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43773623733) — PASS 107/107** Node source/site tests, JS syntax and localhost HTTP checks, including evidence export, source absence behavior, source-gated atmosphere and bilingual controls. This does **not** constitute a full real-browser WebGL interaction test or publication on BanaHosting.
+
+**Release gate remains open:** EXP-009 was committed to GitHub main but no new BanaHosting deployment output or public-browser screenshots have been supplied. The next release must use the existing backed-up dry-run/deploy and HTTPS-integrity procedure and then actual ES/EN/mobile checks.
