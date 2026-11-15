@@ -191,8 +191,18 @@ export function summarizeInvestigation(rows,{lang="es",sites=[]}={}){
 export function groundedAnswer(question,rows,{lang="es",sites=[]}={}){
   const es=lang!=="en",q=String(question||"").toLocaleLowerCase();
   if(!rows?.length)return es?"Primero carga observaciones NASA verificables.":"Load verifiable NASA observations first.";
+  const aliases={
+    T2M:["temperatura","temperature","calor"],T2M_MAX:["temperatura máxima","maximum temperature"],
+    T2M_MIN:["temperatura mínima","minimum temperature"],
+    PRECTOTCORR:["lluvia","precipitación","rain","rainfall"],
+    RH2M:["humedad relativa","relative humidity"],WS10M:["viento","wind speed"],
+    GWETROOT:["humedad del suelo","root zone","soil wetness"],
+    CLOUD_AMT:["nubosidad","clouds","cloud cover"],
+    ALLSKY_SFC_SW_DWN:["radiación solar","solar radiation"]
+  };
   const matches=rows.filter(r=>q.includes(r.code.toLowerCase())||
-    q.includes((es?r.definition.nameEs:r.definition.name).toLowerCase()));
+    q.includes((es?r.definition.nameEs:r.definition.name).toLowerCase())||
+    aliases[r.code]?.some(term=>q.includes(term)));
   if(/(pistas|correlac|relacion|asocia|mueven|co-var|clue|related|correlat|co.?mov)/.test(q)){
     const clues=coMovementClues(rows,sites);
     if(!clues.length)return es?
@@ -223,6 +233,22 @@ export function groundedAnswer(question,rows,{lang="es",sites=[]}={}){
     if(r.left.status!=="descriptive")return es?
       name+": no hay una tendencia lineal interpretable en esta fuente (sin datos o variable circular).":
       name+": no interpretable linear trend from this source (missing observations or circular variable).";
+    if(r.right?.status==="descriptive"&&
+       /(cuál zona|que zona|qué zona|mayor valor|más lluvia|mas lluvia|which (location|region)|higher (rain|value)|more rain)/.test(q)){
+      const a=new Map(r.a?.points?.map(p=>[p.year,p.value])||[]);
+      const b=new Map(r.b?.points?.map(p=>[p.year,p.value])||[]);
+      const years=[...a.keys()].filter(year=>b.has(year)).sort((x,y)=>x-y);
+      if(years.length>=10){
+        const avgA=years.reduce((sum,year)=>sum+a.get(year),0)/years.length;
+        const avgB=years.reduce((sum,year)=>sum+b.get(year),0)/years.length;
+        return (es?"Promedio anual sobre años coincidentes":"Annual mean over matched years")+
+          " ("+years[0]+"–"+years.at(-1)+", n="+years.length+") · "+
+          (sites[0]?.label||"A")+": "+fmt(avgA)+" "+r.definition.unit+"; "+
+          (sites[1]?.label||"B")+": "+fmt(avgB)+" "+r.definition.unit+". "+
+          (es?"Comparación descriptiva entre celdas NASA, no estaciones ni explicación causal.":
+            "Descriptive NASA grid-cell comparison, not stations or a causal explanation.");
+      }
+    }
     let response=name+" · "+(sites[0]?.label||"A")+": "+
       fmt(r.left.slopePerDecade)+" "+r.definition.slopeUnit+" ("+
       r.left.start+"–"+r.left.end+", n="+r.left.n+").";
