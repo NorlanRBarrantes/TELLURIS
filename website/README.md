@@ -1,25 +1,31 @@
-# Project Uriel website — initial public landing snapshot
+# Project Uriel website and TELLURIS Explorer 0.1
 
-**Version:** initial landing, 2026-11-14  
-**Maintained in:** `NorlanRBarrantes/TELLURIS` (source snapshot)
+Static sources: `website/public/`; no server-side runtime, npm installation or database is required on BanaHosting.
 
-## Pages
+## Routes
 
-| Route | Source |
+| Route | Function |
 | --- | --- |
-| `/` | `public/index.html` |
-| `/telluris/` | `public/telluris/index.html` |
-| `/es/` | `public/es/index.html` |
-| `/es/telluris/` | `public/es/telluris/index.html` |
+| `/`, `/es/` | Project Uriel home |
+| `/telluris/`, `/es/telluris/` | TELLURIS scientific project description |
+| `/telluris/explore/` | **Working experimental scientific application** |
 
-This is a standalone, static HTML/CSS/JS site: no build step, database, credentials, live NASA API request or real-data scientific result. The interactive research-question builder produces only questions. Original OG art resides in `public/assets/`. No external front-end libraries.
+The explorer loads a versioned, authentic NASA POWER-derived 1985–2025 archive for Liberia/Limón; it can also request NASA POWER directly or import original NASA JSON. It offers temperature and rainfall, year ranges, an annual chart, Theil–Sen slope, a *clearly provisional* original Mann–Kendall p-value, lag-one diagnostic, data provenance, table and CSV export. Grid data are not ground-station readings. Large precipitation shifts require independent product-homogeneity checks.
+
+## Local operation
+
+```bash
+cd website
+node --test tests/science.test.js
+cd public
+python -m http.server 8765
+# open http://localhost:8765/telluris/explore/
+```
+
+The site uses ES modules and needs to be served over HTTP(S) rather than opened by file://. The archived annual dataset is at `public/telluris/explore/data/exp001-annual.json` and links to NASA original-response hashes and the successful EXP-001 GitHub Actions run.
 
 ## Deployment
 
-Copy **contents of `website/public/`** into the verified BanaHosting document root for `projecturiel.earth`; do not copy the enclosing directory. Never overwrite the current production `.htaccess` blindly. See [DEPLOYMENT.md](DEPLOYMENT.md). GitHub commits here **do not deploy automatically**.
+Upload **the contents** of `website/public/` into the actual `projecturiel.earth` document root in BanaHosting cPanel, without overwriting production SSL/.htaccess configuration. GitHub source commits do **not** deploy automatically. The `.github/workflows/explorer-qa.yml` workflow packages this tree into a deployment ZIP after unit tests and an HTTP smoke check.
 
-## Version integrity
-
-The full initial ZIP delivered to the team was `Project_Uriel_TELLURIS_Website_2026-11-14.zip`. This directory preserves the site assets from the bundle (and the deployment documentation), not server-private data. Website source has its own area so future TELLURIS statistical experiments remain untouched.
-
-Status: website landing content only. Scientific methods and findings must be backed by real NASA observations and verified results. See `docs/VALIDATION.md`. Not endorsed by NASA.
+The browser's direct NASA call depends on NASA's CORS/service availability; the archived source and JSON import are independent fallback paths. NASA is not affiliated with or endorsing this independent Space Apps participant product.
