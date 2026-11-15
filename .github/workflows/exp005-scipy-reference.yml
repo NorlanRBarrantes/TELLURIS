@@ -1,0 +1,74 @@
+name: EXP-005 independent SciPy trend confidence cross-check
+
+on:
+  push:
+    paths:
+      - "website/public/assets/science.js"
+      - "website/public/assets/inference.js"
+      - "analysis/exp005_reference_scipy.py"
+      - ".github/workflows/exp005-scipy-reference.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scipy-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Build independent test cases from original NASA-derived annual archive
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE' > /tmp/telluris-exp005-reference.json
+          import fs from "node:fs";
+          import {senConfidenceInterval} from "./website/public/assets/inference.js";
+          const snapshot=JSON.parse(fs.readFileSync("./website/public/telluris/explore/data/exp001-annual.json","utf8"));
+          const cases=[];
+          for(const place of ["liberia","limon"]) for(const [code,i] of [["T2M",1],["PRECTOTCORR",2]]){
+            const rows=snapshot.locations[place].series;
+            const points=rows.map(row=>({year:row[0],value:row[i]}));
+            cases.push({label:place+"_"+code,years:points.map(p=>p.year),
+              values:points.map(p=>p.value),js:senConfidenceInterval(points)});
+          }
+          const synthetic=[
+            Array.from({length:41},(_,i)=>({year:1985+i,value:4.5*i+Math.sin(i*.73)*6})),
+            Array.from({length:41},(_,i)=>({year:1985+i,value:Math.floor(i/3)+Math.cos(i)*3}))
+          ];
+          for(let i=0;i<synthetic.length;i++){
+            const points=synthetic[i];
+            cases.push({label:"synthetic_"+i,years:points.map(p=>p.year),
+              values:points.map(p=>p.value),js:senConfidenceInterval(points)});
+          }
+          process.stdout.write(JSON.stringify(cases));
+          NODE
+      - name: Install SciPy reference implementation
+        run: python -m pip install "scipy>=1.14,<1.19"
+      - name: Verify independent NASA/SciPy Sen confidence bounds
+        run: python analysis/exp005_reference_scipy.py /tmp/telluris-exp005-reference.json
+      - name: Print reproducible original NASA MK and block sensitivity values
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from "node:fs";
+          import {analyze} from "./website/public/assets/science.js";
+          const data=JSON.parse(fs.readFileSync("./website/public/telluris/explore/data/exp001-annual.json","utf8"));
+          for(const site of ["liberia","limon"])for(const [name,index] of [["T2M",1],["PRECTOTCORR",2]]){
+            const result=analyze(data.locations[site].series.map(r=>({year:r[0],value:r[index]})));
+            const proof=result.inference;
+            console.log("NASA_EXP001_EXPLORATORY",JSON.stringify({
+              site,variable:name,n:result.n,slopeDecade:result.slopePerDecade,
+              mkRawP:result.mk.p,ci95:proof.senCI,
+              blocks:proof.blockTests.map(x=>({size:x.blockYears,p:x.p})),
+              lag1:result.lag1,interpretation:proof.status,
+              validatedSignificance:proof.validatedSignificance
+            }));
+          }
+          NODE
