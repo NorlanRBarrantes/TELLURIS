@@ -7,6 +7,12 @@
 
 **Project status:** GitHub implements a bilingual 18-parameter NASA POWER source-aware Observatory with four modes (1 variable × 1/2 sites, 18 variables × 1/2 sites), NASA GIBS globe, USGS/EONET event context, experimental statistical evidence and an EXP-013 selected-parameter decision dashboard. Original archive coverage remains T2M/PRECTOTCORR at Liberia/Limón; broader parameters rely on live NASA queries. **137 Node tests passed** and ES/EN desktop/mobile Chromium local-site acceptance passed on 2026-11-15 (Costa Rica). Significance and climate-product homogeneity remain qualified, **BanaHosting production publication remains unverified**, and optional external generative AI is **not configured or deployed**.
 
+## For judges — TELLURIS in one minute
+
+**[Start with the 60-second evidence-first tour](docs/JUDGES-60-SECOND-TOUR.md)**: a real NASA POWER 1985–2025 two-site comparison, a rejected MODIS coastal vegetation sample, the reproducibility links, and explicit scientific limitations. This path addresses **impact, creativity, validation, relevance, and presentation** without presenting exploratory findings as verified causal climate conclusions.
+
+**Important:** Verify anonymous public website and source access, then complete the official NASA Space Apps team-project submission. GitHub source changes are not a BanaHosting deployment or an official submission.
+
 ## Challenge
 
 TELLURIS responds to **[Be An Earth System Trend Detective!](https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/)**, an advanced Earth Science / Software challenge in the 2026 NASA Space Apps Challenge.
