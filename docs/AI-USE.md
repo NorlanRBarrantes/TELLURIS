@@ -133,3 +133,7 @@ ChatGPT assisted with homepage slider/keyboard and touch UX code, source-aware U
 ## EXP-012 user-provided graphic references and AI-assisted implementation — 2026-11-15
 
 The project team provided multiple motion-graphic reference frames and their Project Uriel crest. ChatGPT assisted in translating those visual preferences to a restrained, responsive HTML/CSS design applied across all ES/EN pages, optimizing a decorative copy of the original team crest, implementing slide 00 skip-to-final behavior and adding UI regression tests. These presentation changes do not introduce AI-generated climate readings or modify NASA scientific observations. The optional promotional Earth drawing is expressly conceptual, not source imagery. The deterministic evidence explainer remains unchanged; no new generative AI provider is implied.
+
+## EXP-013 — Dashboard interpretation and optional AI, 2026-11-15
+
+OpenAI ChatGPT assisted with an ES/EN evidence-first dashboard, conditional decision guidance for 18 NASA POWER parameters, opt-in AI interface wiring, an optional disabled-by-default PHP server adapter, tests and documentation. The client decision-support module is deterministic, **not generative AI**. No live provider, API credentials or independently validated climate forecast are part of this commit. The external model may be enabled only after hosting/security/privacy/cost validation. Original NASA measurements and numerical calculations remain authoritative. See [EXP-013](EXP-013-EVIDENCE-DECISIONS-AI.md).

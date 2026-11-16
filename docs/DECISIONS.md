@@ -360,3 +360,11 @@ A second real-source run confirmed that the selected Limón point is classified 
 - **External benchmark:** a request to review `https://afterglow.work/index.html` was not independently retrievable; do not conflate it with other unrelated Afterglow projects. A **separately identified** Afterglow Access/IDATA reference supports exploring accessible science UX, sonification and educational onboarding as future ideas, but does not justify any claims about the unreachable target.
 - **Scope boundary:** documentation only; preserve EXP-012 presentation design and the NASA deadline. No secret-dependent LLM, unlicensed assets, generated environmental measurements or deployment is part of this decision.
 - **Records:** [future-release scientific roadmap](FUTURE-VERSIONS-ROADMAP.md) and [bounded external Afterglow reference study](EXTERNAL-REFERENCE-AFTERGLOW.md).
+
+## ADR-039 — Evidence first: selected parameter KPIs, conditional actions and private AI gate
+
+- **Date:** 2026-11-15 (Costa Rica).
+- **Status:** Accepted in GitHub source, public browser/release QA pending.
+- **Decision:** Use one-variable/two-location as the initial Observatory scope and surface selected-source readings, descriptive slope, coverage and matched-year difference, then a cautious five-part explanation and optional private-server AI request. Preserve 18 modes/parameters, original NASA calculations, matrices, raw exports, globe and ES/EN identity. Hide the raw comparison table behind a discoverable advanced disclosure.
+- **Scientific guardrail:** General plausible influences, conditional scenarios and short/long-term monitoring options are not causal inference, future forecasts or verified local recommendations. Never invent source values.
+- **Security gate:** The generative adapter is separately deployed, disabled by default and cannot ship API keys in public JavaScript; external model availability must be verified before calling it connected. [Detailed decisions and tests](EXP-013-EVIDENCE-DECISIONS-AI.md).

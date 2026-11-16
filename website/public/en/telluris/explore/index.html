@@ -12,9 +12,10 @@
 <script type="module" src="../../../assets/explorer.js?v=exp010-20261115"></script>
 <link rel="stylesheet" href="../../../assets/globe.css?v=exp008-20261115">
 <link rel="stylesheet" href="../../../assets/observatory.css?v=exp011-events-20261115">
-<script type="module" src="../../../assets/observatory.js?v=exp010-20261115"></script>
+<script type="module" src="../../../assets/observatory.js?v=exp013-20261115"></script>
 <script type="module" src="../../../assets/globe.js?v=exp010-static-20261115"></script>
 <script type="module" src="../../../assets/natural-events.js?v=exp011-20261115"></script>
+<link rel="stylesheet" href="../../../assets/decision-dashboard.css?v=exp013-20261115">
 <link rel="stylesheet" href="/assets/visual-identity.css?v=exp012-20261115">
 </head><body>
 <a class="skip" href="#explorer">Skip to explorer</a>
@@ -63,9 +64,9 @@
     <span class="obs-head-label">NASA POWER · 18 VERIFIED PARAMETERS</span>
   </header>
   <div class="obs-modes" role="group" aria-label="Choose the investigation scope"><button class="obs-mode" type="button" data-obs-mode="one-one" aria-pressed="false"><small>01 / 01</small><strong>One variable · one location</strong><span>Deep investigation of one source</span></button>
-<button class="obs-mode" type="button" data-obs-mode="one-two" aria-pressed="false"><small>01 / 02</small><strong>One variable · two locations</strong><span>Matched annual contrasts</span></button>
+<button class="obs-mode" type="button" data-obs-mode="one-two" aria-pressed="true"><small>01 / 02</small><strong>One variable · two locations</strong><span>Matched annual contrasts</span></button>
 <button class="obs-mode" type="button" data-obs-mode="all-one" aria-pressed="false"><small>18 / 01</small><strong>All variables · one location</strong><span>Environmental context</span></button>
-<button class="obs-mode" type="button" data-obs-mode="all-two" aria-pressed="true"><small>18 / 02</small><strong>All variables · two locations</strong><span>Full regional contrast</span></button></div>
+<button class="obs-mode" type="button" data-obs-mode="all-two" aria-pressed="false"><small>18 / 02</small><strong>All variables · two locations</strong><span>Full regional contrast</span></button></div>
   <div class="obs-query">
     <div class="obs-query-context"><small>LOCATION A</small><strong id="obs-primary-label">Selected in research controls</strong><span>Primary controls are shared with the detailed Explorer below.</span><details class="obs-primary-config"><summary>Edit location A, variable and years</summary><div class="obs-config-grid">
  <label for="obs-main-place">Location A<select id="obs-main-place"><option value="liberia">Liberia · Pacific</option><option value="limon">Limón · Caribbean</option><option value="custom">Custom coordinates</option></select></label>
@@ -95,10 +96,30 @@
       <div><small>Negative slopes · A</small><strong id="obs-kpi-down">—</strong></div>
       <div><small>Missing sources</small><strong id="obs-kpi-unavailable">—</strong></div>
     </div>
+    <section class="obs-decision" id="obs-decision" aria-labelledby="obs-decision-name">
+      <header class="obs-decision-head"><div><p class="eyebrow mint">01 / READ THE EVIDENCE</p><h3 id="obs-decision-name">Selected NASA parameter</h3><p>One physical variable at a time. These indicators describe observations, not forecasts or validated climate significance.</p></div><span class="obs-decision-tag">SOURCE-BOUND / DESCRIPTIVE</span></header>
+      <div class="obs-decision-metrics" aria-label="READ THE EVIDENCE">
+        <article><small id="obs-d-label-0">—</small><strong id="obs-d-metric-0">—</strong><p id="obs-d-note-0">—</p></article>
+        <article><small id="obs-d-label-1">—</small><strong id="obs-d-metric-1">—</strong><p id="obs-d-note-1">—</p></article>
+        <article><small id="obs-d-label-2">—</small><strong id="obs-d-metric-2">—</strong><p id="obs-d-note-2">—</p></article>
+        <article><small id="obs-d-label-3">—</small><strong id="obs-d-metric-3">—</strong><p id="obs-d-note-3">—</p></article>
+      </div>
+      <div class="obs-decision-grid"><article class="obs-decision-evidence"><span class="obs-decision-index">WHAT WE OBSERVED</span><h4>Evidence snapshot</h4><p id="obs-d-evidence">Load NASA source observations to begin.</p></article>
+        <article><span class="obs-decision-index">HYPOTHESES / NOT PROVEN CAUSES</span><h4>What might influence it?</h4><p id="obs-d-drivers">—</p></article>
+        <article><span class="obs-decision-index">CONDITIONAL / NOT A FORECAST</span><h4>What might matter next?</h4><p id="obs-d-outlook">—</p></article>
+        <article><span class="obs-decision-index">SHORT TERM</span><h4>What can we check now?</h4><p id="obs-d-near">—</p></article>
+        <article><span class="obs-decision-index">LONG TERM</span><h4>What should we plan to monitor?</h4><p id="obs-d-long">—</p></article>
+      </div>
+      <p class="obs-decision-limitation" id="obs-d-limitation">Conclusions depend on source and scientific assumptions.</p>
+      <div class="obs-ai-panel"><div><span class="obs-decision-index">OPTIONAL / GENERATIVE AI</span><h4>Ask AI for a cautious scientific interpretation</h4><p>Only if a private server is configured, this action sends the selected NASA series and coordinates to an AI provider. AI cannot alter calculations or establish causation.</p></div><button id="obs-ai-run" type="button">Generate AI interpretation</button><p class="obs-ai-output" id="obs-ai-output" role="status" aria-live="polite">Not requested: source-grounded guidance works without AI.</p></div>
+    </section>
+    <section class="obs-focus" aria-labelledby="obs-focus-title"><div class="obs-focus-top"><div><small>SELECTED SOURCE / ONE PHYSICAL UNIT</small><h3 id="obs-focus-title">—</h3></div><a class="obs-detail-link" href="#detail-research">Detailed analysis ↓</a></div><p id="obs-focus-detail"></p><svg id="obs-chart" viewBox="0 0 720 260" aria-label="Annual NASA data chart"></svg><div class="obs-chart-legend" id="obs-chart-legend"></div><div class="obs-provenance" id="obs-provenance"></div></section>
+    <details class="obs-deep-data"><summary>Show NASA evidence matrix (advanced)</summary>
     <div class="obs-matrix-header"><div><h3>Comparative evidence matrix</h3><p>Select a variable to inspect real annual series; do not compare slopes across different physical units.</p></div><label for="obs-family-filter">Source family<select id="obs-family-filter"><option value="all">All NASA parameters</option><option value="atmosphere">Atmosphere</option><option value="wind">Wind</option><option value="water">Water and soil</option><option value="energy">Energy and radiation</option></select></label></div>
     <p class="obs-matrix-count">Shown: <strong id="obs-count">—</strong></p>
     <div class="obs-table-scroll"><table class="obs-table"><thead><tr id="obs-head"></tr></thead><tbody id="obs-rows"></tbody></table></div>
-    <section class="obs-focus" aria-labelledby="obs-focus-title"><div class="obs-focus-top"><div><small>SELECTED SOURCE / ONE PHYSICAL UNIT</small><h3 id="obs-focus-title">—</h3></div><a class="obs-detail-link" href="#detail-research">Detailed analysis ↓</a></div><p id="obs-focus-detail"></p><svg id="obs-chart" viewBox="0 0 720 260" aria-label="Annual NASA data chart"></svg><div class="obs-chart-legend" id="obs-chart-legend"></div><div class="obs-provenance" id="obs-provenance"></div></section>
+
+    </details>
     <section class="obs-clues" aria-labelledby="obs-clues-title"><div class="obs-clues-head"><div><p class="eyebrow mint">MULTIVARIABLE / HYPOTHESIS GENERATOR</p><h3 id="obs-clues-title">Signals worth investigating</h3></div><span>ANNUAL FIRST DIFFERENCES</span></div><p>Source-grounded, predeclared variable pairs only. Values are descriptive correlations of changes between consecutive matched years; they are not p-values, cross-product validation or evidence of causation.</p><div id="obs-clue-grid" class="obs-clue-grid"></div></section>
     <section class="obs-explainer" aria-labelledby="obs-explainer-title"><div><p class="eyebrow mint">TELLURIS / EVIDENCE INTERPRETER</p><h3 id="obs-explainer-title">What might these observations mean?</h3><div id="obs-explanation" class="obs-explanation"></div></div>
       <div class="obs-qa"><p>Ask the evidence</p><form id="obs-question-form"><label for="obs-question" class="sr-only">Question</label><input id="obs-question" type="text" maxlength="240" placeholder="Why did it change? Is T2M significant?"><button type="submit">Explain</button></form><p id="obs-answer" class="obs-answer" aria-live="polite"></p><p class="obs-ai-disclosure">Deterministic, source-grounded interpreter — not generative AI. It does not infer causation or invent measurements.</p></div>

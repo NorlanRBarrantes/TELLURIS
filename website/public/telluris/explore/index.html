@@ -12,9 +12,10 @@
 <script type="module" src="../../assets/explorer.js?v=exp010-20261115"></script>
 <link rel="stylesheet" href="../../assets/globe.css?v=exp008-20261115">
 <link rel="stylesheet" href="../../assets/observatory.css?v=exp011-events-20261115">
-<script type="module" src="../../assets/observatory.js?v=exp010-20261115"></script>
+<script type="module" src="../../assets/observatory.js?v=exp013-20261115"></script>
 <script type="module" src="../../assets/globe.js?v=exp010-static-20261115"></script>
 <script type="module" src="../../assets/natural-events.js?v=exp011-20261115"></script>
+<link rel="stylesheet" href="../../../assets/decision-dashboard.css?v=exp013-20261115">
 <link rel="stylesheet" href="/assets/visual-identity.css?v=exp012-20261115">
 </head><body>
 <a class="skip" href="#explorer">Ir al explorador</a>
@@ -63,9 +64,9 @@
     <span class="obs-head-label">NASA POWER · 18 PARÁMETROS VERIFICADOS</span>
   </header>
   <div class="obs-modes" role="group" aria-label="Elige el alcance de investigación"><button class="obs-mode" type="button" data-obs-mode="one-one" aria-pressed="false"><small>01 / 01</small><strong>Una variable · una zona</strong><span>Investigación en profundidad</span></button>
-<button class="obs-mode" type="button" data-obs-mode="one-two" aria-pressed="false"><small>01 / 02</small><strong>Una variable · dos zonas</strong><span>Contraste anual pareado</span></button>
+<button class="obs-mode" type="button" data-obs-mode="one-two" aria-pressed="true"><small>01 / 02</small><strong>Una variable · dos zonas</strong><span>Contraste anual pareado</span></button>
 <button class="obs-mode" type="button" data-obs-mode="all-one" aria-pressed="false"><small>18 / 01</small><strong>Todas las variables · una zona</strong><span>Contexto ambiental completo</span></button>
-<button class="obs-mode" type="button" data-obs-mode="all-two" aria-pressed="true"><small>18 / 02</small><strong>Todas las variables · dos zonas</strong><span>Contraste regional integral</span></button></div>
+<button class="obs-mode" type="button" data-obs-mode="all-two" aria-pressed="false"><small>18 / 02</small><strong>Todas las variables · dos zonas</strong><span>Contraste regional integral</span></button></div>
   <div class="obs-query">
     <div class="obs-query-context"><small>ZONA A</small><strong id="obs-primary-label">Seleccionada en los controles de investigación</strong><span>Los controles se comparten con el explorador científico inferior.</span><details class="obs-primary-config"><summary>Editar zona A, variable y años</summary><div class="obs-config-grid">
  <label for="obs-main-place">Zona A<select id="obs-main-place"><option value="liberia">Liberia · Pacífico</option><option value="limon">Limón · Caribe</option><option value="custom">Coordenadas propias</option></select></label>
@@ -95,10 +96,30 @@
       <div><small>Pendientes negativas · A</small><strong id="obs-kpi-down">—</strong></div>
       <div><small>Fuentes no disponibles</small><strong id="obs-kpi-unavailable">—</strong></div>
     </div>
+    <section class="obs-decision" id="obs-decision" aria-labelledby="obs-decision-name">
+      <header class="obs-decision-head"><div><p class="eyebrow mint">01 / COMPRENDER LA EVIDENCIA</p><h3 id="obs-decision-name">Parámetro NASA seleccionado</h3><p>Una variable física a la vez. Estos indicadores describen observaciones, no pronósticos ni significancia climática validada.</p></div><span class="obs-decision-tag">FUENTE ORIGINAL / DESCRIPTIVO</span></header>
+      <div class="obs-decision-metrics" aria-label="COMPRENDER LA EVIDENCIA">
+        <article><small id="obs-d-label-0">—</small><strong id="obs-d-metric-0">—</strong><p id="obs-d-note-0">—</p></article>
+        <article><small id="obs-d-label-1">—</small><strong id="obs-d-metric-1">—</strong><p id="obs-d-note-1">—</p></article>
+        <article><small id="obs-d-label-2">—</small><strong id="obs-d-metric-2">—</strong><p id="obs-d-note-2">—</p></article>
+        <article><small id="obs-d-label-3">—</small><strong id="obs-d-metric-3">—</strong><p id="obs-d-note-3">—</p></article>
+      </div>
+      <div class="obs-decision-grid"><article class="obs-decision-evidence"><span class="obs-decision-index">QUÉ OBSERVAMOS</span><h4>Resumen de evidencia</h4><p id="obs-d-evidence">Carga observaciones NASA para comenzar.</p></article>
+        <article><span class="obs-decision-index">HIPÓTESIS / NO CAUSAS DEMOSTRADAS</span><h4>¿Qué podría influir?</h4><p id="obs-d-drivers">—</p></article>
+        <article><span class="obs-decision-index">CONDICIONAL / NO ES PRONÓSTICO</span><h4>¿Qué podría importar después?</h4><p id="obs-d-outlook">—</p></article>
+        <article><span class="obs-decision-index">CORTO PLAZO</span><h4>¿Qué podemos comprobar ahora?</h4><p id="obs-d-near">—</p></article>
+        <article><span class="obs-decision-index">LARGO PLAZO</span><h4>¿Qué conviene planificar o vigilar?</h4><p id="obs-d-long">—</p></article>
+      </div>
+      <p class="obs-decision-limitation" id="obs-d-limitation">Las conclusiones dependen de la fuente y los supuestos científicos.</p>
+      <div class="obs-ai-panel"><div><span class="obs-decision-index">OPCIONAL / IA GENERATIVA</span><h4>Solicitar una interpretación científica a la IA</h4><p>Solo si se configura un servidor privado, esta acción envía expresamente la serie NASA y coordenadas seleccionadas a un proveedor de IA. La IA no puede modificar los cálculos ni confirmar causalidad.</p></div><button id="obs-ai-run" type="button">Generar interpretación con IA</button><p class="obs-ai-output" id="obs-ai-output" role="status" aria-live="polite">No solicitado: las recomendaciones basadas en evidencia funcionan sin IA.</p></div>
+    </section>
+    <section class="obs-focus" aria-labelledby="obs-focus-title"><div class="obs-focus-top"><div><small>FUENTE EN DETALLE / UNA UNIDAD FÍSICA</small><h3 id="obs-focus-title">—</h3></div><a class="obs-detail-link" href="#detail-research">Análisis detallado ↓</a></div><p id="obs-focus-detail"></p><svg id="obs-chart" viewBox="0 0 720 260" aria-label="Gráfica de datos anuales NASA"></svg><div class="obs-chart-legend" id="obs-chart-legend"></div><div class="obs-provenance" id="obs-provenance"></div></section>
+    <details class="obs-deep-data"><summary>Mostrar matriz de evidencia NASA (avanzado)</summary>
     <div class="obs-matrix-header"><div><h3>Matriz de evidencias comparadas</h3><p>Selecciona una variable para revisar sus series anuales reales; no compares pendientes con distintas unidades físicas.</p></div><label for="obs-family-filter">Familia de variables<select id="obs-family-filter"><option value="all">Todas las variables NASA</option><option value="atmosphere">Atmósfera</option><option value="wind">Viento</option><option value="water">Agua y suelo</option><option value="energy">Energía y radiación</option></select></label></div>
     <p class="obs-matrix-count">Mostradas: <strong id="obs-count">—</strong></p>
     <div class="obs-table-scroll"><table class="obs-table"><thead><tr id="obs-head"></tr></thead><tbody id="obs-rows"></tbody></table></div>
-    <section class="obs-focus" aria-labelledby="obs-focus-title"><div class="obs-focus-top"><div><small>FUENTE EN DETALLE / UNA UNIDAD FÍSICA</small><h3 id="obs-focus-title">—</h3></div><a class="obs-detail-link" href="#detail-research">Análisis detallado ↓</a></div><p id="obs-focus-detail"></p><svg id="obs-chart" viewBox="0 0 720 260" aria-label="Gráfica de datos anuales NASA"></svg><div class="obs-chart-legend" id="obs-chart-legend"></div><div class="obs-provenance" id="obs-provenance"></div></section>
+
+    </details>
     <section class="obs-clues" aria-labelledby="obs-clues-title"><div class="obs-clues-head"><div><p class="eyebrow mint">MULTIVARIABLE / GENERADOR DE HIPÓTESIS</p><h3 id="obs-clues-title">Pistas que merecen investigarse</h3></div><span>CAMBIOS ENTRE AÑOS CONSECUTIVOS</span></div><p>Pares predefinidos de variables con datos originales NASA. Los valores son correlaciones descriptivas de cambios anuales pareados; no son valores p, validaciones independientes ni pruebas de causalidad.</p><div id="obs-clue-grid" class="obs-clue-grid"></div></section>
     <section class="obs-explainer" aria-labelledby="obs-explainer-title"><div><p class="eyebrow mint">TELLURIS / INTÉRPRETE DE EVIDENCIAS</p><h3 id="obs-explainer-title">¿Qué podrían significar estas observaciones?</h3><div id="obs-explanation" class="obs-explanation"></div></div>
       <div class="obs-qa"><p>Pregúntale a la evidencia</p><form id="obs-question-form"><label for="obs-question" class="sr-only">Pregunta</label><input id="obs-question" type="text" maxlength="240" placeholder="¿Por qué cambió? ¿Es significativo T2M?"><button type="submit">Explicar</button></form><p id="obs-answer" class="obs-answer" aria-live="polite"></p><p class="obs-ai-disclosure">Intérprete determinista basado en fuentes — no es IA generativa. No deduce causalidad ni inventa mediciones.</p></div>

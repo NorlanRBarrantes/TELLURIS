@@ -29,6 +29,8 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 
 ## Documentation
 
+- [EXP-013 evidence-first dashboard, conditional actions and optional secure AI adapter (not active)](docs/EXP-013-EVIDENCE-DECISIONS-AI.md)
+
 - [Post-submission roadmap — all 49 scientific topics and 10 proposed indicators, with source-validation gates](docs/FUTURE-VERSIONS-ROADMAP.md)
 - [External Afterglow reference review — evidence limits, accessible-science ideas, and future UX tests](docs/EXTERNAL-REFERENCE-AFTERGLOW.md)
 

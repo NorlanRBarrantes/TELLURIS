@@ -40,6 +40,7 @@ jobs:
           node --check website/public/assets/globe-layers.js
           node --check website/public/assets/matrix-core.js
           node --check website/public/assets/observatory.js
+          node --check website/public/assets/decision-core.js
           node --check website/public/assets/evidence.js
           node --check website/public/assets/catalog.js
           node --check website/public/assets/inference.js

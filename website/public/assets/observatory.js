@@ -3,6 +3,7 @@
  * Visual matrix slopes = descriptive estimates, NEVER 18 validated p-values.
  */
 import {VARIABLES} from "./science.js";
+import {buildDecisionBrief,buildAIRequest} from "./decision-core.js";
 import {chosenCodes,siteCount,planBatches,parseBatch,parseArchive,
         matrixRows,summarizeInvestigation,groundedAnswer,coMovementClues,
         buildMatrixEvidence,matrixCSV} from "./matrix-core.js";
@@ -40,7 +41,8 @@ const matrixHead=el("obs-head"),matrixBody=el("obs-rows");
 const focusTitle=el("obs-focus-title"),focusDetail=el("obs-focus-detail");
 const focusChart=el("obs-chart"),sourceLink=el("obs-source-link");
 const insight=el("obs-explanation"),answer=el("obs-answer");
-let mode="all-two",controller=null,generation=0,current=null,selectedCode="T2M";
+let mode="one-two",controller=null,generation=0,current=null,selectedCode="T2M";
+let aiSeq=0;
 const localeCode=(code)=>es?VARIABLES[code].nameEs:VARIABLES[code].name;
 
 function announce(message,problem=false){
@@ -399,6 +401,23 @@ function renderFocus(){
     }
   }
   const detail=el("obs-drilldown");detail.disabled=!Object.hasOwn(VARIABLES,row.code);
+  renderDecision(row);
+}
+function renderDecision(row){
+ const brief=buildDecisionBrief(row,{sites:current.sites,start:current.start,end:current.end,lang:es?"es":"en"});
+ if(!brief)return;
+ aiSeq++; // Discard any model answer for an old parameter or dataset.
+ el("obs-decision-name").textContent=brief.name+" · "+brief.code;
+ brief.metrics.forEach((m,i)=>{
+  el("obs-d-label-"+i).textContent=m.label;
+  el("obs-d-metric-"+i).textContent=m.value;
+  el("obs-d-note-"+i).textContent=m.note;
+ });
+ for(const k of ["evidence","drivers","outlook","near","long","limitation"])
+  el("obs-d-"+k).textContent=brief[k];
+ el("obs-ai-run").disabled=!brief.ready;
+ el("obs-ai-output").textContent=L("No solicitado. La guía científica funciona sin IA.",
+  "Not requested. The scientific guidance works without AI.");
 }
 function renderClues(){
   const grid=el("obs-clue-grid");grid.replaceChildren();
@@ -485,6 +504,45 @@ el("obs-question-form").addEventListener("submit",event=>{
   });
 });
 
+// Optional user-initiated generative analysis; no API key is ever shipped to the browser.
+el("obs-ai-run").addEventListener("click",async()=>{
+ const row=current?.rows.find(r=>r.code===selectedCode);
+ const brief=row?buildDecisionBrief(row,{sites:current.sites,start:current.start,
+   end:current.end,lang:es?"es":"en"}):null;
+ const payload=row?buildAIRequest(brief,row,{sites:current.sites,start:current.start,
+   end:current.end,lang:es?"es":"en",source:current.source}):null;
+ const output=el("obs-ai-output"),button=el("obs-ai-run");
+ if(!payload){output.textContent=L("No hay datos NASA suficientes para IA.",
+    "Insufficient NASA observations for AI.");return;}
+ const token=++aiSeq,investigation=current,ac=new AbortController();
+ const timeout=setTimeout(()=>ac.abort(),26000);
+ button.disabled=true;
+ output.textContent=L("Solicitando análisis guiado por evidencia…","Requesting evidence-bounded analysis…");
+ try{
+  const response=await fetch("/api/telluris-ai.php",{
+   method:"POST",credentials:"same-origin",signal:ac.signal,
+   headers:{"Content-Type":"application/json","X-Telluris-Request":"source-brief-v1"},
+   body:JSON.stringify(payload)
+  });
+  if(!response.ok)throw Error("HTTP "+response.status);
+  const data=await response.json();
+  if(token!==aiSeq||current!==investigation)return;
+  if(data.status!=="model_generated_not_scientifically_validated"||
+    typeof data.analysis!=="string"||!data.analysis.trim())throw Error("Invalid AI response");
+  output.textContent=data.analysis.slice(0,7000)+"\n\n"+L(
+    "Generado por IA: hipótesis, no pronóstico ni conclusión científica validada.",
+    "AI generated: hypotheses, not a forecast or validated scientific conclusion.");
+ }catch(error){
+  if(token!==aiSeq||current!==investigation)return;
+  output.textContent=L("IA no disponible o sin configurar (","AI unavailable or unconfigured (")+
+   (error.name==="AbortError"?"timeout":error.message)+L(
+    "). La evidencia y las recomendaciones guiadas siguen disponibles.",
+    "). Evidence and deterministic guidance remain available.");
+ }finally{
+  clearTimeout(timeout);
+  if(token===aiSeq)button.disabled=false;
+ }
+});
 syncSecond();
-setMode("all-two");
+setMode("one-two");
 }
