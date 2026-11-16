@@ -338,3 +338,15 @@ body[data-page="telluris-journey"]>.jg-deck{
 @media(prefers-reduced-motion:reduce){
  .jg-deck .jg-slide,.jg-slide-chapters button{transition:none!important;transform:none!important}
 }
+
+
+/* Additional observations are independently sourced event catalogs, not climate variables. */
+.jg-events-teaser{margin-top:11px;border:1px solid rgba(156,213,222,.28);
+ border-radius:11px;background:rgba(12,43,63,.67);padding:11px 15px;
+ display:flex;justify-content:space-between;align-items:center;gap:15px}
+.jg-events-teaser>div{display:grid;gap:4px}
+.jg-events-teaser strong{font-size:11px;color:#caeddd}
+.jg-events-teaser span{font-size:10px;color:#98c8d0;line-height:1.45}
+.jg-events-teaser a{display:inline-block;flex:0 0 auto;font-size:11px;
+ font-weight:800;color:#b8f5db;text-decoration:underline;text-underline-offset:4px}
+@media(max-width:700px){.jg-events-teaser{flex-direction:column;align-items:flex-start}}
