@@ -1,0 +1,45 @@
+name: EXP-010 TELLURIS real-browser user journey QA
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/exp010-browser-qa.yml"
+      - "website/tests/browser-smoke.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  chromium-ux:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Install pinned browser test driver and Chromium
+        shell: bash
+        run: |
+          cd website
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Verify desktop and mobile user journeys without external CDN reliance
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8765 --bind 127.0.0.1 -d website/public &
+          server=$!
+          trap 'kill "$server" || true' EXIT
+          sleep 2
+          cd website
+          node tests/browser-smoke.mjs
+      - name: Retain screenshots for judge-facing visual review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: telluris-exp010-browser-qa
+          path: website/browser-artifacts/
+          if-no-files-found: ignore
+          retention-days: 14
