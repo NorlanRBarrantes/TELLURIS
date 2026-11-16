@@ -6,6 +6,7 @@ import {VARIABLES} from "./science.js";
 import {chosenCodes,siteCount,planBatches,parseBatch,parseArchive,
         matrixRows,summarizeInvestigation,groundedAnswer,coMovementClues,
         buildMatrixEvidence,matrixCSV} from "./matrix-core.js";
+import {KNOWN_SITES,sameSite,primarySiteIdentity,chooseSecondarySite,filterSecondaryOptions} from "./site-choice.js?v=exp010-20261115";
 
 const root=document.getElementById("observatory");
 if(root){
@@ -15,10 +16,7 @@ const L=(esText,enText)=>es?esText:enText;
 const locale=es?"es-CR":"en-US";
 const N=(x,d=2)=>Number.isFinite(x)?Number(x).toLocaleString(locale,{
   minimumFractionDigits:0,maximumFractionDigits:d}):"—";
-const known={
-  liberia:{lat:10.63,lon:-85.44},
-  limon:{lat:9.99,lon:-83.03}
-};
+const known=KNOWN_SITES;
 const form={
   place:el("location"),lat:el("latitude"),lon:el("longitude"),
   variable:el("variable"),start:el("from-year"),end:el("to-year")
@@ -87,7 +85,7 @@ function getLocations(){
     throw Error(L("Segunda zona: coordenadas inválidas.","Second location: invalid coordinates."));
   const other={id:id==="custom"?"custom-b":id,
     label:second.place.selectedOptions[0]?.textContent||"B",lat:lat2,lon:lon2};
-  if(Math.abs(first.lat-other.lat)<.0001&&Math.abs(first.lon-other.lon)<.0001)
+  if(sameSite(first,other))
     throw Error(L("Elige dos coordenadas distintas para comparar.",
                   "Choose two distinct coordinates for comparison."));
   return [first,other];
@@ -129,14 +127,17 @@ function syncPrimary(){
  * When Zone A changes, preserve B unless it becomes the same preset.
  */
 function syncSecond(){
-  const selected=form.place.value;
-  const forbidden=selected==="liberia"||selected==="limon"?selected:null;
-  if(forbidden&&second.place.value===forbidden)
-    second.place.value=forbidden==="liberia"?"limon":"liberia";
+  const forbidden=primarySiteIdentity(
+    form.place.value,Number(form.lat.value),Number(form.lon.value)
+  );
+  second.place.value=chooseSecondarySite(forbidden,second.place.value);
+  const availability=filterSecondaryOptions(
+    [...second.place.options].map(option=>option.value),forbidden
+  );
   for(const option of second.place.options){
-    const excluded=option.value===forbidden;
-    option.disabled=excluded;
-    option.hidden=excluded;
+    const allowed=availability.find(x=>x.value===option.value)?.available!==false;
+    option.disabled=!allowed;
+    option.hidden=!allowed;
   }
   updateSecond();
   syncPrimary();
@@ -153,9 +154,10 @@ function clearResult(){
 second.place.addEventListener("change",()=>{
   // Defensive fallback if a browser, script or assistive control assigns a
   // disabled preset despite the UI exclusion.
-  if(second.place.value===form.place.value && form.place.value!=="custom"){
-    second.place.value=form.place.value==="liberia"?"limon":"liberia";
-  }
+  const forbidden=primarySiteIdentity(
+    form.place.value,Number(form.lat.value),Number(form.lon.value)
+  );
+  second.place.value=chooseSecondarySite(forbidden,second.place.value);
   updateSecond();
   clearResult();
 });
@@ -173,7 +175,7 @@ for(const key of ["variable","lat","lon","start","end"]){
 for(const f of [second.lat,second.lon,form.lat,form.lon,
   form.place,form.variable,form.start,form.end])
   f.addEventListener("change",()=>{
-    if(f===form.place)syncSecond();
+    if(f===form.place||f===form.lat||f===form.lon)syncSecond();
     syncPrimary();
     clearResult();
   });
