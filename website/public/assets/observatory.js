@@ -22,6 +22,11 @@ const form={
   variable:el("variable"),start:el("from-year"),end:el("to-year")
 };
 const second={place:el("obs-other-place"),lat:el("obs-other-lat"),lon:el("obs-other-lon")};
+/* Use a stable option catalog so forbidden sites are ABSENT in native selects,
+ * including Safari/iOS, rather than merely disabled in a platform dropdown. */
+const secondaryOptionCatalog=[...second.place.options].map(option=>({
+  value:option.value,label:option.textContent
+}));
 const primary={
   place:el("obs-main-place"),variable:el("obs-main-variable"),
   lat:el("obs-main-lat"),lon:el("obs-main-lon"),
@@ -130,15 +135,19 @@ function syncSecond(){
   const forbidden=primarySiteIdentity(
     form.place.value,Number(form.lat.value),Number(form.lon.value)
   );
-  second.place.value=chooseSecondarySite(forbidden,second.place.value);
+  const selected=chooseSecondarySite(forbidden,second.place.value);
   const availability=filterSecondaryOptions(
-    [...second.place.options].map(option=>option.value),forbidden
+    secondaryOptionCatalog.map(option=>option.value),forbidden
   );
-  for(const option of second.place.options){
-    const allowed=availability.find(x=>x.value===option.value)?.available!==false;
-    option.disabled=!allowed;
-    option.hidden=!allowed;
-  }
+  const allowed=new Set(availability.filter(option=>option.available).map(option=>option.value));
+  second.place.replaceChildren(...secondaryOptionCatalog.filter(option=>
+    allowed.has(option.value)).map(item=>{
+      const option=document.createElement("option");
+      option.value=item.value;
+      option.textContent=item.label;
+      return option;
+    }));
+  second.place.value=allowed.has(selected)?selected:second.place.options[0].value;
   updateSecond();
   syncPrimary();
 }
@@ -152,8 +161,7 @@ function clearResult(){
   cancelCurrent();
 }
 second.place.addEventListener("change",()=>{
-  // Defensive fallback if a browser, script or assistive control assigns a
-  // disabled preset despite the UI exclusion.
+  // Defensive fallback if any external code assigns a removed preset.
   const forbidden=primarySiteIdentity(
     form.place.value,Number(form.lat.value),Number(form.lon.value)
   );
