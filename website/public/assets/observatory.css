@@ -436,3 +436,9 @@ body:has(#observatory){
 .globe-next-step:hover{background:#d0ffeb}
 @media(max-width:700px){.lab-advanced>summary{flex-direction:column;align-items:flex-start}
  .obs-definitions{grid-template-columns:1fr}.globe-next-step{width:100%;justify-content:center}}
+
+/* EXP-010: clear product return path when the navigation collapses on mobile. */
+.explorer-intro .explorer-breadcrumb{display:flex;gap:8px;align-items:center;
+ margin:0 0 14px;color:#91c7c0;font-size:11px;font-weight:750;line-height:1.5}
+.explorer-intro .explorer-breadcrumb a{color:#b8f6dd;text-decoration:underline;text-underline-offset:4px}
+.explorer-intro .explorer-breadcrumb a:hover{color:#fff}

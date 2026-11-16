@@ -90,5 +90,7 @@ test("Explorer remains NASA scientific tool, with advanced methods preserved but
    assert.ok(!html.includes('id="globe-weather-canvas"'));
    assert.ok(!html.includes('class="question-presets"'));
    assert.ok(html.includes('href="'+(page.startsWith("en/")?"/en/about/":"/about/")+'"'));
+   assert.ok(html.includes('class="explorer-breadcrumb"'));
+   assert.ok(html.includes('href="'+(page.startsWith("en/")?"/en/":"/")+'"'));
  }
 });
