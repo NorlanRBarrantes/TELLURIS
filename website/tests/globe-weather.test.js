@@ -30,6 +30,6 @@ test("Research controls retain original source, export, and synced form",()=>{
  assert.match(script,/form\.place\.dispatchEvent\(new Event\("change"/);
  assert.match(script,/buildMatrixEvidence\(current\)/);
  assert.match(script,/matrixCSV\(report\)/);
- assert.match(script,/option\.disabled=excluded/);
- assert.match(script,/option\.hidden=excluded/);
+ assert.match(script,/option\.disabled=!allowed/);
+ assert.match(script,/option\.hidden=!allowed/);
 });
