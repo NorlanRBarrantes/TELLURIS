@@ -122,7 +122,11 @@ if(root){
    try{
      const response=await fetch(request.url,{signal:ac.signal});
      if(!response.ok)throw Error(request.provider+" HTTP "+response.status);
-     const payload=await response.json();
+     // USGS FDSN uses HTTP 204 for a valid no-data query. Treat it as an
+     // empty source response, not a network failure and never invent records.
+     const payload=response.status===204&&request.type==="earthquakes"?
+       {type:"FeatureCollection",features:[]}:
+       await response.json();
      if(token!==seq)return;
      const data=request.type==="earthquakes"?parseUSGS(payload,request):parseEONET(payload,request);
      render(data,{lat:request.lat,lon:request.lon});
