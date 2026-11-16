@@ -40,10 +40,15 @@ try{
   await go(home,"/");
   assert.match(await home.locator("h1").innerText(),/TELLURIS/);
   assert.equal(await home.locator(".jg-section .jg-step-label").count(),4);
-  assert.equal(await home.locator("a.jg-action[href='/telluris/explore/']").count(),2);
+  assert.equal(await home.locator("a.jg-action[href='/telluris/explore/']").count(),1);
   assert.equal(await home.locator('a[href="/about/"]').count()>0,true);
   assert.equal(await home.locator(".jg-slide").count(),6);
   assert.equal(await home.locator(".jg-slide.is-active").getAttribute("data-slide"),"intro");
+  assert.equal(await home.locator("[data-slide-skip]").count(),1);
+  await home.locator("[data-slide-skip]").click();
+  assert.equal(await home.locator(".jg-slide.is-active").getAttribute("data-slide"),"explorer");
+  assert.equal(await home.locator(".jg-slide.is-active a.jg-action").getAttribute("href"),"/telluris/explore/");
+  await home.locator('[data-slide-to="0"]').click();
   assert.equal(await home.locator('[data-slide-prev]').isDisabled(),true);
   assert.equal(await home.locator('[data-slide-next]').isEnabled(),true);
   const extent=await home.evaluate(()=>({

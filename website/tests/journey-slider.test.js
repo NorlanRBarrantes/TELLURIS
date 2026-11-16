@@ -15,6 +15,10 @@ test("Exactly six presentations retain 00 intro, 01 problem, 02 method, 03 featu
   assert.ok(html.includes('class="jg-deck-track"'));
   assert.ok(html.includes("journey-slider.js?v=exp011-slides-20261115"));
   assert.ok(html.includes("jg-slide-nav"));
+  assert.ok(html.includes("data-slide-skip"),lang);
+  assert.ok(html.includes("/assets/visual-identity.css?v=exp012-20261115"),lang);
+  assert.ok(html.includes("/assets/uriel-symbol-128.png"),lang);
+  assert.ok(!html.includes('class="jg-cta-row"><a class="jg-action"'),lang);
  }
 });
 test("URL anchors and navigation stay within boundaries",()=>{
