@@ -38,7 +38,6 @@ jobs:
           node --check website/public/assets/explorer.js
           node --check website/public/assets/globe.js
           node --check website/public/assets/globe-layers.js
-          node --check website/public/assets/globe-weather.js
           node --check website/public/assets/matrix-core.js
           node --check website/public/assets/observatory.js
           node --check website/public/assets/evidence.js
@@ -59,6 +58,10 @@ jobs:
           sleep 2
           curl --fail --silent --show-error http://127.0.0.1:8765/ | grep -q 'lang="es"'
           curl --fail --silent --show-error http://127.0.0.1:8765/en/ | grep -q 'lang="en"'
+          curl --fail --silent --show-error http://127.0.0.1:8765/ | grep -q 'TELLURIS'
+          curl --fail --silent --show-error http://127.0.0.1:8765/about/ | grep -q 'PROJECT URIEL'
+          curl --fail --silent --show-error http://127.0.0.1:8765/en/about/ | grep -q 'PROJECT URIEL'
+          curl --fail --silent --show-error http://127.0.0.1:8765/assets/journey.css | grep -q 'jg-hero'
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/ | grep -q 'lang="es"'
           curl --fail --silent --show-error http://127.0.0.1:8765/en/telluris/ | grep -q 'lang="en"'
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/explore/ | grep -q 'lang="es"'
@@ -79,7 +82,6 @@ jobs:
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/ne_110m_land.geojson | grep -q 'FeatureCollection'
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/globe-layers.js | grep -q 'GIBS_WMS'
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/globe.css | grep -q 'globe-card-v2'
-          curl --fail --silent --show-error http://127.0.0.1:8765/assets/globe-weather.js | grep -q 'weatherSource'
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/observatory.js | grep -q 'planBatches'
           curl --fail --silent --show-error http://127.0.0.1:8765/assets/observatory.css | grep -q 'obs-modes'
           curl --fail --silent --show-error http://127.0.0.1:8765/telluris/explore/ | grep -q 'id="observatory"'

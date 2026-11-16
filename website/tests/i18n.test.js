@@ -8,11 +8,13 @@ const root=path.resolve(fileURLToPath(new URL("../public/",import.meta.url)));
 const read=rel=>readFileSync(path.join(root,rel),"utf8");
 const pages=[
  ["index.html","es","/","/","/en/"],
- ["telluris/index.html","es","/telluris/","/telluris/","/en/telluris/"],
+ ["telluris/index.html","es","/","/","/en/"],
  ["telluris/explore/index.html","es","/telluris/explore/","/telluris/explore/","/en/telluris/explore/"],
  ["en/index.html","en","/en/","/","/en/"],
- ["en/telluris/index.html","en","/en/telluris/","/telluris/","/en/telluris/"],
- ["en/telluris/explore/index.html","en","/en/telluris/explore/","/telluris/explore/","/en/telluris/explore/"]
+ ["en/telluris/index.html","en","/en/","/","/en/"],
+ ["en/telluris/explore/index.html","en","/en/telluris/explore/","/telluris/explore/","/en/telluris/explore/"],
+ ["about/index.html","es","/about/","/about/","/en/about/"],
+ ["en/about/index.html","en","/en/about/","/about/","/en/about/"]
 ];
 for(const [file,lang,route,es,en] of pages){
  test("Language, canonical URL and navigation: "+route,()=>{
@@ -36,7 +38,7 @@ for(const [file,lang,route,es,en] of pages){
  });
 }
 test("Previously published /es/ pages remain Spanish and canonicalized",()=>{
- for(const [file,canonical] of [["es/index.html","/"],["es/telluris/index.html","/telluris/"]]){
+ for(const [file,canonical] of [["es/index.html","/"],["es/telluris/index.html","/"]]){
   const html=read(file);
   assert.ok(html.includes('<html lang="es">'));
   assert.ok(html.includes('<link rel="canonical" href="https://projecturiel.earth'+canonical+'">'));
@@ -58,8 +60,13 @@ test("Dynamic analysis feedback is localized and shares the archived NASA data",
  assert.ok(js.includes('fetch("/telluris/explore/data/exp001-annual.json"'));
  assert.ok(existsSync(path.join(root,"telluris/explore/data/exp001-annual.json")));
 });
-test("Sitemap lists all six canonical language routes without old duplicates",()=>{
+test("Sitemap indexes 8 canonical TELLURIS / team / scientific URLs",()=>{
  const map=read("sitemap.xml");
- for(const [file,lang,route] of pages)assert.ok(map.includes('<loc>https://projecturiel.earth'+route+'</loc>'));
- assert.ok(!map.includes("https://projecturiel.earth/es/"));
+ const routes=["/","/en/","/about/","/en/about/",
+  "/telluris/explore/","/en/telluris/explore/",
+  "/telluris/catalog/","/en/telluris/catalog/"];
+ for(const route of routes)assert.ok(map.includes('<loc>https://projecturiel.earth'+route+'</loc>'));
+ assert.equal((map.match(/<loc>/g)||[]).length,routes.length);
+ assert.ok(!map.includes("<loc>https://projecturiel.earth/telluris/</loc>"));
+ assert.ok(!map.includes("<loc>https://projecturiel.earth/es/</loc>"));
 });

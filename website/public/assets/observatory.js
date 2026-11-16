@@ -455,13 +455,19 @@ function downloadEvidence(kind){
 el("obs-export-csv").addEventListener("click",()=>downloadEvidence("csv"));
 el("obs-export-json").addEventListener("click",()=>downloadEvidence("json"));
 el("obs-family-filter").addEventListener("change",()=>{if(current)renderTable();});
-el("obs-drilldown").addEventListener("click",()=>{
-  if(!current)return;
-  form.variable.value=selectedCode;
-  form.variable.dispatchEvent(new Event("change",{bubbles:true}));
-  form.variable.scrollIntoView({behavior:"smooth",block:"center"});
-  form.variable.focus({preventScroll:true});
+const detailLink=root.querySelector(".obs-detail-link");
+detailLink?.addEventListener("click",()=>{
+  const panel=document.getElementById("detail-research");
+  if(panel)panel.open=true;
+  if(current){
+    form.variable.value=selectedCode;
+    form.variable.dispatchEvent(new Event("change",{bubbles:true}));
+  }
 });
+if(window.location.hash==="#detail-research"){
+  const panel=document.getElementById("detail-research");
+  if(panel)panel.open=true;
+}
 el("obs-question-form").addEventListener("submit",event=>{
   event.preventDefault();
   answer.textContent=groundedAnswer(el("obs-question").value,current?.rows,{
