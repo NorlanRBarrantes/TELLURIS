@@ -42,6 +42,26 @@ try{
   assert.equal(await home.locator(".jg-section .jg-step-label").count(),4);
   assert.equal(await home.locator("a.jg-action[href='/telluris/explore/']").count(),2);
   assert.equal(await home.locator('a[href="/about/"]').count()>0,true);
+  assert.equal(await home.locator(".jg-slide").count(),6);
+  assert.equal(await home.locator(".jg-slide.is-active").getAttribute("data-slide"),"intro");
+  assert.equal(await home.locator('[data-slide-prev]').isDisabled(),true);
+  assert.equal(await home.locator('[data-slide-next]').isEnabled(),true);
+  const extent=await home.evaluate(()=>({
+    document:document.documentElement.scrollHeight,viewport:window.innerHeight
+  }));
+  assert.ok(extent.document<=extent.viewport+7,"Homepage must not be a vertical-scroll storytelling page: "+JSON.stringify(extent));
+  await home.locator("[data-slide-next]").click();
+  assert.equal(await home.locator(".jg-slide.is-active").getAttribute("data-slide"),"how");
+  await home.keyboard.press("ArrowRight");
+  assert.equal(await home.locator(".jg-slide.is-active").getAttribute("data-slide"),"method");
+  await home.locator('[data-slide-to="3"]').click();
+  assert.equal(await home.locator(".jg-slide.is-active").getAttribute("data-slide"),"capabilities");
+  assert.ok(home.url().endsWith("#capabilities"));
+  await home.locator('[data-slide-to="5"]').click();
+  assert.equal(await home.locator(".jg-slide.is-active").getAttribute("data-slide"),"explorer");
+  assert.equal(await home.locator('[data-slide-next]').isDisabled(),true);
+  assert.equal(await home.locator(".jg-slide.is-active a.jg-action").getAttribute("href"),"/telluris/explore/");
+  await home.locator('[data-slide-to="0"]').click();
   await noOverflow(home,"Spanish desktop landing");
   await home.screenshot({path:"browser-artifacts/telluris-home-1440.png",fullPage:true});
   await go(home,"/telluris/");
@@ -122,11 +142,18 @@ try{
   assert.match(await en.locator("h1").innerText(),/TELLURIS/);
   await go(en,"/en/telluris/explore/");
   await en.waitForFunction(()=>document.querySelector("#obs-main-variable").options.length>=18);
+  assert.equal(await en.locator("#natural-events").count(),1);
+  assert.equal(await en.locator("#events-type option").count(),6);
   assert.equal(await en.locator("#obs-other-place option[value=liberia]").count(),0);
 
   const mobile=await contextAt(390,844);
   const mobileHome=await mobile.newPage();
   await go(mobileHome,"/");
+  assert.equal(await mobileHome.locator(".jg-slide.is-active").getAttribute("data-slide"),"intro");
+  assert.equal(await mobileHome.locator('[data-slide-to="4"]').isVisible(),true);
+  await mobileHome.locator('[data-slide-to="4"]').click();
+  assert.equal(await mobileHome.locator(".jg-slide.is-active").getAttribute("data-slide"),"rigor");
+  await mobileHome.locator('[data-slide-to="0"]').click();
   await noOverflow(mobileHome,"Spanish mobile home");
   await mobileHome.screenshot({path:"browser-artifacts/telluris-home-390.png",fullPage:true});
   const mobileLab=await mobile.newPage();
