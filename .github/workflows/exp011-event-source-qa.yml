@@ -1,0 +1,59 @@
+name: EXP-011 Original USGS earthquakes and NASA EONET source QA
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/exp011-event-source-qa.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-observations:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Query real USGS and NASA EONET events; never substitute fixtures
+        run: |
+          node --input-type=module <<'JS'
+          import {
+            eventRequest,parseUSGS,parseEONET
+          } from "./website/public/assets/natural-events-core.js";
+
+          const when=new Date();
+          const site={lat:10.63,lon:-85.44};
+          const quake=eventRequest({type:"earthquakes",...site,days:90,
+            radiusKm:1000,minMagnitude:3.5,now:when});
+          const event=eventRequest({type:"wildfires",lat:38,lon:-121,days:365,
+            radiusKm:1000,now:when});
+          let valid=0;
+          for(const r of [quake,event]){
+            const response=await fetch(r.url,{
+              signal:AbortSignal.timeout(85000),
+              headers:{"User-Agent":"ProjectUriel-TELLURIS-EXP011-source-qa/1.0"}
+            });
+            if(!response.ok)throw Error("Original "+r.provider+" API "+response.status+": "+
+              (await response.text()).slice(0,250));
+            const json=await response.json();
+            const data=r.type==="earthquakes"?parseUSGS(json,r):parseEONET(json,r);
+            if(!Array.isArray(data.items)||!data.sourceUrl.startsWith("https://")||
+              !data.provider)throw Error("Invalid event provenance");
+            if(r.type==="earthquakes"&&!Array.isArray(json.features))
+              throw Error("Original USGS features missing");
+            if(r.type==="wildfires"&&!Array.isArray(json.events))
+              throw Error("Original EONET events missing");
+            console.log("ORIGINAL_EVENT_SOURCE_OK",r.provider,r.type,
+              "HTTP",response.status,"RAW_COUNT",
+              r.type==="earthquakes"?json.features.length:json.events.length,
+              "POINTS_IN_RADIUS",data.items.length,"START",r.start,"END",r.end,
+              "CAPPED",data.capped);
+            valid++;
+          }
+          if(valid!==2)throw Error("Both original providers must be checked");
+          console.log("EXP011_ORIGINAL_SOURCE_VALIDATED",valid,"providers; no synthetic data");
+          JS
