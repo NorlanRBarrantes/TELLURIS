@@ -350,3 +350,13 @@ A second real-source run confirmed that the selected Limón point is classified 
 - **Logo:** retain the identifiable wings, star and orbital emblem of the user-uploaded Project Uriel Galactic Crest in a transparent, optimized symbol image in all headers and both About pages. Do not override TELLURIS's product-first position with the team brand.
 - **Navigation:** the introduction slide no longer exits into the laboratory. A real skip control moves to the final slide with one valid Explorer CTA; hash navigation, accessible focus and reduced motion remain supported.
 - **Scope:** user interface only, no scientific calculations or provider integrations changed. [Full rationale and validation](EXP-012-VISUAL-IDENTITY.md). Publication on BanaHosting requires separate operator confirmation.
+
+## ADR-038 — Freeze 2026 breadth; preserve all research topics for verifiable post-submission versions
+
+- **Date:** 2026-11-15 (Costa Rica).
+- **Status:** Accepted for roadmap and documentation; no new public implementation implied.
+- **Decision:** preserve all 49 team research topics and ten proposed indicators, while continuing to distinguish 18 actual NASA POWER operational parameters and their overlap with research topics. At the reviewed EXP-012 baseline the research-topic states are 5 connected, 8 partial and 36 not connected. Prioritize a stable NASA challenge submission and evidence-based scientific analysis over attempting all external mission integrations in one hackathon.
+- **Next-stage approach:** advance new sources only through source/product/version, real observation, QA/masks, compatible geography and time, units, independently verified methods, bilingual accessibility, operational/security checks and public browser validation. Never claim 49 connected sources or ten statistically validated indicators.
+- **External benchmark:** a request to review `https://afterglow.work/index.html` was not independently retrievable; do not conflate it with other unrelated Afterglow projects. A **separately identified** Afterglow Access/IDATA reference supports exploring accessible science UX, sonification and educational onboarding as future ideas, but does not justify any claims about the unreachable target.
+- **Scope boundary:** documentation only; preserve EXP-012 presentation design and the NASA deadline. No secret-dependent LLM, unlicensed assets, generated environmental measurements or deployment is part of this decision.
+- **Records:** [future-release scientific roadmap](FUTURE-VERSIONS-ROADMAP.md) and [bounded external Afterglow reference study](EXTERNAL-REFERENCE-AFTERGLOW.md).
