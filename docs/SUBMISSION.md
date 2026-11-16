@@ -54,8 +54,8 @@ The repository was created private; reviewers cannot access private repositories
 
 ## Mandatory final cleanup
 
-- [ ] Delete docs/_working/NOTES.md from the final branch after transferring approved decisions to docs/DECISIONS.md.
-- [ ] Understand that deleting a tracked document does **not** remove historical Git commits. The note must never include secrets.
+- [x] Remove obsolete temporary `docs/_working/NOTES.md` from the final branch after promoting approved decisions into `docs/DECISIONS.md` and permanent scientific records.
+- [x] Confirm that deleting tracked notes does **not** remove their historical Git commits. All history and Actions artifacts still require independent confidential-data review before visibility is changed to public.
 - [ ] Review every feature claim in README and the submission for evidence.
 - [ ] Confirm that published screenshots and charts use real, traceable data or are explicitly labeled illustrative.
 - [ ] Audit licenses and asset ownership.
