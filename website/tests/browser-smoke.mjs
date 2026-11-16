@@ -91,7 +91,8 @@ try{
   // Full archived matrix: original two source variables, sixteen clearly unavailable.
   await lab.locator("#obs-main-place").selectOption("liberia");
   await lab.locator("#obs-other-place").selectOption("limon");
-  await lab.locator("#obs-main-variable").selectOption("T2M");
+  // All-variables mode intentionally hides its irrelevant single-variable selector.
+  assert.equal(await lab.locator("#obs-main-variable").isVisible(),false);
   await lab.locator(".obs-archive-advanced summary").click();
   await lab.locator("#obs-run-archive").click();
   await lab.locator("#obs-results").waitFor({state:"visible",timeout:15000});
