@@ -105,3 +105,29 @@ test("18 NASA POWER links target distinct and available explorer parameter IDs",
  assert.ok(js.includes('encodeURIComponent(entry.id)'));
  assert.ok(js.includes('entry.integration_codes'));
 });
+
+
+test("USGS event dimensions are source-integrated without being mislabeled NASA POWER climate parameters",()=>{
+ const quakeIds=["C31","C32","C33","C34"];
+ assert.equal(data.connected.length,18);
+ assert.equal(data.candidates.length,49);
+ for(const id of quakeIds){
+   const e=data.candidates.find(c=>c.id===id);
+   assert.equal(e.implementation_status,"partial");
+   assert.equal(e.event_integration.status,"event_api_connected");
+   assert.equal(e.event_integration.type,"earthquakes");
+   assert.match(e.event_integration.source_url,/earthquake\.usgs\.gov/);
+   assert.ok(e.event_integration.fields.length>0);
+ }
+ for(const [id,type] of [["C22","floods"],["C29","wildfires"],
+                           ["C36","volcanoes"],["C38","landslides"]]){
+   const e=data.candidates.find(c=>c.id===id);
+   assert.equal(e.implementation_status,"not_connected");
+   assert.equal(e.related_event.type,type);
+   assert.match(e.related_event.note_en,/not |not /i);
+ }
+ const js=read("assets/catalog.js");
+ assert.ok(js.includes("entry.event_integration"));
+ assert.ok(js.includes("entry.related_event"));
+ assert.ok(js.includes('encodeURIComponent(entry.event_integration.type)'));
+});
