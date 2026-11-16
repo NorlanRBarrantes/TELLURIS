@@ -13,6 +13,12 @@
 
 **Important:** Verify anonymous public website and source access, then complete the official NASA Space Apps team-project submission. GitHub source changes are not a BanaHosting deployment or an official submission.
 
+## Optional full-length evidence film (EXP-017)
+
+The homepage now contains a **bilingual, user-controlled long-form film player** (English video, ~2:48 at 1.15×; no automatic playback). The player remains hidden until its video URL returns HTTP 200.
+
+**The MP4 binary has not been committed or deployed yet.** Before expecting the new button on the live website, upload `telluris-evidence-film-115x.mp4` to `website/public/assets/` and deploy the tested `website/public/` directory to BanaHosting. This optional film is not the official ≤30-second NASA submission video. See [EXP-017 implementation and deployment steps](docs/EXP-017-LONG-FORM-EVIDENCE-FILM.md).
+
 ## Challenge
 
 TELLURIS responds to **[Be An Earth System Trend Detective!](https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/)**, an advanced Earth Science / Software challenge in the 2026 NASA Space Apps Challenge.
