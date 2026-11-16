@@ -31,7 +31,7 @@ The outdated catalog SEO description asserting only two connected NASA variables
 
 ## Region-A/region-B invariants
 
-- Zone A Liberia excludes Liberia from Zone B (hidden and disabled); Limón remains selectable.
+- Zone A Liberia removes Liberia entirely from the native Zone B option list (including mobile Safari); Limón remains selectable. Changing Zone A reconstructs B's valid list from a stable source catalog.
 - Zone A Limón excludes Limón from Zone B; Liberia remains selectable.
 - Switching A between presets automatically moves B to the other preset only if it would otherwise collide.
 - Zone A custom coordinates identical to a known preset exclude that named B option too.
@@ -62,3 +62,8 @@ Do not present Project Uriel as an official NASA organization, imply NASA endors
 - The Chromium browser acceptance tests **intentionally block external jsDelivr and NASA GIBS** to validate a usable geographic/browser fallback. They **do not** verify public texture appearance or live source image georegistration.
 - More explicit browser regression checks subsequently cover the four distinct one/two-variable and one/two-site research mode transitions. Capture the final passing Action run separately.
 - **BanaHosting release remains unverified** until a user/operator executes a successful backed-up --deploy and confirms visible product-first pages and source integrity.
+
+
+## Safari-compatible native selector hardening
+
+Following the browser/static acceptance tests, the secondary zone selector was strengthened: when A selects a named location or a custom coordinate equivalent to it, the matching B option is **not rendered in the native select at all**. This avoids platform differences in how hidden/disabled options appear in mobile Safari. The complete available option catalog is retained in JavaScript and recreated on each A change, preserving B's previous legitimate selection and a custom-coordinate option. The geographic-duplicate validator remains an independent pre-request guard for custom/custom duplicates. Browser tests now assert **absence** of excluded B options, not merely disabled styling.
