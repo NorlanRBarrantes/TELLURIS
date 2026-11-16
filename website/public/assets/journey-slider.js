@@ -64,7 +64,7 @@ export function initJourneyDeck(doc=document,win=window){
   doc.addEventListener("keydown",event=>{
     if(event.altKey||event.ctrlKey||event.metaKey||event.defaultPrevented)return;
     const target=event.target;
-    if(target?.closest?.("input,textarea,select,[contenteditable],button,a,summary"))return;
+    if(target?.closest?.("input,textarea,select,[contenteditable]"))return;
     if(event.key==="ArrowRight"||event.key==="PageDown"){event.preventDefault();navigate(1);}
     else if(event.key==="ArrowLeft"||event.key==="PageUp"){event.preventDefault();navigate(-1);}
     else if(event.key==="Home"){event.preventDefault();change(0);}
