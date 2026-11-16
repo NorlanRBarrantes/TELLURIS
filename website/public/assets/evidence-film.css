@@ -1,0 +1,11 @@
+/* EXP-017 — responsive, deliberately opt-in long-form evidence film */
+.jg-film-button{border:1px solid rgba(147,239,218,.65);background:rgba(17,65,73,.75)!important;color:#d7fff1!important;cursor:pointer}
+.jg-film-button[hidden]{display:none!important}
+.jg-film-dialog{position:fixed;inset:0;margin:auto;width:min(960px,calc(100vw - 28px));max-height:min(92vh,980px);overflow:auto;box-sizing:border-box;border:1px solid rgba(138,226,204,.45);border-radius:19px;background:linear-gradient(145deg,#061b2b,#030e1b);color:#ecfdf8;padding:clamp(17px,3vw,30px);box-shadow:0 30px 90px rgba(0,0,0,.7)}
+.jg-film-dialog::backdrop{background:rgba(0,6,14,.87);backdrop-filter:blur(7px)}
+.jg-film-dialog h2{font-size:clamp(23px,3vw,38px);margin:7px 0 13px;letter-spacing:-.03em}
+.jg-film-dialog p{color:#b7d3d9;font-size:13px;line-height:1.65}
+.jg-film-dialog .jg-film-overline{font-size:11px;font-weight:800;letter-spacing:.14em;color:#93ead4}
+.jg-film-dialog .jg-film-close{float:right;padding:8px 13px;border:1px solid rgba(182,232,220,.4);border-radius:7px;color:#d9f9f0;background:#153044;cursor:pointer}
+.jg-film-dialog video{width:100%;height:auto;display:block;aspect-ratio:16/9;background:#060e1d;margin:18px 0;border-radius:10px}
+@media(max-width:560px){.jg-film-dialog{padding:13px}.jg-film-dialog .jg-film-close{margin-bottom:5px}}
