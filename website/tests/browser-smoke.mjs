@@ -163,6 +163,7 @@ try{
   }));
   await lab.locator("#events-type").selectOption("wildfires");
   assert.equal(await lab.locator("#events-mag-field").isVisible(),false);
+  assert.equal(await lab.locator("#events-type").inputValue(),"wildfires");
   assert.equal(await lab.locator("#events-result").isVisible(),false,"Changing sources clears old results");
   await lab.locator("#events-run").click();
   await lab.locator("#events-result").waitFor({state:"visible"});
