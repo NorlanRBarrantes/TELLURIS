@@ -24,7 +24,8 @@ test("Earthquake API request is geocentric, thresholded, bounded, sourced",()=>{
  assert.equal(url.searchParams.get("minmagnitude"),"3.5");
  assert.equal(url.searchParams.get("format"),"geojson");
  assert.equal(url.searchParams.get("limit"),"500");
- assert.equal(url.searchParams.get("starttime"),"2026-08-17");
+ assert.equal(url.searchParams.get("starttime"),"2026-08-17T14:30:00.000Z");
+ assert.equal(url.searchParams.get("endtime"),"2026-11-15T14:30:00.000Z");
  assert.equal(r.provider,"USGS Earthquake Catalog");
 });
 test("NASA EONET is an event catalog, NEVER a MODIS pixel or sea-level series",()=>{
