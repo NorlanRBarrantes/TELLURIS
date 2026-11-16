@@ -35,7 +35,7 @@ test("NASA EONET is an event catalog, NEVER a MODIS pixel or sea-level series",(
    assert.equal(u.pathname,"/api/v3/events");
    assert.equal(u.searchParams.get("category"),type);
    assert.equal(u.searchParams.get("status"),"all");
-   assert.ok(u.searchParams.get("bbox").split(",").every(Number.isFinite.bind(null)));
+   assert.ok(u.searchParams.get("bbox").split(",").map(Number).every(Number.isFinite));
    assert.ok(!r.url.includes("FIRMS")&&!r.url.includes("SWOT"));
  }
 });
