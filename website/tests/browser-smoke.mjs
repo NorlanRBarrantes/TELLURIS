@@ -63,7 +63,7 @@ try{
   assert.equal(await lab.locator("#globe-spin").count(),0);
   assert.equal(await lab.locator("#globe-stage").count(),1);
   assert.equal(await lab.locator("#detail-research").evaluate(el=>el.open),false);
-  assert.equal(await lab.locator("#obs-other-place option[value=liberia]").evaluate(e=>e.disabled&&e.hidden),true,
+  assert.equal(await lab.locator("#obs-other-place option[value=liberia]").count(),0,
     "With zone A Liberia, zone B Liberia must be absent/unselectable.");
   assert.equal(await lab.locator("#obs-other-place").inputValue(),"limon");
   // The four modes are distinct operational states, not decorative buttons.
@@ -83,7 +83,7 @@ try{
   await lab.locator(".obs-primary-config summary").click();
   await lab.locator("#obs-main-place").selectOption("limon");
   await lab.waitForFunction(()=>document.querySelector("#obs-other-place").value==="liberia");
-  assert.equal(await lab.locator("#obs-other-place option[value=limon]").evaluate(e=>e.disabled&&e.hidden),true,
+  assert.equal(await lab.locator("#obs-other-place option[value=limon]").count(),0,
     "With zone A Limón, zone B Limón must be absent/unselectable.");
 
   // Even custom coordinates cannot be used to compare a point to itself.
@@ -92,7 +92,7 @@ try{
   await lab.locator("#obs-main-lat").dispatchEvent("change");
   await lab.locator("#obs-main-lon").fill("-85.44");
   await lab.locator("#obs-main-lon").dispatchEvent("change");
-  assert.equal(await lab.locator("#obs-other-place option[value=liberia]").evaluate(e=>e.disabled),true);
+  assert.equal(await lab.locator("#obs-other-place option[value=liberia]").count(),0);
   await lab.locator("#obs-other-place").selectOption("custom");
   await lab.locator("#obs-other-lat").fill("10.63");
   await lab.locator("#obs-other-lat").dispatchEvent("change");
@@ -122,7 +122,7 @@ try{
   assert.match(await en.locator("h1").innerText(),/TELLURIS/);
   await go(en,"/en/telluris/explore/");
   await en.waitForFunction(()=>document.querySelector("#obs-main-variable").options.length>=18);
-  assert.equal(await en.locator("#obs-other-place option[value=liberia]").evaluate(e=>e.disabled&&e.hidden),true);
+  assert.equal(await en.locator("#obs-other-place option[value=liberia]").count(),0);
 
   const mobile=await contextAt(390,844);
   const mobileHome=await mobile.newPage();

@@ -45,8 +45,8 @@ test("Browser controller hides forbidden site and rejects duplicate coordinates"
  const {readFileSync}=await import("node:fs");
  const js=readFileSync(new URL("../public/assets/observatory.js",import.meta.url),"utf8");
  assert.match(js,/filterSecondaryOptions/);
- assert.match(js,/option\.disabled=!allowed/);
- assert.match(js,/option\.hidden=!allowed/);
+ assert.match(js,/second\.place\.replaceChildren/);
+ assert.match(js,/secondaryOptionCatalog/);
  assert.match(js,/if\(sameSite\(first,other\)\)/);
  assert.match(js,/f===form\.place\|\|f===form\.lat\|\|f===form\.lon/);
 });
