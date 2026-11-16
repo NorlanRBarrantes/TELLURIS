@@ -15,7 +15,8 @@ test("All 18 NASA POWER parameters have source-specific conditional guidance",()
   const brief=buildDecisionBrief(row,{sites:[sites[0]],start:1991,end:2020,lang:"en"});
   assert.equal(brief.ready,true);
   assert.equal(brief.metrics.length,4);
-  assert.match(brief.drivers,/may |can |could |require|influence|reflect|contribute|interact/i);
+  assert.ok(brief.drivers.length>55,"Every parameter needs a substantive source-specific hypothesis");
+  assert.ok(!/is caused by|will certainly|will definitely/i.test(brief.drivers));
   assert.match(brief.limitation,/not causal attribution/);
  }
 });
