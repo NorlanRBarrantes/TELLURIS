@@ -82,3 +82,9 @@ TELLURIS visibly reports a Theil–Sen trend per decade, an independent-year ran
 ## EXP-006 — test of precipitation consistency across NASA collections
 
 We implemented a reproducible pipeline from GPM IMERG Final V07 native monthly HDF5 (once obtained via NASA Earthdata) to unit-validated, complete-year comparison against POWER `PRECTOTCORR`. The public Explorer provides a dedicated optional upload/comparison module and audit JSON export. **No independent IMERG source observations are available yet**, so do not describe any cross-validated precipitation trend. Scientific rationale and provenance protocol: [EXP-006](EXP-006-IMERG-CROSS-VALIDATION.md).
+
+## EXP-010 reviewer-facing experience (2026-11-15)
+
+TELLURIS now leads the canonical project root `https://projecturiel.earth/` (English `/en/`), with a five-moment guided story explaining the challenge, authentic NASA source analysis, four comparison modes, 18 connected POWER variables and statistical/physical limitations. The direct CTA leads to `/telluris/explore/` or `/en/telluris/explore/`. Project Uriel's non-NASA team explanation is separated into `/about/` and `/en/about/`. Full source documentation: [EXP-010](EXP-010-JUDGE-JOURNEY.md).
+
+This repository revision and CI are **not** evidence of official NASA Space Apps submission or deployed public website readiness. Confirm final public URLs, image/source attribution, reproducible study, repository access and official deadline independently. Do not conflate source test success with NASA endorsement or validated climate causality.

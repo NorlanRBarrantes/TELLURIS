@@ -54,3 +54,11 @@ Only real NASA POWER source series and NASA GIBS mapped images are used for sour
 ## Contest presentation integrity
 
 Do not present Project Uriel as an official NASA organization, imply NASA endorsement, invent precise station-level accuracy, claim causal explanations, advertise real-time weather, or claim an unconnected generative assistant. All documentation and code changes retain English Conventional Commit history. See EXP-009-OBSERVATORY.md, SCIENTIFIC-METHODOLOGY.md, DATA-SOURCES.md, SUBMISSION.md and VALIDATION.md for scope and audit trail.
+
+## Recorded EXP-010 CI and real-browser acceptance — 2026-11-15
+
+- [Static GitHub source suite #43784411416](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43784411416): **117/117 Node test cases PASS** with JavaScript syntax/localhost HTTP checks.
+- [Real Chromium test #43784411387](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43784411387): **PASS** ES/EN guided landing, dedicated team About, original-source archivally-backed Observatory, bidirectional known-site exclusion, custom coordinate alias exclusion and exact custom duplicate prevention, advanced disclosure navigation, 1440px/390px horizontal-overflow checks and image artifacts.
+- The Chromium browser acceptance tests **intentionally block external jsDelivr and NASA GIBS** to validate a usable geographic/browser fallback. They **do not** verify public texture appearance or live source image georegistration.
+- More explicit browser regression checks subsequently cover the four distinct one/two-variable and one/two-site research mode transitions. Capture the final passing Action run separately.
+- **BanaHosting release remains unverified** until a user/operator executes a successful backed-up --deploy and confirms visible product-first pages and source integrity.

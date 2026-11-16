@@ -321,3 +321,14 @@ A second real-source run confirmed that the selected Limón point is classified 
 - **Accessibility/AI:** plain-language glossary with keyboard-accessible term descriptions; bounded deterministic source-grounded Q&A. True generative AI is postponed until a secret-safe server proxy and scientific claim validation are supported. Never place API keys in public JavaScript or commit them.
 - **Verified evidence:** [NASA grouped API probe #43771373529](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43771373529); [source website CI #43772430934](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43772430934); [EXP-009 technical method](EXP-009-OBSERVATORY.md).
 - **Release:** not automatically deployed to BanaHosting. After a verified clean GitHub check, use the audited incremental deploy script with backup/HTTPS verification, then separately document real browser QA and official contest submission safety.
+
+## ADR-035 — TELLURIS product-first UX and reciprocal geographic selection
+
+- **Date:** 2026-11-15 (Costa Rica)
+- **Status:** Accepted and implemented in GitHub source; public BanaHosting deployment remains pending operator confirmation.
+- **Decision:** reorient the site's root to the TELLURIS product, using a concise, bilingual five-moment judge presentation. Keep Project Uriel's distinct skills and participation in standalone About pages. Eight canonical ES/EN product/team/science routes; the old /telluris/ paths remain readable with root canonical URLs.
+- **Interface:** preserve original NASA GIBS 3D imagery, geographic hover, manual zoom/drag and source provenance. Remove all illustrative wind/rain canvas, automatic globe rotation and redundant question/prompt buttons. Preserve reproducibility, source uploads, original inferential caveats and report/CSV/JSON exports behind native expandable advanced panels.
+- **Region invariant:** any named Zone A cannot be chosen again as Zone B. The same is true for a custom A location whose coordinates match a known preset. A/B equal coordinates are rejected independently before any NASA request; changes invalidate stale source results. Pure validation module: website/public/assets/site-choice.js.
+- **Evidence and positioning:** do not claim city-station precision, 18 validated p-values, causality, independently verified GPM, an integrated LLM, NASA sponsorship or browser texture validation from a static source test. English/Spanish text highlights only actual verified capabilities.
+- **QA:** [static site #43784411416](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43784411416), 117/117; [real Chromium #43784411387](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43784411387), ES/EN desktop/mobile and source-fallback browser acceptance, not live deployment.
+- **Full rationale:** [EXP-010](EXP-010-JUDGE-JOURNEY.md).
