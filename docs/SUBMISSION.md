@@ -88,3 +88,11 @@ We implemented a reproducible pipeline from GPM IMERG Final V07 native monthly H
 TELLURIS now leads the canonical project root `https://projecturiel.earth/` (English `/en/`), with a five-moment guided story explaining the challenge, authentic NASA source analysis, four comparison modes, 18 connected POWER variables and statistical/physical limitations. The direct CTA leads to `/telluris/explore/` or `/en/telluris/explore/`. Project Uriel's non-NASA team explanation is separated into `/about/` and `/en/about/`. Full source documentation: [EXP-010](EXP-010-JUDGE-JOURNEY.md).
 
 This repository revision and CI are **not** evidence of official NASA Space Apps submission or deployed public website readiness. Confirm final public URLs, image/source attribution, reproducible study, repository access and official deadline independently. Do not conflate source test success with NASA endorsement or validated climate causality.
+
+## EXP-011 judge-facing slide and seismic-event scope
+
+The homepage `/` (English `/en/`) presents TELLURIS in **six manual horizontal panels**: identity, question, original methodology, 18 connected POWER variable capabilities, scientific caveats and the Explorer handoff. No timed autoplay or whole-home vertical scroll. Project Uriel's team page remains distinct.
+
+The Explorer has source-backed **USGS seismic observations** and five **NASA EONET natural-event categories** in a separate interface. Their results are catalog observations at selected dates and places, **not climate measurements or evidence of climate-caused earthquakes**. Candidate MODIS pixels, volcano SO₂, flood area and landslide susceptibility are not claimed as source-integrated. See [EXP-011](EXP-011-SLIDES-EVENTS.md) and [original API evidence](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43787577130).
+
+Do not claim current public BanaHosting publication until the deployment script and manual browser source QA are recorded. Do not claim NASA official status or scientific results that exceed the source boundaries.

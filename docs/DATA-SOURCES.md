@@ -114,3 +114,22 @@ The original NASA POWER meteorology adapter is one provider in a larger mission/
 ## Natural Earth geographic navigation — 2026-11-15
 
 The new 3D globe uses the Natural Earth 1:110m land boundaries (public domain, https://www.naturalearthdata.com/about/terms-of-use/ ) exclusively to draw coastlines, NOT as measured NASA climate data. The WebGL rendering library is Three.js r170, MIT. All colors and graticule lines are illustrative and must not be presented as NASA remotely sensed values.
+
+## EXP-011 — Public episodic natural event providers (not NASA POWER climatology)
+
+### USGS FDSN Earthquake Catalog
+
+- Official source: https://earthquake.usgs.gov/fdsnws/event/1/ · GeoJSON Event API endpoint `https://earthquake.usgs.gov/fdsnws/event/1/query`.
+- Query by native epicentral coordinates, maxradiuskm, bounded 30/90/365-day observation window, magnitude floor M2.5/3.5/4.5, descending time, maximum 500 events. Record original time, magnitude, point longitude/latitude and depth km; show original USGS eventpage link where valid.
+- Derived count is **only** the returned catalog count under a specified threshold and area. It is NOT a completeness-normalized rate, trend, early warning or risk estimate. USGS records may be revised; fields have uncertainty and reported magnitude scales may differ.
+
+### NASA EONET v3 curated natural event reports
+
+- Official source: https://eonet.gsfc.nasa.gov/docs/v3 · API `https://eonet.gsfc.nasa.gov/api/v3/events`.
+- Categories supported in EXP-011: `wildfires`, `volcanoes`, `floods`, `severeStorms`, `landslides`. Source time window, bounding box and max 150. Keep reported Point geometries with real dates. Polygon records are not assigned imaginary point coordinates. Exact-radius filtering is applied after API output.
+- NASA EONET supplies *reported events*, NOT physical measured fields, MODIS/VIIRS thermal pixels, volcanic emission magnitudes, landslide probabilities or verified flood areas. EONET may not be exhaustive, and zero results do not prove absence. When capped, report truncation.
+- Original six-source success proof: [GitHub Actions #43787577130](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43787577130). Event catalogs stay separate from NASA POWER year-scale quantitative climate analysis; no earthquake-climate causal interpretation.
+
+### Pending catalog sources
+
+The broader 49-topic inventory still includes satellite granule families requiring mission-specific validation, atmospheric chemistry (OCO/AIRS/OMI), GLDAS/SMAP, SWOT/PO.DAAC/PACE, MODIS/VIIRS/GEDI, GRACE/ICESat-2 and nighttime-light/population products. A related NASA event report is not a connected implementation of those physical variables.
