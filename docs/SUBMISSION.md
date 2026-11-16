@@ -34,6 +34,10 @@ The English project narrative, demo, credits, public project link and submission
 - [ ] Scientific evidence independently verifiable from provenance and/or included fixtures.
 - [ ] Submit from the official Project tab on the team page before the deadline.
 
+## Recommended primary judge case (confirmed original NASA evidence)
+
+Use **[TELLURIS judges' evidence-backed case](JUDGES-EVIDENCE-CASE-2026.md)** as the canonical narrative: why raw Earth observations are difficult to interpret; 41 years of actual NASA POWER T2M/PRECTOTCORR grid samples (Liberia and Limón), carefully labeled exploratory slopes and unadjusted p-values; NASA MODIS land/water pixel rejection as an independent data-quality case; and accessible, reproducible source-backed comparisons as the demonstrated MVP capability. Do **not** claim validated local climate attribution, 49 live variables, a deployed generative LLM or measured societal impact. The official portal submission remains separate from GitHub and BanaHosting publication.
+
 ## Suggested narrative for reviewers (draft structure, not results)
 
 1. **Problem:** Earth system trends are hard to find, interpret, and validate.

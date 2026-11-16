@@ -29,6 +29,8 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 
 ## Documentation
 
+- **[NASA judges: evidence-backed case, real results, limitations, problem and impact](docs/JUDGES-EVIDENCE-CASE-2026.md)** — the central demonstration narrative and scientific honesty checks.
+
 - [EXP-013 evidence-first dashboard, conditional actions and optional secure AI adapter (not active)](docs/EXP-013-EVIDENCE-DECISIONS-AI.md)
 
 - [Post-submission roadmap — all 49 scientific topics and 10 proposed indicators, with source-validation gates](docs/FUTURE-VERSIONS-ROADMAP.md)

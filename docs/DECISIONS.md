@@ -372,3 +372,11 @@ A second real-source run confirmed that the selected Limón point is classified 
 ### ADR-039 verification addendum — 2026-11-15
 
 GitHub Actions source tests [#43797114489](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43797114489) passed 137/137 and the local Chromium bilingual/mobile flow [#43797114547](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43797114547) passed after removing an obsolete DOM reference in commit `c51586c`. This does not validate the external AI proxy or live BanaHosting deployment.
+
+## ADR-040 — Judge-centered evidence narrative instead of technology-count marketing
+
+- **Date:** 2026-11-15 (Costa Rica).
+- **Status:** Accepted documentation and submission positioning; no new feature or hosting claim.
+- **Decision:** Present TELLURIS as a guided, reproducible research instrument addressing the four official NASA Earth System Trend Detective questions. Anchor the product in the actual 1985–2025 NASA POWER Liberia/Limón case, the independent SciPy calculations, explicit statistical assumptions, a negative MODIS site-quality example and explainable, bounded educational value. Avoid presenting 18 sources as 18 independent NASA missions, the 49-topic catalog as connected, generative AI as active, or significant climate outcomes as validated.
+- **Reason:** A working scientific use case, its verification and potential impact are more valuable to judges than technology count or visual effects; unsourced claims would lower scientific credibility.
+- **Impact:** The human-facing explanation is aligned to the functional MVP and honest research limitations; independent public deployment and NASA submission remain explicit operator tasks. [Case record](JUDGES-EVIDENCE-CASE-2026.md).

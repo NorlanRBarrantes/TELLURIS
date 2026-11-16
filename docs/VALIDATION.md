@@ -300,3 +300,7 @@ New source-separated precipitation comparison is implemented in [GPM JS module](
 - **Negative evidence retained:** initial CI failed on one over-restrictive English guidance test and a Spanish relative CSS path; browser QA subsequently found a preexisting removed `obs-drilldown` null dereference after chart drawing, now fixed by `c51586c`. No test result was hidden.
 - **NOT validated:** public BanaHosting deployment, manual real NASA live CORS and NASA GIBS map rendering, manual screen-reader users, server-enabled generative AI, independent physical trend significance/cause, local future risk or reliable impact forecasts. The PHP adapter is disabled and excluded from static deploy.
 - **External security reference:** https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety . No LLM secret is present in frontend assets.
+
+## Judge-facing claim audit — 2026-11-15
+
+The canonical [judge evidence case](JUDGES-EVIDENCE-CASE-2026.md) distinguishes real source observations, independent numerical reproducibility, conditional statistical findings, authentic negative MODIS QA and still-unmeasured social outcomes. No additional NASA data were acquired, no new physical conclusion was established, and no new deployment or LLM service was enabled by this documentation commit. Core numerical values are linked to [EXP-001](EXPERIMENT-001.md) and [EXP-005](EXP-005-SIGNIFICANCE.md).
