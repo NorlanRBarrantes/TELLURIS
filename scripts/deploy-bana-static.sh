@@ -56,7 +56,7 @@ while IFS= read -r -d '' path; do
   rel="${path#"$SRC"/}"
   case "$rel" in
     .htaccess|.well-known/*) continue ;;
-    *.html|*.js|*.css|*.json|*.geojson|*.svg|*.png|*.webp|*.ico|*.jpg|*.jpeg|*.txt|*.xml) ;;
+    *.html|*.js|*.css|*.json|*.geojson|*.svg|*.png|*.webp|*.ico|*.jpg|*.jpeg|*.txt|*.xml|assets/telluris-evidence-film-115x.mp4) ;;
     *) echo "ERROR: unsupported public file type: $rel" >&2; exit 1 ;;
   esac
   if [[ -L "$DST/$rel" ]]; then
