@@ -79,6 +79,14 @@
  .jg-deck .jg-case-story{padding:12px}
  .jg-case-copy{min-height:0}
 }
+/* Existing six-slide CSS hides .jg-visual below 560px. The source plot
+   must remain accessible when the user actively selects evidence/future. */
+@media(max-width:560px){
+ .jg-deck .jg-hero .jg-visual.jg-case-visual{display:grid;max-width:100%;margin:6px auto 14px}
+ .jg-case-visual[data-scene="1"] .jg-case-guide,
+ .jg-case-visual[data-scene="2"] .jg-case-guide{top:0;bottom:auto}
+ .jg-deck .jg-case-visual[data-scene="0"] .jg-planet{width:min(100%,250px)}
+}
 @media(max-width:430px){
  .jg-case-tabs button{font-size:9px;letter-spacing:0;padding:9px 2px}
  .jg-case-board h3{font-size:16px}
