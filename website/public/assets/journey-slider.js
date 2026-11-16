@@ -64,6 +64,7 @@ export function initJourneyDeck(doc=document,win=window){
   for(const [i,button] of numbered.entries())button.addEventListener("click",()=>change(i));
   doc.addEventListener("keydown",event=>{
     if(event.altKey||event.ctrlKey||event.metaKey||event.defaultPrevented)return;
+    if(doc.querySelector("dialog[open]"))return; // do not change slides while an accessible film dialog is open
     const target=event.target;
     if(target?.closest?.("input,textarea,select,[contenteditable]"))return;
     if(event.key==="ArrowRight"||event.key==="PageDown"){event.preventDefault();navigate(1);}
