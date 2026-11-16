@@ -132,6 +132,8 @@ try{
   const mobileLab=await mobile.newPage();
   await go(mobileLab,"/telluris/explore/");
   await mobileLab.waitForFunction(()=>document.querySelector("#obs-main-variable").options.length>=18);
+  assert.equal(await mobileLab.locator(".explorer-breadcrumb a").isVisible(),true);
+  assert.equal(await mobileLab.locator(".explorer-breadcrumb a").getAttribute("href"),"/");
   await noOverflow(mobileLab,"Spanish mobile Explorer");
   await mobileLab.screenshot({path:"browser-artifacts/telluris-explorer-390.png",fullPage:true});
   assert.deepEqual(errors,[],"No unhandled page exceptions");
