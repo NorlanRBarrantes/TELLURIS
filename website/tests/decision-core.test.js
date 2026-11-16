@@ -57,19 +57,19 @@ test("Two-zone KPI uses matched-year difference, not subtraction of different ye
  const x=buildDecisionBrief(row,{sites,start:1985,end:2025,lang:"en"});
  assert.match(x.metrics[3].note,/2024/);assert.match(x.metrics[3].value,/2.5/);
 });
-test("Explorer has matching ES/EN KPI, decision and explicit AI opt-in controls",()=>{
+test("Explorer has ES/EN evidence KPIs without an unavailable AI CTA",()=>{
  for(const path of ["telluris/explore/index.html","en/telluris/explore/index.html"]){
   const h=readFileSync(new URL("../public/"+path,import.meta.url),"utf8");
   for(const id of ["obs-decision","obs-decision-name","obs-d-metric-0","obs-d-metric-3",
-    "obs-d-evidence","obs-d-drivers","obs-d-outlook","obs-d-near","obs-d-long",
-    "obs-ai-run","obs-ai-output"])
+    "obs-d-evidence","obs-d-drivers","obs-d-outlook","obs-d-near","obs-d-long"])
    assert.ok(h.includes('id="'+id+'"'),path+" missing "+id);
   assert.ok(h.includes('class="obs-deep-data"'));
+  assert.ok(!h.includes('obs-ai-run')&&!h.includes('obs-ai-output')&&!h.includes('obs-ai-panel'));
  }
  const js=readFileSync(new URL("../public/assets/observatory.js",import.meta.url),"utf8");
  assert.ok(js.includes('buildDecisionBrief('));
- assert.ok(js.includes('buildAIRequest('));
+ assert.ok(!js.includes('buildAIRequest('));
  assert.ok(js.includes('textContent='));
- assert.ok(js.includes('/api/telluris-ai.php'));
+ assert.ok(!js.includes('/api/telluris-ai.php'));
  assert.ok(!js.includes('OPENAI_API_KEY'));
 });

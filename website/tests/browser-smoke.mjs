@@ -148,7 +148,8 @@ try{
   assert.notEqual(await lab.locator("#obs-d-metric-1").innerText(),"—");
   assert.match(await lab.locator("#obs-d-metric-2").innerText(),/41/);
   assert.match(await lab.locator("#obs-d-evidence").innerText(),/Theil/);
-  assert.match(await lab.locator("#obs-ai-output").innerText(),/No solicitado/);
+  assert.equal(await lab.locator("#obs-ai-output").count(),0);
+  assert.equal(await lab.locator("#obs-ai-run").count(),0);
   assert.equal(await lab.locator("#obs-chart polyline").count()>=1,true);
   await lab.locator(".obs-detail-link").click();
   assert.equal(await lab.locator("#detail-research").evaluate(el=>el.open),true);
@@ -205,6 +206,7 @@ try{
   assert.equal(await en.locator("#natural-events").count(),1);
   assert.equal(await en.locator('[data-obs-mode="one-two"]').getAttribute("aria-pressed"),"true");
   assert.equal(await en.locator("#obs-decision").count(),1);
+  assert.equal(await en.locator("#obs-ai-run").count(),0);
   assert.equal(await en.locator("#events-type option").count(),6);
   assert.equal(await en.locator("#obs-other-place option[value=liberia]").count(),0);
 
