@@ -29,10 +29,11 @@ jobs:
           const site={lat:10.63,lon:-85.44};
           const quake=eventRequest({type:"earthquakes",...site,days:90,
             radiusKm:1000,minMagnitude:3.5,now:when});
-          const event=eventRequest({type:"wildfires",lat:38,lon:-121,days:365,
-            radiusKm:1000,now:when});
+          const events=["wildfires","volcanoes","floods","severeStorms","landslides"]
+            .map(type=>eventRequest({type,lat:38,lon:-121,days:365,
+              radiusKm:1000,now:when}));
           let valid=0;
-          for(const r of [quake,event]){
+          for(const r of [quake,...events]){
             const response=await fetch(r.url,{
               signal:AbortSignal.timeout(85000),
               headers:{"User-Agent":"ProjectUriel-TELLURIS-EXP011-source-qa/1.0"}
@@ -45,7 +46,7 @@ jobs:
               !data.provider)throw Error("Invalid event provenance");
             if(r.type==="earthquakes"&&!Array.isArray(json.features))
               throw Error("Original USGS features missing");
-            if(r.type==="wildfires"&&!Array.isArray(json.events))
+            if(r.type!=="earthquakes"&&!Array.isArray(json.events))
               throw Error("Original EONET events missing");
             console.log("ORIGINAL_EVENT_SOURCE_OK",r.provider,r.type,
               "HTTP",response.status,"RAW_COUNT",
@@ -54,6 +55,6 @@ jobs:
               "CAPPED",data.capped);
             valid++;
           }
-          if(valid!==2)throw Error("Both original providers must be checked");
-          console.log("EXP011_ORIGINAL_SOURCE_VALIDATED",valid,"providers; no synthetic data");
+          if(valid!==6)throw Error("Original USGS and all five EONET event categories must be checked");
+          console.log("EXP011_ORIGINAL_SOURCE_VALIDATED",valid,"source categories across USGS and NASA EONET; no synthetic data");
           JS
