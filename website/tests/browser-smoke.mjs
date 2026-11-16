@@ -90,6 +90,7 @@ try{
 
   // Full archived matrix: original two source variables, sixteen clearly unavailable.
   await lab.locator("#obs-main-place").selectOption("liberia");
+  await lab.locator("#obs-other-place").selectOption("limon");
   await lab.locator("#obs-main-variable").selectOption("T2M");
   await lab.locator(".obs-archive-advanced summary").click();
   await lab.locator("#obs-run-archive").click();
