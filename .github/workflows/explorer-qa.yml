@@ -111,7 +111,8 @@ jobs:
       github.ref == 'refs/heads/main' &&
       (vars.BANAHOSTING_AUTO_DEPLOY == 'true' ||
        (github.event_name == 'push' &&
-        contains(toJSON(github.event.commits), 'website/public/assets/telluris-evidence-film-115x.mp4')))
+        (contains(toJSON(github.event.commits), 'website/public/assets/telluris-evidence-film-115x.mp4') ||
+         contains(github.event.head_commit.message, '[deploy-film]'))))
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
