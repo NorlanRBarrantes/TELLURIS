@@ -26,10 +26,14 @@ URI is an understated original geometric evidence-navigation cue, not a NASA mas
 
 ## Release verification
 
-- [ ] New structural and source-rejection tests pass.
-- [ ] Existing website + science tests pass; slider 00–05 unaffected.
-- [ ] Local Chromium ES/EN desktop/mobile: story navigation, keyboard, 41 original sample points per series, source failure handling, accessibility and no horizontal overflow.
+- [x] Structural, source parity and source-rejection tests passed in [static QA #43806192154](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43806192154): 141 passed, 0 failed.
+- [x] Original website, data and science suites passed unchanged: [141/141 in static QA #43806192154](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43806192154).
+- [x] Chromium ES/EN desktop/mobile user journeys, story buttons, 41 source points per plotted series, preserved slide 00 skip and responsive no-overflow passed in [browser QA #43806238639](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43806238639); [ ] separate manual screen-reader and source-error states.
 - [ ] Public BanaHosting ES/EN routes verified through audited backup/deploy script separately.
 - [ ] Official NASA submission status verified separately.
 
 See [EXP-001](EXPERIMENT-001.md), [EXP-005](EXP-005-SIGNIFICANCE.md), [judge evidence case](JUDGES-EVIDENCE-CASE-2026.md), and [EXP-015 prior video concept](EXP-015-VIDEO-EVIDENCE-AND-VISION.md).
+
+### EXP-016 implementation verification notes
+
+The first Chromium run [#43805947132](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43805947132) found a legacy CSS rule hiding the full right-side figure below 560px, including the evidence plot. Corrected the mobile selector in `cfdac99` (source plot now visible when selected), and made browser QA trigger automatically for future homepage/asset changes in `d4ac9e3`. [Chromium run #43806238639](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43806238639) subsequently passed. The static suite [#43806192154](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43806192154) passed **141 tests / 0 failures**. Production BanaHosting was **not** deployed by Actions (the opt-in deploy job was skipped). No video file was created or installed.

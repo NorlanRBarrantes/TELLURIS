@@ -320,3 +320,9 @@ The initial Chromium run failed during GitHub private-repository checkout (no br
 - Data provenance: [EXP-001 original NASA archive](../website/public/telluris/explore/data/exp001-annual.json); source fingerprint and SciPy slopes in [EXP-001](EXPERIMENT-001.md). Charts require a complete original schema, correct years and numeric values; errors show a readable unavailable state without invented points.
 - No new MP4, Remotion runtime, provider account/credential, scientific engine or backend changes. The new intro is HTML/CSS/JS only, independent of the Explorer.
 - **Release gates (pending until witnessed):** Node source tests; ES/EN desktop/mobile Chromium chart and six-slide navigation; reduced-motion/keyboard checks; manual BanaHosting HTTPS source-byte verification and real logged-out browser inspection. Do not infer live release from successful GitHub tests.
+
+### EXP-016 QA close-out — 2026-11-15 Costa Rica
+
+- [Static website and scientific suite #43806192154](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43806192154): **141 passed / 0 failed**, no deployment (opt-in job skipped).
+- [ES/EN Chromium desktop/mobile #43806238639](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43806238639): **success** with authentic 41-point plotted series per site, interactive narrative switching, preserved six-slide navigation and mobile view. The earlier failed Chromium run #43805947132 revealed a pre-existing mobile display:none rule, corrected by `cfdac99` and retested successfully.
+- Latest GitHub source is **not yet known to be deployed** to `projecturiel.earth`; the operator must execute and review `--check` and explicit `--deploy`, verify HTTPS byte equality and manually inspect the public browser. No movie or Remotion integration was made.
