@@ -109,7 +109,9 @@ jobs:
     if: >-
       (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
       github.ref == 'refs/heads/main' &&
-      vars.BANAHOSTING_AUTO_DEPLOY == 'true'
+      (vars.BANAHOSTING_AUTO_DEPLOY == 'true' ||
+       (github.event_name == 'push' &&
+        contains(toJSON(github.event.commits), 'website/public/assets/telluris-evidence-film-115x.mp4')))
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
@@ -165,3 +167,18 @@ jobs:
               --retry 2 --max-time 15 "https://projecturiel.earth$route" >/dev/null
             echo "HTTP OK: $route"
           done
+          # Only when a real binary has been committed, verify the media and
+          # bilingual entrypoint assets after deployment. A missing film must
+          # never appear as a successfully published one.
+          if [ -f website/public/assets/telluris-evidence-film-115x.mp4 ]; then
+            curl --fail --head --location --silent --show-error --retry 2 --max-time 20 \
+              https://projecturiel.earth/assets/telluris-evidence-film-115x.mp4 >/dev/null
+            curl --fail --location --silent --show-error --retry 2 --max-time 30 \
+              --range 0-1023 -o /dev/null \
+              https://projecturiel.earth/assets/telluris-evidence-film-115x.mp4
+            curl --fail --location --silent --show-error --max-time 15 \
+              https://projecturiel.earth/assets/evidence-film.js >/dev/null
+            curl --fail --location --silent --show-error --max-time 15 \
+              https://projecturiel.earth/assets/evidence-film.css >/dev/null
+            echo "EXP-017: public film and player assets pass HTTPS smoke tests"
+          fi
