@@ -400,7 +400,8 @@ function renderFocus(){
       a.target="_blank";a.rel="noopener noreferrer";links.append(a);
     }
   }
-  const detail=el("obs-drilldown");detail.disabled=!Object.hasOwn(VARIABLES,row.code);
+  // The advanced explorer is reached through .obs-detail-link; the former
+  // obs-drilldown button was removed in EXP-010. Never dereference that old ID.
   renderDecision(row);
 }
 function renderDecision(row){
