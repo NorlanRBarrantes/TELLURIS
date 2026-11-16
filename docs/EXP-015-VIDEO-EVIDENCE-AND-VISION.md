@@ -1,5 +1,7 @@
 # EXP-015 — NASA evidence film, credible future applications and URI narrative character
 
+> **Superseded for the live opening (EXP-016):** Project Uriel chose an animated interactive evidence-first HTML introduction instead of producing this additional new movie. The film storyboard below remains a historical creative proposal, not an implementation request, video file or required production item. See [EXP-016](EXP-016-INTERACTIVE-OPENING.md).
+
 **Reviewed:** 2026-11-15 (Costa Rica)  
 **Status:** Creative specification + research decision, **NOT a rendered video or production website feature**. No spacecraft launch-authorization or NASA partnership is claimed.
 

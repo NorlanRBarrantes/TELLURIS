@@ -29,6 +29,8 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 
 ## Documentation
 
+- **[EXP-016 interactive, NASA-source-backed opening (no new video)](docs/EXP-016-INTERACTIVE-OPENING.md)** — three user-controlled moments: the problem, real 41-year Liberia–Limón observations and future research potential.
+
 - [EXP-015: verified NASA evidence video, responsible future applications and original URI guide character](docs/EXP-015-VIDEO-EVIDENCE-AND-VISION.md)
 - [Codex + Remotion implementation brief for the two-slide video story](docs/PROMPT-CODEX-REMOTION-EXP015.md)
 

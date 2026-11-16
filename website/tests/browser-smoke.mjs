@@ -45,6 +45,21 @@ try{
   assert.equal(await home.locator(".jg-slide").count(),6);
   assert.equal(await home.locator(".jg-slide.is-active").getAttribute("data-slide"),"intro");
   assert.equal(await home.locator("[data-slide-skip]").count(),1);
+  // EXP-016 — Original NASA evidence narrated in interactive HTML, not a new video.
+  assert.equal(await home.locator("[data-case-story]").count(),1);
+  assert.equal(await home.locator("[data-case-step]").count(),3);
+  await home.locator('[data-case-step="1"]').click();
+  assert.match(await home.locator("[data-case-heading]").innerText(),/41 años/);
+  await home.locator('[data-plot-series="liberia"]').waitFor({state:"attached",timeout:12000});
+  const plotA=(await home.locator('[data-plot-series="liberia"]').getAttribute("points")).trim().split(" ");
+  const plotB=(await home.locator('[data-plot-series="limon"]').getAttribute("points")).trim().split(" ");
+  assert.equal(plotA.length,41);assert.equal(plotB.length,41);
+  assert.equal(await home.locator("[data-case-visual]").getAttribute("data-source"),"verified-archive");
+  await home.locator("[data-case-next]").click();
+  assert.match(await home.locator("[data-case-heading]").innerText(),/nuevas preguntas/);
+  assert.match(await home.locator('[data-case-panel="2"]').innerText(),/POTENCIAL FUTURO/);
+  await home.locator('[data-case-step="0"]').click();
+  assert.equal(await home.locator('[data-case-visual]').getAttribute("data-scene"),"0");
   await home.locator("[data-slide-skip]").click();
   assert.equal(await home.locator(".jg-slide.is-active").getAttribute("data-slide"),"explorer");
   assert.equal(await home.locator(".jg-slide.is-active a.jg-action").getAttribute("href"),"/telluris/explore/");
@@ -201,6 +216,13 @@ try{
   const en=await desktop.newPage();
   await go(en,"/en/");
   assert.match(await en.locator("h1").innerText(),/TELLURIS/);
+  assert.equal(await en.locator("[data-case-story]").count(),1);
+  await en.locator('[data-case-step="1"]').click();
+  assert.match(await en.locator("[data-case-heading]").innerText(),/41 years/);
+  await en.locator('[data-plot-series="limon"]').waitFor({state:"attached"});
+  await en.locator('[data-case-step="2"]').click();
+  assert.match(await en.locator('[data-case-panel="2"]').innerText(),/FUTURE POTENTIAL/);
+  await en.locator('[data-case-step="0"]').click();
   await go(en,"/en/telluris/explore/");
   await en.waitForFunction(()=>document.querySelector("#obs-main-variable").options.length>=18);
   assert.equal(await en.locator("#natural-events").count(),1);
@@ -213,6 +235,10 @@ try{
   const mobile=await contextAt(390,844);
   const mobileHome=await mobile.newPage();
   await go(mobileHome,"/");
+  assert.equal(await mobileHome.locator("[data-case-story]").count(),1);
+  await mobileHome.locator('[data-case-step="1"]').click();
+  assert.equal(await mobileHome.locator('[data-case-panel="1"]').isVisible(),true);
+  await mobileHome.locator('[data-case-step="0"]').click();
   assert.equal(await mobileHome.locator(".jg-slide.is-active").getAttribute("data-slide"),"intro");
   assert.equal(await mobileHome.locator('[data-slide-to="4"]').isVisible(),true);
   await mobileHome.locator('[data-slide-to="4"]').click();

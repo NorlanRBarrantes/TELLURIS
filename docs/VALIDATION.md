@@ -313,3 +313,10 @@ The canonical [judge evidence case](JUDGES-EVIDENCE-CASE-2026.md) distinguishes 
 ### EXP-014 final browser verification — same GitHub commit, retry
 
 The initial Chromium run failed during GitHub private-repository checkout (no browser test executed). Its **retry, attempt 2, passed**: [GitHub Actions browser run #43799927195](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43799927195), including Spanish/English desktop/mobile navigation, NASA archive and original charts. Browser log: `EXP010_BROWSER_ACCEPTANCE_PASS`. Paired source suite also passed: [#43799927204](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43799927204). This is local test-site QA, **not proof of live BanaHosting deployment**.
+
+## EXP-016 — User-controlled evidence-first hero (2026-11-15)
+
+- Source implementation: ES/EN slide 00 explains the problem, plots the original 1985–2025 (41 yearly records/site) NASA POWER T2M grid-cell observations and labels future research potential separately. The existing original conceptual Earth illustration and skip-to-last mechanism remain.
+- Data provenance: [EXP-001 original NASA archive](../website/public/telluris/explore/data/exp001-annual.json); source fingerprint and SciPy slopes in [EXP-001](EXPERIMENT-001.md). Charts require a complete original schema, correct years and numeric values; errors show a readable unavailable state without invented points.
+- No new MP4, Remotion runtime, provider account/credential, scientific engine or backend changes. The new intro is HTML/CSS/JS only, independent of the Explorer.
+- **Release gates (pending until witnessed):** Node source tests; ES/EN desktop/mobile Chromium chart and six-slide navigation; reduced-motion/keyboard checks; manual BanaHosting HTTPS source-byte verification and real logged-out browser inspection. Do not infer live release from successful GitHub tests.

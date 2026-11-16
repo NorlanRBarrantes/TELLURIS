@@ -1,5 +1,7 @@
 # Codex + Remotion — TELLURIS NASA evidence film with URI
 
+> **HISTORICAL / NOT CURRENTLY REQUESTED (EXP-016):** The user opted for a dynamic, source-backed HTML/CSS/JS opening instead of a new Remotion film. Do not execute this video prompt as part of the current homepage update. See [EXP-016](EXP-016-INTERACTIVE-OPENING.md).
+
 You are working on **Project Uriel / TELLURIS** (`main`) and must respect `AGENTS.md`, repository documentation, original data, Conventional Commits, and the established EXP-012 navy / cyan / violet graphic identity.
 
 Read **`docs/EXP-015-VIDEO-EVIDENCE-AND-VISION.md`** end to end before changing anything. It defines factual scientific evidence, source constraints, original character URI, storyboard, two-video placement, future-use limitations and acceptance tests. If the document is missing, stop instead of guessing environmental findings.

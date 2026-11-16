@@ -17,6 +17,8 @@
 <link rel="stylesheet" href="../assets/journey.css?v=exp011-slides-20261115">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"TELLURIS by Project Uriel","url":"https://projecturiel.earth/","inLanguage":["es","en"]},{"@type":"WebPage","name":"TELLURIS — Explore Earth system changes with NASA data | Project Uriel","url":"https://projecturiel.earth/en/","inLanguage":"en","description":"TELLURIS turns NASA POWER data into transparent investigations of temperature, rain, wind, humidity and radiation. Compare 18 parameters across Earth locations.","about":{"@type":"CreativeWork","name":"TELLURIS","creator":"Project Uriel","isBasedOn":"https://www.spaceappschallenge.org/2026/challenges/earth-system-trend-detective/"}}]}</script>
 <script type="module" src="../assets/journey-slider.js?v=exp011-slides-20261115"></script>
+<script type="module" src="/assets/hero-case.js?v=exp016-20261115"></script>
+<link rel="stylesheet" href="/assets/hero-case.css?v=exp016-20261115">
 <link rel="stylesheet" href="/assets/visual-identity.css?v=exp012-20261115">
 </head><body data-page="telluris-journey" data-lang="en">
 <a class="skip" href="#main">Skip to content</a><header class="header jg-header"><div class="container nav"><a href="/en/" class="brand" aria-label="TELLURIS · The journey"><img class="uriel-mark" src="/assets/uriel-symbol-128.png" width="44" height="37" alt="" decoding="async"><span><strong>TELLURIS</strong><small>BY PROJECT URIEL</small></span></a>
@@ -32,10 +34,15 @@
 <main id="main" class="jg-deck" aria-label="TELLURIS presentation"><div class="jg-deck-track"><div class="jg-slide is-active" data-slide="intro" data-slide-index="0" aria-hidden="false" aria-label="0 / TELLURIS" role="group"><section class="jg-hero jg-container" aria-labelledby="telluris-title"><div><p class="eyebrow">NASA SPACE APPS CHALLENGE 2026 · INDEPENDENT PROJECT</p>
 <h1 id="telluris-title">TELLURIS<span class="sr-only">: Earth System Trend Intelligence</span></h1>
 <h2>Earth is changing.<br><em>Decode the evidence.</em></h2><p class="jg-lead">A platform to explore our planet, connect 18 NASA POWER variables and compare locations and time periods. Every clue comes with its source data, methodology and explicit limits.</p>
+<section class="jg-case-story" data-case-story data-step="0" aria-label="Interactive science story">
+<div class="jg-case-tabs" role="group" aria-label="Interactive science story"><button type="button" data-case-step="0" aria-pressed="true">01 · The problem</button><button type="button" data-case-step="1" aria-pressed="false">02 · NASA case</button><button type="button" data-case-step="2" aria-pressed="false">03 · Potential</button></div>
+<div class="jg-case-copy"><p class="jg-case-eyebrow" data-case-eyebrow>01 / THE PROBLEM</p><h3 data-case-heading>Having data is not understanding Earth.</h3><p data-case-body aria-live="polite">A graph can reveal a trend without telling us whether it reflects natural variability, a physical change, or limitations in the source. We need to ask, compare, and verify.</p></div>
+<div class="jg-case-actions"><button type="button" data-case-prev disabled>Previous</button><span data-case-counter>1 / 3</span><button type="button" data-case-next>Next</button></div></section>
+
 <div class="jg-cta-row"><button type="button" class="jg-action jg-skip" data-slide-skip aria-label="Skip to the final slide">Skip presentation · Final slide →</button></div>
 <p class="jg-cta-note">NASA POWER · NASA GIBS · Reproducible exploratory science</p>
 <div class="jg-signals"><span>18 connected NASA variables</span><span>4 research modes</span><span>Sources and limitations visible</span></div>
-</div><figure class="jg-visual"><span class="jg-orbit-note">PROJECT URIEL / 2026</span>
+</div><figure class="jg-visual jg-case-visual" data-case-visual data-scene="0"><span class="jg-orbit-note">PROJECT URIEL / 2026</span>
 <svg class="jg-planet" viewBox="0 0 560 560" role="img" aria-label="Conceptual Earth globe illustration; not scientific data" xmlns="http://www.w3.org/2000/svg">
 <defs><radialGradient id="jgOcean" cx="0" cy="0" r="1" gradientTransform="translate(191 128) rotate(48) scale(540)"><stop stop-color="#277b91"/><stop offset=".56" stop-color="#0e3b57"/><stop offset="1" stop-color="#051728"/></radialGradient><linearGradient id="jgArc" x1="60" y1="80" x2="480" y2="490"><stop stop-color="#b8f6db" stop-opacity=".75"/><stop offset="1" stop-color="#4daab3" stop-opacity=".05"/></linearGradient></defs>
 <circle cx="280" cy="280" r="257" fill="none" stroke="#78bcb7" stroke-opacity=".17"/>
@@ -54,7 +61,17 @@
 <text x="437" y="224" fill="#b4f2dc" font-size="10" font-family="ui-monospace,monospace" letter-spacing="2">EARTH</text>
 <path d="M48 280a232 232 0 0 1 429-118" fill="none" stroke="#a6efcf" stroke-opacity=".32" stroke-width="1.5"/>
 <circle cx="125" cy="109" r="3.5" fill="#c4f9de"/><circle cx="460" cy="405" r="4" fill="#c4f9de"/>
-<path d="M42 54h27M55 41v26M485 495h26m-13-13v26" stroke="#8dc3bc" stroke-opacity=".5"/></svg><figcaption class="jg-visual-caption">Conceptual illustration of Earth. Actual NASA scientific visualization is in the Explorer.</figcaption></figure>
+<path d="M42 54h27M55 41v26M485 495h26m-13-13v26" stroke="#8dc3bc" stroke-opacity=".5"/></svg><figcaption class="jg-visual-caption">Conceptual illustration of Earth. Actual NASA scientific visualization is in the Explorer.</figcaption><div class="jg-case-board" data-case-panel="1" hidden><p class="jg-case-source">ORIGINAL DATA · NASA POWER / MERRA-2</p><h3>What is really changing?</h3>
+<p>1985–2025 · 41 years per grid cell · T2M (°C)</p>
+<svg class="jg-case-chart" data-case-chart viewBox="0 0 480 239" role="img" aria-label="Awaiting original NASA data" xmlns="http://www.w3.org/2000/svg"><g data-case-series></g></svg>
+<div class="jg-case-legend"><span>Liberia · Pacific</span><span>Limón · Caribbean</span></div>
+<div class="jg-case-slopes"><div><small>Liberia · Pacific</small><strong>−0,113 °C/decade</strong></div><div><small>Limón · Caribbean</small><strong>+0,168 °C/decade</strong></div></div>
+<p>Exploratory Theil–Sen slope · <a href="/en/telluris/explore/">Investigate the data</a></p><p class="jg-case-warning">Reanalysis grid cells, not local weather stations. Slopes do NOT establish a validated climate change finding.</p>
+<p data-case-status role="status" aria-live="polite">Loading original NASA series…</p></div>
+<div class="jg-case-board" data-case-panel="2" hidden><p class="jg-case-source">FUTURE POTENTIAL · NOT OPERATIONAL</p><h3>A foundation for new investigations</h3>
+<div class="jg-case-forward"><div><strong>Vegetation and ecosystems</strong><small>Assess pixel quality, land cover and potential study locations.</small></div><div><strong>Water and landscapes</strong><small>Add sources and independently evaluate precipitation estimates.</small></div><div><strong>Earth-based science testing</strong><small>Preliminary environmental context; never launch approval or official NASA site certification.</small></div></div></div>
+<div class="jg-case-guide" aria-hidden="true"><svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg"><path d="M26 4 45 15 44 36 26 48 7 37 7 15Z" fill="#111c3a" stroke="#2ddbe8" stroke-width="2.5"/><circle cx="26" cy="26" r="11" fill="#183e66" stroke="#a493ff" stroke-width="3"/><circle cx="26" cy="26" r="4.5" fill="#2ddbe8"/><path d="M6 42 0 47 M47 5 52 1" stroke="#2ddbe8" stroke-width="2"/></svg><span>URI / visual guide</span></div>
+</figure>
 </section></div>
 <div class="jg-slide" data-slide="how" data-slide-index="1" aria-hidden="true" aria-label="1 / The problem" role="group" inert=""><section id="how" class="jg-section"><div class="jg-container jg-stage"><div class="jg-step-label"><span class="jg-number">01</span><span>The problem</span></div><div class="jg-content"><h2 class="jg-section-title">Millions of data points.<br><em>One essential question.</em></h2><p class="jg-section-intro">Earth does not change in just one way. Temperature, rain, humidity, wind and radiation tell different parts of the story. An isolated trend is not enough to understand a place.</p><div class="jg-grid"><article class="jg-card"><p class="jg-card-kicker">ONE QUESTION</p><h3>What is changing?</h3><p>Choose a documented variable, time period and geographic coordinates.</p></article><article class="jg-card"><p class="jg-card-kicker">ONE INVESTIGATION</p><h3>What do the signals reveal together?</h3><p>Contrast several parameters to identify co-occurrences and differences worthy of further hypotheses.</p></article></div></div></div></section>
 </div>

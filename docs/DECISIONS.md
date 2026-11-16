@@ -399,3 +399,12 @@ GitHub Actions source tests [#43797114489](https://github.com/NorlanRBarrantes/T
 ### ADR-041 verification addendum
 
 After the infrastructure checkout failure in the first CI attempt, [the same browser workflow #43799927195](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43799927195) was rerun and passed in **attempt 2**. No test logic was changed to conceal the earlier access problem. The separate static suite [#43799927204](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43799927204) passed. Live deployment remains to be verified.
+
+## ADR-043 — Replace proposed new intro video with a live source-backed opening
+
+- **Date:** 2026-11-15 (Costa Rica).
+- **Status:** Approved for GitHub; public deployment and manual live browser QA separately required.
+- **Decision:** Preserve the existing six-slide EXP-012 visual identity and skip control. Add a user-controlled, three-part scientific story to slide 00: the interpretation problem, authentic 41-year NASA POWER source-grid temperature chart at Liberia and Limón and carefully distinguished future uses. Source numeric chart data must be loaded and verified from the existing EXP-001 JSON, not synthesized or embedded as illustrative values. Controls support ES/EN, keyboard and reduced motion; no autoplay, new video, audio, LLM or additional NASA data acquisition.
+- **Scientific guardrail:** The slopes are descriptive, the physical source product/independence remain unvalidated; potential vegetation, water and Earth-based analog studies are not current operational services. Avoid launch-weather authorization, earthquake prediction and assumed NASA endorsement.
+- **Reason:** A demonstrable, inspectable first-screen scientific question conveys impact more directly than a second cinematic trailer and reduces video size and production risk.
+- **Record:** [EXP-016 interactive introduction](EXP-016-INTERACTIVE-OPENING.md), [prior EXP-015 video concept, superseded for opening](EXP-015-VIDEO-EVIDENCE-AND-VISION.md).

@@ -110,3 +110,7 @@ The browser includes an **optional generative AI button**, but the provider is *
 ## EXP-015 judge video and future applications
 
 The planned source-backed **29.4-second** film must stand alone as the NASA demo: original POWER 1985–2025 observational series for two locations, caveated contrasting exploratory temperature slopes and a clear explanation of why robust inference matters. A separate user-provided identity film (>30 seconds) can play independently on the website's final slide, but must not be concatenated with the official <=30-second entry. Broader applications to vegetation, Earth analog sites and preliminary aerospace site climatology are **unimplemented potential** requiring independent datasets, field data, regulatory review and relevant mission constraints. TELLURIS is not a launch-weather system. See [EXP-015](EXP-015-VIDEO-EVIDENCE-AND-VISION.md).
+
+## EXP-016 — Website narrative opening (supersedes additional intro film)
+
+The new **slide 00** is an interactive three-step explanation rather than a second video. It shows the problem, genuine NASA POWER/MERRA-2 Liberia/Limón observations (1985–2025, 41 T2M values per cell) and bounded future research uses, with the public-source and scientific caveats explicit. It does not mean a new 30-second NASA video was rendered or submitted. Preserve the previously produced separate film and upload only if subsequently approved. The site presentation and NASA's official submission remain separate.
