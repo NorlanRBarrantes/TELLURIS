@@ -33,7 +33,9 @@ for(const [file,lang,route,es,en] of pages){
   assert.ok(refs.length >= 3);
   for(const ref of refs) {
    if(ref.startsWith("https://")) continue;
-   assert.ok(existsSync(path.resolve(dir,ref.split("?")[0])),file+" broken asset: "+ref);
+   const asset=ref.split("?")[0];
+   const local=asset.startsWith("/")?path.join(root,asset.slice(1)):path.resolve(dir,asset);
+   assert.ok(existsSync(local),file+" broken asset: "+ref);
   }
  });
 }
