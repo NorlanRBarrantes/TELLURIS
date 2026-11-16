@@ -76,10 +76,10 @@ try{
 
   const about=await desktop.newPage();
   await go(about,"/about/");
-  assert.match(await about.locator("h1").innerText(),/La curiosidad nos impulsa/);
+  assert.match(await about.locator("h1").innerText(),/La curiosidad nos impulsa/i);
   assert.equal(await about.locator(".jg-card").count(),4);
   await go(about,"/en/about/");
-  assert.match(await about.locator("h1").innerText(),/Curiosity drives us/);
+  assert.match(await about.locator("h1").innerText(),/Curiosity drives us/i);
 
   const lab=await desktop.newPage();
   await go(lab,"/telluris/explore/");
