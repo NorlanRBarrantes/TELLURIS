@@ -5,7 +5,6 @@
  */
 import {GLOBE_LAYERS,DEFAULT_GIBS_DATE,gibsWmsUrl,
         gibsLayerDisclosure,validateGlobeDate,GIBS_TEXTURE_U_OFFSET} from "./globe-layers.js?v=exp008-uvfix-20261115";
-import {initWeatherCanvas} from "./globe-weather.js?v=exp009-20261115";
 
 const el=id=>document.getElementById(id);
 const stage=el("globe-stage"),status=el("globe-status");
@@ -13,10 +12,10 @@ const lang=document.documentElement.lang.startsWith("es")?"es":"en";
 const es=lang==="es";
 const say=(spanish,english)=>es?spanish:english;
 const controls={
-  layer:el("globe-layer"),date:el("globe-date"),spin:el("globe-spin"),
+  layer:el("globe-layer"),date:el("globe-date"),
   source:el("globe-source-link"),meta:el("globe-layer-meta"),
-  legend:el("globe-nasa-legend"),selection:el("globe-selection"),
-  analyze:el("globe-analyze")
+  legend:el("globe-nasa-legend"),selection:el("globe-selection")
+
 };
 const locations={liberia:[10.63,-85.44],limon:[9.99,-83.03]};
 const messages={
@@ -61,11 +60,6 @@ function chooseLocation(key,point=null){
 }
 document.querySelectorAll("[data-globe-location]").forEach(b=>
   b.addEventListener("click",()=>chooseLocation(b.dataset.globeLocation)));
-controls.analyze?.addEventListener("click",()=>{
-  const button=el("live-btn");
-  button?.scrollIntoView({behavior:"smooth",block:"center"});
-  button?.focus({preventScroll:true});
-});
 if(controls.date && !controls.date.value)controls.date.value=DEFAULT_GIBS_DATE;
 if(controls.layer)describeLayer(controls.layer.value,controls.date?.value||DEFAULT_GIBS_DATE);
 
@@ -83,10 +77,6 @@ async function boot(){
   renderer.setClearColor(0x000000,0);
   renderer.outputColorSpace=T.SRGBColorSpace;
   stage.append(renderer.domElement);
-  const weather=initWeatherCanvas(el("globe-weather-canvas"),
-    el("globe-weather-mode"),el("globe-weather-note"),{language:lang});
-  const receiveEvidence=event=>weather.update(event.detail);
-  window.addEventListener("telluris:source-data",receiveEvidence);
 
   const scene=new T.Scene();
   const camera=new T.PerspectiveCamera(36,1,.1,80);
@@ -292,14 +282,6 @@ async function boot(){
     group.rotation.set(.16,85*Math.PI/180,0);camera.position.z=HOME_Z;
     setStatus(say("Vista centrada en Costa Rica.","View centered on Costa Rica."));
   });
-  let spinning=false;
-  const reduced=window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches??false;
-  controls.spin?.addEventListener("click",()=>{
-    spinning=!spinning;
-    controls.spin.setAttribute("aria-pressed",String(spinning));
-    controls.spin.textContent=spinning?
-      say("Pausar giro","Pause rotation"):say("Giro automático","Auto rotate");
-  });
 
   const tooltip=el("globe-hover-tooltip");
   const hoverRay=new T.Raycaster();
@@ -415,16 +397,13 @@ async function boot(){
   let running=true;
   function animate(){
     if(!running)return;
-    if(spinning&&!reduced&&!document.hidden)group.rotation.y+=.001;
     if(!document.hidden)renderer.render(scene,camera);
-    weather.frame(performance.now());
     requestAnimationFrame(animate);
   }
   animate();
   window.addEventListener("pagehide",()=>{
     running=false;generation++;observer?.disconnect();
-    window.removeEventListener("telluris:source-data",receiveEvidence);
-    weather.dispose();renderer.dispose();
+    renderer.dispose();
   },{once:true});
 }
 boot();

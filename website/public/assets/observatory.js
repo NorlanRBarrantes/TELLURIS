@@ -55,10 +55,12 @@ function setMode(value){
     b.setAttribute("aria-pressed",String(b.dataset.obsMode===mode));
   });
   el("obs-second-controls").hidden=siteCount(mode)===1;
-  el("obs-single-hint").hidden=!mode.startsWith("one");
+  primary.variable.closest("label").hidden=!mode.startsWith("one");
   el("obs-family-filter").value="all";
   cancelCurrent();
   results.hidden=true;
+  current=null;
+  answer.textContent="";
   announce(L("Modo seleccionado: elige consultar NASA o usar la muestra archivada.",
              "Mode selected: request NASA data or use the archived sample."));
 }
@@ -121,12 +123,21 @@ function syncPrimary(){
     (Number.isFinite(lat)?N(lat,3):"—")+"°, "+
     (Number.isFinite(lon)?N(lon,3):"—")+"°";
 }
+/* Site identity has one owner: Zone A. Never offer it again in Zone B.
+ * Keep custom coordinates available; getLocations independently rejects
+ * exact coordinate duplicates and validates latitude/longitude.
+ * When Zone A changes, preserve B unless it becomes the same preset.
+ */
 function syncSecond(){
   const selected=form.place.value;
-  if(selected==="liberia"&&second.place.value==="liberia")
-    second.place.value="limon";
-  else if(selected==="limon"&&second.place.value==="limon")
-    second.place.value="liberia";
+  const forbidden=selected==="liberia"||selected==="limon"?selected:null;
+  if(forbidden&&second.place.value===forbidden)
+    second.place.value=forbidden==="liberia"?"limon":"liberia";
+  for(const option of second.place.options){
+    const excluded=option.value===forbidden;
+    option.disabled=excluded;
+    option.hidden=excluded;
+  }
   updateSecond();
   syncPrimary();
 }
@@ -139,7 +150,15 @@ function clearResult(){
   }
   cancelCurrent();
 }
-second.place.addEventListener("change",()=>{updateSecond();clearResult();});
+second.place.addEventListener("change",()=>{
+  // Defensive fallback if a browser, script or assistive control assigns a
+  // disabled preset despite the UI exclusion.
+  if(second.place.value===form.place.value && form.place.value!=="custom"){
+    second.place.value=form.place.value==="liberia"?"limon":"liberia";
+  }
+  updateSecond();
+  clearResult();
+});
 primary.place.addEventListener("change",()=>{
   form.place.value=primary.place.value;
   form.place.dispatchEvent(new Event("change",{bubbles:true}));
@@ -449,29 +468,6 @@ el("obs-question-form").addEventListener("submit",event=>{
     lang:es?"es":"en",sites:current?.sites||[]
   });
 });
-root.querySelectorAll("[data-obs-prompt]").forEach(b=>
-  b.addEventListener("click",()=>{
-    el("obs-question").value=b.dataset.obsPrompt;
-    answer.textContent=groundedAnswer(b.dataset.obsPrompt,current?.rows,{
-      lang:es?"es":"en",sites:current?.sites||[]
-    });
-  }));
-const defs={
- "sen":L("La pendiente Theil–Sen resume cuánto cambia una variable por década mediante la mediana de pendientes entre años. No predice el futuro.",
-         "Theil–Sen is the median slope between annual observations, expressed per decade. It is not a forecast."),
- "pvalue":L("El valor p supone un modelo estadístico. Un valor pequeño no prueba causalidad ni certifica que una tendencia climática sea real; la dependencia temporal importa.",
-            "A p-value is conditional on a statistical model. A small p-value does not prove causation or independently certify a climate trend."),
- "ci":L("Un intervalo de confianza depende de supuestos. Si incluye cero, una pendiente nula sigue siendo compatible con esos supuestos.",
-        "A confidence interval depends on assumptions. If it includes zero, a zero slope remains compatible under those assumptions."),
- "paired":L("Contraste A − B: para cada año disponible en ambas zonas se resta B de A, y después se estima su cambio con el tiempo.",
-            "Matched A − B: subtract B from A in each jointly observed year, then estimate the change of the differences over time."),
- "model":L("NASA POWER combina fuentes modeladas y satelitales en celdas geográficas. No es un termómetro ni pluviómetro físico ubicado en ese punto.",
-           "NASA POWER combines modeled and satellite sources on grids. It is not a physical thermometer or rain gauge at the exact point.")
-};
-root.querySelectorAll("[data-obs-term]").forEach(b=>
-  b.addEventListener("click",()=>{
-    el("obs-glossary-answer").textContent=defs[b.dataset.obsTerm]||"";
-  }));
 
 syncSecond();
 setMode("all-two");

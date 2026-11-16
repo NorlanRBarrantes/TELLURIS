@@ -9,11 +9,11 @@
 <link rel="icon" type="image/svg+xml" href="../../../assets/favicon.svg">
 <link rel="stylesheet" href="../../../assets/site.css?v=exp009-theme-20261115">
 <link rel="stylesheet" href="../../../assets/explorer.css?v=exp007-20261115">
-<script type="module" src="../../../assets/explorer.js?v=exp009-20261115"></script>
+<script type="module" src="../../../assets/explorer.js?v=exp010-20261115"></script>
 <link rel="stylesheet" href="../../../assets/globe.css?v=exp008-20261115">
-<link rel="stylesheet" href="../../../assets/observatory.css?v=exp009-20261115">
-<script type="module" src="../../../assets/observatory.js?v=exp009-20261115"></script>
-<script type="module" src="../../../assets/globe.js?v=exp009-atmos-20261115"></script>
+<link rel="stylesheet" href="../../../assets/observatory.css?v=exp010-20261115">
+<script type="module" src="../../../assets/observatory.js?v=exp010-20261115"></script>
+<script type="module" src="../../../assets/globe.js?v=exp010-static-20261115"></script>
 </head><body>
 <a class="skip" href="#explorer">Skip to explorer</a>
 <header class="header"><div class="container nav">
@@ -40,23 +40,15 @@
       <input id="globe-date" type="date" min="2000-03-01" value="2024-07-15">
     </label>
   </div>
-  <div class="globe-viewport"><div id="globe-stage" class="globe-stage" role="group" aria-label="3D NASA Earth globe; accessible keyboard and location buttons below"></div><canvas id="globe-weather-canvas" aria-hidden="true"></canvas><div id="globe-hover-tooltip" class="globe-hover-tooltip" role="tooltip" hidden></div><span class="globe-viewport-label">NASA EARTH OBSERVATION · GEOGRAPHIC VIEW</span></div>
+  <div class="globe-viewport"><div id="globe-stage" class="globe-stage" role="group" aria-label="3D NASA Earth globe; accessible keyboard and location buttons below"></div><div id="globe-hover-tooltip" class="globe-hover-tooltip" role="tooltip" hidden></div><span class="globe-viewport-label">NASA EARTH OBSERVATION · GEOGRAPHIC VIEW</span></div>
   <div class="globe-command">
     <div class="globe-camera-controls" role="group" aria-label="3D view controls">
       <button type="button" id="globe-zoom-in" aria-label="Zoom in">+</button>
       <button type="button" id="globe-zoom-out" aria-label="Zoom out">−</button>
       <button type="button" id="globe-reset">Costa Rica</button>
-      <button type="button" id="globe-spin" aria-pressed="false">Auto rotate</button>
-    </div>
-    <div class="globe-actions" role="group" aria-label="Example research locations">
-      <button type="button" data-globe-location="liberia">Liberia · Pacific</button>
-      <button type="button" data-globe-location="limon">Limón · Caribbean</button>
     </div>
   </div>
-  <div class="globe-weather-toolbar"><label for="globe-weather-mode">Illustrative atmosphere
-      <select id="globe-weather-mode"><option value="none">No animation</option><option value="wind">Wind · source-gated</option><option value="rain">Rain · source-gated</option></select></label>
-    <p id="globe-weather-note">Wind/rain motion is disabled until matching annual NASA POWER observations are loaded. It never portrays real-time weather or a gridded wind/rain field.</p></div>
-  <div class="globe-selected"><div><small>SELECTED LOCATION</small><strong id="globe-selection">Liberia · 10.630°, -85.440°</strong></div><button type="button" id="globe-analyze">Investigate with NASA POWER ↗</button></div>
+  <div class="globe-selected"><div><small>SELECTED LOCATION</small><strong id="globe-selection">Liberia · 10.630°, -85.440°</strong></div><a class="globe-next-step" href="#observatory">Compare NASA evidence ↓</a></div>
   <p id="globe-status" class="globe-status" role="status" aria-live="polite">Loading geographical globe…</p>
   <p id="globe-layer-meta" class="globe-layer-meta">NASA Blue Marble is an Earth reference image, not a measurement at this point.</p>
   <div id="globe-nasa-legend" class="globe-nasa-legend" hidden><p>Official NASA GIBS MODIS land-surface-temperature legend. Source visualization is in Kelvin; verify its palette in NASA Worldview before reading numeric values.</p><img src="https://gibs.earthdata.nasa.gov/legends/MODIS_Land_Surface_Temp_H.png" alt="NASA GIBS MODIS land-surface temperature color legend" loading="lazy" decoding="async"></div>
@@ -87,16 +79,15 @@
         <select id="obs-other-place"><option value="limon">Limón · Caribbean, Costa Rica</option><option value="liberia">Liberia · Pacific, Costa Rica</option><option value="custom">Custom coordinates</option></select></label>
       <div class="obs-coordinate-pair"><label for="obs-other-lat">Latitude<input id="obs-other-lat" type="number" min="-90" max="90" step="any" value="9.99" readonly></label><label for="obs-other-lon">Longitude<input id="obs-other-lon" type="number" min="-180" max="180" step="any" value="-83.03" readonly></label></div>
     </div>
-    <div class="obs-query-actions"><p id="obs-single-hint" hidden>The selected variable in section 01 is used for this mode.</p>
-      <button id="obs-run-live" type="button" class="obs-action-primary">Explore NASA data live <span aria-hidden="true">↗</span></button>
-      <button id="obs-run-archive" type="button" class="obs-action-secondary">Try original NASA archive</button>
+    <div class="obs-query-actions"><button id="obs-run-live" type="button" class="obs-action-primary">Explore NASA data live <span aria-hidden="true">↗</span></button>
+      <details class="obs-archive-advanced"><summary>Use a verified archived example</summary><button id="obs-run-archive" type="button" class="obs-action-secondary">Try original NASA archive</button><p>The archive contains only T2M and rainfall for Liberia and Limón.</p></details>
       <button id="obs-cancel" type="button" hidden>Cancel requests</button></div>
   </div>
   <p class="obs-status" id="obs-status" role="status" aria-live="polite">Select a mode and load original NASA observations.</p>
   <div id="obs-results" class="obs-results" hidden>
     <p class="obs-source-kind" id="obs-source-kind"></p>
     <p class="obs-summary" id="obs-summary"></p>
-    <div class="obs-export" role="group" aria-label="Download reproducible comparative scientific evidence"><button type="button" id="obs-export-csv">Export comparison CSV ↧</button><button type="button" id="obs-export-json">Download source evidence JSON ↧</button></div>
+    <details class="obs-export-advanced"><summary>Download scientific evidence</summary><div class="obs-export" role="group" aria-label="Download reproducible comparative scientific evidence"><button type="button" id="obs-export-csv">Export comparison CSV ↧</button><button type="button" id="obs-export-json">Download source evidence JSON ↧</button></div></details>
     <div class="obs-kpis">
       <div><small>Available series</small><strong id="obs-kpi-available">—</strong></div>
       <div><small>Positive slopes · A</small><strong id="obs-kpi-up">—</strong></div>
@@ -106,23 +97,19 @@
     <div class="obs-matrix-header"><div><h3>Comparative evidence matrix</h3><p>Select a variable to inspect real annual series; do not compare slopes across different physical units.</p></div><label for="obs-family-filter">Source family<select id="obs-family-filter"><option value="all">All NASA parameters</option><option value="atmosphere">Atmosphere</option><option value="wind">Wind</option><option value="water">Water and soil</option><option value="energy">Energy and radiation</option></select></label></div>
     <p class="obs-matrix-count">Shown: <strong id="obs-count">—</strong></p>
     <div class="obs-table-scroll"><table class="obs-table"><thead><tr id="obs-head"></tr></thead><tbody id="obs-rows"></tbody></table></div>
-    <section class="obs-focus" aria-labelledby="obs-focus-title"><div class="obs-focus-top"><div><small>SELECTED SOURCE / ONE PHYSICAL UNIT</small><h3 id="obs-focus-title">—</h3></div><button type="button" id="obs-drilldown">Open detailed research controls ↗</button></div><p id="obs-focus-detail"></p><svg id="obs-chart" viewBox="0 0 720 260" aria-label="Annual NASA data chart"></svg><div class="obs-chart-legend" id="obs-chart-legend"></div><div class="obs-provenance" id="obs-provenance"></div></section>
+    <section class="obs-focus" aria-labelledby="obs-focus-title"><div class="obs-focus-top"><div><small>SELECTED SOURCE / ONE PHYSICAL UNIT</small><h3 id="obs-focus-title">—</h3></div><a class="obs-detail-link" href="#detail-research">Detailed analysis ↓</a></div><p id="obs-focus-detail"></p><svg id="obs-chart" viewBox="0 0 720 260" aria-label="Annual NASA data chart"></svg><div class="obs-chart-legend" id="obs-chart-legend"></div><div class="obs-provenance" id="obs-provenance"></div></section>
     <section class="obs-clues" aria-labelledby="obs-clues-title"><div class="obs-clues-head"><div><p class="eyebrow mint">MULTIVARIABLE / HYPOTHESIS GENERATOR</p><h3 id="obs-clues-title">Signals worth investigating</h3></div><span>ANNUAL FIRST DIFFERENCES</span></div><p>Source-grounded, predeclared variable pairs only. Values are descriptive correlations of changes between consecutive matched years; they are not p-values, cross-product validation or evidence of causation.</p><div id="obs-clue-grid" class="obs-clue-grid"></div></section>
     <section class="obs-explainer" aria-labelledby="obs-explainer-title"><div><p class="eyebrow mint">TELLURIS / EVIDENCE INTERPRETER</p><h3 id="obs-explainer-title">What might these observations mean?</h3><div id="obs-explanation" class="obs-explanation"></div></div>
-      <div class="obs-qa"><p>Ask the evidence</p><form id="obs-question-form"><label for="obs-question" class="sr-only">Question</label><input id="obs-question" type="text" maxlength="240" placeholder="Why did it change? Is T2M significant?"><button type="submit">Explain</button></form><div class="obs-prompt-list"><button type="button" data-obs-prompt="Why did the climate change?">Possible causes</button><button type="button" data-obs-prompt="Is it significant?">Evidence confidence</button><button type="button" data-obs-prompt="PRECTOTCORR">Rainfall</button></div><p id="obs-answer" class="obs-answer" aria-live="polite"></p><p class="obs-ai-disclosure">Deterministic, source-grounded interpreter — not generative AI. It does not infer causation or invent measurements.</p></div>
+      <div class="obs-qa"><p>Ask the evidence</p><form id="obs-question-form"><label for="obs-question" class="sr-only">Question</label><input id="obs-question" type="text" maxlength="240" placeholder="Why did it change? Is T2M significant?"><button type="submit">Explain</button></form><p id="obs-answer" class="obs-answer" aria-live="polite"></p><p class="obs-ai-disclosure">Deterministic, source-grounded interpreter — not generative AI. It does not infer causation or invent measurements.</p></div>
     </section>
   </div>
-  <details class="obs-glossary"><summary>Translate scientific terms into plain language</summary><div class="obs-glossary-buttons"><button type="button" data-obs-term="sen">Theil–Sen</button><button type="button" data-obs-term="pvalue">p-value</button><button type="button" data-obs-term="ci">Confidence interval</button><button type="button" data-obs-term="paired">Matched years</button><button type="button" data-obs-term="model">NASA POWER</button></div><p id="obs-glossary-answer" aria-live="polite"></p></details>
+  <details class="obs-glossary"><summary>Translate scientific terms into plain language</summary><dl class="obs-definitions"><dt>Theil–Sen</dt><dd>Median slope of the annual observations; not a prediction.</dd><dt>p-value</dt><dd>Conditional on statistical assumptions; not proof of climate significance or cause.</dd><dt>Confidence interval</dt><dd>Its interpretation depends on assumptions, especially independence.</dd><dt>Paired calendar years</dt><dd>Two sites are compared only for years present in both sources.</dd><dt>NASA POWER point</dt><dd>Gridded model/satellite product, not an instrument installed at that coordinate.</dd></dl></details>
   <p class="obs-integrity">Source integrity: NASA POWER supplies original monthly observations grouped by RE/AG community (maximum 20 parameters per request). Annual aggregations are deterministic. Comparative trends here are descriptive, unadjusted for serial dependence and multiple testing; co-occurrence is not causation. Annual-only EXP-001 archive covers just T2M and PRECTOTCORR in Liberia/Limón.</p>
 </section>
-<div class="explore-layout">
+<div class="explore-layout" id="detail-research">
   <aside class="explore-controls" aria-labelledby="controls-title">
     <p class="eyebrow mint">01 / SET UP AN INVESTIGATION</p>
     <h2 id="controls-title">Define the question</h2>
-    <div class="question-presets" id="question-presets" aria-label="Suggested questions">
-      <p>Start from a scientific question:</p>
-      <div class="question-preset-buttons"><button type="button" data-question-variable="T2M">Is air temperature changing?</button><button type="button" data-question-variable="PRECTOTCORR">Is rainfall changing?</button><button type="button" data-question-variable="RH2M">Is humidity changing?</button><button type="button" data-question-variable="WS10M">Are winds changing?</button><button type="button" data-question-variable="ALLSKY_SFC_SW_DWN">Is solar radiation changing?</button><button type="button" data-question-variable="GWETROOT">Is soil wetness changing?</button></div>
-    </div>
     <form id="explore-form">
       <label for="location">Location</label>
       <select id="location" name="location"><option value="liberia">Liberia · Pacific, Costa Rica</option><option value="limon">Limón · Caribbean, Costa Rica</option><option value="custom">Custom coordinates</option></select>
@@ -132,10 +119,11 @@
       <p id="variable-guide" class="control-note variable-guide">Select a variable to see source, units and aggregation.</p>
       <div class="coordinate-fields"><div><label for="from-year">From</label><input id="from-year" type="number" min="1981" max="2025" value="1985" required></div><div><label for="to-year">Through</label><input id="to-year" type="number" min="1981" max="2025" value="2025" required></div></div>
       <button id="live-btn" class="explore-primary" type="submit">Request live NASA data <span aria-hidden="true">↗</span></button>
-      <label class="compare-label" for="compare-locations"><input type="checkbox" id="compare-locations"><span>Also compare with the other Costa Rican coast (additional NASA request)</span></label>
+      <details class="explore-advanced"><summary>Archived data and original NASA JSON</summary>
       <button id="snapshot-btn" class="explore-secondary" type="button">Use archived NASA sample</button>
       <label class="import-label" for="file-input">Or import original NASA JSON (.json)</label>
       <input id="file-input" type="file" accept=".json,application/json">
+      </details>
     </form>
     <p class="control-note">Live requests depend on NASA service availability and cross-origin browser access. The archived example is authentic NASA data retrieved for this investigation—not a synthetic simulation.</p>
   </aside>

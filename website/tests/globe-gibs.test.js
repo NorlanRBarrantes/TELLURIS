@@ -84,11 +84,11 @@ test("Bilingual globe controls remain linked to the source-specific modules",()=
   for(const language of ["","en/"]){
     const page=readFileSync(new URL("../public/"+language+"telluris/explore/index.html",import.meta.url),"utf8");
     for(const id of ["globe-stage","globe-layer","globe-date","globe-zoom-in",
-        "globe-zoom-out","globe-reset","globe-spin","globe-selection",
+        "globe-zoom-out","globe-reset","globe-selection",
         "globe-analyze","globe-nasa-legend","globe-source-link"])
       assert.ok(page.includes('id="'+id+'"'),language+id);
     assert.ok(page.includes("globe.css?v=exp008-20261115"));
-    assert.ok(page.includes("globe.js?v=exp009-atmos-20261115"));
+    assert.ok(page.includes("globe.js?v=exp010-static-20261115"));
     assert.ok(page.includes('option value="lst"'));
     assert.ok(page.includes('option value="truecolor"'));
   }
