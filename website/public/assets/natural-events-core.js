@@ -60,6 +60,7 @@ function safeEarthquake(feature){
  if(!feature||feature.type!=="Feature"||!feature.properties||
    !Array.isArray(feature.geometry?.coordinates))return null;
  const [lon,lat,depth]=feature.geometry.coordinates;
+ if(feature.properties.mag===null||feature.properties.mag===undefined)return null;
  const mag=Number(feature.properties.mag),time=Number(feature.properties.time);
  if(!isCoordinate(lat,lon)||!Number.isFinite(mag)||mag<0||
    !Number.isFinite(time)||!Number.isFinite(depth)||depth< -10||depth>1000)return null;
