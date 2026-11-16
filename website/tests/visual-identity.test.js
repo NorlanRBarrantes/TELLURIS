@@ -15,7 +15,7 @@ test("EXP-012: every ES/EN public page has the same final design layer and authe
   const css='/assets/visual-identity.css?v=exp012-20261115';
   assert.equal(html.split('href="'+css+'"').length-1,1,page+" shared stylesheet count");
   assert.equal(html.split('src="/assets/uriel-symbol-128.png"').length-1,
-    page.includes("/about/")?2:1,page+" team emblem count");
+    (page==="about/index.html"||page==="en/about/index.html")?2:1,page+" team emblem count");
   assert.ok(html.indexOf(css)>html.indexOf("site.css"),page+" custom theme must load last");
   assert.ok(!html.includes('class="brand" aria-label="TELLURIS · El recorrido"><svg'),page);
  }
