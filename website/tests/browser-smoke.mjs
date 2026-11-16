@@ -153,6 +153,13 @@ try{
   assert.match(await lab.locator("#events-summary").innerText(),/USGS/);
   assert.equal((await lab.locator("#events-source-link").getAttribute("href")).startsWith("https://earthquake.usgs.gov/"),true);
   assert.ok((await lab.locator("#events-map circle").count())>=3);
+  await lab.unroute("https://earthquake.usgs.gov/fdsnws/event/1/query?**");
+  await lab.route("https://earthquake.usgs.gov/fdsnws/event/1/query?**",route=>
+    route.fulfill({status:204,body:""}));
+  await lab.locator("#events-run").click();
+  await lab.locator("#events-result").waitFor({state:"visible"});
+  assert.match(await lab.locator("#events-summary").innerText(),/0 eventos/);
+  assert.match(await lab.locator("#events-list tr").first().innerText(),/No se recibieron eventos/);
   await lab.route("https://eonet.gsfc.nasa.gov/api/v3/events?**",route=>route.fulfill({
     contentType:"application/json",body:JSON.stringify({events:[{
       id:"EONET_3456",title:"Documented wildfire observation",
