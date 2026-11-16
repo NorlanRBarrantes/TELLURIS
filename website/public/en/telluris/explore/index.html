@@ -11,9 +11,10 @@
 <link rel="stylesheet" href="../../../assets/explorer.css?v=exp007-20261115">
 <script type="module" src="../../../assets/explorer.js?v=exp010-20261115"></script>
 <link rel="stylesheet" href="../../../assets/globe.css?v=exp008-20261115">
-<link rel="stylesheet" href="../../../assets/observatory.css?v=exp010-20261115">
+<link rel="stylesheet" href="../../../assets/observatory.css?v=exp011-events-20261115">
 <script type="module" src="../../../assets/observatory.js?v=exp010-20261115"></script>
 <script type="module" src="../../../assets/globe.js?v=exp010-static-20261115"></script>
+<script type="module" src="../../../assets/natural-events.js?v=exp011-20261115"></script>
 </head><body>
 <a class="skip" href="#explorer">Skip to explorer</a>
 <header class="header"><div class="container nav">
@@ -105,6 +106,38 @@
   <details class="obs-glossary"><summary>Translate scientific terms into plain language</summary><dl class="obs-definitions"><dt>Theil–Sen</dt><dd>Median slope of the annual observations; not a prediction.</dd><dt>p-value</dt><dd>Conditional on statistical assumptions; not proof of climate significance or cause.</dd><dt>Confidence interval</dt><dd>Its interpretation depends on assumptions, especially independence.</dd><dt>Paired calendar years</dt><dd>Two sites are compared only for years present in both sources.</dd><dt>NASA POWER point</dt><dd>Gridded model/satellite product, not an instrument installed at that coordinate.</dd></dl></details>
   <p class="obs-integrity">Source integrity: NASA POWER supplies original monthly observations grouped by RE/AG community (maximum 20 parameters per request). Annual aggregations are deterministic. Comparative trends here are descriptive, unadjusted for serial dependence and multiple testing; co-occurrence is not causation. Annual-only EXP-001 archive covers just T2M and PRECTOTCORR in Liberia/Limón.</p>
 </section>
+
+<section id="natural-events" class="events-panel" aria-labelledby="events-title">
+ <div class="events-head"><div><p class="eyebrow mint">EXP-011 / SOURCE-VERIFIED EARTH EVENTS</p>
+ <h2 id="events-title">Earthquakes & natural events</h2>
+ <p>Observe reported seismic activity from USGS and curated NASA EONET natural events near the selected geographic point. Separate catalogs: NOT NASA POWER climate variables or causal explanations.</p></div>
+ <span id="events-provider" class="events-provider">USGS</span></div>
+ <div class="events-controls">
+ <label for="events-type">Observation source<select id="events-type">
+ <option value="earthquakes">Earthquakes · USGS</option>
+ <option value="wildfires">Wildfires · NASA EONET</option>
+ <option value="volcanoes">Volcanic events · NASA EONET</option>
+ <option value="floods">Flood events · NASA EONET</option>
+ <option value="severeStorms">Severe storms · NASA EONET</option>
+ <option value="landslides">Landslides · NASA EONET</option>
+ </select></label>
+ <label for="events-days">Observation window<select id="events-days"><option value="30">30 days</option><option value="90" selected>90 days</option><option value="365">365 days</option></select></label>
+ <label for="events-radius">Radius from location A<select id="events-radius"><option value="200">200 km</option><option value="500" selected>500 km</option><option value="1000">1 000 km</option></select></label>
+ <label for="events-min-mag" id="events-mag-field">USGS minimum magnitude<select id="events-min-mag"><option value="2.5" selected>2.5+</option><option value="3.5">3.5+</option><option value="4.5">4.5+</option></select></label>
+ <button type="button" id="events-run" class="events-run">Query original events ↗</button>
+ </div>
+ <p class="events-control-hint">The center is the latitude/longitude selected in the research form. Change the geographic point above to query another area. Searches are on demand; no continuous monitoring.</p>
+ <p id="events-status" class="events-status" role="status" aria-live="polite">Choose an event type and query the original source.</p>
+ <div id="events-result" hidden>
+  <p id="events-summary" class="events-summary"></p>
+  <div class="events-geography"><svg id="events-map" viewBox="0 0 820 360" aria-label="Geographic event positions"></svg>
+  <p>Relative latitude/longitude diagram. The circles are catalog points, not observed shaking intensity, hazard or a real-time satellite map.</p></div>
+  <div class="events-table-scroll"><table class="events-table"><thead><tr><th>Event / source details</th><th>UTC date</th><th>Magnitude / type</th><th>Depth</th><th>Coordinates</th></tr></thead><tbody id="events-list"></tbody></table></div>
+  <p id="events-caveat" class="events-caveat"></p>
+  <a id="events-source-link" class="events-source-link" target="_blank" rel="noopener noreferrer" href="https://earthquake.usgs.gov/">USGS ↗</a>
+ </div>
+</section>
+
 <details id="detail-research" class="lab-advanced"><summary><span>Advanced scientific analysis</span><small>Trends, inference and PDF/CSV/JSON reports</small></summary>
 <div class="explore-layout">
   <aside class="explore-controls" aria-labelledby="controls-title">
