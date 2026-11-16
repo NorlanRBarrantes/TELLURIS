@@ -66,6 +66,19 @@ try{
   assert.equal(await lab.locator("#obs-other-place option[value=liberia]").evaluate(e=>e.disabled&&e.hidden),true,
     "With zone A Liberia, zone B Liberia must be absent/unselectable.");
   assert.equal(await lab.locator("#obs-other-place").inputValue(),"limon");
+  // The four modes are distinct operational states, not decorative buttons.
+  for(const [kind,two,one] of [
+    ["one-one",false,true],["one-two",true,true],
+    ["all-one",false,false],["all-two",true,false]
+  ]){
+    await lab.locator('[data-obs-mode="'+kind+'"]').click();
+    assert.equal(await lab.locator('[data-obs-mode="'+kind+'"]').getAttribute("aria-pressed"),"true");
+    assert.equal(await lab.locator("#obs-second-controls").isVisible(),two,kind+" B visibility");
+    assert.equal(await lab.locator("#obs-main-variable").evaluate(el=>el.closest("label").hidden),!one,kind+" variable scope");
+    assert.equal(await lab.locator("#obs-results").isVisible(),false,kind+" must clear prior results");
+  }
+  assert.equal(await lab.locator(".question-presets").count(),0);
+  assert.equal(await lab.locator(".obs-prompt-list").count(),0);
 
   await lab.locator(".obs-primary-config summary").click();
   await lab.locator("#obs-main-place").selectOption("limon");
