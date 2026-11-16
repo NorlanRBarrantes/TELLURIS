@@ -380,3 +380,18 @@ GitHub Actions source tests [#43797114489](https://github.com/NorlanRBarrantes/T
 - **Decision:** Present TELLURIS as a guided, reproducible research instrument addressing the four official NASA Earth System Trend Detective questions. Anchor the product in the actual 1985–2025 NASA POWER Liberia/Limón case, the independent SciPy calculations, explicit statistical assumptions, a negative MODIS site-quality example and explainable, bounded educational value. Avoid presenting 18 sources as 18 independent NASA missions, the 49-topic catalog as connected, generative AI as active, or significant climate outcomes as validated.
 - **Reason:** A working scientific use case, its verification and potential impact are more valuable to judges than technology count or visual effects; unsourced claims would lower scientific credibility.
 - **Impact:** The human-facing explanation is aligned to the functional MVP and honest research limitations; independent public deployment and NASA submission remain explicit operator tasks. [Case record](JUDGES-EVIDENCE-CASE-2026.md).
+
+## ADR-041 — Remove the unavailable generative AI button (user-visible dead end)
+
+- **Date:** 2026-11-15 (Costa Rica).
+- **Status:** Implemented in GitHub source commit `122c92f`; public deployment pending.
+- **Issue and decision:** User observed HTTP 404 from the optional generative model CTA. Remove the entire generative UI and browser request in both languages; retain the fully source-bound deterministic KPI and interpretation, original measurements and science panel. Prototype PHP is not deployed or connected.
+- **Tests:** static source suite passed [GitHub Actions #43799927204](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43799927204). Chromium run #43799927195 failed **at GitHub checkout** with a private-repo access error, before any browser tests ran. This is an infrastructure failure, not evidence that the new UI passed browser QA. Re-run after repo/token access is restored.
+
+## ADR-042 — Evidence-first source film plus bounded future vision and geometric narrator
+
+- **Date:** 2026-11-15 (Costa Rica).
+- **Status:** Approved creative brief, implementation and production release **not** performed.
+- **Decision:** Use original-data 29.4s animated case at slide 00 and the already-supplied independent identity film as an optional separate closing video on slide 05. Develop an original understated geometric URI guide (not NASA mascot) to introduce factual Liberia/Limón source record observations and distinguish current methods from future vegetation, hydrological and analog-research potential.
+- **Scientific boundary:** NASA POWER model-grid climate history is not real-time launch weather or rocket authorization, and the product has not selected a certified test site or predicted an earthquake. No invented empirical data, NASA endorsement or future mission approval.
+- **Acceptance:** Read [EXP-015 video research](EXP-015-VIDEO-EVIDENCE-AND-VISION.md) and [Remotion brief](PROMPT-CODEX-REMOTION-EXP015.md); tests, ffprobe, captions, mobile and separate deployment/official submission validation required.

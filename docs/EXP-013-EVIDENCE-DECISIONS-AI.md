@@ -69,3 +69,7 @@ The public URL https://projecturiel.earth/en/telluris/explore/ was not directly 
 - The first Chromium run found an existing stale `obs-drilldown` DOM reference, which prevented the new decision panel from rendering. Corrected in commit `c51586c`. Both subsequent source tests and Chromium acceptance passed. The failed run is intentionally preserved for traceability.
 - [Static suite: 137 passed, 0 failed](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43797114489); [Chromium acceptance: success](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43797114547), with screenshots in the retained `telluris-exp010-browser-qa` artifact. Images are local-test renderings, not screenshots from the public domain.
 - Optional server backend has not had a verified host PHP lint, auth/rate-limit live penetration test, provider test or deployed credential; keep `TELLURIS_AI_ENABLED` off. Provider response is user-initiated, model-generated and **not** an independently audited climate conclusion.
+
+## EXP-014 status superseding earlier optional AI UI
+
+The team reported HTTP 404 on the optional generative button, which was removed in GitHub commit `122c92f`. The earlier in-browser opt-in references in this file are superseded historical design notes, not current functionality. The deterministic source-grounded interpretation remains. The server-side model prototype has never been deployed. Browser validation for this change is pending because GitHub Actions encountered a repository checkout access failure; the source test suite passed.

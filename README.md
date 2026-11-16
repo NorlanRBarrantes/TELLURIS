@@ -29,6 +29,9 @@ The initial candidate data provider is [NASA POWER](https://power.larc.nasa.gov/
 
 ## Documentation
 
+- [EXP-015: verified NASA evidence video, responsible future applications and original URI guide character](docs/EXP-015-VIDEO-EVIDENCE-AND-VISION.md)
+- [Codex + Remotion implementation brief for the two-slide video story](docs/PROMPT-CODEX-REMOTION-EXP015.md)
+
 - **[NASA judges: evidence-backed case, real results, limitations, problem and impact](docs/JUDGES-EVIDENCE-CASE-2026.md)** — the central demonstration narrative and scientific honesty checks.
 
 - [EXP-013 evidence-first dashboard, conditional actions and optional secure AI adapter (not active)](docs/EXP-013-EVIDENCE-DECISIONS-AI.md)
