@@ -68,6 +68,24 @@ function itemCard(entry) {
       evidence.textContent=tr("Ver prueba real de NASA ↗","View real NASA verification ↗");
       card.append(note,evidence);
     }
+    if(entry.event_integration?.status==="event_api_connected"){
+      const note=document.createElement("p");note.className="catalog-note";
+      note.textContent=lang==="es"?entry.event_integration.note_es:entry.event_integration.note_en;
+      const link=document.createElement("a");link.className="catalog-open";
+      link.href=(lang==="es"?"/telluris/explore/":"/en/telluris/explore/")+
+        "?events="+encodeURIComponent(entry.event_integration.type)+"#natural-events";
+      link.textContent=tr("Consultar sismos USGS ↗","Explore USGS earthquakes ↗");
+      card.append(note,link);
+    }
+    if(entry.related_event?.type){
+      const note=document.createElement("p");note.className="catalog-note";
+      note.textContent=lang==="es"?entry.related_event.note_es:entry.related_event.note_en;
+      const link=document.createElement("a");link.className="catalog-open";
+      link.href=(lang==="es"?"/telluris/explore/":"/en/telluris/explore/")+
+        "?events="+encodeURIComponent(entry.related_event.type)+"#natural-events";
+      link.textContent=tr("Ver eventos relacionados ↗","Explore related events ↗");
+      card.append(note,link);
+    }
     if(entry.spatial_evidence &&
        entry.spatial_evidence.status==="one_date_spatial_qa_and_one_year_landcover_verified"){
       const note=document.createElement("p");note.className="catalog-note";
