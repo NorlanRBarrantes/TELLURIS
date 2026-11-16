@@ -84,6 +84,9 @@ try{
   const lab=await desktop.newPage();
   await go(lab,"/telluris/explore/");
   await lab.waitForFunction(()=>document.querySelector("#obs-main-variable").options.length>=18);
+  // EXP-013: focused comparison is the default; all-mode remains selectable.
+  assert.equal(await lab.locator('[data-obs-mode="one-two"]').getAttribute("aria-pressed"),"true");
+  assert.equal(await lab.locator("#obs-decision").count(),1);
   assert.equal(await lab.locator("#globe-weather-mode").count(),0);
   assert.equal(await lab.locator("#globe-spin").count(),0);
   assert.equal(await lab.locator("#globe-stage").count(),1);
@@ -137,6 +140,15 @@ try{
   assert.equal(await lab.locator("#obs-rows tr").count(),18);
   assert.equal(await lab.locator("#obs-kpi-available").innerText(),"2");
   assert.equal(await lab.locator("#obs-kpi-unavailable").innerText(),"16");
+  assert.equal(await lab.locator("#obs-decision").isVisible(),true);
+  assert.equal(await lab.locator("#obs-deep-data").count(),0); // disclosure class, not a duplicate id
+  assert.equal(await lab.locator(".obs-deep-data").evaluate(el=>el.open),false);
+  assert.match(await lab.locator("#obs-decision-name").innerText(),/Temperatura/);
+  assert.notEqual(await lab.locator("#obs-d-metric-0").innerText(),"—");
+  assert.notEqual(await lab.locator("#obs-d-metric-1").innerText(),"—");
+  assert.match(await lab.locator("#obs-d-metric-2").innerText(),/41/);
+  assert.match(await lab.locator("#obs-d-evidence").innerText(),/Theil/);
+  assert.match(await lab.locator("#obs-ai-output").innerText(),/No solicitado/);
   assert.equal(await lab.locator("#obs-chart polyline").count()>=1,true);
   await lab.locator(".obs-detail-link").click();
   assert.equal(await lab.locator("#detail-research").evaluate(el=>el.open),true);
@@ -182,6 +194,7 @@ try{
   assert.match(await lab.locator("#events-list tr").first().innerText(),/Documented wildfire observation/);
   assert.match(await lab.locator("#events-summary").innerText(),/NASA EONET/);
   assert.ok((await lab.locator("#events-source-link").getAttribute("href")).startsWith("https://eonet.gsfc.nasa.gov/"));
+  await lab.screenshot({path:"browser-artifacts/telluris-explorer-evidence-1440.png",fullPage:true});
   await noOverflow(lab,"Spanish desktop Explorer");
 
   const en=await desktop.newPage();
@@ -190,6 +203,8 @@ try{
   await go(en,"/en/telluris/explore/");
   await en.waitForFunction(()=>document.querySelector("#obs-main-variable").options.length>=18);
   assert.equal(await en.locator("#natural-events").count(),1);
+  assert.equal(await en.locator('[data-obs-mode="one-two"]').getAttribute("aria-pressed"),"true");
+  assert.equal(await en.locator("#obs-decision").count(),1);
   assert.equal(await en.locator("#events-type option").count(),6);
   assert.equal(await en.locator("#obs-other-place option[value=liberia]").count(),0);
 

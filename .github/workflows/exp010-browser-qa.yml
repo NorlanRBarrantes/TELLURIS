@@ -6,6 +6,11 @@ on:
     paths:
       - ".github/workflows/exp010-browser-qa.yml"
       - "website/tests/browser-smoke.mjs"
+      - "website/public/assets/decision-core.js"
+      - "website/public/assets/observatory.js"
+      - "website/public/assets/decision-dashboard.css"
+      - "website/public/telluris/explore/index.html"
+      - "website/public/en/telluris/explore/index.html"
 
 permissions:
   contents: read
