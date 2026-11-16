@@ -651,7 +651,12 @@
         "NASA OPERA · DSWx-HLS / DSWx-S1"
       ],
       "spatial_support_es": "Mapa categórico de superficie de agua",
-      "validation_gate_es": "Agregación espacial de área, no usar pendiente sobre códigos de clase"
+      "validation_gate_es": "Agregación espacial de área, no usar pendiente sobre códigos de clase",
+      "related_event": {
+        "type": "floods",
+        "note_es": "NASA EONET cataloga eventos de inundación, no mide su extensión. El producto DSWx sigue pendiente.",
+        "note_en": "NASA EONET reports flood events, not flood extent. DSWx remains unintegrated."
+      }
     },
     {
       "id": "C23",
@@ -807,7 +812,12 @@
         "ECOSTRESS",
         "HLS",
         "OPERA"
-      ]
+      ],
+      "related_event": {
+        "type": "wildfires",
+        "note_es": "NASA EONET aporta eventos de incendio, no píxeles de puntos calientes MODIS/VIIRS. FIRMS sigue pendiente.",
+        "note_en": "NASA EONET provides wildfire events, not MODIS/VIIRS hot spot pixels. FIRMS is pending."
+      }
     },
     {
       "id": "C30",
@@ -838,7 +848,7 @@
       "domain_es": "Geosfera y actividad sísmica",
       "domain_en": "Geosphere and seismic activity",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "partial",
       "source_candidates": [
         "USGS",
         "NASA ARIA",
@@ -846,7 +856,19 @@
         "InSAR",
         "OMI",
         "MODIS"
-      ]
+      ],
+      "event_integration": {
+        "status": "event_api_connected",
+        "type": "earthquakes",
+        "provider": "USGS FDSN Earthquake Catalog",
+        "source_url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+        "fields": [
+          "event time",
+          "event count with catalog limits"
+        ],
+        "note_es": "Eventos sísmicos USGS consultables por zona y periodo. No representan una tasa sísmica corregida, riesgo ni una tendencia climática NASA.",
+        "note_en": "USGS seismic event records queryable by area and period. Not completeness-adjusted seismic rates, hazard or a NASA climate trend."
+      }
     },
     {
       "id": "C32",
@@ -857,7 +879,7 @@
       "domain_es": "Geosfera y actividad sísmica",
       "domain_en": "Geosphere and seismic activity",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "partial",
       "source_candidates": [
         "USGS",
         "NASA ARIA",
@@ -865,7 +887,19 @@
         "InSAR",
         "OMI",
         "MODIS"
-      ]
+      ],
+      "event_integration": {
+        "status": "event_api_connected",
+        "type": "earthquakes",
+        "provider": "USGS FDSN Earthquake Catalog",
+        "source_url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+        "fields": [
+          "magnitude",
+          "magnitude scale reported"
+        ],
+        "note_es": "Eventos sísmicos USGS consultables por zona y periodo. No representan una tasa sísmica corregida, riesgo ni una tendencia climática NASA.",
+        "note_en": "USGS seismic event records queryable by area and period. Not completeness-adjusted seismic rates, hazard or a NASA climate trend."
+      }
     },
     {
       "id": "C33",
@@ -876,7 +910,7 @@
       "domain_es": "Geosfera y actividad sísmica",
       "domain_en": "Geosphere and seismic activity",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "partial",
       "source_candidates": [
         "USGS",
         "NASA ARIA",
@@ -884,7 +918,18 @@
         "InSAR",
         "OMI",
         "MODIS"
-      ]
+      ],
+      "event_integration": {
+        "status": "event_api_connected",
+        "type": "earthquakes",
+        "provider": "USGS FDSN Earthquake Catalog",
+        "source_url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+        "fields": [
+          "hypocenter depth km"
+        ],
+        "note_es": "Eventos sísmicos USGS consultables por zona y periodo. No representan una tasa sísmica corregida, riesgo ni una tendencia climática NASA.",
+        "note_en": "USGS seismic event records queryable by area and period. Not completeness-adjusted seismic rates, hazard or a NASA climate trend."
+      }
     },
     {
       "id": "C34",
@@ -895,7 +940,7 @@
       "domain_es": "Geosfera y actividad sísmica",
       "domain_en": "Geosphere and seismic activity",
       "kind": "research_candidate",
-      "implementation_status": "not_connected",
+      "implementation_status": "partial",
       "source_candidates": [
         "USGS",
         "NASA ARIA",
@@ -903,7 +948,19 @@
         "InSAR",
         "OMI",
         "MODIS"
-      ]
+      ],
+      "event_integration": {
+        "status": "event_api_connected",
+        "type": "earthquakes",
+        "provider": "USGS FDSN Earthquake Catalog",
+        "source_url": "https://earthquake.usgs.gov/fdsnws/event/1/",
+        "fields": [
+          "epicenter latitude",
+          "epicenter longitude"
+        ],
+        "note_es": "Eventos sísmicos USGS consultables por zona y periodo. No representan una tasa sísmica corregida, riesgo ni una tendencia climática NASA.",
+        "note_en": "USGS seismic event records queryable by area and period. Not completeness-adjusted seismic rates, hazard or a NASA climate trend."
+      }
     },
     {
       "id": "C35",
@@ -941,7 +998,12 @@
         "InSAR",
         "OMI",
         "MODIS"
-      ]
+      ],
+      "related_event": {
+        "type": "volcanoes",
+        "note_es": "NASA EONET reporta eventos volcánicos, no concentraciones de emisiones SO₂.",
+        "note_en": "NASA EONET reports volcano events, not SO₂ emission measurements."
+      }
     },
     {
       "id": "C37",
@@ -979,7 +1041,12 @@
         "InSAR",
         "OMI",
         "MODIS"
-      ]
+      ],
+      "related_event": {
+        "type": "landslides",
+        "note_es": "NASA EONET cataloga deslizamientos reportados, no mapas de susceptibilidad.",
+        "note_en": "NASA EONET reports landslide events, not susceptibility maps."
+      }
     },
     {
       "id": "C39",
