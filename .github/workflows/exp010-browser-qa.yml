@@ -1,4 +1,4 @@
-name: EXP-010 TELLURIS real-browser user journey QA
+name: EXP-011 TELLURIS slides and event-browser QA
 
 on:
   workflow_dispatch:
