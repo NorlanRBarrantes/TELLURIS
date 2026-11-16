@@ -31,7 +31,11 @@ export function eventRequest({type,lat,lon,days=90,radiusKm=500,minMagnitude=2.5
  if(type==="earthquakes"){
   if(!EVENT_MAGNITUDES.includes(minMagnitude))throw Error("Unsupported magnitude threshold");
   const q=new URLSearchParams({
-   format:"geojson",starttime:start,endtime:end,
+   // Unlike EONET's inclusive YYYY-MM-DD end filter, USGS interprets a
+   // bare date as 00:00 UTC; use exact UTC instants to include events today.
+   format:"geojson",
+   starttime:new Date(now.getTime()-days*86400000).toISOString(),
+   endtime:now.toISOString(),
    latitude:String(lat),longitude:String(lon),
    maxradiuskm:String(radiusKm),minmagnitude:String(minMagnitude),
    limit:String(USGS_MAX_EVENTS),orderby:"time"
