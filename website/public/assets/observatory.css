@@ -494,3 +494,7 @@ body:has(#observatory){
  .events-controls label:first-child,.events-controls .events-run{grid-column:span 2}
  .events-geography{padding:7px}
 }
+
+
+/* Native hidden must override author display:grid (Chromium QA regression). */
+.events-panel [hidden]{display:none!important}
