@@ -118,3 +118,11 @@ The statically served site adds `assets/journey-slider.js`, `assets/natural-even
 The event panel uses only HTTPS original data from earthquake.usgs.gov and eonet.gsfc.nasa.gov. GitHub original API checks do not prove third-party browser CORS at projecturiel.earth. Browser QA uses explicit fixtures, not a production API success claim; test a direct deployed request and inspect console/network failures manually. Preserve original NASA POWER and GIBS scientific paths.
 
 With the existing BanaHosting checkout and read-only GitHub SSH key, run `git fetch/pull --ff-only`, `scripts/deploy-bana-static.sh --check`, review changes, and only then `--deploy` with script backups and HTTPS source verification. Never deploy automatically during official hackathon submission. Record exact commit SHA, public cache-versioned routes and browser screenshots.
+
+### EXP-012 public visual identity rollout
+
+New static files in `website/public/assets/`: `visual-identity.css` and `uriel-symbol-128.png`. The 12 public HTML pages reference these with a cache-busted CSS URL. `journey-slider.js` now wires the slide 00 “Skip presentation” button to the final presentation slide. The only primary Explore CTA remains at slide 05. No source-processing modules were changed.
+
+Verify GitHub site and Chromium QA first. On BanaHosting, use the **read-only** SSH deploy key to update `$HOME/telluris-source`, then run `scripts/deploy-bana-static.sh --check`; inspect the changed files, and only run `--deploy` if appropriate for the official NASA submission stage. The existing deployment script backs up changed server files and verifies HTTPS served content; do not manually delete public files or overwrite unrelated site data.
+
+Review `/`, `/en/`, all slide chapters (especially intro skip), `/about/`, `/en/about/`, Explorer and scientific catalog on mobile and desktop. Confirm logo is transparent, no unexpected horizontal scrolling or nested input overlap, language-switch continuity, real NASA source availability and browser CORS for USGS/EONET. Public production is not claimed until after manual checks.

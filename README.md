@@ -118,3 +118,11 @@ The canonical Spanish and English homepages are now **six horizontally navigable
 The research Explorer now offers a separate **Earthquake & Natural Events** investigation for the active Zone A: genuine **USGS FDSN** seismic events (epicenters, depth, magnitude and thresholded occurrence counts), and **NASA EONET** curated natural events (wildfires, volcanoes, floods, severe storms, landslides). Both are event catalogs, not the original 18 NASA POWER climate series. **Four USGS seismic research candidates** C31–C34 have a source-connected *partial* implementation. Four other research topics have links to related EONET reports while remaining **not connected to the underlying physical variable** (e.g., reported wildfire events do not equal MODIS hot-spot pixels).
 
 [EXP-011 complete scientific and UX scope](docs/EXP-011-SLIDES-EVENTS.md) · [original six-source API QA](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43787577130). Source tests do not substitute for published-browser CORS and NASA GIBS visual validation. The BanaHosting public rollout is manual and pending.
+
+## EXP-012 — One coherent visual identity and shorter entry to the laboratory
+
+The six-slide judge introduction, NASA Explorer, 49-topic research catalog and Project Uriel About pages now share the same **minimal navy, white, cyan and restrained violet** graphic system, following the user-supplied presentation references without adding gratuitous visual effects. The Project Uriel crest in the header was derived from the image the team supplied and optimized as a transparent 128×106 PNG. TELLURIS remains the product-first heading and identity.
+
+Slide **00** offers a **Skip presentation → last slide** action; it does **not** go straight to the laboratory. The final slide alone retains the primary **Open Explorer** CTA. Source data, original GIBS layers, numerical methodology and scientific limits are unchanged.
+
+[EXP-012 visual identity specification](docs/EXP-012-VISUAL-IDENTITY.md) · [browser acceptance](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43792630373) · [source QA](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43792857775).

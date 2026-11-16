@@ -284,3 +284,10 @@ New source-separated precipitation comparison is implemented in [GPM JS module](
 - **Source classification:** 18 NASA POWER parameters remain connected; C31–C34 seismic catalog event dimensions have source-backed partial integration, while C22 flood extent / C29 thermal hot spots / C36 volcanic emissions / C38 landslide susceptibility retain pending **physical** data-product status and expose only labeled related event catalogs.
 - **Deployment:** GitHub source changes are not evidence of a production update. Validate `--check`, back up, deploy `--deploy` and inspect public ES/EN slider, browser event CORS, 3D NASA map, downloads and original scientific method after publication.
 - **Method and remaining backlog:** [EXP-011](EXP-011-SLIDES-EVENTS.md).
+
+## EXP-012 — Visual identity and intro skip acceptance
+
+- **Source QA [#43792857775](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43792857775): PASS** after addressing root-relative asset resolution in the test harness and counting the crest correctly on the root About route. Includes ES/EN page asset checks, scientific source regressions, user-supplied PNG signature/128×106 dimensions, shared stylesheet on all 12 public pages, and a skip-to-final-slide invariant.
+- **Chromium desktop/mobile [#43792630373](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43792630373): PASS** with slide 00 skipping to slide 05, final Explorer CTA, ES/EN landing and About, NASA archive analysis, USGS/EONET UI, and tested 1440/390px viewports. Browser tests block external NASA GIBS and CDN calls to exercise resilient fallback; this is not physical georegistration validation.
+- **Preserved:** NASA data source URLs, original scientific processing, 3D georeferenced GIBS imagery source logic, all four multi-variable modes, source provenance and report exports, and explicit independent-project disclaimer.
+- **Not yet demonstrated:** EXP-012 published on BanaHosting, successful public-page browser cache refresh and actual remote NASA GIBS texture registration; these require operator deploy and live browser checks.

@@ -341,3 +341,12 @@ A second real-source run confirmed that the selected Limón point is classified 
 - **Original request proof:** [6 source responses HTTP 200](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43787577130); output shows zero when none reported and explicitly marks API caps. No fake observations and no combined climate-seismic causal inference.
 - **Deferred:** specialist NASA mission products requiring authenticated granules, quality masks, geographic aggregation and independent scientific source QA. Refer to [EXP-011](EXP-011-SLIDES-EVENTS.md) for the 49-topic assessment and to [DATA-SOURCES](DATA-SOURCES.md) for sources.
 - **Release gate:** original historical-site QA and GitHub browser smoke are not live BanaHosting deployment; verify browser external CORS and GIBS data independently.
+
+## ADR-037 — Unified, restrained NASA-judge-facing TELLURIS visual identity
+
+- **Date:** 2026-11-15 (Costa Rica).
+- **Decision:** use a shared, last-loaded CSS design layer for all 12 public routes rather than separately adjusting half a dozen copies of the same colors. Color palette: navy #080D24, white #F6F8FF, cyan #2DDBE8, limited violet #806BE5 and coral #FB6A84. Typography, subtle lines, progress and focus states take precedence over heavy glow/animation.
+- **Source of graphic direction:** reference images supplied by the project team, particularly bold white type, schematic scientific signals and simple flat geometric Earth illustrations. The homepage illustration remains *conceptual*; real NASA source imagery remains confined to the georeferenced Explorer.
+- **Logo:** retain the identifiable wings, star and orbital emblem of the user-uploaded Project Uriel Galactic Crest in a transparent, optimized symbol image in all headers and both About pages. Do not override TELLURIS's product-first position with the team brand.
+- **Navigation:** the introduction slide no longer exits into the laboratory. A real skip control moves to the final slide with one valid Explorer CTA; hash navigation, accessible focus and reduced motion remain supported.
+- **Scope:** user interface only, no scientific calculations or provider integrations changed. [Full rationale and validation](EXP-012-VISUAL-IDENTITY.md). Publication on BanaHosting requires separate operator confirmation.
