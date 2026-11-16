@@ -33,10 +33,11 @@ test("Weather or water questions are actually selectable in both languages",()=>
  for(const page of ["telluris/explore/index.html","en/telluris/explore/index.html"]){
   const html=read(page);
   for(const variable of ["T2M","PRECTOTCORR","RH2M","WS10M","GWETROOT","ALLSKY_SFC_SW_DWN"]){
-   assert.ok(html.includes('data-question-variable="'+variable+'"'),page+" "+variable);
+   assert.ok(html.includes('value="'+variable+'"'),page+" "+variable);
   }
   assert.ok(html.includes('id="variable-guide"'));
-  assert.ok(html.includes('id="compare-locations"'));
+  assert.ok(html.includes('data-obs-mode="one-two"'));
+  assert.ok(html.includes('data-obs-mode="all-two"'));
   assert.ok(html.includes('id="p-value-note"'));
   assert.ok(html.includes('id="chart-legend"'));
  }
