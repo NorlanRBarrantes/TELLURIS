@@ -27,8 +27,8 @@
 1. **Get the locally produced MP4 from the conversation.** Its filename is `TELLURIS-EXP015-English-115x.mp4`.
 2. **Rename it EXACTLY** to `telluris-evidence-film-115x.mp4`.
 3. Add it via GitHub's Add file → Upload files to repository path `website/public/assets/telluris-evidence-film-115x.mp4` on `main` (or upload it to the same path in a verified local checkout and commit).
-4. Deploy the updated contents of `website/public/` to the real BanaHosting document root, including all changed HTML/JS/CSS and the binary. GitHub commits alone **do not** publish the site.
-5. In a logged-out browser, verify `https://projecturiel.earth/assets/telluris-evidence-film-115x.mp4` loads with video/audio, then `/` and `/en/` show the film button; playback, pause, close, responsive layout and other slides work. Test HTTP range seeking and slow mobile connections.
+4. **Automatic post-upload deployment:** the existing `explorer-qa.yml` workflow now detects a push containing this exact MP4 path and, after static QA passes, runs the existing SSH backup + rsync deploy to BanaHosting. It requires preconfigured `BANAHOSTING_SSH_*` secrets and pinned host key; if absent, deployment fails safely. Manual deploy is the fallback, not the default.
+5. The same workflow performs HTTPS checks of the public MP4 and player assets when the binary is present. Independently verify `https://projecturiel.earth/assets/telluris-evidence-film-115x.mp4` loads with video/audio, then `/` and `/en/` show the film button; playback, pause, close, responsive layout and other slides work. Test HTTP range seeking and slow mobile connections.
 6. Keep the **official submission demo ≤30 seconds** (or use the officially permitted slide format). This 2:48 web film is supplemental information only.
 
 ## Security, science and operational caveats
@@ -37,3 +37,7 @@
 - This edit does **not** modify NASA data, statistical methods, the Explorer, the application backend or the official submission portal.
 - Avoid uploading a large MP4 through a tool that accepts only UTF-8 text; binary publishing requires a real file-upload mechanism.
 - Do not mark production published or judge-viewable until the asset and HTML are tested anonymously.
+
+## Automatic post-upload deployment (2026-11-15)
+
+The deployment workflow was updated to bypass only the *manual auto-deploy variable* when GitHub's push payload includes the exact MP4 path `website/public/assets/telluris-evidence-film-115x.mp4`. It **does not** bypass static tests, mandatory deployment credentials, pinned SSH host verification, production backup, or post-deployment HTTPS checks. Future unrelated pushes still require `BANAHOSTING_AUTO_DEPLOY=true`. Whether live deployment succeeded remains unconfirmed until the relevant new Actions run concludes successfully.
