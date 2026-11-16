@@ -135,6 +135,40 @@ try{
   assert.equal(await lab.locator("#obs-chart polyline").count()>=1,true);
   await lab.locator(".obs-detail-link").click();
   assert.equal(await lab.locator("#detail-research").evaluate(el=>el.open),true);
+  // In-browser event explorer is exercised with STRUCTURAL fixtures only;
+  // original USGS/EONET live-source checks are in separate EXP-011 API CI.
+  await lab.route("https://earthquake.usgs.gov/fdsnws/event/1/query?**",route=>route.fulfill({
+    contentType:"application/geo+json",body:JSON.stringify({
+      type:"FeatureCollection",features:[{
+        type:"Feature",id:"us9000000",geometry:{type:"Point",coordinates:[-85.5,10.7,22]},
+        properties:{mag:4.3,time:Date.UTC(2026,10,1),place:"Near Costa Rica",
+          status:"reviewed",url:"https://earthquake.usgs.gov/earthquakes/eventpage/us9000000"}
+      }]
+    })
+  }));
+  await lab.locator("#events-type").selectOption("earthquakes");
+  await lab.locator("#events-run").click();
+  await lab.locator("#events-result").waitFor({state:"visible"});
+  assert.equal(await lab.locator("#events-list tr").count(),1);
+  assert.match(await lab.locator("#events-summary").innerText(),/USGS/);
+  assert.equal((await lab.locator("#events-source-link").getAttribute("href")).startsWith("https://earthquake.usgs.gov/"),true);
+  assert.ok((await lab.locator("#events-map circle").count())>=3);
+  await lab.route("https://eonet.gsfc.nasa.gov/api/v3/events?**",route=>route.fulfill({
+    contentType:"application/json",body:JSON.stringify({events:[{
+      id:"EONET_3456",title:"Documented wildfire observation",
+      categories:[{id:"wildfires"}],geometry:[{
+        type:"Point",coordinates:[-85.61,10.5],date:"2026-10-30T10:00:00Z"
+      }]
+    }]})
+  }));
+  await lab.locator("#events-type").selectOption("wildfires");
+  assert.equal(await lab.locator("#events-mag-field").isVisible(),false);
+  assert.equal(await lab.locator("#events-result").isVisible(),false,"Changing sources clears old results");
+  await lab.locator("#events-run").click();
+  await lab.locator("#events-result").waitFor({state:"visible"});
+  assert.match(await lab.locator("#events-list tr").first().innerText(),/Documented wildfire observation/);
+  assert.match(await lab.locator("#events-summary").innerText(),/NASA EONET/);
+  assert.ok((await lab.locator("#events-source-link").getAttribute("href")).startsWith("https://eonet.gsfc.nasa.gov/"));
   await noOverflow(lab,"Spanish desktop Explorer");
 
   const en=await desktop.newPage();
