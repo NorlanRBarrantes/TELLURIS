@@ -87,3 +87,7 @@ Spanish subtitle track must be accurate and naturally localized; captions should
 4. Data chart compared programmatically against JSON (every plotted point; no mutation of data).
 5. ES/EN site, mobile/desktop no overflow, poster fallback, keyboard controls, pause on slide change, navigation/skip unaffected.
 6. NASA submission follows its live portal; do not imply website film publication equals official submission.
+
+### Evidence QA addendum
+
+The unrelated EXP-014 removal of the dead-end AI CTA has both [passing static source tests](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43799927204) and [passing Chromium attempt 2](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43799927195). Neither run renders, publishes or validates the planned EXP-015 films.

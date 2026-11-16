@@ -395,3 +395,7 @@ GitHub Actions source tests [#43797114489](https://github.com/NorlanRBarrantes/T
 - **Decision:** Use original-data 29.4s animated case at slide 00 and the already-supplied independent identity film as an optional separate closing video on slide 05. Develop an original understated geometric URI guide (not NASA mascot) to introduce factual Liberia/Limón source record observations and distinguish current methods from future vegetation, hydrological and analog-research potential.
 - **Scientific boundary:** NASA POWER model-grid climate history is not real-time launch weather or rocket authorization, and the product has not selected a certified test site or predicted an earthquake. No invented empirical data, NASA endorsement or future mission approval.
 - **Acceptance:** Read [EXP-015 video research](EXP-015-VIDEO-EVIDENCE-AND-VISION.md) and [Remotion brief](PROMPT-CODEX-REMOTION-EXP015.md); tests, ffprobe, captions, mobile and separate deployment/official submission validation required.
+
+### ADR-041 verification addendum
+
+After the infrastructure checkout failure in the first CI attempt, [the same browser workflow #43799927195](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43799927195) was rerun and passed in **attempt 2**. No test logic was changed to conceal the earlier access problem. The separate static suite [#43799927204](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43799927204) passed. Live deployment remains to be verified.

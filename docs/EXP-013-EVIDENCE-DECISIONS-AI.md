@@ -73,3 +73,7 @@ The public URL https://projecturiel.earth/en/telluris/explore/ was not directly 
 ## EXP-014 status superseding earlier optional AI UI
 
 The team reported HTTP 404 on the optional generative button, which was removed in GitHub commit `122c92f`. The earlier in-browser opt-in references in this file are superseded historical design notes, not current functionality. The deterministic source-grounded interpretation remains. The server-side model prototype has never been deployed. Browser validation for this change is pending because GitHub Actions encountered a repository checkout access failure; the source test suite passed.
+
+### EXP-014 browser QA confirmation
+
+After an initial `actions/checkout` private-repository authentication failure, the second attempt of [workflow #43799927195](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43799927195) succeeded with `EXP010_BROWSER_ACCEPTANCE_PASS`, preserving bilingual desktop/mobile and archive flows. This confirms local generated site behavior, not the public BanaHosting host.
