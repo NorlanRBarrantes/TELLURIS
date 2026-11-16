@@ -368,3 +368,7 @@ A second real-source run confirmed that the selected Limón point is classified 
 - **Decision:** Use one-variable/two-location as the initial Observatory scope and surface selected-source readings, descriptive slope, coverage and matched-year difference, then a cautious five-part explanation and optional private-server AI request. Preserve 18 modes/parameters, original NASA calculations, matrices, raw exports, globe and ES/EN identity. Hide the raw comparison table behind a discoverable advanced disclosure.
 - **Scientific guardrail:** General plausible influences, conditional scenarios and short/long-term monitoring options are not causal inference, future forecasts or verified local recommendations. Never invent source values.
 - **Security gate:** The generative adapter is separately deployed, disabled by default and cannot ship API keys in public JavaScript; external model availability must be verified before calling it connected. [Detailed decisions and tests](EXP-013-EVIDENCE-DECISIONS-AI.md).
+
+### ADR-039 verification addendum — 2026-11-15
+
+GitHub Actions source tests [#43797114489](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43797114489) passed 137/137 and the local Chromium bilingual/mobile flow [#43797114547](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43797114547) passed after removing an obsolete DOM reference in commit `c51586c`. This does not validate the external AI proxy or live BanaHosting deployment.

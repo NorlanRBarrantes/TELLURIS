@@ -1,7 +1,7 @@
 # EXP-013 — Evidence-first decision dashboard and optional secure AI
 
 **Date:** 2026-11-15 (Costa Rica).
-**Status:** Implemented in GitHub source pending CI, public browser checks and any production release. The optional generative AI endpoint is **not live**, has **no repository credential** and is **disabled by default**.
+**Status:** GitHub source implemented; 137/137 Node/HTTP/static checks and local Chromium ES/EN desktop/mobile QA passed. Public BanaHosting release and manual live NASA/AI server QA remain unverified. The optional generative AI endpoint is **not live**, has **no repository credential** and is **disabled by default**.
 **Baseline:** EXP-012 visual identity, 18 NASA POWER parameters and four existing investigation modes.
 
 ## Issue found in code (not a confirmed live-page screenshot audit)
@@ -43,13 +43,13 @@ The public URL https://projecturiel.earth/en/telluris/explore/ was not directly 
 
 ## Acceptance and release checklist
 
-- [ ] GitHub Actions `explorer-qa` green after EXP-013.
-- [ ] Independent ES/EN desktop/mobile and keyboard navigation checks.
-- [ ] Archive T2M and PRECTOTCORR actual source replay: four KPI values trace to source and matched-year differences.
-- [ ] Wind direction remains circular, no Sen trend KPI.
+- [x] GitHub Actions [`explorer-qa` 137/137 tests, static bundle](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43797114489) green after EXP-013.
+- [x] Automated local Chromium ES/EN desktop/mobile journey, source archive, advanced disclosure and responsive no-overflow checks ([run #43797114547](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43797114547)); [ ] independent manual screen-reader and live-domain checks.
+- [x] Source-archived original EXP-001 T2M and PRECTOTCORR fed into four KPI values and matched-calendar-year difference tests, with source-preserving synthetic negative checks; this is not new physical source validation.
+- [x] Wind direction remains circular, no Sen trend KPI, by automated test.
 - [ ] NASA network failure produces no fake observations or fabricated advice.
 - [ ] All 18 variable categories display contextual and correctly conditional noncausal guidance.
-- [ ] Source matrix and exports remain functional in collapsed advanced disclosure.
+- [x] Source matrix, existing numeric exports and advanced disclosure retained in source/Chromium QA.
 - [ ] No LLM enabled or secrets shipped by static deploy; optional backend path verified separately.
 - [ ] Full screenshot/browser audit on BanaHosting after explicit operator deployment and rollback plan.
 - [ ] If AI is activated later, document configured model, provider license/privacy, secure endpoint tests, cost and evidence safeguards in VALIDATION and AI-USE.
@@ -62,3 +62,10 @@ The public URL https://projecturiel.earth/en/telluris/explore/ was not directly 
 - Existing EXP-005 scientific significance: [EXP-005](EXP-005-SIGNIFICANCE.md)
 - Existing EXP-009 matrix: [EXP-009](EXP-009-OBSERVATORY.md)
 - Existing visual design: [EXP-012](EXP-012-VISUAL-IDENTITY.md)
+
+## EXP-013 verification outcome (2026-11-15, Costa Rica)
+
+- Production and public-browser deployment are **not witnessed** by these GitHub Actions. The static bundle was produced; the deployment job was **skipped**, not successful in production.
+- The first Chromium run found an existing stale `obs-drilldown` DOM reference, which prevented the new decision panel from rendering. Corrected in commit `c51586c`. Both subsequent source tests and Chromium acceptance passed. The failed run is intentionally preserved for traceability.
+- [Static suite: 137 passed, 0 failed](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43797114489); [Chromium acceptance: success](https://github.com/NorlanRBarrantes/TELLURIS/actions/runs/43797114547), with screenshots in the retained `telluris-exp010-browser-qa` artifact. Images are local-test renderings, not screenshots from the public domain.
+- Optional server backend has not had a verified host PHP lint, auth/rate-limit live penetration test, provider test or deployed credential; keep `TELLURIS_AI_ENABLED` off. Provider response is user-initiated, model-generated and **not** an independently audited climate conclusion.

@@ -5,7 +5,7 @@
 
 > Discover what is changing on Earth, where it is changing, how much it is changing, and whether the observed trend is statistically significant.
 
-**Project status:** NASA POWER time series for Liberia/Limón (1985–2025) retrieved from the real service; EXP-001 independently recalculated exploratory slopes. A dependency-free browser TELLURIS Explorer 0.1 and archived real-data sample are implemented. Full statistical inference and public BanaHosting deployment remain unverified.
+**Project status:** GitHub implements a bilingual 18-parameter NASA POWER source-aware Observatory with four modes (1 variable × 1/2 sites, 18 variables × 1/2 sites), NASA GIBS globe, USGS/EONET event context, experimental statistical evidence and an EXP-013 selected-parameter decision dashboard. Original archive coverage remains T2M/PRECTOTCORR at Liberia/Limón; broader parameters rely on live NASA queries. **137 Node tests passed** and ES/EN desktop/mobile Chromium local-site acceptance passed on 2026-11-15 (Costa Rica). Significance and climate-product homogeneity remain qualified, **BanaHosting production publication remains unverified**, and optional external generative AI is **not configured or deployed**.
 
 ## Challenge
 
@@ -21,7 +21,7 @@ The formally approved mission is a **guided, multi-variable, multi-source Earth-
 4. Inspect an appropriate statistical significance test and its limitations.
 5. Compare locations and export a traceable evidence report.
 
-The first exploratory single-location interface is implemented in [TELLURIS Explorer 0.1](website/public/telluris/explore/index.html). Multi-region comparisons and validated inferential reporting remain future milestones.
+The [TELLURIS Explorer](website/public/telluris/explore/index.html) now implements the four observational comparison modes and the EXP-013 selected-source KPI/decision dashboard in GitHub. Its multivariable comparisons and original Mann–Kendall/CI diagnostics are **exploratory**, not independently validated inference, causation or future prediction.
 
 ## Science first
 
