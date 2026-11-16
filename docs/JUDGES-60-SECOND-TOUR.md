@@ -9,6 +9,12 @@
 
 **TELLURIS helps people investigate what is changing on Earth, where and by how much — while showing the NASA source evidence, statistical assumptions, and when a conclusion is *not* justified.**
 
+> **Important submission-format distinction:** This is an optional **60-second reviewer walkthrough**, **not** the official video deliverable. NASA's 2026 submission guidance limits a video demonstration to **30 seconds** (or a presentation of up to seven slides). Use an appropriately short submission video; do not submit this sixty-second script as a sixty-second official demo video.
+
+### Optional 30-second English video narration
+
+“NASA observes Earth at extraordinary scale. But a visible trend is not automatically trustworthy. TELLURIS helps people investigate real NASA data, compare places, and examine statistical evidence. In Costa Rica, we analyzed forty-one years of temperature records — and caught a satellite pixel unsuitable for studying vegetation. Because good science doesn't just find patterns. It tests them. TELLURIS: decode Earth's evidence.”
+
 ## 60-second demonstration script
 
 | Time | Show or explain | What is actually supported |
